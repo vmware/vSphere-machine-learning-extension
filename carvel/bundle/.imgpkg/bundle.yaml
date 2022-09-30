@@ -1,0 +1,9 @@
+apiVersion: imgpkg.carvel.dev/v1alpha1
+kind: Bundle
+metadata:
+  name: kubeflow
+authors:
+- name: Jinheng Xu
+  email: xjinheng@vmware.com
+websites:
+- url: https://vmware.github.io/ml-ops-platform-for-vsphere/

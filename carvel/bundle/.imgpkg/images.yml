@@ -1,0 +1,526 @@
+---
+apiVersion: imgpkg.carvel.dev/v1alpha1
+images:
+- annotations:
+    kbld.carvel.dev/id: docker.io/istio/proxyv2:1.14.1
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 1.14.1
+          url: docker.io/istio/proxyv2:1.14.1
+      - preresolved:
+          url: index.docker.io/istio/proxyv2@sha256:df69c1a7af7c0113424a48f5075ac6d0894123ec926fdb315e849b4f04e39616
+  image: index.docker.io/istio/proxyv2@sha256:df69c1a7af7c0113424a48f5075ac6d0894123ec926fdb315e849b4f04e39616
+- annotations:
+    kbld.carvel.dev/id: docker.io/kubeflowkatib/katib-controller:v0.14.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v0.14.0
+          url: docker.io/kubeflowkatib/katib-controller:v0.14.0
+      - preresolved:
+          url: index.docker.io/kubeflowkatib/katib-controller@sha256:51ca80d6005010ff08853a5f7231158cb695ea899b623200076cbc01509fc0b5
+  image: index.docker.io/kubeflowkatib/katib-controller@sha256:51ca80d6005010ff08853a5f7231158cb695ea899b623200076cbc01509fc0b5
+- annotations:
+    kbld.carvel.dev/id: docker.io/kubeflowkatib/katib-db-manager:v0.14.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v0.14.0
+          url: docker.io/kubeflowkatib/katib-db-manager:v0.14.0
+      - preresolved:
+          url: index.docker.io/kubeflowkatib/katib-db-manager@sha256:8b6c8e4b7019894ed4b6276777cee2d7d40bc69c17b27a75a0f7d3c3a2384d62
+  image: index.docker.io/kubeflowkatib/katib-db-manager@sha256:8b6c8e4b7019894ed4b6276777cee2d7d40bc69c17b27a75a0f7d3c3a2384d62
+- annotations:
+    kbld.carvel.dev/id: docker.io/kubeflowkatib/katib-ui:v0.14.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v0.14.0
+          url: docker.io/kubeflowkatib/katib-ui:v0.14.0
+      - preresolved:
+          url: index.docker.io/kubeflowkatib/katib-ui@sha256:f65a1c8d1d745354a73fc97092dc0938cbb3c07c4763d394c44645899d2f61f1
+  image: index.docker.io/kubeflowkatib/katib-ui@sha256:f65a1c8d1d745354a73fc97092dc0938cbb3c07c4763d394c44645899d2f61f1
+- annotations:
+    kbld.carvel.dev/id: docker.io/kubeflownotebookswg/centraldashboard:v1.6.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1.6.0
+          url: docker.io/kubeflownotebookswg/centraldashboard:v1.6.0
+      - preresolved:
+          url: index.docker.io/kubeflownotebookswg/centraldashboard@sha256:95c5f679c25ae6553ccdfce4d46385bd5235a498b00bbbac6bd4459b0492e94b
+  image: index.docker.io/kubeflownotebookswg/centraldashboard@sha256:95c5f679c25ae6553ccdfce4d46385bd5235a498b00bbbac6bd4459b0492e94b
+- annotations:
+    kbld.carvel.dev/id: docker.io/kubeflownotebookswg/jupyter-web-app:v1.6.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1.6.0
+          url: docker.io/kubeflownotebookswg/jupyter-web-app:v1.6.0
+      - preresolved:
+          url: index.docker.io/kubeflownotebookswg/jupyter-web-app@sha256:f1c7c180d379bb2532b5e2d8536ace8f848e6154d18e7f1c856f50e117b489e4
+  image: index.docker.io/kubeflownotebookswg/jupyter-web-app@sha256:f1c7c180d379bb2532b5e2d8536ace8f848e6154d18e7f1c856f50e117b489e4
+- annotations:
+    kbld.carvel.dev/id: docker.io/kubeflownotebookswg/kfam:v1.6.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1.6.0
+          url: docker.io/kubeflownotebookswg/kfam:v1.6.0
+      - preresolved:
+          url: index.docker.io/kubeflownotebookswg/kfam@sha256:df3872fe17aabcf80bbcaa8cb963b76e6b73c6a0c0353bcd2f8cf1dbc122d8fb
+  image: index.docker.io/kubeflownotebookswg/kfam@sha256:df3872fe17aabcf80bbcaa8cb963b76e6b73c6a0c0353bcd2f8cf1dbc122d8fb
+- annotations:
+    kbld.carvel.dev/id: docker.io/kubeflownotebookswg/notebook-controller:v1.6.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1.6.0
+          url: docker.io/kubeflownotebookswg/notebook-controller:v1.6.0
+      - preresolved:
+          url: index.docker.io/kubeflownotebookswg/notebook-controller@sha256:c5134b45cfb99678d3fa7edf6e0cebdd73017ed3ba762deee35a0d2f03d26098
+  image: index.docker.io/kubeflownotebookswg/notebook-controller@sha256:c5134b45cfb99678d3fa7edf6e0cebdd73017ed3ba762deee35a0d2f03d26098
+- annotations:
+    kbld.carvel.dev/id: docker.io/kubeflownotebookswg/poddefaults-webhook:v1.6.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1.6.0
+          url: docker.io/kubeflownotebookswg/poddefaults-webhook:v1.6.0
+      - preresolved:
+          url: index.docker.io/kubeflownotebookswg/poddefaults-webhook@sha256:5025851dc3901daff9ecc6174ecc809ddfb71afdda785ba7e555cc4c6172aca6
+  image: index.docker.io/kubeflownotebookswg/poddefaults-webhook@sha256:5025851dc3901daff9ecc6174ecc809ddfb71afdda785ba7e555cc4c6172aca6
+- annotations:
+    kbld.carvel.dev/id: docker.io/kubeflownotebookswg/profile-controller:v1.6.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1.6.0
+          url: docker.io/kubeflownotebookswg/profile-controller:v1.6.0
+      - preresolved:
+          url: index.docker.io/kubeflownotebookswg/profile-controller@sha256:8f15ead7322da0dd6b70691954a0f9a3f9ca207871d718c41536f461d7a373ff
+  image: index.docker.io/kubeflownotebookswg/profile-controller@sha256:8f15ead7322da0dd6b70691954a0f9a3f9ca207871d718c41536f461d7a373ff
+- annotations:
+    kbld.carvel.dev/id: docker.io/kubeflownotebookswg/tensorboard-controller:v1.6.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1.6.0
+          url: docker.io/kubeflownotebookswg/tensorboard-controller:v1.6.0
+      - preresolved:
+          url: index.docker.io/kubeflownotebookswg/tensorboard-controller@sha256:bf52cb0c28333f34257921b1375a89ce17ae8b8f37bedeb37391545a93a84011
+  image: index.docker.io/kubeflownotebookswg/tensorboard-controller@sha256:bf52cb0c28333f34257921b1375a89ce17ae8b8f37bedeb37391545a93a84011
+- annotations:
+    kbld.carvel.dev/id: docker.io/kubeflownotebookswg/tensorboards-web-app:v1.6.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1.6.0
+          url: docker.io/kubeflownotebookswg/tensorboards-web-app:v1.6.0
+      - preresolved:
+          url: index.docker.io/kubeflownotebookswg/tensorboards-web-app@sha256:91f796fb8ef1bb46fe89dd4de555ee163abc23ebbd15973cc8052ab1782aa8d0
+  image: index.docker.io/kubeflownotebookswg/tensorboards-web-app@sha256:91f796fb8ef1bb46fe89dd4de555ee163abc23ebbd15973cc8052ab1782aa8d0
+- annotations:
+    kbld.carvel.dev/id: docker.io/kubeflownotebookswg/volumes-web-app:v1.6.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1.6.0
+          url: docker.io/kubeflownotebookswg/volumes-web-app:v1.6.0
+      - preresolved:
+          url: index.docker.io/kubeflownotebookswg/volumes-web-app@sha256:2e22934e77d92bb39a065c5c99b5b74d06ef85e13121f8514cfd4ee857855257
+  image: index.docker.io/kubeflownotebookswg/volumes-web-app@sha256:2e22934e77d92bb39a065c5c99b5b74d06ef85e13121f8514cfd4ee857855257
+- annotations:
+    kbld.carvel.dev/id: docker.io/metacontrollerio/metacontroller:v2.0.4
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v2.0.4
+          url: docker.io/metacontrollerio/metacontroller:v2.0.4
+      - preresolved:
+          url: index.docker.io/metacontrollerio/metacontroller@sha256:897c9601d2cc88069e3d00185d21dcd1c5296927d549e4e044b907ace5e95ed8
+  image: index.docker.io/metacontrollerio/metacontroller@sha256:897c9601d2cc88069e3d00185d21dcd1c5296927d549e4e044b907ace5e95ed8
+- annotations:
+    kbld.carvel.dev/id: docker.io/seldonio/mlserver:0.5.3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 0.5.3
+          url: docker.io/seldonio/mlserver:0.5.3
+      - preresolved:
+          url: index.docker.io/seldonio/mlserver@sha256:5677de9eb8d8127ee43b9792ace9819cffb8495a4f03a66f53338f0a0dec1b01
+  image: index.docker.io/seldonio/mlserver@sha256:5677de9eb8d8127ee43b9792ace9819cffb8495a4f03a66f53338f0a0dec1b01
+- annotations:
+    kbld.carvel.dev/id: gcr.io/arrikto/istio/pilot:1.14.1-1-g19df463bb
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 1.14.1-1-g19df463bb
+          url: gcr.io/arrikto/istio/pilot:1.14.1-1-g19df463bb
+      - preresolved:
+          url: gcr.io/arrikto/istio/pilot@sha256:9336e193dc4c835fa89e7536e7fdea3fda3fc72d4a62fc7f4cd966d47b031857
+  image: gcr.io/arrikto/istio/pilot@sha256:9336e193dc4c835fa89e7536e7fdea3fda3fc72d4a62fc7f4cd966d47b031857
+- annotations:
+    kbld.carvel.dev/id: gcr.io/arrikto/kubeflow/oidc-authservice:28c59ef
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 28c59ef
+          url: gcr.io/arrikto/kubeflow/oidc-authservice:28c59ef
+      - preresolved:
+          url: gcr.io/arrikto/kubeflow/oidc-authservice@sha256:c9450b805ad5c333f6a0d9491719a1d3fb4449fe017e37d3ad4c7591c763746b
+  image: gcr.io/arrikto/kubeflow/oidc-authservice@sha256:c9450b805ad5c333f6a0d9491719a1d3fb4449fe017e37d3ad4c7591c763746b
+- annotations:
+    kbld.carvel.dev/id: gcr.io/knative-releases/knative.dev/net-istio/cmd/controller@sha256:f253b82941c2220181cee80d7488fe1cefce9d49ab30bdb54bcb8c76515f7a26
+    kbld.carvel.dev/origins: |
+      - preresolved:
+          url: gcr.io/knative-releases/knative.dev/net-istio/cmd/controller@sha256:f253b82941c2220181cee80d7488fe1cefce9d49ab30bdb54bcb8c76515f7a26
+  image: gcr.io/knative-releases/knative.dev/net-istio/cmd/controller@sha256:f253b82941c2220181cee80d7488fe1cefce9d49ab30bdb54bcb8c76515f7a26
+- annotations:
+    kbld.carvel.dev/id: gcr.io/knative-releases/knative.dev/net-istio/cmd/webhook@sha256:a705c1ea8e9e556f860314fe055082fbe3cde6a924c29291955f98d979f8185e
+    kbld.carvel.dev/origins: |
+      - preresolved:
+          url: gcr.io/knative-releases/knative.dev/net-istio/cmd/webhook@sha256:a705c1ea8e9e556f860314fe055082fbe3cde6a924c29291955f98d979f8185e
+  image: gcr.io/knative-releases/knative.dev/net-istio/cmd/webhook@sha256:a705c1ea8e9e556f860314fe055082fbe3cde6a924c29291955f98d979f8185e
+- annotations:
+    kbld.carvel.dev/id: gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:93ff6e69357785ff97806945b284cbd1d37e50402b876a320645be8877c0d7b7
+    kbld.carvel.dev/origins: |
+      - preresolved:
+          url: gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:93ff6e69357785ff97806945b284cbd1d37e50402b876a320645be8877c0d7b7
+  image: gcr.io/knative-releases/knative.dev/serving/cmd/activator@sha256:93ff6e69357785ff97806945b284cbd1d37e50402b876a320645be8877c0d7b7
+- annotations:
+    kbld.carvel.dev/id: gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:007820fdb75b60e6fd5a25e65fd6ad9744082a6bf195d72795561c91b425d016
+    kbld.carvel.dev/origins: |
+      - preresolved:
+          url: gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:007820fdb75b60e6fd5a25e65fd6ad9744082a6bf195d72795561c91b425d016
+  image: gcr.io/knative-releases/knative.dev/serving/cmd/autoscaler@sha256:007820fdb75b60e6fd5a25e65fd6ad9744082a6bf195d72795561c91b425d016
+- annotations:
+    kbld.carvel.dev/id: gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:75cfdcfa050af9522e798e820ba5483b9093de1ce520207a3fedf112d73a4686
+    kbld.carvel.dev/origins: |
+      - preresolved:
+          url: gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:75cfdcfa050af9522e798e820ba5483b9093de1ce520207a3fedf112d73a4686
+  image: gcr.io/knative-releases/knative.dev/serving/cmd/controller@sha256:75cfdcfa050af9522e798e820ba5483b9093de1ce520207a3fedf112d73a4686
+- annotations:
+    kbld.carvel.dev/id: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping-webhook@sha256:847bb97e38440c71cb4bcc3e430743e18b328ad1e168b6fca35b10353b9a2c22
+    kbld.carvel.dev/origins: |
+      - preresolved:
+          url: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping-webhook@sha256:847bb97e38440c71cb4bcc3e430743e18b328ad1e168b6fca35b10353b9a2c22
+  image: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping-webhook@sha256:847bb97e38440c71cb4bcc3e430743e18b328ad1e168b6fca35b10353b9a2c22
+- annotations:
+    kbld.carvel.dev/id: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping@sha256:23baa19322320f25a462568eded1276601ef67194883db9211e1ea24f21a0beb
+    kbld.carvel.dev/origins: |
+      - preresolved:
+          url: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping@sha256:23baa19322320f25a462568eded1276601ef67194883db9211e1ea24f21a0beb
+  image: gcr.io/knative-releases/knative.dev/serving/cmd/domain-mapping@sha256:23baa19322320f25a462568eded1276601ef67194883db9211e1ea24f21a0beb
+- annotations:
+    kbld.carvel.dev/id: gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:14415b204ea8d0567235143a6c3377f49cbd35f18dc84dfa4baa7695c2a9b53d
+    kbld.carvel.dev/origins: |
+      - preresolved:
+          url: gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:14415b204ea8d0567235143a6c3377f49cbd35f18dc84dfa4baa7695c2a9b53d
+  image: gcr.io/knative-releases/knative.dev/serving/cmd/queue@sha256:14415b204ea8d0567235143a6c3377f49cbd35f18dc84dfa4baa7695c2a9b53d
+- annotations:
+    kbld.carvel.dev/id: gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:9084ea8498eae3c6c4364a397d66516a25e48488f4a9871ef765fa554ba483f0
+    kbld.carvel.dev/origins: |
+      - preresolved:
+          url: gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:9084ea8498eae3c6c4364a397d66516a25e48488f4a9871ef765fa554ba483f0
+  image: gcr.io/knative-releases/knative.dev/serving/cmd/webhook@sha256:9084ea8498eae3c6c4364a397d66516a25e48488f4a9871ef765fa554ba483f0
+- annotations:
+    kbld.carvel.dev/id: gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v0.8.0
+          url: gcr.io/kubebuilder/kube-rbac-proxy:v0.8.0
+      - preresolved:
+          url: gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c
+  image: gcr.io/kubebuilder/kube-rbac-proxy@sha256:db06cc4c084dd0253134f156dddaaf53ef1c3fb3cc809e5d81711baa4029ea4c
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/api-server:2.0.0-alpha.3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.0.0-alpha.3
+          url: gcr.io/ml-pipeline/api-server:2.0.0-alpha.3
+      - preresolved:
+          url: gcr.io/ml-pipeline/api-server@sha256:cb07767f42e5f0df3d8b80fbad0e37e53c4802a6aa346ecdf060ba3522c45bf5
+  image: gcr.io/ml-pipeline/api-server@sha256:cb07767f42e5f0df3d8b80fbad0e37e53c4802a6aa346ecdf060ba3522c45bf5
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/cache-deployer:2.0.0-alpha.3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.0.0-alpha.3
+          url: gcr.io/ml-pipeline/cache-deployer:2.0.0-alpha.3
+      - preresolved:
+          url: gcr.io/ml-pipeline/cache-deployer@sha256:5d7560bb86141c52247d6461965d549c3835a60a3742145cc51ac6bac3b72314
+  image: gcr.io/ml-pipeline/cache-deployer@sha256:5d7560bb86141c52247d6461965d549c3835a60a3742145cc51ac6bac3b72314
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/cache-server:2.0.0-alpha.3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.0.0-alpha.3
+          url: gcr.io/ml-pipeline/cache-server:2.0.0-alpha.3
+      - preresolved:
+          url: gcr.io/ml-pipeline/cache-server@sha256:41ce95ab21f31793bde65a5e6526ec0fa528d9f03f8f5df576e265d6a261cd33
+  image: gcr.io/ml-pipeline/cache-server@sha256:41ce95ab21f31793bde65a5e6526ec0fa528d9f03f8f5df576e265d6a261cd33
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/frontend:2.0.0-alpha.3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.0.0-alpha.3
+          url: gcr.io/ml-pipeline/frontend:2.0.0-alpha.3
+      - preresolved:
+          url: gcr.io/ml-pipeline/frontend@sha256:9a6a06eb5bc69f0acd6a9a26c440433beb47a794218db5fb2691ebaded1ae999
+  image: gcr.io/ml-pipeline/frontend@sha256:9a6a06eb5bc69f0acd6a9a26c440433beb47a794218db5fb2691ebaded1ae999
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/metadata-envoy:2.0.0-alpha.3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.0.0-alpha.3
+          url: gcr.io/ml-pipeline/metadata-envoy:2.0.0-alpha.3
+      - preresolved:
+          url: gcr.io/ml-pipeline/metadata-envoy@sha256:f2d7d40e6149ac4d8e0a4dc860eb12a07ab7fbc6a1a5dcf7b0b4e75dc46406eb
+  image: gcr.io/ml-pipeline/metadata-envoy@sha256:f2d7d40e6149ac4d8e0a4dc860eb12a07ab7fbc6a1a5dcf7b0b4e75dc46406eb
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/metadata-writer:2.0.0-alpha.3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.0.0-alpha.3
+          url: gcr.io/ml-pipeline/metadata-writer:2.0.0-alpha.3
+      - preresolved:
+          url: gcr.io/ml-pipeline/metadata-writer@sha256:daf1dcda75c7dbdda2b39af603f4c91cf23a86392239ee46ff5289d29a736f6f
+  image: gcr.io/ml-pipeline/metadata-writer@sha256:daf1dcda75c7dbdda2b39af603f4c91cf23a86392239ee46ff5289d29a736f6f
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/minio:RELEASE.2019-08-14T20-37-41Z-license-compliance
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: RELEASE.2019-08-14T20-37-41Z-license-compliance
+          url: gcr.io/ml-pipeline/minio:RELEASE.2019-08-14T20-37-41Z-license-compliance
+      - preresolved:
+          url: gcr.io/ml-pipeline/minio@sha256:587abc14be9bbeed794473cf7290c40e377062f2f77f5e4e27742a77680f08e0
+  image: gcr.io/ml-pipeline/minio@sha256:587abc14be9bbeed794473cf7290c40e377062f2f77f5e4e27742a77680f08e0
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/mysql:5.7-debian
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 5.7-debian
+          url: gcr.io/ml-pipeline/mysql:5.7-debian
+      - preresolved:
+          url: gcr.io/ml-pipeline/mysql@sha256:df28187b545543c0a69383e7cce38e826309e6748b2cfe7f55283d4e6a9e7d45
+  image: gcr.io/ml-pipeline/mysql@sha256:df28187b545543c0a69383e7cce38e826309e6748b2cfe7f55283d4e6a9e7d45
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/persistenceagent:2.0.0-alpha.3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.0.0-alpha.3
+          url: gcr.io/ml-pipeline/persistenceagent:2.0.0-alpha.3
+      - preresolved:
+          url: gcr.io/ml-pipeline/persistenceagent@sha256:21a3400c8d3912e25143db47dfddcfee3ecaca78507cd525a4bd91776f3162a2
+  image: gcr.io/ml-pipeline/persistenceagent@sha256:21a3400c8d3912e25143db47dfddcfee3ecaca78507cd525a4bd91776f3162a2
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/scheduledworkflow:2.0.0-alpha.3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.0.0-alpha.3
+          url: gcr.io/ml-pipeline/scheduledworkflow:2.0.0-alpha.3
+      - preresolved:
+          url: gcr.io/ml-pipeline/scheduledworkflow@sha256:b29b158e56b0748ef0c1484fc57fd521910ee6e13935ee1551b1afd5544d7d1d
+  image: gcr.io/ml-pipeline/scheduledworkflow@sha256:b29b158e56b0748ef0c1484fc57fd521910ee6e13935ee1551b1afd5544d7d1d
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/viewer-crd-controller:2.0.0-alpha.3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.0.0-alpha.3
+          url: gcr.io/ml-pipeline/viewer-crd-controller:2.0.0-alpha.3
+      - preresolved:
+          url: gcr.io/ml-pipeline/viewer-crd-controller@sha256:4f2d8c191fafe2d06a27fe673e8ff3412dffcaff9530d59e09506e4079be69b6
+  image: gcr.io/ml-pipeline/viewer-crd-controller@sha256:4f2d8c191fafe2d06a27fe673e8ff3412dffcaff9530d59e09506e4079be69b6
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/visualization-server:2.0.0-alpha.3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.0.0-alpha.3
+          url: gcr.io/ml-pipeline/visualization-server:2.0.0-alpha.3
+      - preresolved:
+          url: gcr.io/ml-pipeline/visualization-server@sha256:6fc55954c1d4ee35473eab974d32b15ce36c8e7f33ccf86f23d8c78a10979578
+  image: gcr.io/ml-pipeline/visualization-server@sha256:6fc55954c1d4ee35473eab974d32b15ce36c8e7f33ccf86f23d8c78a10979578
+- annotations:
+    kbld.carvel.dev/id: gcr.io/ml-pipeline/workflow-controller:v3.3.8-license-compliance
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v3.3.8-license-compliance
+          url: gcr.io/ml-pipeline/workflow-controller:v3.3.8-license-compliance
+      - preresolved:
+          url: gcr.io/ml-pipeline/workflow-controller@sha256:6c8e4e2a644376e53803b449d64168740c9ada2754a8e958feb308aef8db898d
+  image: gcr.io/ml-pipeline/workflow-controller@sha256:6c8e4e2a644376e53803b449d64168740c9ada2754a8e958feb308aef8db898d
+- annotations:
+    kbld.carvel.dev/id: gcr.io/tfx-oss-public/ml_metadata_store_server:1.5.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 1.5.0
+          url: gcr.io/tfx-oss-public/ml_metadata_store_server:1.5.0
+      - preresolved:
+          url: gcr.io/tfx-oss-public/ml_metadata_store_server@sha256:db8691752b4cd02658e4bb28b73d34a18ba71f49d6cc124a47c0c5001f8c0f83
+  image: gcr.io/tfx-oss-public/ml_metadata_store_server@sha256:db8691752b4cd02658e4bb28b73d34a18ba71f49d6cc124a47c0c5001f8c0f83
+- annotations:
+    kbld.carvel.dev/id: ghcr.io/dexidp/dex:v2.31.2
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v2.31.2
+          url: ghcr.io/dexidp/dex:v2.31.2
+      - preresolved:
+          url: ghcr.io/dexidp/dex@sha256:a4422334fc2fa528f0b9ca59fe1dff1f41ec66e5086facc85b32fc8d3da72a79
+  image: ghcr.io/dexidp/dex@sha256:a4422334fc2fa528f0b9ca59fe1dff1f41ec66e5086facc85b32fc8d3da72a79
+- annotations:
+    kbld.carvel.dev/id: harbor-repo.vmware.com/juanl/centraldashboard:v1
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1
+          url: harbor-repo.vmware.com/juanl/centraldashboard:v1
+      - preresolved:
+          url: harbor-repo.vmware.com/juanl/centraldashboard@sha256:df771f5504ccb93a5fadc0f08b9b2e14566cb8e0854d7e89c5f3cc40bcc5ffbf
+  image: harbor-repo.vmware.com/juanl/centraldashboard@sha256:df771f5504ccb93a5fadc0f08b9b2e14566cb8e0854d7e89c5f3cc40bcc5ffbf
+- annotations:
+    kbld.carvel.dev/id: harbor-repo.vmware.com/juanl/jupyter-web-app:v4
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v4
+          url: harbor-repo.vmware.com/juanl/jupyter-web-app:v4
+      - preresolved:
+          url: harbor-repo.vmware.com/juanl/jupyter-web-app@sha256:4bf59c90f9ba1cfd195847862b6287cee787631b13885cb43658dbfd28174bc7
+  image: harbor-repo.vmware.com/juanl/jupyter-web-app@sha256:4bf59c90f9ba1cfd195847862b6287cee787631b13885cb43658dbfd28174bc7
+- annotations:
+    kbld.carvel.dev/id: harbor-repo.vmware.com/juanl/notebook-controller:v2.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v2.0
+          url: harbor-repo.vmware.com/juanl/notebook-controller:v2.0
+      - preresolved:
+          url: harbor-repo.vmware.com/juanl/notebook-controller@sha256:b406c7cca8667936905e35a2ef48a00b53bbdeddeb8205d322327f2bb1fc7061
+  image: harbor-repo.vmware.com/juanl/notebook-controller@sha256:b406c7cca8667936905e35a2ef48a00b53bbdeddeb8205d322327f2bb1fc7061
+- annotations:
+    kbld.carvel.dev/id: kserve/kserve-controller:v0.8.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v0.8.0
+          url: kserve/kserve-controller:v0.8.0
+      - preresolved:
+          url: index.docker.io/kserve/kserve-controller@sha256:f0692a9ea09f87c61eda3a9d38b5bfe43a415de7f8eb4e268663b98bf18c4494
+  image: index.docker.io/kserve/kserve-controller@sha256:f0692a9ea09f87c61eda3a9d38b5bfe43a415de7f8eb4e268663b98bf18c4494
+- annotations:
+    kbld.carvel.dev/id: kserve/lgbserver:v0.8.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v0.8.0
+          url: kserve/lgbserver:v0.8.0
+      - preresolved:
+          url: index.docker.io/kserve/lgbserver@sha256:3594c230660a720ba46d8cb29437679f41d39e0038bc3ed2b915ec171f930bc1
+  image: index.docker.io/kserve/lgbserver@sha256:3594c230660a720ba46d8cb29437679f41d39e0038bc3ed2b915ec171f930bc1
+- annotations:
+    kbld.carvel.dev/id: kserve/models-web-app:v0.8.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v0.8.0
+          url: kserve/models-web-app:v0.8.0
+      - preresolved:
+          url: index.docker.io/kserve/models-web-app@sha256:63ea05e738423e9a83fed614d4c713ee42042dd71af0328d7cf01a999c2d52e7
+  image: index.docker.io/kserve/models-web-app@sha256:63ea05e738423e9a83fed614d4c713ee42042dd71af0328d7cf01a999c2d52e7
+- annotations:
+    kbld.carvel.dev/id: kserve/paddleserver:v0.8.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v0.8.0
+          url: kserve/paddleserver:v0.8.0
+      - preresolved:
+          url: index.docker.io/kserve/paddleserver@sha256:4f909047dd48849f796e43a9a0964bf96b292fd5f9baf4ec85ac7a3e673805bd
+  image: index.docker.io/kserve/paddleserver@sha256:4f909047dd48849f796e43a9a0964bf96b292fd5f9baf4ec85ac7a3e673805bd
+- annotations:
+    kbld.carvel.dev/id: kserve/pmmlserver:v0.8.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v0.8.0
+          url: kserve/pmmlserver:v0.8.0
+      - preresolved:
+          url: index.docker.io/kserve/pmmlserver@sha256:63fdce5f4cb72ca868c43a6853d46e5cb28c3dd10897044f9634aaa8529ec2b6
+  image: index.docker.io/kserve/pmmlserver@sha256:63fdce5f4cb72ca868c43a6853d46e5cb28c3dd10897044f9634aaa8529ec2b6
+- annotations:
+    kbld.carvel.dev/id: kserve/sklearnserver:v0.8.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v0.8.0
+          url: kserve/sklearnserver:v0.8.0
+      - preresolved:
+          url: index.docker.io/kserve/sklearnserver@sha256:5331c15d242800e6fe9a5bff84359bf5afef498afefc30ba5ca603fd7d15392e
+  image: index.docker.io/kserve/sklearnserver@sha256:5331c15d242800e6fe9a5bff84359bf5afef498afefc30ba5ca603fd7d15392e
+- annotations:
+    kbld.carvel.dev/id: kserve/torchserve-kfs:0.5.3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 0.5.3
+          url: kserve/torchserve-kfs:0.5.3
+      - preresolved:
+          url: index.docker.io/kserve/torchserve-kfs@sha256:47b23a1bac1a4b33e8fbc86cd653a372deb39503a6f54ba790a7433c9b8c6d85
+  image: index.docker.io/kserve/torchserve-kfs@sha256:47b23a1bac1a4b33e8fbc86cd653a372deb39503a6f54ba790a7433c9b8c6d85
+- annotations:
+    kbld.carvel.dev/id: kserve/xgbserver:v0.8.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v0.8.0
+          url: kserve/xgbserver:v0.8.0
+      - preresolved:
+          url: index.docker.io/kserve/xgbserver@sha256:d5d53bb64f5d432325e68acac5ff08559de33a6976f60955bc55db9df9419861
+  image: index.docker.io/kserve/xgbserver@sha256:d5d53bb64f5d432325e68acac5ff08559de33a6976f60955bc55db9df9419861
+- annotations:
+    kbld.carvel.dev/id: kubeflow/training-operator:v1-e1434f6
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1-e1434f6
+          url: kubeflow/training-operator:v1-e1434f6
+      - preresolved:
+          url: index.docker.io/kubeflow/training-operator@sha256:ff847e2b6af07389a4a4ce73b7444f2f0741ad41e6066345ae858254cf6a562f
+  image: index.docker.io/kubeflow/training-operator@sha256:ff847e2b6af07389a4a4ce73b7444f2f0741ad41e6066345ae858254cf6a562f
+- annotations:
+    kbld.carvel.dev/id: mysql:8.0.29
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 8.0.29
+          url: mysql:8.0.29
+      - preresolved:
+          url: index.docker.io/library/mysql@sha256:152cf187a3efc56afb0b3877b4d21e231d1d6eb828ca9221056590b0ac834c75
+  image: index.docker.io/library/mysql@sha256:152cf187a3efc56afb0b3877b4d21e231d1d6eb828ca9221056590b0ac834c75
+- annotations:
+    kbld.carvel.dev/id: nvcr.io/nvidia/tritonserver:21.09-py3
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 21.09-py3
+          url: nvcr.io/nvidia/tritonserver:21.09-py3
+      - preresolved:
+          url: nvcr.io/nvidia/tritonserver@sha256:70e7e6602d2b101260c13da90381daa8b82c56f1b4d251787858e2fe488e0413
+  image: nvcr.io/nvidia/tritonserver@sha256:70e7e6602d2b101260c13da90381daa8b82c56f1b4d251787858e2fe488e0413
+- annotations:
+    kbld.carvel.dev/id: python:3.7
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: "3.7"
+          url: python:3.7
+      - preresolved:
+          url: index.docker.io/library/python@sha256:2341ac5eedd71f1e6481afe854af572f5ec1b78fa3aea2293dba65942108e663
+  image: index.docker.io/library/python@sha256:2341ac5eedd71f1e6481afe854af572f5ec1b78fa3aea2293dba65942108e663
+- annotations:
+    kbld.carvel.dev/id: quay.io/jetstack/cert-manager-cainjector:v1.5.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1.5.0
+          url: quay.io/jetstack/cert-manager-cainjector:v1.5.0
+      - preresolved:
+          url: quay.io/jetstack/cert-manager-cainjector@sha256:4361eb4e103ad19579832b808edff41c36d060d3d32e70af0c5b7f774f64a7b3
+  image: quay.io/jetstack/cert-manager-cainjector@sha256:4361eb4e103ad19579832b808edff41c36d060d3d32e70af0c5b7f774f64a7b3
+- annotations:
+    kbld.carvel.dev/id: quay.io/jetstack/cert-manager-controller:v1.5.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1.5.0
+          url: quay.io/jetstack/cert-manager-controller:v1.5.0
+      - preresolved:
+          url: quay.io/jetstack/cert-manager-controller@sha256:997561e249eec35361bdf36785e99374aac0dfb668f27b30cf0b066245e5e383
+  image: quay.io/jetstack/cert-manager-controller@sha256:997561e249eec35361bdf36785e99374aac0dfb668f27b30cf0b066245e5e383
+- annotations:
+    kbld.carvel.dev/id: quay.io/jetstack/cert-manager-webhook:v1.5.0
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1.5.0
+          url: quay.io/jetstack/cert-manager-webhook:v1.5.0
+      - preresolved:
+          url: quay.io/jetstack/cert-manager-webhook@sha256:64ad13e4a18d8739dc44fd64e4f8e48bd5b0aec47df6eb81d7d2bcccb446a12e
+  image: quay.io/jetstack/cert-manager-webhook@sha256:64ad13e4a18d8739dc44fd64e4f8e48bd5b0aec47df6eb81d7d2bcccb446a12e
+- annotations:
+    kbld.carvel.dev/id: tensorflow/serving:2.6.2
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: 2.6.2
+          url: tensorflow/serving:2.6.2
+      - preresolved:
+          url: index.docker.io/tensorflow/serving@sha256:2f0b1213de372be6ddb310f9d5eecc6d6787a595b2466f1911b2b2a557bf9b8b
+  image: index.docker.io/tensorflow/serving@sha256:2f0b1213de372be6ddb310f9d5eecc6d6787a595b2466f1911b2b2a557bf9b8b
+kind: ImagesLock

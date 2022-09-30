@@ -1,0 +1,14 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: kubeflow.community.tanzu.vmware.com
+spec:
+  displayName: "kubeflow"
+  longDescription: "The Machine Learning Toolkit for Kubernetes"
+  shortDescription: "The Machine Learning Toolkit for Kubernetes"
+  providerName: VMware
+  maintainers:
+    - name: Jinheng Xu
+  categories:
+    - machine learning
+    - MLOps

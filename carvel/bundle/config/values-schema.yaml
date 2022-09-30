@@ -1,0 +1,19 @@
+#@data/values-schema
+---
+
+#@schema/desc 'Add labels k8s.twr.io/imageswap: enabled to Kubeflow namespaces, which enable imageswap webhook to swap images.'
+imageswap_labels: True
+
+#@schema/desc 'Service type of istio-ingressgateway. Available options: "LoadBalancer" or "NodePort"'
+service_type: "LoadBalancer"
+
+#@schema/desc 'EXTERNAL_IP address of istio-ingressgateway, valid only if service_type is LoadBalancer'
+IP_address: ""
+
+#@schema/desc 'Turn on Registration Flow, so that Kubeflow Central Dashboard will prompt new users to create a namespace (profile)'
+CD_REGISTRATION_FLOW: True
+
+#@schema/desc 'Dex static user. Hash is bcrypt hash value of password'
+static_users: 
+- email: "user@example.com"
+  hash: "$2y$12$4K/VkmDd1q1Orb3xAt82zu8gk7Ad6ReFR4LCP9UeYE90NLiN9Df72"

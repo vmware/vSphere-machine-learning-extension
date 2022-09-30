@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    istio-injection: disabled
+    istio-operator-managed: Reconcile
+  name: istio-system
+  annotations:
+    kapp.k14s.io/change-group: apps.kubeflow.org/order-3
+    kapp.k14s.io/change-rule: upsert after upserting apps.kubeflow.org/order-2

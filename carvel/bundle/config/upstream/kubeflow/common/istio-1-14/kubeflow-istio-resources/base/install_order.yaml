@@ -1,0 +1,79 @@
+aggregationRule:
+  clusterRoleSelectors:
+  - matchLabels:
+      rbac.authorization.kubeflow.org/aggregate-to-kubeflow-istio-admin: "true"
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    rbac.authorization.kubeflow.org/aggregate-to-kubeflow-admin: "true"
+  name: kubeflow-istio-admin
+  annotations:
+    kapp.k14s.io/change-group: apps.kubeflow.org/order-6
+    kapp.k14s.io/change-rule: upsert after upserting apps.kubeflow.org/order-5
+rules: []
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    rbac.authorization.kubeflow.org/aggregate-to-kubeflow-edit: "true"
+    rbac.authorization.kubeflow.org/aggregate-to-kubeflow-istio-admin: "true"
+  name: kubeflow-istio-edit
+  annotations:
+    kapp.k14s.io/change-group: apps.kubeflow.org/order-6
+    kapp.k14s.io/change-rule: upsert after upserting apps.kubeflow.org/order-5
+rules:
+- apiGroups:
+  - istio.io
+  - networking.istio.io
+  resources:
+  - '*'
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - deletecollection
+  - patch
+  - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    rbac.authorization.kubeflow.org/aggregate-to-kubeflow-view: "true"
+  name: kubeflow-istio-view
+  annotations:
+    kapp.k14s.io/change-group: apps.kubeflow.org/order-6
+    kapp.k14s.io/change-rule: upsert after upserting apps.kubeflow.org/order-5
+rules:
+- apiGroups:
+  - istio.io
+  - networking.istio.io
+  resources:
+  - '*'
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: kubeflow-gateway
+  namespace: kubeflow
+  annotations:
+    kapp.k14s.io/change-group: apps.kubeflow.org/order-6
+    kapp.k14s.io/change-rule: upsert after upserting apps.kubeflow.org/order-5
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - '*'
+    port:
+      name: http
+      number: 80
+      protocol: HTTP
