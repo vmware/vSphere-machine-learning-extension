@@ -1,0 +1,60 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: kubeflow.community.tanzu.vmware.com.1.6.0
+spec:
+  refName: kubeflow.community.tanzu.vmware.com
+  version: 1.6.0
+  releaseNotes: Kubeflow 1.6.0 https://github.com/kubeflow/manifests/releases/tag/v1.6.0
+  licenses:
+  - Apache 2.0
+  template:
+    spec:
+      fetch:
+      - imgpkgBundle:
+          image: projects.registry.vmware.com/kubeflow/kubeflow-carvel-testing:0.1
+      template:
+      - ytt:
+          paths:
+          - config/
+      - kbld:
+          paths:
+          - '-'
+          - .imgpkg/images.yml
+      deploy:
+      - kapp: {}
+  valuesSchema:
+    openAPIv3:
+      type: object
+      additionalProperties: false
+      properties:
+        imageswap_labels:
+          type: boolean
+          description: 'Add labels k8s.twr.io/imageswap: enabled to Kubeflow namespaces, which enable imageswap webhook to swap images.'
+          default: true
+        service_type:
+          type: string
+          description: 'Service type of istio-ingressgateway. Available options: "LoadBalancer" or "NodePort"'
+          default: LoadBalancer
+        IP_address:
+          type: string
+          description: EXTERNAL_IP address of istio-ingressgateway, valid only if service_type is LoadBalancer
+          default: ""
+        CD_REGISTRATION_FLOW:
+          type: boolean
+          description: Turn on Registration Flow, so that Kubeflow Central Dashboard will prompt new users to create a namespace (profile)
+          default: true
+        static_users:
+          type: array
+          description: Dex static user. Hash is bcrypt hash value of password
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              email:
+                type: string
+                default: user@example.com
+              hash:
+                type: string
+                default: $2y$12$4K/VkmDd1q1Orb3xAt82zu8gk7Ad6ReFR4LCP9UeYE90NLiN9Df72
+          default: []

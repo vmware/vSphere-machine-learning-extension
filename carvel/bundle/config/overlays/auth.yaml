@@ -1,0 +1,57 @@
+#@ load("@ytt:overlay", "overlay")
+#@ load("@ytt:data", "data")
+#@ load("@ytt:yaml", "yaml") 
+#@ load("@ytt:md5", "md5")
+
+#@overlay/match by=overlay.subset({"kind": "ConfigMap", "metadata": {"name": "centraldashboard-parameters", "namespace": "kubeflow"}}), expects=1
+---
+data:
+  CD_REGISTRATION_FLOW: #@ "true" if data.values.CD_REGISTRATION_FLOW else "false"
+
+#@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "centraldashboard", "namespace": "kubeflow"}}), expects=1
+---
+spec:
+  template:
+    spec:
+      containers:
+      #@overlay/match by='name'
+      - name: centraldashboard
+        env:
+        #@overlay/match missing_ok=True
+        #@overlay/match by='name'
+        - name: REGISTRATION_FLOW
+          value: #@ "true" if data.values.CD_REGISTRATION_FLOW else "false"
+
+#@ def dex_configmap():
+  issuer: http://dex.auth.svc.cluster.local:5556/dex
+  storage:
+    type: kubernetes
+    config:
+      inCluster: true
+  web:
+    http: 0.0.0.0:5556
+  logger:
+    level: "debug"
+    format: text
+  oauth2:
+    skipApprovalScreen: true
+  enablePasswordDB: true
+  staticPasswords:
+#@ for i in range(len(data.values.static_users)):
+#@   map = data.values.static_users[i]
+  - email: #@ map['email']
+    hash: #@ map['hash']
+    username: #@ map['email'].split("@")[0]
+    userID: #@ md5.sum(map['email'])
+#@ end
+  staticClients:
+  - idEnv: OIDC_CLIENT_ID
+    redirectURIs: ["/login/oidc"]
+    name: 'Dex Login Application'
+    secretEnv: OIDC_CLIENT_SECRET
+#@ end
+
+#@overlay/match by=overlay.subset({"kind": "ConfigMap", "metadata": {"name": "dex", "namespace": "auth"}}), expects=1
+---
+data:
+  config.yaml: #@ yaml.encode(dex_configmap())

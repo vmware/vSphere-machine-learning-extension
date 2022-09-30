@@ -1,0 +1,16 @@
+#@data/values
+---
+
+imageswap_labels: True
+
+service_type: "LoadBalancer"
+
+IP_address: ""
+
+CD_REGISTRATION_FLOW: True
+
+static_users: 
+- email: "user@example.com"
+  hash: "$2y$12$4K/VkmDd1q1Orb3xAt82zu8gk7Ad6ReFR4LCP9UeYE90NLiN9Df72"
+- email: "admin@user.com"
+  hash: "$2y$12$4K/VkmDd1q1Orb3xAt82zu8gk7Ad6ReFR4LCP9UeYE90NLiN9Df72"

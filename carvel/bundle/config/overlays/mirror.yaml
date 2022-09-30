@@ -1,0 +1,12 @@
+#@ load("@ytt:overlay", "overlay")
+#@ load("@ytt:data", "data")
+
+#@ if data.values.imageswap_labels:
+#@overlay/match by=overlay.subset({"kind": "Namespace"}), expects=6
+---
+metadata:
+  #@overlay/match missing_ok=True
+  labels:
+    #@overlay/match missing_ok=True
+    k8s.twr.io/imageswap: enabled
+#@ end
