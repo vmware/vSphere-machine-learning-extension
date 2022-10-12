@@ -9,7 +9,7 @@ spec:
       containers:
       #@overlay/match by='name'
       - name: centraldashboard
-        image: harbor-repo.vmware.com/juanl/centraldashboard:v1
+        image: projects.registry.vmware.com/kubeflow/centraldashboard:v1
 
 #@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "jupyter-web-app-deployment", "namespace": "kubeflow"}}), expects=1
 ---
@@ -19,7 +19,7 @@ spec:
       containers:
       #@overlay/match by='name'
       - name: jupyter-web-app
-        image: harbor-repo.vmware.com/juanl/jupyter-web-app:v4
+        image: projects.registry.vmware.com/kubeflow/jupyter-web-app:v1
 
 #@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "notebook-controller-deployment", "namespace": "kubeflow"}}), expects=1
 ---
@@ -29,7 +29,7 @@ spec:
       containers:
       #@overlay/match by='name'
       - name: manager
-        image: harbor-repo.vmware.com/juanl/notebook-controller:v2.0
+        image: projects.registry.vmware.com/kubeflow/notebook-controller:v1
 
 
 #@overlay/match by=overlay.subset({"kind": "ConfigMap", "metadata": {"name": "jupyter-web-app-config-hdc8b8c222", "namespace": "kubeflow"}}), expects=1

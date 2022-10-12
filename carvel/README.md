@@ -3,7 +3,7 @@
 
 ### Prerequisites
 
-- Carvel Tools: https://carvel.dev/ytt/docs/v0.43.0/install/#via-script-macos-or-linux 
+- Carvel Tools: https://carvel.dev/ytt/docs/v0.43.0/install/#via-script-macos-or-linux (please use 'Via script' methods)
 - Docker: https://docs.docker.com/engine/install/
 - Kustomize v3.2.0: https://github.com/kubernetes-sigs/kustomize/releases/tag/v3.2.0
 

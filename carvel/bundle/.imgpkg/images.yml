@@ -353,33 +353,6 @@ images:
           url: ghcr.io/dexidp/dex@sha256:a4422334fc2fa528f0b9ca59fe1dff1f41ec66e5086facc85b32fc8d3da72a79
   image: ghcr.io/dexidp/dex@sha256:a4422334fc2fa528f0b9ca59fe1dff1f41ec66e5086facc85b32fc8d3da72a79
 - annotations:
-    kbld.carvel.dev/id: harbor-repo.vmware.com/juanl/centraldashboard:v1
-    kbld.carvel.dev/origins: |
-      - resolved:
-          tag: v1
-          url: harbor-repo.vmware.com/juanl/centraldashboard:v1
-      - preresolved:
-          url: harbor-repo.vmware.com/juanl/centraldashboard@sha256:df771f5504ccb93a5fadc0f08b9b2e14566cb8e0854d7e89c5f3cc40bcc5ffbf
-  image: harbor-repo.vmware.com/juanl/centraldashboard@sha256:df771f5504ccb93a5fadc0f08b9b2e14566cb8e0854d7e89c5f3cc40bcc5ffbf
-- annotations:
-    kbld.carvel.dev/id: harbor-repo.vmware.com/juanl/jupyter-web-app:v4
-    kbld.carvel.dev/origins: |
-      - resolved:
-          tag: v4
-          url: harbor-repo.vmware.com/juanl/jupyter-web-app:v4
-      - preresolved:
-          url: harbor-repo.vmware.com/juanl/jupyter-web-app@sha256:4bf59c90f9ba1cfd195847862b6287cee787631b13885cb43658dbfd28174bc7
-  image: harbor-repo.vmware.com/juanl/jupyter-web-app@sha256:4bf59c90f9ba1cfd195847862b6287cee787631b13885cb43658dbfd28174bc7
-- annotations:
-    kbld.carvel.dev/id: harbor-repo.vmware.com/juanl/notebook-controller:v2.0
-    kbld.carvel.dev/origins: |
-      - resolved:
-          tag: v2.0
-          url: harbor-repo.vmware.com/juanl/notebook-controller:v2.0
-      - preresolved:
-          url: harbor-repo.vmware.com/juanl/notebook-controller@sha256:b406c7cca8667936905e35a2ef48a00b53bbdeddeb8205d322327f2bb1fc7061
-  image: harbor-repo.vmware.com/juanl/notebook-controller@sha256:b406c7cca8667936905e35a2ef48a00b53bbdeddeb8205d322327f2bb1fc7061
-- annotations:
     kbld.carvel.dev/id: kserve/kserve-controller:v0.8.0
     kbld.carvel.dev/origins: |
       - resolved:
@@ -478,6 +451,27 @@ images:
       - preresolved:
           url: nvcr.io/nvidia/tritonserver@sha256:70e7e6602d2b101260c13da90381daa8b82c56f1b4d251787858e2fe488e0413
   image: nvcr.io/nvidia/tritonserver@sha256:70e7e6602d2b101260c13da90381daa8b82c56f1b4d251787858e2fe488e0413
+- annotations:
+    kbld.carvel.dev/id: projects.registry.vmware.com/kubeflow/centraldashboard:v1
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1
+          url: projects.registry.vmware.com/kubeflow/centraldashboard:v1
+  image: projects.registry.vmware.com/kubeflow/centraldashboard@sha256:df771f5504ccb93a5fadc0f08b9b2e14566cb8e0854d7e89c5f3cc40bcc5ffbf
+- annotations:
+    kbld.carvel.dev/id: projects.registry.vmware.com/kubeflow/jupyter-web-app:v1
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1
+          url: projects.registry.vmware.com/kubeflow/jupyter-web-app:v1
+  image: projects.registry.vmware.com/kubeflow/jupyter-web-app@sha256:4bf59c90f9ba1cfd195847862b6287cee787631b13885cb43658dbfd28174bc7
+- annotations:
+    kbld.carvel.dev/id: projects.registry.vmware.com/kubeflow/notebook-controller:v1
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: v1
+          url: projects.registry.vmware.com/kubeflow/notebook-controller:v1
+  image: projects.registry.vmware.com/kubeflow/notebook-controller@sha256:b406c7cca8667936905e35a2ef48a00b53bbdeddeb8205d322327f2bb1fc7061
 - annotations:
     kbld.carvel.dev/id: python:3.7
     kbld.carvel.dev/origins: |

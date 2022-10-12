@@ -7,5 +7,5 @@ images:
       - resolved:
           tag: "0.1"
           url: projects.registry.vmware.com/kubeflow/kubeflow-carvel-testing:0.1
-  image: projects.registry.vmware.com/kubeflow/kubeflow-carvel-testing@sha256:31d9e7511c3dced2bd4b256f0f2b391c10ad3a8295cc85577ed91d5ba7ff50b2
+  image: projects.registry.vmware.com/kubeflow/kubeflow-carvel-testing@sha256:a7757e9a81c6533a32705a0dd9aa7d2723fa442349a96ed325968f229eb52ec6
 kind: ImagesLock
