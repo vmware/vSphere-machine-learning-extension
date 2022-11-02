@@ -1,0 +1,676 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: g-research-crypto-forecasting-pipeline-
+  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline_compilation_time: '2022-09-20T11:30:08.976656',
+    pipelines.kubeflow.org/pipeline_spec: '{"description": "Forecasting short term
+      returns in 14 popular cryptocurrencies.", "inputs": [{"name": "dataset", "type":
+      "String"}, {"name": "data_path", "type": "String"}], "name": "g-research-crypto-forecasting-pipeline"}'}
+  labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3}
+spec:
+  entrypoint: g-research-crypto-forecasting-pipeline
+  templates:
+  - name: create-data-volume
+    resource:
+      action: create
+      manifest: |
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: '{{workflow.name}}-data-volume'
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 16Gi
+    outputs:
+      parameters:
+      - name: create-data-volume-manifest
+        valueFrom: {jsonPath: '{}'}
+      - name: create-data-volume-name
+        valueFrom: {jsonPath: '{.metadata.name}'}
+      - name: create-data-volume-size
+        valueFrom: {jsonPath: '{.status.capacity.storage}'}
+    metadata:
+      labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline-sdk-type: kfp}
+  - name: download-data
+    container:
+      args: [--dataset, '{{inputs.parameters.dataset}}', --data-path, '{{inputs.parameters.data_path}}']
+      command:
+      - sh
+      - -ec
+      - |
+        program_path=$(mktemp)
+        printf "%s" "$0" > "$program_path"
+        python3 -u "$program_path" "$@"
+      - "def download_data(dataset, \n                  data_path):\n\n    # install\
+        \ the necessary libraries\n    import os, sys, subprocess, zipfile, pickle;\n\
+        \    subprocess.run([\"python\", \"-m\", \"pip\", \"install\", \"--upgrade\"\
+        , \"pip\"])\n    subprocess.run([sys.executable, '-m', 'pip', 'install','pandas'])\n\
+        \    subprocess.run([sys.executable, '-m', 'pip', 'install','kaggle'])\n\n\
+        \    # import libraries\n    import pandas as pd\n\n    # setup kaggle environment\
+        \ for data download\n    # with open('/secret/kaggle-secret/password', 'r')\
+        \ as file:\n    #     kaggle_key = file.read().rstrip()\n    # with open('/secret/kaggle-secret/username',\
+        \ 'r') as file:\n    #     kaggle_user = file.read().rstrip()\n    kaggle_user\
+        \ = 'zxtariel'\n    kaggle_key = '63a97ce226114b066da48aa1e0270b5a'\n\n  \
+        \  os.environ['KAGGLE_USERNAME'], os.environ['KAGGLE_KEY'] = kaggle_user,\
+        \ kaggle_key\n\n    os.environ['zxtariel'], os.environ['KAGGLE_KEY'] = kaggle_user,\
+        \ kaggle_key\n\n    # create data_path directory\n    if not os.path.exists(data_path):\n\
+        \        os.makedirs(data_path)\n\n    # download kaggle's g-research-crypto-forecasting\
+        \ data\n    subprocess.run([\"kaggle\",\"competitions\", \"download\", \"\
+        -c\", dataset])\n\n    # extract 'train.csv' and 'asset_details.csv' in g-research-crypto-forecasting.zip\
+        \ to data_path\n    with zipfile.ZipFile(f\"{dataset}.zip\",\"r\") as zip_ref:\n\
+        \        zip_ref.extractall(data_path, members=['train.csv', 'asset_details.csv'])\n\
+        \n    return(print('Done!'))\n\nimport argparse\n_parser = argparse.ArgumentParser(prog='Download\
+        \ data', description='')\n_parser.add_argument(\"--dataset\", dest=\"dataset\"\
+        , type=str, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"\
+        --data-path\", dest=\"data_path\", type=str, required=True, default=argparse.SUPPRESS)\n\
+        _parsed_args = vars(_parser.parse_args())\n\n_outputs = download_data(**_parsed_args)\n"
+      image: python:3.7.1
+      volumeMounts:
+      - {mountPath: '{{inputs.parameters.data_path}}', name: create-data-volume}
+    inputs:
+      parameters:
+      - {name: create-data-volume-name}
+      - {name: data_path}
+      - {name: dataset}
+    metadata:
+      labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline-sdk-type: kfp}
+      annotations: {pipelines.kubeflow.org/component_spec: '{"implementation": {"container":
+          {"args": ["--dataset", {"inputValue": "dataset"}, "--data-path", {"inputValue":
+          "data_path"}], "command": ["sh", "-ec", "program_path=$(mktemp)\nprintf
+          \"%s\" \"$0\" > \"$program_path\"\npython3 -u \"$program_path\" \"$@\"\n",
+          "def download_data(dataset, \n                  data_path):\n\n    # install
+          the necessary libraries\n    import os, sys, subprocess, zipfile, pickle;\n    subprocess.run([\"python\",
+          \"-m\", \"pip\", \"install\", \"--upgrade\", \"pip\"])\n    subprocess.run([sys.executable,
+          ''-m'', ''pip'', ''install'',''pandas''])\n    subprocess.run([sys.executable,
+          ''-m'', ''pip'', ''install'',''kaggle''])\n\n    # import libraries\n    import
+          pandas as pd\n\n    # setup kaggle environment for data download\n    #
+          with open(''/secret/kaggle-secret/password'', ''r'') as file:\n    #     kaggle_key
+          = file.read().rstrip()\n    # with open(''/secret/kaggle-secret/username'',
+          ''r'') as file:\n    #     kaggle_user = file.read().rstrip()\n    kaggle_user
+          = ''zxtariel''\n    kaggle_key = ''63a97ce226114b066da48aa1e0270b5a''\n\n    os.environ[''KAGGLE_USERNAME''],
+          os.environ[''KAGGLE_KEY''] = kaggle_user, kaggle_key\n\n    os.environ[''zxtariel''],
+          os.environ[''KAGGLE_KEY''] = kaggle_user, kaggle_key\n\n    # create data_path
+          directory\n    if not os.path.exists(data_path):\n        os.makedirs(data_path)\n\n    #
+          download kaggle''s g-research-crypto-forecasting data\n    subprocess.run([\"kaggle\",\"competitions\",
+          \"download\", \"-c\", dataset])\n\n    # extract ''train.csv'' and ''asset_details.csv''
+          in g-research-crypto-forecasting.zip to data_path\n    with zipfile.ZipFile(f\"{dataset}.zip\",\"r\")
+          as zip_ref:\n        zip_ref.extractall(data_path, members=[''train.csv'',
+          ''asset_details.csv''])\n\n    return(print(''Done!''))\n\nimport argparse\n_parser
+          = argparse.ArgumentParser(prog=''Download data'', description='''')\n_parser.add_argument(\"--dataset\",
+          dest=\"dataset\", type=str, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"--data-path\",
+          dest=\"data_path\", type=str, required=True, default=argparse.SUPPRESS)\n_parsed_args
+          = vars(_parser.parse_args())\n\n_outputs = download_data(**_parsed_args)\n"],
+          "image": "python:3.7.1"}}, "inputs": [{"name": "dataset"}, {"name": "data_path"}],
+          "name": "Download data"}', pipelines.kubeflow.org/component_ref: '{}', pipelines.kubeflow.org/arguments.parameters: '{"data_path":
+          "{{inputs.parameters.data_path}}", "dataset": "{{inputs.parameters.dataset}}"}'}
+    volumes:
+    - name: create-data-volume
+      persistentVolumeClaim: {claimName: '{{inputs.parameters.create-data-volume-name}}'}
+  - name: evaluation-result
+    container:
+      args: [--data-path, '{{inputs.parameters.data_path}}', --metrics, /tmp/outputs/metrics/data,
+        '----output-paths', /tmp/outputs/mlpipeline_metrics/data]
+      command:
+      - sh
+      - -ec
+      - |
+        program_path=$(mktemp)
+        printf "%s" "$0" > "$program_path"
+        python3 -u "$program_path" "$@"
+      - "def _make_parent_dirs_and_return_path(file_path: str):\n    import os\n \
+        \   os.makedirs(os.path.dirname(file_path), exist_ok=True)\n    return file_path\n\
+        \ndef evaluation_result(data_path, \n                metrics_path):\n\n  \
+        \  # import Library\n    import sys, subprocess;\n    subprocess.run([\"python\"\
+        , \"-m\", \"pip\", \"install\", \"--upgrade\", \"pip\"])\n    subprocess.run([sys.executable,\
+        \ '-m', 'pip', 'install','lightgbm'])\n    import json;\n    from collections\
+        \ import namedtuple\n    import joblib\n    import lightgbm as lgb\n    from\
+        \ lightgbm import LGBMRegressor\n\n    # load model\n    model = joblib.load(f'{data_path}/lgb.jl')\n\
+        \n    # model evaluation\n    root_mean_squared_error = model.best_score.get('valid_0').get('rmse')\n\
+        \    weighted_correlation = model.best_score.get('valid_0').get('eval_wcorr')\n\
+        \n    # create kubeflow metric metadata for UI    \n    metrics = {\n    \
+        \            'metrics': [\n                    {'name': 'root-mean-squared-error',\n\
+        \                    'numberValue':  root_mean_squared_error,\n          \
+        \          'format': 'RAW'},\n                    {'name': 'weighted-correlation',\n\
+        \                    'numberValue':  weighted_correlation,\n             \
+        \       'format': 'RAW'}\n                            ]\n              }\n\
+        \n    with open(metrics_path, \"w\") as f:\n        json.dump(metrics, f)\n\
+        \n    output_tuple = namedtuple(\"EvaluationOutput\", [\"mlpipeline_metrics\"\
+        ])\n\n    return output_tuple(json.dumps(metrics))\n\nimport argparse\n_parser\
+        \ = argparse.ArgumentParser(prog='Evaluation result', description='')\n_parser.add_argument(\"\
+        --data-path\", dest=\"data_path\", type=str, required=True, default=argparse.SUPPRESS)\n\
+        _parser.add_argument(\"--metrics\", dest=\"metrics_path\", type=_make_parent_dirs_and_return_path,\
+        \ required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"----output-paths\"\
+        , dest=\"_output_paths\", type=str, nargs=1)\n_parsed_args = vars(_parser.parse_args())\n\
+        _output_files = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = evaluation_result(**_parsed_args)\n\
+        \n_output_serializers = [\n    str,\n\n]\n\nimport os\nfor idx, output_file\
+        \ in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n\
+        \    except OSError:\n        pass\n    with open(output_file, 'w') as f:\n\
+        \        f.write(_output_serializers[idx](_outputs[idx]))\n"
+      image: python:3.7.1
+      volumeMounts:
+      - {mountPath: '{{inputs.parameters.data_path}}', name: create-data-volume}
+    inputs:
+      parameters:
+      - {name: create-data-volume-name}
+      - {name: data_path}
+    outputs:
+      artifacts:
+      - {name: mlpipeline-metrics, path: /tmp/outputs/mlpipeline_metrics/data}
+      - {name: evaluation-result-metrics, path: /tmp/outputs/metrics/data}
+    metadata:
+      labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline-sdk-type: kfp}
+      annotations: {pipelines.kubeflow.org/component_spec: '{"implementation": {"container":
+          {"args": ["--data-path", {"inputValue": "data_path"}, "--metrics", {"outputPath":
+          "metrics"}, "----output-paths", {"outputPath": "mlpipeline_metrics"}], "command":
+          ["sh", "-ec", "program_path=$(mktemp)\nprintf \"%s\" \"$0\" > \"$program_path\"\npython3
+          -u \"$program_path\" \"$@\"\n", "def _make_parent_dirs_and_return_path(file_path:
+          str):\n    import os\n    os.makedirs(os.path.dirname(file_path), exist_ok=True)\n    return
+          file_path\n\ndef evaluation_result(data_path, \n                metrics_path):\n\n    #
+          import Library\n    import sys, subprocess;\n    subprocess.run([\"python\",
+          \"-m\", \"pip\", \"install\", \"--upgrade\", \"pip\"])\n    subprocess.run([sys.executable,
+          ''-m'', ''pip'', ''install'',''lightgbm''])\n    import json;\n    from
+          collections import namedtuple\n    import joblib\n    import lightgbm as
+          lgb\n    from lightgbm import LGBMRegressor\n\n    # load model\n    model
+          = joblib.load(f''{data_path}/lgb.jl'')\n\n    # model evaluation\n    root_mean_squared_error
+          = model.best_score.get(''valid_0'').get(''rmse'')\n    weighted_correlation
+          = model.best_score.get(''valid_0'').get(''eval_wcorr'')\n\n    # create
+          kubeflow metric metadata for UI    \n    metrics = {\n                ''metrics'':
+          [\n                    {''name'': ''root-mean-squared-error'',\n                    ''numberValue'':  root_mean_squared_error,\n                    ''format'':
+          ''RAW''},\n                    {''name'': ''weighted-correlation'',\n                    ''numberValue'':  weighted_correlation,\n                    ''format'':
+          ''RAW''}\n                            ]\n              }\n\n    with open(metrics_path,
+          \"w\") as f:\n        json.dump(metrics, f)\n\n    output_tuple = namedtuple(\"EvaluationOutput\",
+          [\"mlpipeline_metrics\"])\n\n    return output_tuple(json.dumps(metrics))\n\nimport
+          argparse\n_parser = argparse.ArgumentParser(prog=''Evaluation result'',
+          description='''')\n_parser.add_argument(\"--data-path\", dest=\"data_path\",
+          type=str, required=True, default=argparse.SUPPRESS)\n_parser.add_argument(\"--metrics\",
+          dest=\"metrics_path\", type=_make_parent_dirs_and_return_path, required=True,
+          default=argparse.SUPPRESS)\n_parser.add_argument(\"----output-paths\", dest=\"_output_paths\",
+          type=str, nargs=1)\n_parsed_args = vars(_parser.parse_args())\n_output_files
+          = _parsed_args.pop(\"_output_paths\", [])\n\n_outputs = evaluation_result(**_parsed_args)\n\n_output_serializers
+          = [\n    str,\n\n]\n\nimport os\nfor idx, output_file in enumerate(_output_files):\n    try:\n        os.makedirs(os.path.dirname(output_file))\n    except
+          OSError:\n        pass\n    with open(output_file, ''w'') as f:\n        f.write(_output_serializers[idx](_outputs[idx]))\n"],
+          "image": "python:3.7.1"}}, "inputs": [{"name": "data_path"}], "name": "Evaluation
+          result", "outputs": [{"name": "metrics", "type": "String"}, {"name": "mlpipeline_metrics",
+          "type": "Metrics"}]}', pipelines.kubeflow.org/component_ref: '{}', pipelines.kubeflow.org/arguments.parameters: '{"data_path":
+          "{{inputs.parameters.data_path}}"}'}
+    volumes:
+    - name: create-data-volume
+      persistentVolumeClaim: {claimName: '{{inputs.parameters.create-data-volume-name}}'}
+  - name: feature-engineering
+    container:
+      args: [--data-path, '{{inputs.parameters.data_path}}']
+      command:
+      - sh
+      - -ec
+      - |
+        program_path=$(mktemp)
+        printf "%s" "$0" > "$program_path"
+        python3 -u "$program_path" "$@"
+      - "def feature_engineering(data_path):\n\n    # install the necessary libraries\n\
+        \    import sys, subprocess;\n    subprocess.run([\"python\", \"-m\", \"pip\"\
+        , \"install\", \"--upgrade\", \"pip\"])\n    subprocess.run([sys.executable,\
+        \ '-m', 'pip', 'install','pandas'])\n    subprocess.run([sys.executable, '-m',\
+        \ 'pip', 'install','tqdm'])\n    subprocess.run([sys.executable, '-m', 'pip',\
+        \ 'install','talib-binary'])\n\n    # import Library\n    import os, pickle,\
+        \ time, talib, datetime;\n    import numpy as np\n    import pandas as pd\n\
+        \    from tqdm import tqdm\n\n    # loading the df_train data\n    with open(f'{data_path}/df_train',\
+        \ 'rb') as f:\n        df_train = pickle.load(f)\n\n    # creating technical\
+        \ indicators\n\n    # Create a function to calculate the Relative Strength\
+        \ Index\n    def RSI(df, n):\n        return talib.RSI(df['Close'], n)\n\n\
+        \    # Create a function to calculate the Average True Range\n    def ATR(df,\
+        \ n):\n        return talib.ATR(df[\"High\"], df.Low, df.Close, n)\n\n   \
+        \ # Create a function to calculate the Double Exponential Moving Average (DEMA)\n\
+        \    def DEMA(data, time_period):\n        #Calculate the Exponential Moving\
+        \ Average for some time_period (in days)\n        EMA = data['Close'].ewm(span=time_period,\
+        \ adjust=False).mean()\n        #Calculate the DEMA\n        DEMA = 2*EMA\
+        \ - EMA.ewm(span=time_period, adjust=False).mean()\n        return DEMA\n\n\
+        \    # Create a function to calculate the upper_shadow\n    def upper_shadow(df):\n\
+        \        return df['High'] - np.maximum(df['Close'], df['Open'])\n\n    #\
+        \ Create a function to calculate the lower_shadow\n    def lower_shadow(df):\n\
+        \        return np.minimum(df['Close'], df['Open']) - df['Low']\n\n    def\
+        \ get_features(df, asset_id, train=True):\n        '''\n        This function\
+        \ takes a dataframe with all asset data and return the lagged features for\
+        \ a single asset.\n\n        df - Full dataframe with all assets included\n\
+        \        asset_id - integer from 0-13 inclusive to represent a cryptocurrency\
+        \ asset\n        train - True - you are training your model\n            \
+        \  - False - you are submitting your model via api\n        '''\n        #\
+        \ filter based on asset id\n        df = df[df['Asset_ID']==asset_id]\n\n\
+        \        # sort based on time stamp\n        df = df.sort_values('timestamp')\n\
+        \n        if train == True:\n            df_feat = df.copy()\n\n         \
+        \   # define a train_flg column to split your data into train and validation\n\
+        \            totimestamp = lambda s: np.int32(time.mktime(datetime.datetime.strptime(s,\
+        \ \"%d/%m/%Y\").timetuple()))\n            valid_window = [totimestamp(\"\
+        01/05/2021\")]\n\n            df_feat['train_flg'] = np.where(df_feat['timestamp']>=valid_window[0],\
+        \ 0,1)\n            df_feat = df_feat[['timestamp','Asset_ID', 'High', 'Low',\
+        \ 'Open', 'Close', 'Volume','Target','train_flg']].copy()\n        else:\n\
+        \            df = df.sort_values('row_id')\n            df_feat = df[['Asset_ID',\
+        \ 'High', 'Low', 'Open', 'Close', 'Volume','row_id']].copy()\n\n        for\
+        \ i in tqdm([30, 120, 240]):\n            # Applyin technical indicators\n\
+        \            df_feat[f'RSI_{i}'] = RSI(df_feat, i)\n            df_feat[f'ATR_{i}']\
+        \ = ATR(df_feat, i)\n            df_feat[f'DEMA_{i}'] = DEMA(df_feat, i)\n\
+        \n        for i in tqdm([30, 120, 240]):\n            # creating lag features\n\
+        \            df_feat[f'sma_{i}'] = df_feat['Close'].rolling(i).mean()/df_feat['Close']\
+        \ -1\n            df_feat[f'return_{i}'] = df_feat['Close']/df_feat['Close'].shift(i)\
+        \ -1\n\n        # new features\n        df_feat['HL'] = np.log(df_feat['High']\
+        \ - df_feat['Low'])\n        df_feat['OC'] = np.log(df_feat['Close'] - df_feat['Open'])\n\
+        \n        # Applyin lower_shadow and upper_shadow indicators\n        df_feat['lower_shadow']\
+        \ = np.log(lower_shadow(df)) \n        df_feat['upper_shadow'] = np.log(upper_shadow(df))\n\
+        \n        # replace inf with nan\n        df_feat.replace([np.inf, -np.inf],\
+        \ np.nan, inplace=True)\n\n        # datetime features\n        df_feat['Date']\
+        \ = pd.to_datetime(df_feat['timestamp'], unit='s')\n        df_feat['Day']\
+        \ = df_feat['Date'].dt.weekday.astype(np.int32)\n        df_feat[\"dayofyear\"\
+        ] = df_feat['Date'].dt.dayofyear\n        df_feat[\"weekofyear\"] = df_feat['Date'].dt.weekofyear\n\
+        \        df_feat[\"season\"] = ((df_feat['Date'].dt.month)%12 + 3)//3\n\n\
+        \        # drop features\n        df_feat = df_feat.drop(['Open','Close','High','Low',\
+        \ 'Volume', 'Date'], axis=1)\n\n        # fill nan values with 0\n       \
+        \ df_feat = df_feat.fillna(0)\n\n        return df_feat\n\n    # create your\
+        \ features dataframe for each asset and concatenate\n    feature_df = pd.DataFrame()\n\
+        \    for i in range(14):\n        print(i)\n        feature_df = pd.concat([feature_df,get_features(df_train,i,train=True)])\n\
+        \n    # save the feature engineered data as a pickle file to be used by the\
+        \ modeling component.\n    with open(f'{data_path}/feature_df', 'wb') as f:\n\
+        \        pickle.dump(feature_df, f)\n\n    return(print('Done!'))  \n\nimport\
+        \ argparse\n_parser = argparse.ArgumentParser(prog='Feature engineering',\
+        \ description='')\n_parser.add_argument(\"--data-path\", dest=\"data_path\"\
+        , type=str, required=True, default=argparse.SUPPRESS)\n_parsed_args = vars(_parser.parse_args())\n\
+        \n_outputs = feature_engineering(**_parsed_args)\n"
+      image: python:3.7.1
+      volumeMounts:
+      - {mountPath: '{{inputs.parameters.data_path}}', name: create-data-volume}
+    inputs:
+      parameters:
+      - {name: create-data-volume-name}
+      - {name: data_path}
+    metadata:
+      labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline-sdk-type: kfp}
+      annotations: {pipelines.kubeflow.org/component_spec: '{"implementation": {"container":
+          {"args": ["--data-path", {"inputValue": "data_path"}], "command": ["sh",
+          "-ec", "program_path=$(mktemp)\nprintf \"%s\" \"$0\" > \"$program_path\"\npython3
+          -u \"$program_path\" \"$@\"\n", "def feature_engineering(data_path):\n\n    #
+          install the necessary libraries\n    import sys, subprocess;\n    subprocess.run([\"python\",
+          \"-m\", \"pip\", \"install\", \"--upgrade\", \"pip\"])\n    subprocess.run([sys.executable,
+          ''-m'', ''pip'', ''install'',''pandas''])\n    subprocess.run([sys.executable,
+          ''-m'', ''pip'', ''install'',''tqdm''])\n    subprocess.run([sys.executable,
+          ''-m'', ''pip'', ''install'',''talib-binary''])\n\n    # import Library\n    import
+          os, pickle, time, talib, datetime;\n    import numpy as np\n    import pandas
+          as pd\n    from tqdm import tqdm\n\n    # loading the df_train data\n    with
+          open(f''{data_path}/df_train'', ''rb'') as f:\n        df_train = pickle.load(f)\n\n    #
+          creating technical indicators\n\n    # Create a function to calculate the
+          Relative Strength Index\n    def RSI(df, n):\n        return talib.RSI(df[''Close''],
+          n)\n\n    # Create a function to calculate the Average True Range\n    def
+          ATR(df, n):\n        return talib.ATR(df[\"High\"], df.Low, df.Close, n)\n\n    #
+          Create a function to calculate the Double Exponential Moving Average (DEMA)\n    def
+          DEMA(data, time_period):\n        #Calculate the Exponential Moving Average
+          for some time_period (in days)\n        EMA = data[''Close''].ewm(span=time_period,
+          adjust=False).mean()\n        #Calculate the DEMA\n        DEMA = 2*EMA
+          - EMA.ewm(span=time_period, adjust=False).mean()\n        return DEMA\n\n    #
+          Create a function to calculate the upper_shadow\n    def upper_shadow(df):\n        return
+          df[''High''] - np.maximum(df[''Close''], df[''Open''])\n\n    # Create a
+          function to calculate the lower_shadow\n    def lower_shadow(df):\n        return
+          np.minimum(df[''Close''], df[''Open'']) - df[''Low'']\n\n    def get_features(df,
+          asset_id, train=True):\n        ''''''\n        This function takes a dataframe
+          with all asset data and return the lagged features for a single asset.\n\n        df
+          - Full dataframe with all assets included\n        asset_id - integer from
+          0-13 inclusive to represent a cryptocurrency asset\n        train - True
+          - you are training your model\n              - False - you are submitting
+          your model via api\n        ''''''\n        # filter based on asset id\n        df
+          = df[df[''Asset_ID'']==asset_id]\n\n        # sort based on time stamp\n        df
+          = df.sort_values(''timestamp'')\n\n        if train == True:\n            df_feat
+          = df.copy()\n\n            # define a train_flg column to split your data
+          into train and validation\n            totimestamp = lambda s: np.int32(time.mktime(datetime.datetime.strptime(s,
+          \"%d/%m/%Y\").timetuple()))\n            valid_window = [totimestamp(\"01/05/2021\")]\n\n            df_feat[''train_flg'']
+          = np.where(df_feat[''timestamp'']>=valid_window[0], 0,1)\n            df_feat
+          = df_feat[[''timestamp'',''Asset_ID'', ''High'', ''Low'', ''Open'', ''Close'',
+          ''Volume'',''Target'',''train_flg'']].copy()\n        else:\n            df
+          = df.sort_values(''row_id'')\n            df_feat = df[[''Asset_ID'', ''High'',
+          ''Low'', ''Open'', ''Close'', ''Volume'',''row_id'']].copy()\n\n        for
+          i in tqdm([30, 120, 240]):\n            # Applyin technical indicators\n            df_feat[f''RSI_{i}'']
+          = RSI(df_feat, i)\n            df_feat[f''ATR_{i}''] = ATR(df_feat, i)\n            df_feat[f''DEMA_{i}'']
+          = DEMA(df_feat, i)\n\n        for i in tqdm([30, 120, 240]):\n            #
+          creating lag features\n            df_feat[f''sma_{i}''] = df_feat[''Close''].rolling(i).mean()/df_feat[''Close'']
+          -1\n            df_feat[f''return_{i}''] = df_feat[''Close'']/df_feat[''Close''].shift(i)
+          -1\n\n        # new features\n        df_feat[''HL''] = np.log(df_feat[''High'']
+          - df_feat[''Low''])\n        df_feat[''OC''] = np.log(df_feat[''Close'']
+          - df_feat[''Open''])\n\n        # Applyin lower_shadow and upper_shadow
+          indicators\n        df_feat[''lower_shadow''] = np.log(lower_shadow(df))
+          \n        df_feat[''upper_shadow''] = np.log(upper_shadow(df))\n\n        #
+          replace inf with nan\n        df_feat.replace([np.inf, -np.inf], np.nan,
+          inplace=True)\n\n        # datetime features\n        df_feat[''Date'']
+          = pd.to_datetime(df_feat[''timestamp''], unit=''s'')\n        df_feat[''Day'']
+          = df_feat[''Date''].dt.weekday.astype(np.int32)\n        df_feat[\"dayofyear\"]
+          = df_feat[''Date''].dt.dayofyear\n        df_feat[\"weekofyear\"] = df_feat[''Date''].dt.weekofyear\n        df_feat[\"season\"]
+          = ((df_feat[''Date''].dt.month)%12 + 3)//3\n\n        # drop features\n        df_feat
+          = df_feat.drop([''Open'',''Close'',''High'',''Low'', ''Volume'', ''Date''],
+          axis=1)\n\n        # fill nan values with 0\n        df_feat = df_feat.fillna(0)\n\n        return
+          df_feat\n\n    # create your features dataframe for each asset and concatenate\n    feature_df
+          = pd.DataFrame()\n    for i in range(14):\n        print(i)\n        feature_df
+          = pd.concat([feature_df,get_features(df_train,i,train=True)])\n\n    # save
+          the feature engineered data as a pickle file to be used by the modeling
+          component.\n    with open(f''{data_path}/feature_df'', ''wb'') as f:\n        pickle.dump(feature_df,
+          f)\n\n    return(print(''Done!''))  \n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Feature
+          engineering'', description='''')\n_parser.add_argument(\"--data-path\",
+          dest=\"data_path\", type=str, required=True, default=argparse.SUPPRESS)\n_parsed_args
+          = vars(_parser.parse_args())\n\n_outputs = feature_engineering(**_parsed_args)\n"],
+          "image": "python:3.7.1"}}, "inputs": [{"name": "data_path"}], "name": "Feature
+          engineering"}', pipelines.kubeflow.org/component_ref: '{}', pipelines.kubeflow.org/arguments.parameters: '{"data_path":
+          "{{inputs.parameters.data_path}}"}'}
+    volumes:
+    - name: create-data-volume
+      persistentVolumeClaim: {claimName: '{{inputs.parameters.create-data-volume-name}}'}
+  - name: g-research-crypto-forecasting-pipeline
+    inputs:
+      parameters:
+      - {name: data_path}
+      - {name: dataset}
+    dag:
+      tasks:
+      - {name: create-data-volume, template: create-data-volume}
+      - name: download-data
+        template: download-data
+        dependencies: [create-data-volume]
+        arguments:
+          parameters:
+          - {name: create-data-volume-name, value: '{{tasks.create-data-volume.outputs.parameters.create-data-volume-name}}'}
+          - {name: data_path, value: '{{inputs.parameters.data_path}}'}
+          - {name: dataset, value: '{{inputs.parameters.dataset}}'}
+      - name: evaluation-result
+        template: evaluation-result
+        dependencies: [create-data-volume, modeling]
+        arguments:
+          parameters:
+          - {name: create-data-volume-name, value: '{{tasks.create-data-volume.outputs.parameters.create-data-volume-name}}'}
+          - {name: data_path, value: '{{inputs.parameters.data_path}}'}
+      - name: feature-engineering
+        template: feature-engineering
+        dependencies: [create-data-volume, load-data]
+        arguments:
+          parameters:
+          - {name: create-data-volume-name, value: '{{tasks.create-data-volume.outputs.parameters.create-data-volume-name}}'}
+          - {name: data_path, value: '{{inputs.parameters.data_path}}'}
+      - name: load-data
+        template: load-data
+        dependencies: [create-data-volume, download-data]
+        arguments:
+          parameters:
+          - {name: create-data-volume-name, value: '{{tasks.create-data-volume.outputs.parameters.create-data-volume-name}}'}
+          - {name: data_path, value: '{{inputs.parameters.data_path}}'}
+      - name: merge-assets-features
+        template: merge-assets-features
+        dependencies: [create-data-volume, feature-engineering]
+        arguments:
+          parameters:
+          - {name: create-data-volume-name, value: '{{tasks.create-data-volume.outputs.parameters.create-data-volume-name}}'}
+          - {name: data_path, value: '{{inputs.parameters.data_path}}'}
+      - name: modeling
+        template: modeling
+        dependencies: [create-data-volume, merge-assets-features]
+        arguments:
+          parameters:
+          - {name: create-data-volume-name, value: '{{tasks.create-data-volume.outputs.parameters.create-data-volume-name}}'}
+          - {name: data_path, value: '{{inputs.parameters.data_path}}'}
+  - name: load-data
+    container:
+      args: [--data-path, '{{inputs.parameters.data_path}}']
+      command:
+      - sh
+      - -ec
+      - |
+        program_path=$(mktemp)
+        printf "%s" "$0" > "$program_path"
+        python3 -u "$program_path" "$@"
+      - |
+        def load_data(data_path):
+
+            # install the necessary libraries
+            import os, sys, subprocess, pickle;
+            subprocess.run(["python", "-m", "pip", "install", "--upgrade", "pip"])
+            subprocess.run([sys.executable, '-m', 'pip', 'install','pandas'])
+
+            # import libraries
+            import pandas as pd
+
+            TRAIN_CSV = f'{data_path}/train.csv'
+            ASSET_DETAILS_CSV = f'{data_path}/asset_details.csv'
+
+            # read TRAIN_CSV and ASSET_DETAILS_CSV
+            df_train = pd.read_csv(TRAIN_CSV)
+            df_asset_details = pd.read_csv(ASSET_DETAILS_CSV).sort_values("Asset_ID")
+
+            df_train['datetime'] = pd.to_datetime(df_train['timestamp'], unit='s')
+            df_train = df_train[df_train['datetime'] >= '2020-01-01 00:00:00'].copy()
+
+            # Save the df_train data as a pickle file to be used by the feature_engineering component.
+            with open(f'{data_path}/df_train', 'wb') as f:
+                pickle.dump(df_train, f)
+
+            # Save the df_train data as a pickle file to be used by the merge_data component.
+            with open(f'{data_path}/df_asset_details', 'wb') as g:
+                pickle.dump(df_asset_details, g)
+
+            return(print('Done!'))
+
+        import argparse
+        _parser = argparse.ArgumentParser(prog='Load data', description='')
+        _parser.add_argument("--data-path", dest="data_path", type=str, required=True, default=argparse.SUPPRESS)
+        _parsed_args = vars(_parser.parse_args())
+
+        _outputs = load_data(**_parsed_args)
+      image: python:3.7.1
+      volumeMounts:
+      - {mountPath: '{{inputs.parameters.data_path}}', name: create-data-volume}
+    inputs:
+      parameters:
+      - {name: create-data-volume-name}
+      - {name: data_path}
+    metadata:
+      labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline-sdk-type: kfp}
+      annotations: {pipelines.kubeflow.org/component_spec: '{"implementation": {"container":
+          {"args": ["--data-path", {"inputValue": "data_path"}], "command": ["sh",
+          "-ec", "program_path=$(mktemp)\nprintf \"%s\" \"$0\" > \"$program_path\"\npython3
+          -u \"$program_path\" \"$@\"\n", "def load_data(data_path):\n\n    # install
+          the necessary libraries\n    import os, sys, subprocess, pickle;\n    subprocess.run([\"python\",
+          \"-m\", \"pip\", \"install\", \"--upgrade\", \"pip\"])\n    subprocess.run([sys.executable,
+          ''-m'', ''pip'', ''install'',''pandas''])\n\n    # import libraries\n    import
+          pandas as pd\n\n    TRAIN_CSV = f''{data_path}/train.csv''\n    ASSET_DETAILS_CSV
+          = f''{data_path}/asset_details.csv''\n\n    # read TRAIN_CSV and ASSET_DETAILS_CSV\n    df_train
+          = pd.read_csv(TRAIN_CSV)\n    df_asset_details = pd.read_csv(ASSET_DETAILS_CSV).sort_values(\"Asset_ID\")\n\n    df_train[''datetime'']
+          = pd.to_datetime(df_train[''timestamp''], unit=''s'')\n    df_train = df_train[df_train[''datetime'']
+          >= ''2020-01-01 00:00:00''].copy()\n\n    # Save the df_train data as a
+          pickle file to be used by the feature_engineering component.\n    with open(f''{data_path}/df_train'',
+          ''wb'') as f:\n        pickle.dump(df_train, f)\n\n    # Save the df_train
+          data as a pickle file to be used by the merge_data component.\n    with
+          open(f''{data_path}/df_asset_details'', ''wb'') as g:\n        pickle.dump(df_asset_details,
+          g)\n\n    return(print(''Done!''))\n\nimport argparse\n_parser = argparse.ArgumentParser(prog=''Load
+          data'', description='''')\n_parser.add_argument(\"--data-path\", dest=\"data_path\",
+          type=str, required=True, default=argparse.SUPPRESS)\n_parsed_args = vars(_parser.parse_args())\n\n_outputs
+          = load_data(**_parsed_args)\n"], "image": "python:3.7.1"}}, "inputs": [{"name":
+          "data_path"}], "name": "Load data"}', pipelines.kubeflow.org/component_ref: '{}',
+        pipelines.kubeflow.org/arguments.parameters: '{"data_path": "{{inputs.parameters.data_path}}"}'}
+    volumes:
+    - name: create-data-volume
+      persistentVolumeClaim: {claimName: '{{inputs.parameters.create-data-volume-name}}'}
+  - name: merge-assets-features
+    container:
+      args: [--data-path, '{{inputs.parameters.data_path}}']
+      command:
+      - sh
+      - -ec
+      - |
+        program_path=$(mktemp)
+        printf "%s" "$0" > "$program_path"
+        python3 -u "$program_path" "$@"
+      - "def merge_assets_features(data_path):\n\n    # install the necessary libraries\n\
+        \    import sys, subprocess;\n    subprocess.run([\"python\", \"-m\", \"pip\"\
+        , \"install\", \"--upgrade\", \"pip\"])\n    subprocess.run([sys.executable,\
+        \ '-m', 'pip', 'install','pandas'])\n\n    # import Library\n    import os,\
+        \ pickle;\n    import pandas as pd\n\n    #loading the feature_df data\n \
+        \   with open(f'{data_path}/feature_df', 'rb') as f:\n        feature_df =\
+        \ pickle.load(f)\n\n    #loading the df_asset_details data\n    with open(f'{data_path}/df_asset_details',\
+        \ 'rb') as g:\n        df_asset_details = pickle.load(g)\n\n    # assign weight\
+        \ column feature dataframe\n    feature_df = pd.merge(feature_df, df_asset_details[['Asset_ID','Weight']],\
+        \ how='left', on=['Asset_ID'])\n\n    #Save the feature_df as a pickle file\
+        \ to be used by the modelling component.\n    with open(f'{data_path}/merge_feature_df',\
+        \ 'wb') as h:\n        pickle.dump(feature_df, h)\n\n    return(print('Done!'))\
+        \  \n\nimport argparse\n_parser = argparse.ArgumentParser(prog='Merge assets\
+        \ features', description='')\n_parser.add_argument(\"--data-path\", dest=\"\
+        data_path\", type=str, required=True, default=argparse.SUPPRESS)\n_parsed_args\
+        \ = vars(_parser.parse_args())\n\n_outputs = merge_assets_features(**_parsed_args)\n"
+      image: python:3.7.1
+      volumeMounts:
+      - {mountPath: '{{inputs.parameters.data_path}}', name: create-data-volume}
+    inputs:
+      parameters:
+      - {name: create-data-volume-name}
+      - {name: data_path}
+    metadata:
+      labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline-sdk-type: kfp}
+      annotations: {pipelines.kubeflow.org/component_spec: '{"implementation": {"container":
+          {"args": ["--data-path", {"inputValue": "data_path"}], "command": ["sh",
+          "-ec", "program_path=$(mktemp)\nprintf \"%s\" \"$0\" > \"$program_path\"\npython3
+          -u \"$program_path\" \"$@\"\n", "def merge_assets_features(data_path):\n\n    #
+          install the necessary libraries\n    import sys, subprocess;\n    subprocess.run([\"python\",
+          \"-m\", \"pip\", \"install\", \"--upgrade\", \"pip\"])\n    subprocess.run([sys.executable,
+          ''-m'', ''pip'', ''install'',''pandas''])\n\n    # import Library\n    import
+          os, pickle;\n    import pandas as pd\n\n    #loading the feature_df data\n    with
+          open(f''{data_path}/feature_df'', ''rb'') as f:\n        feature_df = pickle.load(f)\n\n    #loading
+          the df_asset_details data\n    with open(f''{data_path}/df_asset_details'',
+          ''rb'') as g:\n        df_asset_details = pickle.load(g)\n\n    # assign
+          weight column feature dataframe\n    feature_df = pd.merge(feature_df, df_asset_details[[''Asset_ID'',''Weight'']],
+          how=''left'', on=[''Asset_ID''])\n\n    #Save the feature_df as a pickle
+          file to be used by the modelling component.\n    with open(f''{data_path}/merge_feature_df'',
+          ''wb'') as h:\n        pickle.dump(feature_df, h)\n\n    return(print(''Done!''))  \n\nimport
+          argparse\n_parser = argparse.ArgumentParser(prog=''Merge assets features'',
+          description='''')\n_parser.add_argument(\"--data-path\", dest=\"data_path\",
+          type=str, required=True, default=argparse.SUPPRESS)\n_parsed_args = vars(_parser.parse_args())\n\n_outputs
+          = merge_assets_features(**_parsed_args)\n"], "image": "python:3.7.1"}},
+          "inputs": [{"name": "data_path"}], "name": "Merge assets features"}', pipelines.kubeflow.org/component_ref: '{}',
+        pipelines.kubeflow.org/arguments.parameters: '{"data_path": "{{inputs.parameters.data_path}}"}'}
+    volumes:
+    - name: create-data-volume
+      persistentVolumeClaim: {claimName: '{{inputs.parameters.create-data-volume-name}}'}
+  - name: modeling
+    container:
+      args: [--data-path, '{{inputs.parameters.data_path}}']
+      command:
+      - sh
+      - -ec
+      - |
+        program_path=$(mktemp)
+        printf "%s" "$0" > "$program_path"
+        python3 -u "$program_path" "$@"
+      - "def modeling(data_path):\n\n    # install the necessary libraries\n    import\
+        \ sys, subprocess;\n    subprocess.run([\"python\", \"-m\", \"pip\", \"install\"\
+        , \"--upgrade\", \"pip\"])\n    subprocess.run([sys.executable, '-m', 'pip',\
+        \ 'install','pandas'])\n    subprocess.run([sys.executable, '-m', 'pip', 'install','lightgbm'])\n\
+        \n    # import Library\n    import os, pickle, joblib;\n    import pandas\
+        \ as pd\n    import numpy as np\n    import lightgbm as lgb\n    from lightgbm\
+        \ import LGBMRegressor\n\n    #loading the new_feats data\n    with open(f'{data_path}/merge_feature_df',\
+        \ 'rb') as f:\n        feature_df = pickle.load(f)\n\n    # define features\
+        \ for LGBM\n    features = ['Asset_ID', 'RSI_30', 'ATR_30',\n           'DEMA_30',\
+        \ 'RSI_120', 'ATR_120', 'DEMA_120', 'RSI_240', 'ATR_240',\n           'DEMA_240',\
+        \ 'sma_30', 'return_30', 'sma_120', 'return_120', 'sma_240',\n           'return_240',\
+        \ 'HL', 'OC', 'lower_shadow', 'upper_shadow', 'Day',\n           'dayofyear',\
+        \ 'weekofyear', 'season']\n    categoricals = ['Asset_ID']\n\n    # define\
+        \ the evaluation metric\n    def weighted_correlation(a, train_data):\n\n\
+        \        weights = train_data.add_w.values.flatten()\n        b = train_data.get_label()\n\
+        \n        w = np.ravel(weights)\n        a = np.ravel(a)\n        b = np.ravel(b)\n\
+        \n        sum_w = np.sum(w)\n        mean_a = np.sum(a * w) / sum_w\n    \
+        \    mean_b = np.sum(b * w) / sum_w\n        var_a = np.sum(w * np.square(a\
+        \ - mean_a)) / sum_w\n        var_b = np.sum(w * np.square(b - mean_b)) /\
+        \ sum_w\n\n        cov = np.sum((a * b * w)) / np.sum(w) - mean_a * mean_b\n\
+        \        corr = cov / np.sqrt(var_a * var_b)\n\n        return 'eval_wcorr',\
+        \ corr, True\n\n    # define train and validation weights and datasets\n \
+        \   weights_train = feature_df.query('train_flg == 1')[['Weight']]\n    weights_test\
+        \ = feature_df.query('train_flg == 0')[['Weight']]\n\n    train_dataset =\
+        \ lgb.Dataset(feature_df.query('train_flg == 1')[features], \n           \
+        \                     feature_df.query('train_flg == 1')['Target'].values,\
+        \ \n                                feature_name = features,\n           \
+        \                    categorical_feature= categoricals)\n    val_dataset =\
+        \ lgb.Dataset(feature_df.query('train_flg == 0')[features], \n           \
+        \                   feature_df.query('train_flg == 0')['Target'].values, \n\
+        \                              feature_name = features,\n                \
+        \             categorical_feature= categoricals)\n    # add weights\n    train_dataset.add_w\
+        \ = weights_train\n    val_dataset.add_w = weights_test\n\n    # LGBM params\n\
+        \    evals_result = {}\n    params = {'n_estimators': 1200,\n            'objective':\
+        \ 'regression',\n            'metric': 'rmse',\n            'boosting_type':\
+        \ 'gbdt',\n            'max_depth': -1, \n            'learning_rate': 0.01,\n\
+        \            'seed': 2022,\n            'verbose': -1,\n            }\n\n\
+        \    # train LGBM\n    model = lgb.train(params = params,\n              \
+        \        train_set = train_dataset, \n                      valid_sets = [val_dataset],\n\
+        \                      early_stopping_rounds=60,\n                      verbose_eval\
+        \ = 30,\n                      feval=weighted_correlation,\n             \
+        \         evals_result = evals_result \n                     )\n\n    # saving\
+        \ model\n    joblib.dump(model, f'{data_path}/lgb.jl')\n\n    return(print('Done!'))\n\
+        \nimport argparse\n_parser = argparse.ArgumentParser(prog='Modeling', description='')\n\
+        _parser.add_argument(\"--data-path\", dest=\"data_path\", type=str, required=True,\
+        \ default=argparse.SUPPRESS)\n_parsed_args = vars(_parser.parse_args())\n\n\
+        _outputs = modeling(**_parsed_args)\n"
+      image: python:3.7.1
+      volumeMounts:
+      - {mountPath: '{{inputs.parameters.data_path}}', name: create-data-volume}
+    inputs:
+      parameters:
+      - {name: create-data-volume-name}
+      - {name: data_path}
+    metadata:
+      labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline-sdk-type: kfp}
+      annotations: {pipelines.kubeflow.org/component_spec: '{"implementation": {"container":
+          {"args": ["--data-path", {"inputValue": "data_path"}], "command": ["sh",
+          "-ec", "program_path=$(mktemp)\nprintf \"%s\" \"$0\" > \"$program_path\"\npython3
+          -u \"$program_path\" \"$@\"\n", "def modeling(data_path):\n\n    # install
+          the necessary libraries\n    import sys, subprocess;\n    subprocess.run([\"python\",
+          \"-m\", \"pip\", \"install\", \"--upgrade\", \"pip\"])\n    subprocess.run([sys.executable,
+          ''-m'', ''pip'', ''install'',''pandas''])\n    subprocess.run([sys.executable,
+          ''-m'', ''pip'', ''install'',''lightgbm''])\n\n    # import Library\n    import
+          os, pickle, joblib;\n    import pandas as pd\n    import numpy as np\n    import
+          lightgbm as lgb\n    from lightgbm import LGBMRegressor\n\n    #loading
+          the new_feats data\n    with open(f''{data_path}/merge_feature_df'', ''rb'')
+          as f:\n        feature_df = pickle.load(f)\n\n    # define features for
+          LGBM\n    features = [''Asset_ID'', ''RSI_30'', ''ATR_30'',\n           ''DEMA_30'',
+          ''RSI_120'', ''ATR_120'', ''DEMA_120'', ''RSI_240'', ''ATR_240'',\n           ''DEMA_240'',
+          ''sma_30'', ''return_30'', ''sma_120'', ''return_120'', ''sma_240'',\n           ''return_240'',
+          ''HL'', ''OC'', ''lower_shadow'', ''upper_shadow'', ''Day'',\n           ''dayofyear'',
+          ''weekofyear'', ''season'']\n    categoricals = [''Asset_ID'']\n\n    #
+          define the evaluation metric\n    def weighted_correlation(a, train_data):\n\n        weights
+          = train_data.add_w.values.flatten()\n        b = train_data.get_label()\n\n        w
+          = np.ravel(weights)\n        a = np.ravel(a)\n        b = np.ravel(b)\n\n        sum_w
+          = np.sum(w)\n        mean_a = np.sum(a * w) / sum_w\n        mean_b = np.sum(b
+          * w) / sum_w\n        var_a = np.sum(w * np.square(a - mean_a)) / sum_w\n        var_b
+          = np.sum(w * np.square(b - mean_b)) / sum_w\n\n        cov = np.sum((a *
+          b * w)) / np.sum(w) - mean_a * mean_b\n        corr = cov / np.sqrt(var_a
+          * var_b)\n\n        return ''eval_wcorr'', corr, True\n\n    # define train
+          and validation weights and datasets\n    weights_train = feature_df.query(''train_flg
+          == 1'')[[''Weight'']]\n    weights_test = feature_df.query(''train_flg ==
+          0'')[[''Weight'']]\n\n    train_dataset = lgb.Dataset(feature_df.query(''train_flg
+          == 1'')[features], \n                                feature_df.query(''train_flg
+          == 1'')[''Target''].values, \n                                feature_name
+          = features,\n                               categorical_feature= categoricals)\n    val_dataset
+          = lgb.Dataset(feature_df.query(''train_flg == 0'')[features], \n                              feature_df.query(''train_flg
+          == 0'')[''Target''].values, \n                              feature_name
+          = features,\n                             categorical_feature= categoricals)\n    #
+          add weights\n    train_dataset.add_w = weights_train\n    val_dataset.add_w
+          = weights_test\n\n    # LGBM params\n    evals_result = {}\n    params =
+          {''n_estimators'': 1200,\n            ''objective'': ''regression'',\n            ''metric'':
+          ''rmse'',\n            ''boosting_type'': ''gbdt'',\n            ''max_depth'':
+          -1, \n            ''learning_rate'': 0.01,\n            ''seed'': 2022,\n            ''verbose'':
+          -1,\n            }\n\n    # train LGBM\n    model = lgb.train(params = params,\n                      train_set
+          = train_dataset, \n                      valid_sets = [val_dataset],\n                      early_stopping_rounds=60,\n                      verbose_eval
+          = 30,\n                      feval=weighted_correlation,\n                      evals_result
+          = evals_result \n                     )\n\n    # saving model\n    joblib.dump(model,
+          f''{data_path}/lgb.jl'')\n\n    return(print(''Done!''))\n\nimport argparse\n_parser
+          = argparse.ArgumentParser(prog=''Modeling'', description='''')\n_parser.add_argument(\"--data-path\",
+          dest=\"data_path\", type=str, required=True, default=argparse.SUPPRESS)\n_parsed_args
+          = vars(_parser.parse_args())\n\n_outputs = modeling(**_parsed_args)\n"],
+          "image": "python:3.7.1"}}, "inputs": [{"name": "data_path"}], "name": "Modeling"}',
+        pipelines.kubeflow.org/component_ref: '{}', pipelines.kubeflow.org/arguments.parameters: '{"data_path":
+          "{{inputs.parameters.data_path}}"}'}
+    volumes:
+    - name: create-data-volume
+      persistentVolumeClaim: {claimName: '{{inputs.parameters.create-data-volume-name}}'}
+  arguments:
+    parameters:
+    - {name: dataset}
+    - {name: data_path}
+  serviceAccountName: pipeline-runner

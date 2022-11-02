@@ -1,0 +1,1 @@
+{"metrics": [{"name": "root-mean-squared-error", "numberValue": 0.005088780668404586, "format": "RAW"}, {"name": "weighted-correlation", "numberValue": 0.044750884983381915, "format": "RAW"}]}
