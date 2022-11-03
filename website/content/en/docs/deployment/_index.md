@@ -10,4 +10,4 @@ This tutorial will guide you through the **three** steps to get Kubeflow up and 
 2. [**Create a Tanzu Kubernetes Cluster**](./cluster). You will create a Tanzu Kubernetes Cluster with in the namespace you just created in the first step.
 3. [**Deploy Kubeflow**](./carvel). Deploy Kubeflow 1.6 on Tanzu Kubernetes Cluster you created before, with features like `bitfusion` enabled.
 
-![Overview of Kubeflow installation process](./kubeflow_install.png)
+![Overview of Kubeflow installation process](./assets/kubeflow_install.png)
