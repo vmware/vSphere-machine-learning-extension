@@ -6,7 +6,7 @@ weight = 40
 
 # Full Source
 ---
-You can download the complete Jupyter Notebook [here](https://github.com/xujinheng/kubeflow-manifests/blob/main/website/content/en/docs/kubeflow-tutorial/lab4.ipynb). 
+You can download the complete Jupyter Notebook [here](https://github.com/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab4.ipynb). 
 
 # Preview 
 ---

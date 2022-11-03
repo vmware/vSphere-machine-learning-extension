@@ -6,7 +6,7 @@ weight = 70
 
 ## Full Source
 
-You can view and download the complete repo from (including notebooks, datasets, source codes, Dockerfile, etc) [here](https://github.com/xujinheng/kubeflow-manifests/tree/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete).
+You can view and download the complete repo from (including notebooks, datasets, source codes, Dockerfile, etc) [here](https://github.com/vmware/ml-ops-platform-for-vsphere/tree/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete).
 
 ---
 ## Table of Contents
