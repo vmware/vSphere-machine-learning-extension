@@ -7,6 +7,9 @@ weight = 10
 
 ## About Kubeflow
 ---
+
+We maintained a documentation [Running Kubeflow on AI-Ready Enterprise Platform on VMware vSphere 7 with VMware Tanzu Kubernetes Grid](https://core.vmware.com/aiml-solutions). If you want to know how to deploy and use vanilla Kubeflow on vSphere 7 with TKG, this documentation is good start.
+
 #### **What is Kubeflow?** ####
 Kubeflow is a free and open-source platform for machine learning on Kubernetes. The Kubeflow project has multiple distinct software components which each address specific stages of the machine learning lifecycle, including model development, model training, model serving, and automated machine learning. Each component of Kubeflow can be deployed separately, and it is not a requirement to deploy every component.
 
