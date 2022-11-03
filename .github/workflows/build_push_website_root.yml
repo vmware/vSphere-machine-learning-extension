@@ -28,11 +28,11 @@ jobs:
 
       - name: Checkout repository and setup Hugo
         run: |
-          git clone --recurse-submodules ${{ github.server_url }}/${{ github.repository }}.git && cd kubeflow-manifests
+          git clone --recurse-submodules ${{ github.server_url }}/${{ github.repository }}.git && cd ml-ops-platform-for-vsphere
           git checkout ${{ github.event.inputs.branch_name }}
           cd website
           npm install postcss-cli@8.3.0
-          base_url="baseURL = \"https://$GITHUB_REPOSITORY_OWNER.github.io/kubeflow-manifests/\""
+          base_url="baseURL = \"https://$GITHUB_REPOSITORY_OWNER.github.io/ml-ops-platform-for-vsphere/\""
           sed -i "1s#.*#$base_url#" config.toml
           hugo
 
@@ -40,6 +40,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./kubeflow-manifests/website/public
+          publish_dir: ./ml-ops-platform-for-vsphere/website/public
           destination_dir: ./
           keep_files: true          
