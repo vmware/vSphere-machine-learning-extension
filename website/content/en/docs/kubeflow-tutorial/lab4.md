@@ -24,4 +24,4 @@ src="https://nbviewer.org/github/xujinheng/kubeflow-manifests/blob/main/website/
 
 ## What's next
 
-Now move forward to [Lab5 Training Operators](../lab5_pipeline) about Kubeflow pipeline
+Now move forward to [Lab5 Pipeline](../lab5_pipeline/lab_pipeline) about Kubeflow pipeline
