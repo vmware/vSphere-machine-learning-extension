@@ -18,7 +18,7 @@ height: 80vh;
 border: 1px solid #aaa;
 margin-bottom: 20px;
 "
-src="https://nbviewer.org/github/xujinheng/kubeflow-manifests/blob/main/website/content/en/docs/kubeflow-tutorial/lab3.ipynb?flush_cache=true">
+src="https://nbviewer.org/github/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab3.ipynb?flush_cache=true">
 </iframe>
 </div>
 
