@@ -1,5 +1,22 @@
-# Docsy Example
+# Kubeflow on vSphere Website
 
+## Getting Started
+
+Cloning the repository with Docsy submodules
+```bash
+# option 1
+git clone --recurse-submodules https://github.com/vmware/ml-ops-platform-for-vsphere.git
+# option 2
+git clone https://github.com/vmware/ml-ops-platform-for-vsphere.git
+cd ml-ops-platform-for-vsphere/ && git submodule update --init --recursive
+```
+
+Running a container locally
+```bash
+docker compose -f ./website/docker-compose.yaml up --build
+```
+
+## Docsy
 [Docsy][] is a [Hugo theme][] for technical documentation sites, providing easy
 site navigation, structure, and more. This **Docsy Example Project** uses the
 Docsy theme and provides a skeleton documentation structure for you to use. You
