@@ -1,4 +1,4 @@
-# Lab 7: Kubeflow Pipeline
+# Lab 5: Kubeflow Pipeline
 
 ### Install Kubeflow Pipeline Package
 
@@ -10,7 +10,7 @@
 
 ```python
 # confirm the kfp sdk
-! pip show kfp
+!pip show kfp
 ```
 
 ## Example 1: Facial Keypoint Detection
@@ -23,9 +23,7 @@ This model comes from Kaggle Competition. The objective of this task is to predi
 
 There are two main tasks: train and evaluation. Each would be build as a pipeline component later. 
 
-Datasets for training can be found in [train/my_data](./train/my_data).
-
-More details about this model itself can be found [here on Kaggle Competition page](https://www.kaggle.com/competitions/facial-keypoints-detection).
+Please download datasets at https://www.kaggle.com/competitions/facial-keypoints-detection and put them at the path: [train/my_data](./train/my_data), and you can also find more details about this model itself.
 
 ### Design Pipeline Components
 
@@ -252,14 +250,7 @@ You may also pull the image to your local if you want.
 
 
 ```python
-!docker pull harbor-repo.vmware.com/zxintong/docker_images@sha256:48cb43365f65adffc16db98bc6a05e62c13ab5dff7579d381cf8ef8d2e1da489
-```
-
-If you are Mac with M1 chip, you may need to pull following image:
-
-
-```python
-!docker pull harbor-repo.vmware.com/zxintong/docker_images@sha256:3418cabc178b04a24e0f2b767ccaf4cc0e3fad68c3a6f407b4508ace433b5d83
+!docker pull projects.registry.vmware.com/kubeflow/lab_pipeline@sha256:3418cabc178b04a24e0f2b767ccaf4cc0e3fad68c3a6f407b4508ace433b5d83
 ```
 
 ***OPTION 2***
@@ -281,7 +272,7 @@ Use `docker build` command to build Docker images.
 
 
 ```python
-!docker build -f <dockerfile_path> -t <docker_username>/<docker_imagename>:<tag> .
+!docker build --platform linux/amd64 -f <dockerfile_path> -t <docker_username>/<docker_imagename>:<tag> .
 ```
 
 If you only have one Dockerfile where you run above command, you may not need to specify `-f <dockerfile_path>`. 
@@ -290,7 +281,7 @@ Feel free to directly run following command to build docker image in this notebo
 
 
 ```python
-!docker build -t docker_images:facial .
+!docker build --platform linux/amd64 -t docker_images:facial .
 ```
 
 Or, you can also build images for train and evaluate separately.
@@ -302,7 +293,7 @@ Or, you can also build images for train and evaluate separately.
 
 
 ```python
-!docker build -t docker_images:facial_train .
+!docker build --platform linux/amd64 -t docker_images:facial_train .
 ```
 
 
@@ -312,14 +303,7 @@ Or, you can also build images for train and evaluate separately.
 
 
 ```python
-!docker build -t docker_images:facial_eval .
-```
-
-***Note: if you are Mac M1 chip user, you may need to add following flag to `docker run`***
-
-
-```python
-!docker build --platform linux/amd64 -f <dockerfile_path> -t <docker_username>/<docker_imagename>:<tag> .
+!docker build --platform linux/amd64 -t docker_images:facial_eval .
 ```
 
 ### Build Pipeline
@@ -363,9 +347,7 @@ def Train(trial, epoch, patience):
 
     return dsl.ContainerOp(
         name = 'Train', 
-        image = 'harbor-repo.vmware.com/zxintong/docker_images@sha256:48cb43365f65adffc16db98bc6a05e62c13ab5dff7579d381cf8ef8d2e1da489',
-        # IF YOU ARE MAC M1 CHIP USER, USER FOLLOWING
-        # image = 'harbor-repo.vmware.com/zxintong/docker_images@sha256:3418cabc178b04a24e0f2b767ccaf4cc0e3fad68c3a6f407b4508ace433b5d83'
+        image = 'projects.registry.vmware.com/kubeflow/lab_pipeline@sha256:3418cabc178b04a24e0f2b767ccaf4cc0e3fad68c3a6f407b4508ace433b5d83',
         command = ['python3', '/train/train.py'],
         arguments=[
             '--trial', trial,
@@ -388,9 +370,7 @@ We then create a `ContainerOp` instance, which would be understood and used as "
 ```python
 return dsl.ContainerOp(
         name = 'Train', 
-        image = 'harbor-repo.vmware.com/zxintong/docker_images@sha256:48cb43365f65adffc16db98bc6a05e62c13ab5dff7579d381cf8ef8d2e1da489', 
-        # IF YOU ARE MAC M1 CHIP USER, USER FOLLOWING
-        # image = 'harbor-repo.vmware.com/zxintong/docker_images@sha256:3418cabc178b04a24e0f2b767ccaf4cc0e3fad68c3a6f407b4508ace433b5d83'
+        image = 'projects.registry.vmware.com/kubeflow/lab_pipeline@sha256:3418cabc178b04a24e0f2b767ccaf4cc0e3fad68c3a6f407b4508ace433b5d83', 
         command = ['python3', '/train/train.py'],
         arguments=[
             '--trial', trial,
@@ -402,7 +382,7 @@ return dsl.ContainerOp(
         }
     )
 ```
-We need to specify the inputs (`trial`, `epoch`, and `patience`) in `arguments`, container image in `image`, and volume for data storage in `pvolumes`. Note that here in `image`, we provide you with our built images, containing both `train` folder and `evaluate` folder, stored on our internal Harbor repo. If you want to use your own image, please remember to change this value.
+We need to specify the inputs (`trial`, `epoch`, and `patience`) in `arguments`, container image in `image`, and volume for data storage in `pvolumes`. Note that here in `image`, we provide you with our built images, containing both `train` folder and `evaluate` folder, stored on our `projects.registry` repo. If you want to use your own image, please remember to change this value.
 
 We also need to specify `command`. In this provided case, as we containernize the image at root directory, in command we need `python3 /train/train.py`. (If you containernize Train component and Evaluate component one by one in each own folder, you may need to change this value to `python3 train.py`.)
 
@@ -416,9 +396,7 @@ We also need to specify `command`. In this provided case, as we containernize th
 def Evaluate(comp1):
     return dsl.ContainerOp(
         name = 'Evaluate',
-        image = 'harbor-repo.vmware.com/zxintong/docker_images@sha256:48cb43365f65adffc16db98bc6a05e62c13ab5dff7579d381cf8ef8d2e1da489',
-        # IF YOU ARE MAC M1 CHIP USER, USER FOLLOWING
-        # image = 'harbor-repo.vmware.com/zxintong/docker_images@sha256:3418cabc178b04a24e0f2b767ccaf4cc0e3fad68c3a6f407b4508ace433b5d83'
+        image = 'projects.registry.vmware.com/kubeflow/lab_pipeline@sha256:3418cabc178b04a24e0f2b767ccaf4cc0e3fad68c3a6f407b4508ace433b5d83',
         pvolumes={
             '/data': comp1.pvolumes['/data']
         },
@@ -461,7 +439,7 @@ You should now be able to see a file called `face_pipeline.yaml` in current dire
 
 In our last cell, we compile our pipeline as a YAML file. 
 
-Note that for testing purpose, we also provide you with two already-compiled pipeline YAML files, `face_pipeline_test_default.yaml` and `face_pipeline_test_amd64.yaml`. Feel free to directly download and use them.
+Note that for testing purpose, we also provide you with two already-compiled pipeline YAML files, `face_pipeline_test.yaml`. Feel free to directly download and use them.
 
 To run this pipeline, go to Kubeflow UI. Navigate to Pipelines Page. Upload this pipeline by choosing "upload a file" option. Choose the YAML file we created just now.
 

@@ -1,4 +1,4 @@
-# Lab 7: Kubeflow Pipeline
+# Lab 5: Kubeflow Pipeline
 
 ### Install Kubeflow Pipeline Package
 
@@ -10,7 +10,7 @@
 
 ```python
 # confirm the kfp sdk
-! pip show kfp
+!pip show kfp
 ```
 
 ## Example 2: G-Research Crypto Forecasting
