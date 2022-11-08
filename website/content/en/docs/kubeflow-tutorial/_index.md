@@ -1,5 +1,5 @@
 +++
-title = "Kubeflow Tutorial"
+title = "Tutorials"
 description = "Explore component guides for Kubeflow on vSphere"
 weight = 20
 +++
