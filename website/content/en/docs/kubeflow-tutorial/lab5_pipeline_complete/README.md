@@ -1,17 +1,30 @@
-# Lab 7: Kubeflow Pipeline
++++
+title = "Lab5 Pipeline"
+description = "Kubeflow pipeline"
+weight = 50
++++
 
 ## Full Source
 
-You can view and download the complete repo from (including notebooks, datasets, source codes, Dockerfile, etc) [here](https://gitlab.eng.vmware.com/models/kubeflow-tutorial/-/tree/main/labs/lab7_pipeline).
+You can view and download the complete repo from (including notebooks, datasets, source codes, Dockerfile, etc) [here](https://github.com/vmware/ml-ops-platform-for-vsphere/tree/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete).
 
 ---
 ## Table of Contents
+- [Full Source](#full-source)
+- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
-- [Understand pipeline and pipeline components](#understand-pipeline-and-pipeline-components)
-- [Example overview](#example-overview)
-    - [Example 1 facial keypoint detection: build pipeline from docker images](#example-1-facial-keypoint-detection)
-    - [Example 2 g-research crypto forecasting: build pipeline from notebook directly](#example-2-g-research-crypto-forecasting)
-- [Running a pipeline](#running-a-pipeline)
+- [Understand Pipeline and Pipeline Components](#understand-pipeline-and-pipeline-components)
+- [Example Overview](#example-overview)
+  - [Example 1: Facial Keypoint Detection](#example-1-facial-keypoint-detection)
+    - [About Model](#about-model)
+    - [About Pipeline](#about-pipeline)
+  - [Example 2: G-Research Crypto Forecasting](#example-2-g-research-crypto-forecasting)
+    - [About Model](#about-model-1)
+    - [About Pipeline](#about-pipeline-1)
+- [Running a Pipeline](#running-a-pipeline)
+  - [Upload the pipeline to Kubeflow UI](#upload-the-pipeline-to-kubeflow-ui)
+  - [Create experiment and run](#create-experiment-and-run)
+  - [Check logs and outputs](#check-logs-and-outputs)
 ---
 
 ## Introduction
@@ -19,8 +32,8 @@ Kubeflow Pipelines is a platform for building and deploying portable, scalable m
 
 Kubeflow Pipelines is one of the most powerful and popular features of Kubeflow. In this lab, we would guide you through two concrete examples  to build up and run Kubeflow pipelines in two different ways.
 
-- [Example 1 Facial Keypoint Detection: build pipeline from docker images](https://gitlab.eng.vmware.com/models/kubeflow-tutorial/-/blob/main/labs/lab7_pipeline/example1_facialKeypoint.ipynb)
-- [Example 2 G-Research Crypto Forecasting: build pipeline from notebook directly](https://gitlab.eng.vmware.com/models/kubeflow-tutorial/-/blob/main/labs/lab7_pipeline/example2_gResearch.ipynb)
+- [Example 1 Facial Keypoint Detection: build pipeline from docker images](https://github.com/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete/example1_facialKeypoint.ipynb)
+- [Example 2 G-Research Crypto Forecasting: build pipeline from notebook directly](https://github.com/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete/example2_gResearch.ipynb)
 
 *For each example, we provide you with a already-compiled pipeline YAML files for quick-test purpose. If you prefer that, feel free to skip to pipeline running part and use them.*
 
@@ -46,7 +59,7 @@ This model comes from Kaggle Competition. The objective of this task is to predi
 
 There are two main tasks: train and evaluation. Each would be build as a pipeline component later. 
 
-Datasets for training can be found in [train/my_data](./train/my_data).
+Datasets for training and testing can be found and downloaded [here](https://www.kaggle.com/competitions/facial-keypoints-detection), and we have also provided the downloaded data for you. (More details can be found in [Example 1 notebook](https://github.com/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete/example1_facialKeypoint.ipynb).)
 
 More details about this model itself can be found [here on Kaggle Competition page](https://www.kaggle.com/competitions/facial-keypoints-detection).
 
@@ -70,7 +83,7 @@ And in this example, specifically, a component specification should define:
 
 *Notebook, example pipeline YAML file and example pipeline logs are included in repo.*
 
-### About Model
+#### About Model
 
 This model comes from Kaggle Competition. Over $40 billion worth of cryptocurrencies are traded every day. The objective of this task is to correctly forecast short term returns in 14 popular cryptocurrencies. [G-Research](https://www.gresearch.co.uk/) is Europe’s leading quantitative finance research firm, and partered with [Cambridge Spark](https://www.cambridgespark.com) for this Kaggle Competition.
 
@@ -78,9 +91,7 @@ The dataset this model would use contains information on historic trades for sev
 
 More details about this model and dataset itself or Kaggle Competition can be found [here](https://www.kaggle.com/competitions/g-research-crypto-forecasting/overview).
 
-### About Pipeline
-
-### Design Pipeline
+#### About Pipeline
 
 **In this example, we would directly build pipeline components in notebook, from model itself. Some modifications are required to the original model function.**
 
@@ -104,11 +115,11 @@ We would use Example 2: G-Research Crypto Forecasting as example.
 
 Following our notebook, you should be able to see a file called `pipeline_gResearch.yaml`, under the same directory of the example 2 notebook. Download `pipeline_gResearch.yaml`, and upload it to Pipelines on Kubeflow UI.
 
-![g1](./img/g1.png)
+![g1](../img/g1.png)
 
-![g2](./img/g2.png)
+![g2](../img/g2.png)
 
-![g3](./img/g3.png)
+![g3](../img/g3.png)
 
 This pipeline graph is more complex than the one in Example 1. You may take some time going through it. 
 
@@ -122,22 +133,22 @@ dataset = "g-research-crypto-forecasting"
 data_path = "/mnt"
 ```
 
-![g4](./img/g4.png)
+![g4](../img/g4.png)
 
-![g5](./img/g5.png)
+![g5](../img/g5.png)
 
 The pipeline would start to run then. You would be able to see the running process in Runs Page on Kubeflow UI.
 
-![g6](./img/g6.png)
+![g6](../img/g6.png)
 
 The pipeline running may take some time, as the datasets is pretty big and there are much more steps in this example. There would be a green symbol appears next to each component after its completion. And you can always click on each component to see its details, such as its input/output, volumes, logs, and pod.
 
 ### Check logs and outputs
 
-![g7](./img/g7.png)
+![g7](../img/g7.png)
 
 After the whole pipeline finishes running, click on any of the component/step that you are interested in. You should be able to see main-logs under Input/Output, Output artifacts. 
 
 Specifically, click on Evaluation Result Step, you should see "metrics" under Input/Output, Output artifacts. Click into them to see the evaluation metrics.
 
-We also provide you with example logs of evaluation metrics in [logs](https://gitlab.eng.vmware.com/models/kubeflow-tutorial/-/tree/main/labs/lab7_pipeline/logs) folder.
+We also provide you with example logs of evaluation metrics in [logs](https://github.com/vmware/ml-ops-platform-for-vsphere/tree/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete/logs) folder.
