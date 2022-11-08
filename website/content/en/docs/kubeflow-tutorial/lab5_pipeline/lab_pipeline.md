@@ -119,11 +119,11 @@ We would use Example 2: G-Research Crypto Forecasting as example.
 
 Following our notebook, you should be able to see a file called `pipeline_gResearch.yaml`, under the same directory of the example 2 notebook. Download `pipeline_gResearch.yaml`, and upload it to Pipelines on Kubeflow UI.
 
-![g1](./img/g1.png)
+![g1](../img/g1.png)
 
-![g2](./img/g2.png)
+![g2](../img/g2.png)
 
-![g3](./img/g3.png)
+![g3](../img/g3.png)
 
 This pipeline graph is more complex than the one in Example 1. You may take some time going through it. 
 
@@ -137,19 +137,19 @@ dataset = "g-research-crypto-forecasting"
 data_path = "/mnt"
 ```
 
-![g4](./img/g4.png)
+![g4](../img/g4.png)
 
-![g5](./img/g5.png)
+![g5](../img/g5.png)
 
 The pipeline would start to run then. You would be able to see the running process in Runs Page on Kubeflow UI.
 
-![g6](./img/g6.png)
+![g6](../img/g6.png)
 
 The pipeline running may take some time, as the datasets is pretty big and there are much more steps in this example. There would be a green symbol appears next to each component after its completion. And you can always click on each component to see its details, such as its input/output, volumes, logs, and pod.
 
 ### Check logs and outputs
 
-![g7](./img/g7.png)
+![g7](../img/g7.png)
 
 After the whole pipeline finishes running, click on any of the component/step that you are interested in. You should be able to see main-logs under Input/Output, Output artifacts. 
 
