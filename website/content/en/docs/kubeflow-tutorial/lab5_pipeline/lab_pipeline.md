@@ -34,8 +34,8 @@ Kubeflow Pipelines is a platform for building and deploying portable, scalable m
 
 Kubeflow Pipelines is one of the most powerful and popular features of Kubeflow. In this lab, we would guide you through two concrete examples  to build up and run Kubeflow pipelines in two different ways.
 
-- [Example 1 Facial Keypoint Detection: build pipeline from docker images](https://gitlab.eng.vmware.com/models/kubeflow-tutorial/-/blob/main/labs/lab7_pipeline/example1_facialKeypoint.ipynb)
-- [Example 2 G-Research Crypto Forecasting: build pipeline from notebook directly](https://gitlab.eng.vmware.com/models/kubeflow-tutorial/-/blob/main/labs/lab7_pipeline/example2_gResearch.ipynb)
+- [Example 1 Facial Keypoint Detection: build pipeline from docker images](https://github.com/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete/example1_facialKeypoint.ipynb)
+- [Example 2 G-Research Crypto Forecasting: build pipeline from notebook directly](https://github.com/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete/example2_gResearch.ipynb)
 
 *For each example, we provide you with a already-compiled pipeline YAML files for quick-test purpose. If you prefer that, feel free to skip to pipeline running part and use them.*
 
@@ -155,4 +155,4 @@ After the whole pipeline finishes running, click on any of the component/step th
 
 Specifically, click on Evaluation Result Step, you should see "metrics" under Input/Output, Output artifacts. Click into them to see the evaluation metrics.
 
-We also provide you with example logs of evaluation metrics in [logs](https://gitlab.eng.vmware.com/models/kubeflow-tutorial/-/tree/main/labs/lab7_pipeline/logs) folder.
+We also provide you with example logs of evaluation metrics in [logs](https://github.com/vmware/ml-ops-platform-for-vsphere/tree/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete/logs) folder.
