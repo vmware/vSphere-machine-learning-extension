@@ -23,5 +23,5 @@ src="https://nbviewer.org/github/vmware/ml-ops-platform-for-vsphere/blob/main/we
 </div>
 
 ## What's next
-
 Now move forward to [Lab5 Pipeline](../lab5_pipeline_complete/lab5) about Kubeflow pipeline
+
