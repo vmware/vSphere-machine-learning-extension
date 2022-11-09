@@ -1,5 +1,5 @@
 +++
-title = "lab4 Model Serving"
+title = "Lab4 Model Serving"
 description = "PyTorch Model Serving"
 weight = 40
 +++
@@ -24,4 +24,4 @@ src="https://nbviewer.org/github/vmware/ml-ops-platform-for-vsphere/blob/main/we
 
 ## What's next
 
-Now move forward to [Lab5 Pipeline](../lab5_pipeline/lab_pipeline) about Kubeflow pipeline
+Now move forward to [Lab5 Pipeline](../lab5_pipeline_complete/lab5) about Kubeflow pipeline
