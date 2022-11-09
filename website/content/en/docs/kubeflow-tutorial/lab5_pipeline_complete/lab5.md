@@ -1,7 +1,7 @@
 +++
 title = "Lab5 Pipeline"
 description = "Kubeflow pipeline"
-weight = 70
+weight = 50
 +++
 
 ## Full Source
@@ -12,17 +12,17 @@ You can view and download the complete repo from (including notebooks, datasets,
 ## Table of Contents
 - [Full Source](#full-source)
 - [Table of Contents](#table-of-contents)
-- [- Check logs and outputs](#--check-logs-and-outputs)
 - [Introduction](#introduction)
 - [Understand Pipeline and Pipeline Components](#understand-pipeline-and-pipeline-components)
 - [Example Overview](#example-overview)
   - [Example 1: Facial Keypoint Detection](#example-1-facial-keypoint-detection)
     - [About Model](#about-model)
     - [About Pipeline](#about-pipeline)
+    - [Notebook Preview](#notebook-preview)
   - [Example 2: G-Research Crypto Forecasting](#example-2-g-research-crypto-forecasting)
-  - [About Model](#about-model-1)
-  - [About Pipeline](#about-pipeline-1)
-  - [Design Pipeline](#design-pipeline)
+    - [About Model](#about-model-1)
+    - [About Pipeline](#about-pipeline-1)
+    - [Notebook Preview](#notebook-preview-1)
 - [Running a Pipeline](#running-a-pipeline)
   - [Upload the pipeline to Kubeflow UI](#upload-the-pipeline-to-kubeflow-ui)
   - [Create experiment and run](#create-experiment-and-run)
@@ -61,7 +61,7 @@ This model comes from Kaggle Competition. The objective of this task is to predi
 
 There are two main tasks: train and evaluation. Each would be build as a pipeline component later. 
 
-Datasets for training can be found in [train/my_data](./train/my_data).
+Datasets for training and testing can be found and downloaded [here](https://www.kaggle.com/competitions/facial-keypoints-detection/data). (You need to download `test.zip` and `train.zip` files and put them under `train/my_data`. More details can be found in [Example 1 Notebook](https://github.com/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete/example1_facialKeypoint.ipynb).)
 
 More details about this model itself can be found [here on Kaggle Competition page](https://www.kaggle.com/competitions/facial-keypoints-detection).
 
@@ -81,11 +81,25 @@ And in this example, specifically, a component specification should define:
 * The container image that your component’s code runs in, the command to use to run your component’s code, and the command-line arguments to pass to your component’s code
 * The component’s metadata, such as the name and description
 
+#### Notebook Preview 
+---
+<div>
+<iframe 
+style="
+width: 100%;
+height: 80vh;
+border: 1px solid #aaa;
+margin-bottom: 20px;
+"
+src="https://nbviewer.org/github/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete/example1_facialKeypoint.ipynb?flush_cache=true">
+</iframe>
+</div>
+
 ### Example 2: G-Research Crypto Forecasting
 
 *Notebook, example pipeline YAML file and example pipeline logs are included in repo.*
 
-### About Model
+#### About Model
 
 This model comes from Kaggle Competition. Over $40 billion worth of cryptocurrencies are traded every day. The objective of this task is to correctly forecast short term returns in 14 popular cryptocurrencies. [G-Research](https://www.gresearch.co.uk/) is Europe’s leading quantitative finance research firm, and partered with [Cambridge Spark](https://www.cambridgespark.com) for this Kaggle Competition.
 
@@ -93,9 +107,7 @@ The dataset this model would use contains information on historic trades for sev
 
 More details about this model and dataset itself or Kaggle Competition can be found [here](https://www.kaggle.com/competitions/g-research-crypto-forecasting/overview).
 
-### About Pipeline
-
-### Design Pipeline
+#### About Pipeline
 
 **In this example, we would directly build pipeline components in notebook, from model itself. Some modifications are required to the original model function.**
 
@@ -109,11 +121,27 @@ Basically, the following modifications were required to the original function.
 - The import statements were moved inside of the function. Python function-based components require standalone Python functions. This means that any required import statements must be defined within the function, and any helper functions must be defined within the function. 
 - The function’s arguments all include `data_path` which specifies the location for data storage, and also accessing. This lets Kubeflow Pipelines know the where to extract the data in zipped tar file into, where your function stores the processed data or model, and where to access it and use it as inputs for components.
 
+#### Notebook Preview 
+---
+<div>
+<iframe 
+style="
+width: 100%;
+height: 80vh;
+border: 1px solid #aaa;
+margin-bottom: 20px;
+"
+src="https://nbviewer.org/github/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete/example2_gResearch.ipynb?flush_cache=true">
+</iframe>
+</div>
+
 ## Running a Pipeline
 
 In both examples, we compiled the pipeline as a YAML file. So here we provide you with a brief guide on how to run a pipeline.
 
 We would use Example 2: G-Research Crypto Forecasting as example.
+
+*Note: following pictures would be loaded and displayed on our website. If you are reading this markdown file in github repo, following pictures may not be loaded. If that is the case, please view them in `./img`.*
 
 ### Upload the pipeline to Kubeflow UI
 
