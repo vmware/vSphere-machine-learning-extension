@@ -5,12 +5,48 @@ imageswap_labels: True
 
 service_type: "LoadBalancer"
 
-IP_address: ""
+IP_address: "10.117.233.30"
 
 CD_REGISTRATION_FLOW: True
 
-static_users: 
-- email: "user@example.com"
-  hash: "$2y$12$4K/VkmDd1q1Orb3xAt82zu8gk7Ad6ReFR4LCP9UeYE90NLiN9Df72"
-- email: "admin@user.com"
-  hash: "$2y$12$4K/VkmDd1q1Orb3xAt82zu8gk7Ad6ReFR4LCP9UeYE90NLiN9Df72"
+OIDC_Authservice:
+  OIDC_AUTH_URL: /dex/auth
+  OIDC_PROVIDER: http://dex.auth.svc.cluster.local:5556/dex
+  OIDC_SCOPES: "profile email groups"
+  REDIRECT_URL: /login/oidc
+  SKIP_AUTH_URI: "/dex"
+  USERID_CLAIM: email
+  USERID_HEADER: kubeflow-userid
+  USERID_PREFIX: ""
+  OIDC_CLIENT_ID: kubeflow-oidc-authservice
+  OIDC_CLIENT_SECRET: pUBnBOY80SnXgjibTYM9ZWNzY2xreNGQok
+
+Dex:
+  use_external: False
+  config: |
+    issuer: http://dex.auth.svc.cluster.local:5556/dex
+    storage:
+      type: kubernetes
+      config:
+        inCluster: true
+    web:
+      http: 0.0.0.0:5556
+    logger:
+      level: "debug"
+      format: text
+    oauth2:
+      skipApprovalScreen: true
+    enablePasswordDB: true
+    staticPasswords:
+    - email: user@example.com
+      hash: $2y$12$4K/VkmDd1q1Orb3xAt82zu8gk7Ad6ReFR4LCP9UeYE90NLiN9Df72
+      # https://github.com/dexidp/dex/pull/1601/commits
+      # FIXME: Use hashFromEnv instead
+      username: user
+      userID: "15841185641784"
+    staticClients:
+    # https://github.com/dexidp/dex/pull/1664
+    - idEnv: OIDC_CLIENT_ID
+      redirectURIs: ["/login/oidc"]
+      name: 'Dex Login Application'
+      secretEnv: OIDC_CLIENT_SECRET

@@ -1,6 +1,6 @@
 #@ load("@ytt:overlay", "overlay")
 
-#@overlay/match by=overlay.subset({"kind": "Deployment"}), expects=44
+#@overlay/match by=overlay.subset({"kind": "Deployment"}), expects="43+"
 ---
 spec:
   #@overlay/match missing_ok=True

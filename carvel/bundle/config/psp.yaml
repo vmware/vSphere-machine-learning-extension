@@ -1,11 +1,16 @@
+#@ load("@ytt:data", "data")
+
 #@ namespaces=[
-#@  'auth',
 #@  'cert-manager',
 #@  'istio-system',
 #@  'knative-serving',
 #@  'kubeflow',
 #@  'kubeflow-user-example-com',
 #@  ]
+
+#@ if not data.values.Dex.use_external:
+#@  namespaces.append('auth')
+#@ end
 
 ---
 apiVersion: v1

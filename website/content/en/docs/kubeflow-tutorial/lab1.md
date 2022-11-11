@@ -54,64 +54,13 @@ Email: user@example.com
 Password: 12341234
 ```
 
-![](../screenshots/centraldashboard.png)
-
-## Static User Creation
-
-Dex allows use to create a static user, and store the username / password in Kubernetes `configmap` object.
-
-1. Create a python file that create the hash of your password
-
-    ```bash
-    pip install passlib
-
-    cat > password_hash.py << EOF
-    import argparse
-    from passlib.hash import bcrypt
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--password', type=str, metavar='P')
-    args = parser.parse_args()
-
-    print(bcrypt.using(rounds=12, ident="2y").hash(args.password))
-    EOF
-    ```
-
-2. Add new users to values.yaml files.
-    ```bash
-    cat > values.yaml << EOF
-
-    imageswap_labels: True
-
-    service_type: "LoadBalancer"
-
-    IP_address: ""
-
-    CD_REGISTRATION_FLOW: True
-
-    static_users: 
-    - email: "user@example.com"
-      hash: $(python3 password_hash.py --password 12341234)
-    - email: "admin@vsphere.local"
-      hash: $(python3 password_hash.py --password 88888888)
-    EOF
-    ```
-
-3. Update to an updated values file
-   ```bash
-    kctrl package installed update --package-install kubeflow --values-file values.yaml
-    ```
-
-4. Restart dex
-    ```bash
-    kubectl rollout restart deployment dex -n auth
-    ```
-
 Follow the Registration Flow, create your Kubeflow profile.
 
 ![](../screenshots/CD_REGISTRATION_FLOW_1.png)
 
 ![](../screenshots/CD_REGISTRATION_FLOW_2.png)
+
+![](../screenshots/centraldashboard.png)
 
 You will see a profile and namespace being created 
 ```bash

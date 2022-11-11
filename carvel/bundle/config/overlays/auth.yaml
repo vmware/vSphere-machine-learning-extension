@@ -1,7 +1,9 @@
 #@ load("@ytt:overlay", "overlay")
 #@ load("@ytt:data", "data")
 #@ load("@ytt:yaml", "yaml") 
-#@ load("@ytt:md5", "md5")
+#@ load("@ytt:base64", "base64")
+
+#! CD_REGISTRATION_FLOW
 
 #@overlay/match by=overlay.subset({"kind": "ConfigMap", "metadata": {"name": "centraldashboard-parameters", "namespace": "kubeflow"}}), expects=1
 ---
@@ -22,36 +24,52 @@ spec:
         - name: REGISTRATION_FLOW
           value: #@ "true" if data.values.CD_REGISTRATION_FLOW else "false"
 
-#@ def dex_configmap():
-  issuer: http://dex.auth.svc.cluster.local:5556/dex
-  storage:
-    type: kubernetes
-    config:
-      inCluster: true
-  web:
-    http: 0.0.0.0:5556
-  logger:
-    level: "debug"
-    format: text
-  oauth2:
-    skipApprovalScreen: true
-  enablePasswordDB: true
-  staticPasswords:
-#@ for i in range(len(data.values.static_users)):
-#@   map = data.values.static_users[i]
-  - email: #@ map['email']
-    hash: #@ map['hash']
-    username: #@ map['email'].split("@")[0]
-    userID: #@ md5.sum(map['email'])
-#@ end
-  staticClients:
-  - idEnv: OIDC_CLIENT_ID
-    redirectURIs: ["/login/oidc"]
-    name: 'Dex Login Application'
-    secretEnv: OIDC_CLIENT_SECRET
-#@ end
+
+#! OIDC authservice
+#@overlay/match by=overlay.subset({"kind": "ConfigMap", "metadata": {"name": "oidc-authservice-parameters", "namespace": "istio-system"}}), expects=1
+---
+data:
+  OIDC_AUTH_URL: #@ data.values.OIDC_Authservice.OIDC_AUTH_URL
+  OIDC_PROVIDER: #@ data.values.OIDC_Authservice.OIDC_PROVIDER
+  OIDC_SCOPES: #@ data.values.OIDC_Authservice.OIDC_SCOPES
+  PORT: '"8080"'
+  REDIRECT_URL: #@ data.values.OIDC_Authservice.REDIRECT_URL
+  SKIP_AUTH_URI: #@ data.values.OIDC_Authservice.SKIP_AUTH_URI
+  STORE_PATH: /var/lib/authservice/data.db
+  USERID_CLAIM:  #@ data.values.OIDC_Authservice.USERID_CLAIM
+  USERID_HEADER: #@ data.values.OIDC_Authservice.USERID_HEADER 
+  USERID_PREFIX: #@ data.values.OIDC_Authservice.USERID_PREFIX
+
+#@overlay/match by=overlay.subset({"kind": "Secret", "metadata": {"name": "oidc-authservice-client", "namespace": "istio-system"}}), expects=1
+---
+data:
+  CLIENT_ID: #@ base64.encode(data.values.OIDC_Authservice.OIDC_CLIENT_ID) 
+  CLIENT_SECRET: #@ base64.encode(data.values.OIDC_Authservice.OIDC_CLIENT_SECRET)
+
+
+#! Dex configurations
+#@ if not data.values.Dex.use_external:
 
 #@overlay/match by=overlay.subset({"kind": "ConfigMap", "metadata": {"name": "dex", "namespace": "auth"}}), expects=1
 ---
 data:
-  config.yaml: #@ yaml.encode(dex_configmap())
+  config.yaml: #@ data.values.Dex.config
+
+#@ end
+
+
+#! Use external Dex
+#@ if data.values.Dex.use_external:
+
+#@overlay/match by=overlay.subset({"kind": "Namespace", "metadata": {"name": "auth"}}), expects=1
+---
+#@overlay/match by=overlay.subset({"metadata": {"namespace": "auth"}}), expects=6
+---
+#@overlay/match by=overlay.subset({"kind": "ClusterRoleBinding", "metadata": {"name": "dex"}}), expects=1
+---
+#@overlay/match by=overlay.subset({"kind": "CustomResourceDefinition", "metadata": {"name": "authcodes.dex.coreos.com"}}), expects=1
+---
+#@overlay/match by=overlay.subset({"kind": "ClusterRole", "metadata": {"name": "dex"}}), expects=1
+---
+
+#@ end
