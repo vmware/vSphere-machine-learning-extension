@@ -2,7 +2,7 @@
 #@ load("@ytt:data", "data")
 
 #@ if data.values.imageswap_labels:
-#@overlay/match by=overlay.subset({"kind": "Namespace"}), expects=6
+#@overlay/match by=overlay.subset({"kind": "Namespace"}), expects="5+"
 ---
 metadata:
   #@overlay/match missing_ok=True
