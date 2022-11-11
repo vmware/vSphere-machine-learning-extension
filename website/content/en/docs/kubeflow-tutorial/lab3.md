@@ -1,5 +1,5 @@
 +++
-title = "Lab3 PyTorch Training (PyTorchJob)"
+title = "PyTorch Training (PyTorchJob)"
 description = "Using Pytorchjob to train a model with Pytorch"
 weight = 20
 +++
@@ -24,4 +24,4 @@ src="https://nbviewer.org/github/vmware/ml-ops-platform-for-vsphere/blob/main/we
 
 # What's Next
 
-Now you are ready to move to the next labs [Lab4 Serving](../lab4) about model serving
+Now you are ready to move to the next tutorial [Serving](../lab4) about model serving

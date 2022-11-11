@@ -1,7 +1,7 @@
 +++
-title = "Deployment"
+title = "Getting Started"
 description = "Deploy Kubeflow on vSphere"
-weight = 10
+weight = 20
 +++
 
 This tutorial will guide you through the **three** steps to get Kubeflow up and running on your vSphere platform. Please make sure you meet the [**Prerequisites**](./prerequisites) before getting started.

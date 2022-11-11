@@ -172,4 +172,4 @@ After proxy is configured properly, you may need to uninstall and install Kubefl
 ## What's Next
 ---
 
-We have prepared an end-to-end tutorial for you to get started quickly. Check it out [Kubeflow Tutorial](../../kubeflow-tutorial/)
+We have prepared [a basic guide to Kubeflow on vSphere componentes](../../kubeflow-tutorial) for you to get started quickly. 

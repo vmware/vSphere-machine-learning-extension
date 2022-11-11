@@ -1,5 +1,5 @@
 +++
-title = "Lab5 Pipeline"
+title = "Pipeline"
 description = "Kubeflow pipeline"
 weight = 50
 +++
@@ -9,7 +9,9 @@ weight = 50
 You can view and download the complete repo from (including notebooks, datasets, source codes, Dockerfile, etc) [here](https://github.com/vmware/ml-ops-platform-for-vsphere/tree/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete).
 
 ---
+
 ## Table of Contents
+
 - [Full Source](#full-source)
 - [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
@@ -27,6 +29,7 @@ You can view and download the complete repo from (including notebooks, datasets,
   - [Upload the pipeline to Kubeflow UI](#upload-the-pipeline-to-kubeflow-ui)
   - [Create experiment and run](#create-experiment-and-run)
   - [Check logs and outputs](#check-logs-and-outputs)
+
 ---
 
 ## Introduction
@@ -81,8 +84,10 @@ And in this example, specifically, a component specification should define:
 * The container image that your component’s code runs in, the command to use to run your component’s code, and the command-line arguments to pass to your component’s code
 * The component’s metadata, such as the name and description
 
-#### Notebook Preview 
+#### Notebook Preview
+
 ---
+
 <div>
 <iframe 
 style="
@@ -122,7 +127,9 @@ Basically, the following modifications were required to the original function.
 - The function’s arguments all include `data_path` which specifies the location for data storage, and also accessing. This lets Kubeflow Pipelines know the where to extract the data in zipped tar file into, where your function stores the processed data or model, and where to access it and use it as inputs for components.
 
 #### Notebook Preview 
+
 ---
+
 <div>
 <iframe 
 style="
