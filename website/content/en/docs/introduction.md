@@ -5,25 +5,20 @@ weight = 10
 +++
 
 
-## About Kubeflow
+
 ---
 
-We maintained a documentation [Running Kubeflow on AI-Ready Enterprise Platform on VMware vSphere 7 with VMware Tanzu Kubernetes Grid](https://core.vmware.com/aiml-solutions). If you want to know how to deploy and use vanilla Kubeflow on vSphere 7 with TKG, this documentation is good start.
+VMware vSphere 8 is one of the most advanced enterprise workload platforms. It brings benefits of cloud to on-premises workloads, supercharges performance through DPUs and GPUs, and accelerates innovation with an enterprise-ready integrated Kubernetes runtime. 
 
-#### **What is Kubeflow?** ####
-Kubeflow is a free and open-source platform for machine learning on Kubernetes. The Kubeflow project has multiple distinct software components which each address specific stages of the machine learning lifecycle, including model development, model training, model serving, and automated machine learning. Each component of Kubeflow can be deployed separately, and it is not a requirement to deploy every component.
+In the world of AI/ML, vSphere 8 unleashes the power of AI for all enterprises with providing world-class end-to-end AI-Ready infrastructure for enterprise IT. vSphere AI/ML solutions enable IT admins to deliver an AI-Ready infrastructure on which data scientists can deliver and scale AI and ML projects and help organizations scale modern workloads on the same vSphere infrastructure that they have already invested in.
 
-The Kubeflow project is dedicated to making deployments of machine learning (ML) workflows on Kubernetes simple, portable and scalable. It provides a straightforward way to deploy best-of-breed open-source systems for ML to diverse infrastructures. Anywhere you are running Kubernetes, you should be able to run Kubeflow. Kubeflow is supported by the biggest names in tech, receiving over 1000 contributions from companies like Google, AWS, Microsoft, VMware, Red Hat, Bloomberg, Cisco, IBM and Intel.
+Kubeflow is a free and open-source platform dedicated to making deployments of machine learning (ML) workflows on Kubernetes simple, portable and scalable. To achieve this goal, Kubeflow has incorporated various relevant open-source tools that work well with Kubernetes. Those tools include Argo for pipeline orchestration, lstio for service mesh, Jupyter for notebooks, Spark, TensorBoard, Katib, et al. Kubeflow is supported by the biggest names in tech, receiving over 1000 contributions from companies like Google, AWS, Microsoft, VMware, Red Hat, Bloomberg, Cisco, IBM and Intel.
 
-#### **Features** ####
-Kubeflow includes services to create and manage ***interactive Jupyter notebooks***. You can customize your notebook deployment and your compute resources to suit your data science needs. Experiment with your workflows locally, then deploy them to a cloud when you're ready. 
+VMware vSphere is contributing to the open-source Kubeflow community by providing vSphere-specific distribution of Kubeflow, named ***Kubeflow on vSphere***, to help enterprises and organizations build and streamline an end-to-end ML workflow. With leveraging the most advanced features of vSphere 8 as well as the seamless enablement and integration of Kubeflow, Kubeflow on vSphere aims to help users build highly reliable, secure, portable and scalable ML workflows with reduced operational overhead.
 
-Kubeflow provides a custom ***TensorFlow*** training job operator that you can use to train your ML model. In particular, Kubeflow's job operator can handle distributed TensorFlow training jobs. Configure the training controller to use CPUs or GPUs and to suit various cluster sizes. 
+Especially, Kubeflow on vSphere provides Carvel packaging and vSphere app platform support, the authentication support, GPU virtualization support, etc. More sophisticated integration and features are on the way.
 
-Kubeflow supports a TensorFlow Serving container to export trained TensorFlow ***models*** to Kubernetes. Kubeflow is also integrated with Seldon Core, an open source platform for deploying machine learning models on Kubernetes, NVIDIA Triton Inference Server for maximized GPU utilization when deploying ML/DL models at scale, and MLRun Serving, an open-source serverless framework for deployment and monitoring of real-time ML/DL pipelines. 
+Meanwhile, we maintained a documentation [Running Kubeflow on AI-Ready Enterprise Platform on VMware vSphere 7 with VMware Tanzu Kubernetes Grid](https://core.vmware.com/aiml-solutions). If you want to know how to deploy and use vanilla Kubeflow on vSphere 7 with TKG, this documentation is good start.
 
-Kubeflow ***Pipelines*** is a comprehensive solution for deploying and managing end-to-end ML workflows. Use Kubeflow Pipelines for rapid and reliable experimentation. You can schedule and compare runs, and examine detailed reports on each run. 
-
-In addition, Kubeflow is also working hard to extend the support of ***PyTorch, Apache MXNet, MPI, XGBoost, Chainer, and more***. It also integrates with ***Istio and Ambassador*** for ingress, ***Nuclio*** as a fast multi-purpose serverless framework, and ***Pachyderm*** for managing your data science pipelines. 
-
-Kubeflow community is an open and welcoming community of software developers, data scientists, and organizations. Feel free to join its Slack Workspace! 
+## What's next
+Now move forward to [Getting Started](../deployment/) and follow our step-by-step instructions to deploy Kubeflow on vSphere!

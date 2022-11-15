@@ -1,9 +1,5 @@
 +++
-<<<<<<< HEAD
-title = "Lab4 Model Serving"
-=======
 title = "Model Serving"
->>>>>>> d6f3107fe33ada0bef5c0230f086f080a918e737
 description = "PyTorch Model Serving"
 weight = 40
 +++
