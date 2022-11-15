@@ -1,5 +1,5 @@
 +++
-title = "Lab1 Getting Started"
+title = "Users and Login"
 description = "Access Kubeflow Central Dashboard, User Creation"
 weight = 10
 +++
@@ -155,4 +155,4 @@ EOF
 ## What's Next
 ---
 
-Now you are ready to move to the next labs [Lab2 Notebook](../lab2) about Data cleaning, EDA, feature engineering, model training, evaluations 
+Now you are ready to move to the next tutorial [Notebook](../lab2) about Data cleaning, EDA, feature engineering, model training, evaluations 

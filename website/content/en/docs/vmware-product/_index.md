@@ -1,5 +1,5 @@
 +++
-title = "Integration with VMware"
+title = "Advanced Features"
 description = "Kubeflow components collaborate with VMware products"
-weight = 30
+weight = 40
 +++

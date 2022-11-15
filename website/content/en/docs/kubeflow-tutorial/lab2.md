@@ -1,5 +1,5 @@
 +++
-title = "Lab2 Notebooks"
+title = "Notebooks"
 description = "Data cleaning, EDA, feature engineering, model training, evaluations"
 weight = 20
 +++
@@ -24,4 +24,4 @@ src="https://nbviewer.org/github/vmware/ml-ops-platform-for-vsphere/blob/main/we
 
 # What's Next
 ---
-Now move forward to [Lab3 Training Operators](../lab3) about PyTorch distributed training with GPU
+Now move forward to [Training Operators](../lab3) about PyTorch distributed training with GPU

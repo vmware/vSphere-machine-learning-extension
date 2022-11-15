@@ -24,7 +24,7 @@ spec:
       containers:
       - name: minio
         # Pulls the default Minio image from Docker Hub
-        image: harbor-repo.vmware.com/dockerhub-proxy-cache/minio/minio:latest
+        image: minio/minio:latest
         args:
         - server
         - --console-address
