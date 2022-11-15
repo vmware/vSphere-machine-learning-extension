@@ -1,0 +1,16 @@
+[build]
+  publish = "public"
+  command = 'git submodule update --force --init --recursive && sed -i "s/baseURL.*/baseURL = \"\/\"/" config.toml && hugo --gc --minify'
+
+[context.deploy-preview.environment]
+  HUGO_VERSION = "0.93.0"
+  NODE_VERSION = "16"
+
+[context.production.environment]
+  HUGO_VERSION = "0.93.0"
+  HUGO_ENV = "production"
+  NODE_VERSION = "16"
+
+[context.branch-deploy.environment]
+  HUGO_VERSION = "0.93.0"
+  NODE_VERSION = "16"
