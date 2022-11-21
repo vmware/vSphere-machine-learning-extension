@@ -84,7 +84,7 @@ And in this example, specifically, a component specification should define:
 * The container image that your component’s code runs in, the command to use to run your component’s code, and the command-line arguments to pass to your component’s code
 * The component’s metadata, such as the name and description
 
-#### Notebook Preview 
+#### Notebook Preview
 
 ---
 
