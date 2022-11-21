@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  labels:
+    app.kubernetes.io/component: cert-manager
+    app.kubernetes.io/name: cert-manager
+    kustomize.component: cert-manager
+  name: kubeflow-self-signing-issuer
+  namespace: cert-manager
+  annotations:
+    kapp.k14s.io/change-group: apps.kubeflow.org/order-2
+    kapp.k14s.io/change-rule: upsert after upserting apps.kubeflow.org/order-1
+spec:
+  selfSigned: {}

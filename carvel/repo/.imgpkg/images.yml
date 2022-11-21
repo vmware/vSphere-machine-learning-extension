@@ -1,0 +1,11 @@
+---
+apiVersion: imgpkg.carvel.dev/v1alpha1
+images:
+- annotations:
+    kbld.carvel.dev/id: projects.registry.vmware.com/kubeflow/kubeflow-carvel-testing:0.1
+    kbld.carvel.dev/origins: |
+      - resolved:
+          tag: "0.1"
+          url: projects.registry.vmware.com/kubeflow/kubeflow-carvel-testing:0.1
+  image: projects.registry.vmware.com/kubeflow/kubeflow-carvel-testing@sha256:a7757e9a81c6533a32705a0dd9aa7d2723fa442349a96ed325968f229eb52ec6
+kind: ImagesLock
