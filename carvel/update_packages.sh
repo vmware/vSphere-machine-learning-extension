@@ -1,8 +1,8 @@
 #!/bin/bash
 cd $(dirname $0)
 
-export IMGPKG_PACKAGE=projects.registry.vmware.com/kubeflow/kubeflow-carvel-testing:0.1
-export IMGPKG_REPO=projects.registry.vmware.com/kubeflow/kubeflow-carvel-repo:0.1
+export IMGPKG_PACKAGE=projects.registry.vmware.com/kubeflow/kubeflow-carvel-testing:0.11
+export IMGPKG_REPO=projects.registry.vmware.com/kubeflow/kubeflow-carvel-repo:0.11
 
 echo 0. Create preview of yaml results at kubeflow_manifest_preview.yaml
 ytt --file bundle/config > kubeflow_manifest_preview.yaml
@@ -27,6 +27,12 @@ cat << EOF | ytt --file repo/packages/1.6.0.yml --file - --data-value-file opena
 #@overlay/match by=overlay.subset({"kind": "Package"}), expects=1
 ---
 spec:
+  template:
+    spec:
+      fetch:
+      #@overlay/match by=overlay.index(0)
+      - imgpkgBundle:
+          image: ${IMGPKG_PACKAGE}
   valuesSchema:
     #@overlay/replace
     openAPIv3: #@ yaml.decode(data.values.openapi)["components"]["schemas"]["dataValues"]
