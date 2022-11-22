@@ -12,7 +12,7 @@ spec:
     spec:
       fetch:
       - imgpkgBundle:
-          image: projects.registry.vmware.com/kubeflow/kubeflow-carvel-testing:0.1
+          image: projects.registry.vmware.com/kubeflow/kubeflow-carvel-testing:0.11
       template:
       - ytt:
           paths:
@@ -44,17 +44,87 @@ spec:
           type: boolean
           description: Turn on Registration Flow, so that Kubeflow Central Dashboard will prompt new users to create a namespace (profile)
           default: true
-        static_users:
-          type: array
-          description: Dex static user. Hash is bcrypt hash value of password
-          items:
-            type: object
-            additionalProperties: false
-            properties:
-              email:
-                type: string
-                default: user@example.com
-              hash:
-                type: string
-                default: $2y$12$4K/VkmDd1q1Orb3xAt82zu8gk7Ad6ReFR4LCP9UeYE90NLiN9Df72
-          default: []
+        OIDC_Authservice:
+          type: object
+          additionalProperties: false
+          description: Configuration of OIDC_Authservice, the OIDC_Authservice is connected to embedded Dex by default
+          properties:
+            OIDC_AUTH_URL:
+              type: string
+              description: AuthService will initiate an Authorization Code OIDC flow by hitting this URL. Normally discovered automatically through the OIDC Provider's well-known endpoint
+              default: /dex/auth
+            OIDC_PROVIDER:
+              type: string
+              description: URL to your OIDC provider. AuthService expects to find information about your OIDC provider at OIDC_PROVIDER/.well-known/openid-configuration, and will use this information to contact your OIDC provider and initiate an OIDC flow later on
+              default: http://dex.auth.svc.cluster.local:5556/dex
+            OIDC_SCOPES:
+              type: string
+              description: Comma-separated list of scopes to request access to. The openid scope is always added.
+              default: profile email groups
+            REDIRECT_URL:
+              type: string
+              description: AuthService will pass this URL to the OIDC provider when initiating an OIDC flow, so the OIDC provider knows where it needs to send the OIDC authorization code to. It defaults to AUTHSERVICE_URL_PREFIX/oidc/callback. This assumes that you have configured your API Gateway to pass all requests under a hostname to Authservice for authentication
+              default: /login/oidc
+            SKIP_AUTH_URI:
+              type: string
+              description: Comma-separated list of URL path-prefixes for which to bypass authentication. For example, if SKIP_AUTH_URL contains /my_app/ then requests to <url>/my_app/* are allowed without checking any credentials. Contains nothing by default
+              default: /dex
+            USERID_CLAIM:
+              type: string
+              description: Claim whose value will be used as the userid (default email)
+              default: email
+            USERID_HEADER:
+              type: string
+              description: Name of the header containing the user-id that will be added to the upstream request
+              default: kubeflow-userid
+            USERID_PREFIX:
+              type: string
+              description: Prefix to add to the userid, which will be the value of the USERID_HEADER
+              default: ""
+            OIDC_CLIENT_ID:
+              type: string
+              description: AuthService will use this Client ID when it needs to contact your OIDC provider and initiate an OIDC flow
+              default: kubeflow-oidc-authservice
+            OIDC_CLIENT_SECRET:
+              type: string
+              description: AuthService will use this Client Secret to authenticate itself against your OIDC provider in combination with CLIENT_ID when attempting to access your OIDC Provider's protected endpoints
+              default: pUBnBOY80SnXgjibTYM9ZWNzY2xreNGQok
+        Dex:
+          type: object
+          additionalProperties: false
+          description: Configuration of Dex service
+          properties:
+            use_external:
+              type: boolean
+              description: If set to True, the embedded Dex will not be created, and you will need to configure OIDC_Authservice with external IdP manually
+              default: false
+            config:
+              type: string
+              description: Configuration file of Dex
+              default: |-
+                issuer: http://dex.auth.svc.cluster.local:5556/dex
+                storage:
+                  type: kubernetes
+                  config:
+                    inCluster: true
+                web:
+                  http: 0.0.0.0:5556
+                logger:
+                  level: "debug"
+                  format: text
+                oauth2:
+                  skipApprovalScreen: true
+                enablePasswordDB: true
+                staticPasswords:
+                - email: user@example.com
+                  hash: $2y$12$4K/VkmDd1q1Orb3xAt82zu8gk7Ad6ReFR4LCP9UeYE90NLiN9Df72
+                  # https://github.com/dexidp/dex/pull/1601/commits
+                  # FIXME: Use hashFromEnv instead
+                  username: user
+                  userID: "15841185641784"
+                staticClients:
+                # https://github.com/dexidp/dex/pull/1664
+                - idEnv: OIDC_CLIENT_ID
+                  redirectURIs: ["/login/oidc"]
+                  name: 'Dex Login Application'
+                  secretEnv: OIDC_CLIENT_SECRET

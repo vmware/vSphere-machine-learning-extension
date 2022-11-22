@@ -457,6 +457,8 @@ images:
       - resolved:
           tag: v1
           url: projects.registry.vmware.com/kubeflow/centraldashboard:v1
+      - preresolved:
+          url: projects.registry.vmware.com/kubeflow/centraldashboard@sha256:df771f5504ccb93a5fadc0f08b9b2e14566cb8e0854d7e89c5f3cc40bcc5ffbf
   image: projects.registry.vmware.com/kubeflow/centraldashboard@sha256:df771f5504ccb93a5fadc0f08b9b2e14566cb8e0854d7e89c5f3cc40bcc5ffbf
 - annotations:
     kbld.carvel.dev/id: projects.registry.vmware.com/kubeflow/jupyter-web-app:v1
@@ -464,6 +466,8 @@ images:
       - resolved:
           tag: v1
           url: projects.registry.vmware.com/kubeflow/jupyter-web-app:v1
+      - preresolved:
+          url: projects.registry.vmware.com/kubeflow/jupyter-web-app@sha256:4bf59c90f9ba1cfd195847862b6287cee787631b13885cb43658dbfd28174bc7
   image: projects.registry.vmware.com/kubeflow/jupyter-web-app@sha256:4bf59c90f9ba1cfd195847862b6287cee787631b13885cb43658dbfd28174bc7
 - annotations:
     kbld.carvel.dev/id: projects.registry.vmware.com/kubeflow/notebook-controller:v1
@@ -471,6 +475,8 @@ images:
       - resolved:
           tag: v1
           url: projects.registry.vmware.com/kubeflow/notebook-controller:v1
+      - preresolved:
+          url: projects.registry.vmware.com/kubeflow/notebook-controller@sha256:b406c7cca8667936905e35a2ef48a00b53bbdeddeb8205d322327f2bb1fc7061
   image: projects.registry.vmware.com/kubeflow/notebook-controller@sha256:b406c7cca8667936905e35a2ef48a00b53bbdeddeb8205d322327f2bb1fc7061
 - annotations:
     kbld.carvel.dev/id: python:3.7

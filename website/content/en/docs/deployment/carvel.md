@@ -58,7 +58,7 @@ kubectl config set-context --current --namespace=carvel-kubeflow-namespace
 
 kctrl package repository add \
     --repository kubeflow-carvel-repo \
-    --url projects.registry.vmware.com/kubeflow/kubeflow-carvel-repo:0.1
+    --url projects.registry.vmware.com/kubeflow/kubeflow-carvel-repo:0.11
 ```
 
 ## Install Kubeflow
