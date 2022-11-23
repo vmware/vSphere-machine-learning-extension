@@ -1,0 +1,6 @@
+# Use the 'create api' subcommand to add watches to this file.
+- group: peach.vmware.com
+  version: v1alpha1
+  kind: Kubeflow
+  chart: helm-charts/kubeflow
+#+kubebuilder:scaffold:watch

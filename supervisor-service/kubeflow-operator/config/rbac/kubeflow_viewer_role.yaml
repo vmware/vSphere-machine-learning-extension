@@ -1,0 +1,20 @@
+# permissions for end users to view kubeflows.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubeflow-viewer-role
+rules:
+- apiGroups:
+  - peach.vmware.com
+  resources:
+  - kubeflows
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - peach.vmware.com
+  resources:
+  - kubeflows/status
+  verbs:
+  - get
