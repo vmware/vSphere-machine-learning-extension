@@ -16,7 +16,6 @@ weight = 15
 4.  A Linux machine that can run docker commands if you have no control over the DNS server in the network segment.
 
 
-
 ### Steps to setup TKG demo environment
 
 1. Fresh install ESXi 7.0 on the physical machine. Configure NTP server for the ESXi.
@@ -39,7 +38,6 @@ weight = 15
 
 	3. Download K8s v1.19.9 OVA from [https://customerconnect.vmware.com/downloads/details?downloadGroup=TKG-131&productId=988&rPId=53095](https://customerconnect.vmware.com/downloads/details?downloadGroup=TKG-131&productId=988&rPId=53095). Click “ACTIONS” – “Import Item”. Click “Local file” – “UPLOAD FILES”, browse to file photon-3-kube-v1.19.9+vmware.2-tkg.1-11749392838678570289.ova, click “Open”. Click “IMPORT”.
 
-  
 
 10. Deploy K8s content library:
 
@@ -47,7 +45,6 @@ weight = 15
 
 	2. Right click the “photon-3-kube-v1.19.9+vmware.2-tkg.1-11749392838678570289” item in content library, select “New VM from This Template …”. Name this VM as “photon-3-kube-v1.19.9_vmware.2”, select the VM folder created in step 6, select the resource pool created in step 5 in the next page, review and accept the license, select a datastore, select the port group created in step 7 as the destination network to connect to, and click “FINISH”. After the deployment is done, right click VM “photon-3-kube-v1.19.9_vmware.2” and click “Template” – “Convert to Template”.
 
-  
 
 11. Deploy TKG demo appliance:
 
@@ -68,3 +65,36 @@ weight = 15
 
 	1. Login the Linux machine/VM prepared for this task as root. Run command “systemctl stop systemd-resolved” to stop the build-in DNS service if it is running.
 	2. Create file “~/Corefile” with the following content using a text editor (like “vi”):
+	3. Create file “~/example.db” with the following content using a text editor (like “vi”):
+4. Run the following command to launch CoreDNS service: docker run --restart=always --volume=`pwd`:/root/ -p 53:53/udp [harbor-repo.vmware.com/dockerhub-proxy-cache/coredns/coredns](http://harbor-repo.vmware.com/dockerhub-proxy-cache/coredns/coredns) -conf ~/Corefile
+	5. Run the following command from the terminal of TKG demo appliance to verify this DNS server is setup correctly: dig @<IP address of the Linux machine> [registry.rainpole.io](http://registry.rainpole.io/)
+
+15. Edit file “/etc/systemd/network/99-dhcp-en.network”, change the DNS server setting in this file to the correct DNS server, not this appliance itself. If you have launched your own DNS service in step 14, point DNS server to the Linux VM you are using in step 14. Run command “systemctl restart systemd-networkd” and “systemctl restart systemd-resolved” to apply this change.
+
+16. Edit file “vsphere-tkg-mgmt-template.yaml”. Make the following changes:
+
+	a. In “vSphere configuration” section, change “VSPHERE_SERVER” to the IP of the vCenter Server.
+	b. Change “VSPHERE_PASSWORD” to the password of vSphere administrator.
+	c. Change “VSPHERE_USERNAME” to the username of vSphere administrator.
+	d. Change “VSPHERE_DATACENTER” to the name of datacenter created in step 3.
+	e. Change the path in “VSPHERE_RESOURCE_POOL” to the actual path, which means the datacenter name and cluster name in the path should be changed.
+	f. Change the datacenter name and datastore name in “VSPHERE_DATASTORE”.
+	g. Change the datacenter name and VM folder name in “VSPHERE_FOLDER”.
+	h. Change “VSPHERE_NETWORK” to the name of port group created in step 7.
+	i. Change “VSPHERE_CONTROL_PLANE_ENDPOINT” to the static IP address of TKG management cluster.
+	j. Copy the content of file “/root/.ssh/id_rsa.pub” (available on screen in step 13) to “VSPHERE_SSH_AUTHORIZED_KEY”.
+	k. In “Node configuration” section, check the resource settings of TKG nodes, especially the disk size. Make changes if needed.
+
+17. Edit file “vsphere-tkg-workload-1-template.yaml” and “vsphere-tkg-workload-2-template.yaml”. Make similar changes to the two files according to step 16.
+
+18. Run the following command to create TKG management cluster: tanzu management-cluster create -f vsphere-tkg-mgmt-template.yaml -v2
+
+This command takes about five minutes. Output of this command is like the following:
+
+19. Run the following command to create TKG workload cluster 1: tanzu cluster create -f vsphere-tkg-workload-1-template.yaml
+
+This command may take 10 to 15 minutes. Output of this command is like the following:
+
+20. Run the following command to create TKG workload cluster 2: tanzu cluster create -f vsphere-tkg-workload-2-template.yaml --tkr v1.19.9---vmware.2-tkg.1
+
+This command may take 10 to 15 minutes. Output of this command is like the following:
