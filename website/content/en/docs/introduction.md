@@ -18,7 +18,7 @@ VMware vSphere is contributing to the open-source Kubeflow community by providin
 
 Especially, Kubeflow on vSphere provides Carvel packaging and vSphere app platform support, authentication support, GPU virtualization support, etc. More sophisticated integration and features are on the way.
 
-Meanwhile, we maintained documentation [Running Kubeflow on AI-Ready Enterprise Platform on VMware vSphere 7 with VMware Tanzu Kubernetes Grid](https://core.vmware.com/aiml-solutions). If you want to know how to deploy and use vanilla Kubeflow on vSphere 7 with TKG, this documentation is a good start.
+Meanwhile, we maintained documentation [Running Kubeflow on AI-Ready Enterprise Platform on VMware vSphere 8 with VMware Tanzu Kubernetes Grid](https://core.vmware.com/aiml-solutions). If you want to know how to deploy and use vanilla Kubeflow on vSphere 8 with TKG, this documentation is a good start.
 
 ## What's next
 Now move forward to [Getting Started](../deployment/) and follow our step-by-step instructions to deploy Kubeflow on vSphere!
