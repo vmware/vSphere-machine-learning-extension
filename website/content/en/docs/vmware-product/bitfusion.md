@@ -22,7 +22,7 @@ For more information about Bitfusion, please visit [vSphere Bitfusion document p
 
 ## Installation & Use Case
 
-The bulk of this session will be a detailed example of how to run a TensorFlow application in a containerized Bitfusion environment with remote GPU access.
+The bulk of this session is a detailed example of how to run a TensorFlow application in a containerized Bitfusion environment with remote GPU access.
 
 ### Installation
 
@@ -32,18 +32,18 @@ There is the achitecture of the Kubeflow Jupyer Notebook integration with Bitfsi
 
 How can we use the same image for both of Bitfusion and Nvidia. Let me show you the reason. Under the hood, when a Notebook created, we’ve modified the Kubeflow code to put bitfusion configuration info into the annotations based on your selection and record the GPU resource requests and limits.
 
-Then the Modified Notebook controller will transfer all these information related to the bitfusion to the “StatefulSet” resource objects.   
+Then the modified Notebook controller will transfer all these information related to the bitfusion to the “StatefulSet” resource objects.   
 
-When “Bitfusion Device Plugin” see that information in the Pod Resource, it will inject the bitfusion client library, server config, client certificate and all necessary information automatically  to make this notebook a valid bitfusion client. 
+When “Bitfusion Device Plugin” sees that information in the Pod Resource, it will inject the bitfusion client library, server config, client certificate and all necessary information automatically  to make this notebook a valid bitfusion client. 
 
 
 ### Use Case
 
-When we are creating Jupyter Notebook instance in the Notebook page of the Kubeflow dashboard, we are giving the name, choose one of the Kubeflow official images. As you can see in the following figure, in the GPU resources settings, we choose th “BITFUSION” option. After launch the new notebook, we can easily run the bitfusion client applications in the Jupyter Notebook. 
+When we are creating Jupyter Notebook instance in the Notebook page of the Kubeflow dashboard, we pick the name and choose one of the Kubeflow official images. As you can see in the following figure, in the GPU resources settings, we choose th “BITFUSION” option. After launch the new notebook, we can easily run the bitfusion client applications in the Jupyter Notebook. 
 
 ![2](../2_notebook.png)
 
-We are running a bitfusion benchmark applications in this use case. From the output of the benchmark, we will find information related to the Bitfusion server resource allocation. You can get the source code of the example from [here]()
+We plan to run a bitfusion benchmark applications in this use case. From the output of the benchmark, we will find information related to the Bitfusion server resource allocation. You can get the source code of the example from [here]().
 
 ```bash
 %env PATH=$PATH:/bitfusion/bitfusion-client-ubuntu2004_4.5.0-4_amd64.deb/usr/bin:/opt/conda/bin
@@ -71,13 +71,13 @@ bitfusion release_gpus -f /tmp/bitfuiosn...
 ```
 
 
-When running the bitfusion notebook, we can monitor the GPU usage in the vCenter Server console, shown as the demo.
+When running the bitfusion notebook, we can monitor the GPU usage in the vCenter Server console as shown in the demo.
 
 ![4](../4_bitfusion_console.png)
 
 
 ## Roadmap
 
-In the above use case, you may find that we can only run python scripts with a bitfusion wrapper. But we will build a “Bitfusion Kernel” in the near feature, shown as the screen, to let users to run every python code blocks into bitfusion environment
+In the above use case, you may find that we can only run python scripts with a bitfusion wrapper. But we will build a “Bitfusion Kernel” in the near feature as shown on the screen to let users to run every python code blocks into bitfusion environment
 
 ![3](../3_bitfusion_kernel_roadmap.png)

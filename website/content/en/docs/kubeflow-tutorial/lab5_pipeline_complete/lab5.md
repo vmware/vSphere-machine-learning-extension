@@ -62,7 +62,7 @@ We suggest you go through examples in order, as some concept explanations are mo
 
 This model comes from Kaggle Competition. The objective of this task is to predict keypoint positions on face images, which can be used as a building block in several applications, such as analysing facial expressions and biometrics recognition.
 
-There are two main tasks: train and evaluation. Each would be build as a pipeline component later. 
+There are two main tasks: train and evaluation. Each would be built as a pipeline component later. 
 
 Datasets for training and testing can be found and downloaded [here](https://www.kaggle.com/competitions/facial-keypoints-detection/data). (You need to download `test.zip` and `train.zip` files and put them under `train/my_data`. More details can be found in [Example 1 Notebook](https://github.com/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab5_pipeline_complete/example1_facialKeypoint.ipynb).)
 
