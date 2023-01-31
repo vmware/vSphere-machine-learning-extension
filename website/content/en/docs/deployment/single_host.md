@@ -7,22 +7,22 @@ weight = 15
 ### Prerequisites
 ---
 
-1.  A dedicated physical machine that can run ESXi 7.0.
+1.  A dedicated physical machine that can run ESXi 8.0.
     1.  Memory requirements: 64GB minimum, 128GB or more is recommended.
     2.  Disk space requirements: 1TB minimum, 2TB or more is recommended.
 2.  A network segment that meets the following requirements:
     1.  At least a /24 segment with 200+ available IPs, with at least 20 static IPs and the rest are DHCP IPs.
     2.  DHCP, DNS, and NTP services are available in the network segment.
-3.  ESXi 7.0 and vCenter Server 7.0 installer ISO files. The latest release of ESXi 7.0 and vCenter Server 7.0 are recommended.
+3.  ESXi 8.0 and vCenter Server 8.0 installer ISO files. The latest release of ESXi 8.0 and vCenter Server 8.0 are recommended.
 4.  A Linux machine that can run docker commands if you have no control over the DNS server in the network segment.
 
 
 ### Steps to setup TKG demo environment
 ---
 
-1. Fresh install ESXi 7.0 on the physical machine. Configure NTP server for the ESXi.
+1. Fresh install ESXi 8.0 on the physical machine. Configure NTP server for the ESXi.
 
-2. Install vCenter Server 7.0 on the physical machine. Please pay attention to the following points when running the installation wizard:
+2. Install vCenter Server 8.0 on the physical machine. Please pay attention to the following points when running the installation wizard:
 
 	1. Be sure to enable thin disk mode for vCenter Server if available disk space is less than 1.5TB.
 	2. Be sure to configure NTP server.
