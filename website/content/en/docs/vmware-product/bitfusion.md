@@ -16,7 +16,7 @@ However, GPUs have traditionally been difficult to share. As a piece of hardware
 
 Enter VMware vSphere Bitfusion. It lets you share GPUs in two ways. Bitfusion sets up a pool of GPU servers, and gives GPU access, remotely, across the network, to applications or microservices running on client VMs or containers set up for each piece of software. GPUs, over the course of time, can “fly” from one application to another, being allocated and deallocated dynamically whenever an application needs hardware acceleration. Bitfusion also partitions GPUs into fractions of arbitrary size (it is the GPU memory that is partitioned), so the GPU can be used concurrently by multiple applications. All this raises the utilization and efficiency of the precious GPU resources.
 
-An inteagrated [VMware vSphere](https://www.vmware.com/products/vsphere.html#resources), Bitfusion delivers the ability to share resources in addition to providing better utilization of existing or new hardware accelerator resources. Bitfusion can dynamically share hardware accelerator devices, such as GPUs, across a network.And this technology is for specific use with AI/ML software such as TensorFlow and PyTorch.
+An inteagrated [VMware vSphere](https://www.vmware.com/products/vsphere.html#resources), Bitfusion delivers the ability to share resources in addition to providing better utilization of existing or new hardware accelerator resources. Bitfusion can dynamically share hardware accelerator devices, such as GPUs, across a network. And this technology is for specific use with AI/ML software such as *TensorFlow* and *PyTorch*.
 
 For more information about Bitfusion, please visit [vSphere Bitfusion document page](https://docs.vmware.com/cn/VMware-vSphere-Bitfusion/index.html).
 
@@ -71,13 +71,13 @@ bitfusion release_gpus -f /tmp/bitfuiosn...
 ```
 
 
-When running the bitfusion notebook, we can monitor the GPU usage in the vCenter Server console as shown in the demo.
+When running the bitfusion notebook, we can monitor the GPU usage in the vCenter Server console. **Please refer to the following figure.**
 
 ![4](../4_bitfusion_console.png)
 
 
 ## Roadmap
 
-In the above use case, you may find that we can only run python scripts with a bitfusion wrapper. But we will build a “Bitfusion Kernel” in the near feature as shown on the screen to let users to run every python code blocks into bitfusion environment
+In the above use case, you may find that we can only run python scripts with a bitfusion wrapper. But we will build a “Bitfusion Kernel” in the near feature as shown on the screen to let users to run every python code blocks into bitfusion environment.
 
 ![3](../3_bitfusion_kernel_roadmap.png)
