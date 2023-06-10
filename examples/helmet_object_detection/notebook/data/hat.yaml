@@ -1,0 +1,7 @@
+train: ./VOCdevkit/images/train/  # 16551 images
+val: ./VOCdevkit/images/val/  # 4952 images
+ 
+# Classes
+nc: 2  # number of classes
+names: ["hat","person"]  # class names
+ 

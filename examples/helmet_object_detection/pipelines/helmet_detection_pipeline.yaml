@@ -1,0 +1,131 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: helmet-detection-pipeline-
+  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline_compilation_time: '2023-04-26T05:17:53.865444',
+    pipelines.kubeflow.org/pipeline_spec: '{"description": "pipeline to detect helmet",
+      "inputs": [{"name": "dataurl"}, {"name": "datapath"}, {"name": "epoch"}, {"name":
+      "device"}, {"name": "workers_num"}], "name": "helmet detection pipeline"}'}
+  labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3}
+spec:
+  entrypoint: helmet-detection-pipeline
+  templates:
+  - name: create-helmet-data-storage-volume
+    resource:
+      action: create
+      manifest: |
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: '{{workflow.name}}-helmet-data-storage-volume'
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 10Gi
+    outputs:
+      parameters:
+      - name: create-helmet-data-storage-volume-manifest
+        valueFrom: {jsonPath: '{}'}
+      - name: create-helmet-data-storage-volume-name
+        valueFrom: {jsonPath: '{.metadata.name}'}
+      - name: create-helmet-data-storage-volume-size
+        valueFrom: {jsonPath: '{.status.capacity.storage}'}
+    metadata:
+      labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline-sdk-type: kfp}
+  - name: download-data
+    container:
+      args: [--dataurl, '{{inputs.parameters.dataurl}}', --datapath, '{{inputs.parameters.datapath}}']
+      command: [python3, ingest_pipeline.py]
+      image: harbor-repo.vmware.com/juanl/helmet_detection_pipeline:v1
+      volumeMounts:
+      - {mountPath: /VOCdevkit, name: create-helmet-data-storage-volume}
+    inputs:
+      parameters:
+      - {name: create-helmet-data-storage-volume-name}
+      - {name: datapath}
+      - {name: dataurl}
+    metadata:
+      labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline-sdk-type: kfp}
+    volumes:
+    - name: create-helmet-data-storage-volume
+      persistentVolumeClaim: {claimName: '{{inputs.parameters.create-helmet-data-storage-volume-name}}'}
+  - name: helmet-detection-pipeline
+    inputs:
+      parameters:
+      - {name: datapath}
+      - {name: dataurl}
+      - {name: device}
+      - {name: epoch}
+      - {name: workers_num}
+    dag:
+      tasks:
+      - {name: create-helmet-data-storage-volume, template: create-helmet-data-storage-volume}
+      - name: download-data
+        template: download-data
+        dependencies: [create-helmet-data-storage-volume]
+        arguments:
+          parameters:
+          - {name: create-helmet-data-storage-volume-name, value: '{{tasks.create-helmet-data-storage-volume.outputs.parameters.create-helmet-data-storage-volume-name}}'}
+          - {name: datapath, value: '{{inputs.parameters.datapath}}'}
+          - {name: dataurl, value: '{{inputs.parameters.dataurl}}'}
+      - name: model-training
+        template: model-training
+        dependencies: [create-helmet-data-storage-volume, process-data]
+        arguments:
+          parameters:
+          - {name: create-helmet-data-storage-volume-name, value: '{{tasks.create-helmet-data-storage-volume.outputs.parameters.create-helmet-data-storage-volume-name}}'}
+          - {name: device, value: '{{inputs.parameters.device}}'}
+          - {name: epoch, value: '{{inputs.parameters.epoch}}'}
+          - {name: workers_num, value: '{{inputs.parameters.workers_num}}'}
+      - name: process-data
+        template: process-data
+        dependencies: [create-helmet-data-storage-volume, download-data]
+        arguments:
+          parameters:
+          - {name: create-helmet-data-storage-volume-name, value: '{{tasks.create-helmet-data-storage-volume.outputs.parameters.create-helmet-data-storage-volume-name}}'}
+  - name: model-training
+    container:
+      args: [--epoch, '{{inputs.parameters.epoch}}', --device, '{{inputs.parameters.device}}',
+        --workers, '{{inputs.parameters.workers_num}}']
+      command: [python3, train_pipeline.py]
+      image: harbor-repo.vmware.com/juanl/helmet_detection_pipeline:v1
+      resources:
+        limits: {nvidia.com/gpu: 1}
+        requests: {cpu: '2', memory: 8G}
+      volumeMounts:
+      - {mountPath: /VOCdevkit, name: create-helmet-data-storage-volume}
+    inputs:
+      parameters:
+      - {name: create-helmet-data-storage-volume-name}
+      - {name: device}
+      - {name: epoch}
+      - {name: workers_num}
+    metadata:
+      labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline-sdk-type: kfp}
+    volumes:
+    - name: create-helmet-data-storage-volume
+      persistentVolumeClaim: {claimName: '{{inputs.parameters.create-helmet-data-storage-volume-name}}'}
+  - name: process-data
+    container:
+      command: [python3, prepare.py]
+      image: harbor-repo.vmware.com/juanl/helmet_detection_pipeline:v1
+      volumeMounts:
+      - {mountPath: /VOCdevkit, name: create-helmet-data-storage-volume}
+    inputs:
+      parameters:
+      - {name: create-helmet-data-storage-volume-name}
+    metadata:
+      labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.6.3, pipelines.kubeflow.org/pipeline-sdk-type: kfp}
+    volumes:
+    - name: create-helmet-data-storage-volume
+      persistentVolumeClaim: {claimName: '{{inputs.parameters.create-helmet-data-storage-volume-name}}'}
+  arguments:
+    parameters:
+    - {name: dataurl}
+    - {name: datapath}
+    - {name: epoch}
+    - {name: device}
+    - {name: workers_num}
+  serviceAccountName: pipeline-runner
