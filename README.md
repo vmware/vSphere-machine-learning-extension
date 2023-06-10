@@ -20,7 +20,7 @@ This project hosts codes and documents to enable Kubeflow better running on VMwa
 
 ## Getting Started
 
-For detailed instructions on how to deploy and configure Kubeflow on vSphere and VMware Cloud, refer to vSphere specific docs [here](docs).
+For detailed instructions on how to deploy, configure and use Kubeflow on vSphere and VMware Cloud, refer to docs [here](https://vmware.github.io/vSphere-machine-learning-extension/).
 
 ## Feedback
 
