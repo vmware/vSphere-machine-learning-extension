@@ -1,0 +1,30 @@
+name: Sphinx build 
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - docs/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y pandoc
+          pip install sphinx sphinx-immaterial sphinx-tabs nbsphinx IPython
+      - name: Sphinx build
+        run: |
+          sphinx-build -b html docs docs/_build/html
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_build/html/
+          force_orphan: true
