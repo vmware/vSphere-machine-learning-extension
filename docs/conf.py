@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Kubeflow'
-copyright = '2023, Elements of AI'
-author = 'Elements of AI'
+copyright = '2023, VMware'
+author = 'VMware'
 release = '0.1'
 
 # -- General configuration ---------------------------------------------------
@@ -25,13 +25,13 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_favicon = "./_static/favicon.ico"
 # html_logo = "./_static/sphinx-needs-logo-white.png"
-html_title = "Freestone Kubeflow Docs"
+html_title = "vSphere Machine Learning Extension"
 
 # material theme options (see theme.conf for more information)
 html_theme_options = {
-    "site_url": "https://elements-of-ai.github.io/kubeflow-docs/",
-    "repo_url": "https://github.com/elements-of-ai/kubeflow-docs",
-    "repo_name": "Freestone Kubeflow Docs",
+    "site_url": "https://vmware.github.io/vSphere-machine-learning-extension/",
+    "repo_url": "https://github.com/vmware/vSphere-machine-learning-extension",
+    "repo_name": "vSphere Machine Learning Extension",
     "repo_type": "github",
     "edit_uri": "blob/master/docs",
     "globaltoc_collapse": True,
@@ -85,7 +85,7 @@ nbsphinx_prolog = """
 
     <div class="admonition note">
       <p>Notebook Download
-        <a class="reference external" href="https://raw.githubusercontent.com/elements-of-ai/kubeflow-docs/main/docs/{{ docname|e }}">{{ docname|e }}</a>
+        <a class="reference external" href="https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/main/docs/{{ docname|e }}">{{ docname|e }}</a>
       </p>
     </div>
 """
