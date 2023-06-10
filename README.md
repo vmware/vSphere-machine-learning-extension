@@ -1,6 +1,6 @@
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/liuqi/kubeflow-on-vsphere/issues) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/vmware/vSphere-machine-learning-extension/issues) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 
-# Kubeflow on vSphere
+# vSphere Machine Learning Extension
 
 ## Overview
 
@@ -8,15 +8,14 @@ This project hosts codes and documents to enable Kubeflow better running on VMwa
 
 ## Features
 
-* Improved manifests to enable Kubeflow deployment on vSphere
-* Tools for auto deployment, environment preparation, et al.
+* Carvel packaging to enable Kubeflow deployment on vSphere with Tanzu and more
 * Components for better working with vSphere, for example, GPU enablement, storage support, et al.
 * Documents on user guide and best practices
+* Better vSphere integration on authentication, resource management, et al.
 
 ## What's Next
 
 * Unified APIs
-* Better vSphere integration on authentication, resource management, et al.
 * ...
 
 ## Getting Started
@@ -25,7 +24,7 @@ For detailed instructions on how to deploy and configure Kubeflow on vSphere and
 
 ## Feedback
 
-Feel free to provide us feedback by [filling an issue](https://github.com/liuqi/kubeflow-on-vsphere/issues/new). Feature requests are always welcome. If you wish to contribute, please take a quick look at the next section.
+Feel free to provide us feedback by [filling an issue](https://github.com/vmware/vSphere-machine-learning-extension/issues/new). Feature requests are always welcome. If you wish to contribute, please take a quick look at the next section.
 
 ## How to Contribute
 
