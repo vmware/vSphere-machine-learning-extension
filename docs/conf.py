@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Kubeflow'
+project = 'vSphere Machine Learning Extension'
 copyright = '2023, VMware'
 author = 'VMware'
 release = '0.1'
