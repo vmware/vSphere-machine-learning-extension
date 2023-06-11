@@ -1,10 +1,10 @@
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/vmware/vSphere-machine-learning-extension/issues) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/vmware/vSphere-machine-learning-extension/issues) [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE) ![Build](https://github.com/vmware/vSphere-machine-learning-extension/actions/workflows/sphinx.yml/badge.svg)
 
 # vSphere Machine Learning Extension
 
 ## Overview
 
-This project hosts codes and documents to enable Kubeflow better running on VMware vSphere and VMware Cloud.
+This project hosts codes and documents to enable machine learning workloads better running on VMware vSphere and VMware Cloud. For now, this project focuses on Kubeflow. We will further extend the scope to other machine learning software soon.
 
 ## Features
 
@@ -15,7 +15,8 @@ This project hosts codes and documents to enable Kubeflow better running on VMwa
 
 ## What's Next
 
-* Unified APIs
+* Ray on vSphere and integration with Kubeflow
+* Support for LLMs
 * ...
 
 ## Getting Started
