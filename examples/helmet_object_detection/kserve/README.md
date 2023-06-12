@@ -35,7 +35,7 @@ $ kubectl apply -f minio-standalone-deployment.yml
 This step uploads `v1/torchserve/model-store`, `v1/torchserve/config` to MinIO buckets. You need to find the MinIO `endpoint_url`, `accesskey`, `secretkey` before upload using the following commands in your terminal.
 
 ```bash
-# <your-namespace> is user, the default one created when login to Freestone Kubeflow dashboard for the first time.
+# <your-namespace> is user, the default one created when login to vSphere Machine Learning Extension dashboard for the first time.
 
 # get the endpoint url for MinIO
 $ kubectl get svc minio-service -n <your-namespace> -o jsonpath='{.status.loadBalancer.ingress}'
@@ -261,7 +261,7 @@ $ kubectl get inferenceservice helmet-detection-serving -o jsonpath='{.status.ur
 
 ```
 
-Use your web browser to login to Freestone Kubeflow, and get Cookies: authservice_session (Chrome: Developer Tools -> Applications -> Cookies)
+Use your web browser to login to vSphere Machine Learning Extension, and get Cookies: authservice_session (Chrome: Developer Tools -> Applications -> Cookies)
 
 
 #### Test model prediction¶
@@ -269,7 +269,7 @@ Use your web browser to login to Freestone Kubeflow, and get Cookies: authservic
 Run the following cell to do model prediction in the notebook server.
 
 ```bash 
- # replace it with the url you used to access Freestone Kubeflow
+ # replace it with the url you used to access vSphere Machine Learning Extension
     bot = Test_bot(uri='http://10.117.233.8',
                 model='helmet_detection',
                 # replace it with what is printed above

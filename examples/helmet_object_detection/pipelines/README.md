@@ -142,9 +142,9 @@ if __name__ == '__main__':
 
 Following the steps in your notebook, you should be able to see a file called `helmet_detection_pipeline.yaml` in folder `generated_yaml_files`.. So here we provide you a brief guide on how to execute a pipeline. 
 
-### Upload the pipeline in Freestone Kubeflow Dashboard 
+### Upload the pipeline in vSphere Machine Learning Extension Dashboard 
 
-Once you have the compiled YAML file, download it. In Freestone Kubeflow Dashboard, go to pipelines dashaborad by clicking the “Pipelines” on the left-side toolbar. And then click the “Upload Pipeline” button.
+Once you have the compiled YAML file, download it. In vSphere Machine Learning Extension Dashboard, go to pipelines dashaborad by clicking the “Pipelines” on the left-side toolbar. And then click the “Upload Pipeline” button.
 
 ![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/helmet_detection/pipelines/imgs/helmet-pipeline-01.png)
 ![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/helmet_detection/pipelines/imgs/helmet-pipeline-02.png)

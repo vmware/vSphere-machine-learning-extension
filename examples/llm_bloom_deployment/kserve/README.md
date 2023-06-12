@@ -1,4 +1,4 @@
-# BLOOM Deployment on Freestone Kubeflow with Kubeflow KServe
+# BLOOM Deployment on vSphere Machine Learning Extension with Kubeflow KServe
 
 The InferenceService custom resource is the primary interface that is used for deploying models on KServe. Inside an InferenceService, users can specify multiple components that are used for handling inference requests. These components are the predictor, transformer, and explainer. For more detailed documentation on Kubeflow KServe, refer to [KServe](https://kserve.github.io/website/0.7/modelserving/data_plane/).
 
@@ -10,7 +10,7 @@ The BLOOM model size this turorial for Kserve uses is 560m. File size of the who
 
 ### Prerequisite
 
-- The Freestone Kubeflow platform is ready for use.
+- The vSphere Machine Learning Extension platform is ready for use.
 
 - The BLOOM 560m MAR model has been prepared and ready for use.
 
@@ -18,9 +18,9 @@ The BLOOM model size this turorial for Kserve uses is 560m. File size of the who
 
 ### 1. Create PVC and Mount the Model.
 
-#### 1.1 Create a volume in Freestone Kubeflow UI
+#### 1.1 Create a volume in vSphere Machine Learning Extension UI
 
-Use your web browser to login to Freestone Kubeflow, and click volumes, then click the New volume in the top right bar to create pvc.
+Use your web browser to login to vSphere Machine Learning Extension, and click volumes, then click the New volume in the top right bar to create pvc.
 
 ![image_volumes](./img/volumes.png)
 
@@ -128,7 +128,7 @@ kubectl get inferenceservice torchserve-bloom-560m -n <your_namepsace> -o jsonpa
 
 #### 3.2 Test model prediction
 
-Use your web browser to login to Freestone Kubeflow, and get Cookies: authservice_session (Chrome: Developer Tools -> Applications -> Cookies)
+Use your web browser to login to vSphere Machine Learning Extension, and get Cookies: authservice_session (Chrome: Developer Tools -> Applications -> Cookies)
 
 ```
 export SESSION='<your_authservice_session>'

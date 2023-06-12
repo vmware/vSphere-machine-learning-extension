@@ -2,7 +2,7 @@
 
 AI-based Helmet Detection models use computer vision techniques to identify and classify objects in an image or video stream. They are designed to detect the presence of helmets on individuals and determine whether they are worn correctly or not. The models can be trained on large datasets of helmet images and use algorithms such as YOLOv5 to analyze visual features and classify the images. The goal of such models is to improve safety in various industries by reducing the number of head injury incidents caused by not wearing helmets correctly or not wearing them at all.
 
-## Create Notebook server on Freestone Kubeflow UI
+## Create Notebook server on vSphere Machine Learning Extension UI
 
 You can refer to the [Notebook Document](https://elements-of-ai.github.io/kubeflow-docs/user-guide/notebooks.html) to create and use a Kubeflow notebook.
 
