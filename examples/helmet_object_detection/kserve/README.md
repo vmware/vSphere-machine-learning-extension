@@ -11,7 +11,7 @@ For more detailed documentation on KServe, refer to [KServe](https://kserve.gith
 First, you can create a notebook refer to [Kubeflow Notebook](https://elements-of-ai.github.io/kubeflow-docs/user-guide/notebooks.html#user-guide-notebooks). Then, unzip the kserve package we have prepared for this notebook server. 
 
 ```bash
-$ cd kubeflow-docs/examples/helmet_object_detection/kserve
+$ cd vSphere-machine-learning-extension/examples/helmet_object_detection/kserve
 $ unzip helmet_kserve.zip
 ```
 
