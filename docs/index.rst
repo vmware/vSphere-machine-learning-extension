@@ -56,6 +56,8 @@ This documentation presents a comprehensive end-to-end workflow of using Freesto
     user-guide/katib
     user-guide/kserve
     user-guide/kfp
+    user-guide/federated-model-training
+
 
 .. toctree::
     :caption: Use Cases
