@@ -16,8 +16,8 @@ You can refer to the [Notebook Document](https://elements-of-ai.github.io/kubefl
 - Clone this repo in the notebook and install the dependencies in the requirements.txt:
 
 ```bash
-$ git clone https://github.com/elements-of-ai/kubeflow-docs.git
-$ cd kubeflow-docs/examples/helmet_object_detection/notebook
+$ git clone https://github.com/vmware/vSphere-machine-learning-extension.git
+$ cd vSphere-machine-learning-extension/examples/helmet_object_detection/notebook
 $ pip install -r requirements.txt
 ```
 
