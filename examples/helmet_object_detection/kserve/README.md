@@ -2,13 +2,13 @@
 
 ## Introduction
 
-The InferenceService custom resource is the primary interface that is used for deploying models on KServe. Inside an InferenceService, you can specify multiple components that are used for handling inference requests. These components are the predictor, transformer, and explainer. 
+The InferenceService custom resource is the primary interface that is used for deploying models on KServe. Inside an InferenceService, you can specify multiple components that are used for handling inference requests. These components are the predictor, transformer, and explainer.
 For more detailed documentation on KServe, refer to [KServe](https://kserve.github.io/website/).
 
 ## Get Started
 ### Prepare model and configuration files
 
-First, you can create a notebook refer to [Kubeflow Notebook](https://elements-of-ai.github.io/kubeflow-docs/user-guide/notebooks.html#user-guide-notebooks). Then, unzip the kserve package we have prepared for this notebook server. 
+First, you can create a notebook refer to [Kubeflow Notebook](https://vmware.github.io/vSphere-machine-learning-extension/user-guide/notebooks.html#user-guide-notebooks). Then, unzip the kserve package we have prepared for this notebook server.
 
 ```bash
 $ cd kubeflow-docs/examples/helmet_object_detection/kserve
@@ -41,7 +41,7 @@ This step uploads `v1/torchserve/model-store`, `v1/torchserve/config` to MinIO b
 $ kubectl get svc minio-service -n <your-namespace> -o jsonpath='{.status.loadBalancer.ingress}'
 # output is like: [{"ip":"10.105.150.41"}], this IP is used later in the Python script to set AWS_ENDPOINT_URL
 
-# get the secret name for Minio. 
+# get the secret name for Minio.
 $ kubectl get secret -n <your-namespace> | grep minio
 # output is: mlpipeline-minio-artifact
 
@@ -91,10 +91,10 @@ bucket = s3.Bucket(bucket_name)
 # upload
 bucket.upload_file(os.path.join(base_path, "model-store", "helmet_detection.mar"),
                 os.path.join(bucket_path, "model-store/helmet_detection.mar"))
-bucket.upload_file(os.path.join(base_path, "config", "config.properties"), 
+bucket.upload_file(os.path.join(base_path, "config", "config.properties"),
                 os.path.join(bucket_path, "config/config.properties"))
 
-# check files 
+# check files
 for obj in bucket.objects.filter(Prefix=bucket_path):
     print(obj.key)
 ```
@@ -196,54 +196,54 @@ class Test_bot():
         self.session = session
         self.headers = {'Host': self.host, 'Content-Type': "image/jpeg", 'Cookie': "authservice_session=" + self.session}
         self.img = './2.jpg'
-        
+
     def update_uri(self, uri):
         self.uri = uri
-            
+
     def update_model(self, model):
         self.model = model
-            
+
     def update_host(self, host):
         self.host = host
         self.update_headers()
-            
+
     def update_session(self, session):
         self.session = session
         self.update_headers()
-            
+
     def update_headers(self):
         self.headers = {'Host': self.host, 'Content-Type': "image/jpeg", 'Cookie': "authservice_session=" + self.session}
-            
+
     def get_data(self, x):
         if x:
             payload = x
-        else: 
+        else:
             payload = self.img
-        with open(payload, "rb") as image:  
+        with open(payload, "rb") as image:
             f = image.read()
-            image_data = base64.b64encode(f).decode('utf-8')    
+            image_data = base64.b64encode(f).decode('utf-8')
 
         return json.dumps({'instances': [image_data]})
 
-        
+
     def predict(self, x=None):
         uri = self.uri + '/v1/models/' + self.model + ':predict'
         response = requests.request("POST", uri, headers=self.headers, data=self.get_data(x))
         return response.text
-        
-            
+
+
     def readiness(self):
         # uri = self.uri + '/v1/models/' + self.model
         uri = self.uri + '/v1/models/' + self.model
         response = requests.get(uri, headers = self.headers, timeout=5)
         return response.text
 
-        
+
     def explain(self, x=None):
         uri = self.uri + '/v1/models/' + self.model + ':explain'
         response = requests.post(uri, data=self.get_data(x), headers = self.headers, timeout=10)
         return response.text
-        
+
     def concurrent_predict(self, num=10):
         print("fire " + str(num) + " requests to " + self.host)
         with mp.Pool() as pool:
@@ -268,7 +268,7 @@ Use your web browser to login to Freestone Kubeflow, and get Cookies: authservic
 
 Run the following cell to do model prediction in the notebook server.
 
-```bash 
+```bash
  # replace it with the url you used to access Freestone Kubeflow
     bot = Test_bot(uri='http://10.117.233.8',
                 model='helmet_detection',
@@ -277,7 +277,7 @@ Run the following cell to do model prediction in the notebook server.
                 # replace it
                 session='MTY3MDM5OTkzNnxOd3dBTkZZeU5GSkhUVE5NVGtaRk1rMVpXVVpJVlV4SFFUWkpSRFpIVmxaQ05WaERTRlpRV2xoUFRWZEpXa2hTTjB4SVFrMDNSRkU9fFWl635XpDECJSOEnzFJLOugFqIiGbIniTh0uPs0BCW1')
 
-    print(bot.readiness()) 
+    print(bot.readiness())
     print(bot.predict('./2.jpg'))
 
     detections = json.loads(bot.predict('./2.jpg'))
@@ -311,19 +311,19 @@ Then increase the value of responseTimeout in file torchserve/config/config.prop
 
 Run the following cell to display model prediction image in the notebook server.
 
-```python 
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 
 def visualize_detections(image_path, detections, figsize=(8, 8)):
-        
+
     img = Image.open(image_path)
     plt.figure(figsize=figsize)
     plt.axis("off")
     plt.imshow(img)
-    
+
     scoreArr, nameArr, boxArr = [], [], []
-        
+
     for detection in detections:
         score = detection['confidence']
         name = detection['class']  #class_names
@@ -336,22 +336,22 @@ def visualize_detections(image_path, detections, figsize=(8, 8)):
 
     boxes, class_names, scores = boxArr, nameArr, scoreArr
     max_boxes, min_score = 18, 0.1
-    score_split_w = 0.1  # 0.95~1.00 
-    score_split_r = 0.1  #0.90~0.95 
-        
+    score_split_w = 0.1  # 0.95~1.00
+    score_split_r = 0.1  #0.90~0.95
+
 
     for i in range(min(boxes.shape[0], max_boxes)):
         if scores[i] >= min_score:
             xmin, ymin, xmax, ymax = tuple(boxes[i])
-            
+
             ax = plt.gca()
             text = "{}: {:.2f}".format(class_names[i], (scores[i]))
             w, h = xmax - xmin, ymax - ymin
             xmin *= 800
             ymin *= 500
             w *= 800
-            h *= 500        
-                
+            h *= 500
+
             if class_names[i] == 'person':
                 patch = plt.Rectangle(
                 [xmin, ymin], w, h, fill=False, edgecolor='w', linewidth=3
@@ -360,9 +360,9 @@ def visualize_detections(image_path, detections, figsize=(8, 8)):
                 patch = plt.Rectangle(
                 [xmin, ymin], w, h, fill=False, edgecolor='c', linewidth=3
             )
-            
+
         ax.add_patch(patch)
-            
+
         if class_names[i] == 'person':
             ax.text(
                 xmin,
@@ -381,9 +381,9 @@ def visualize_detections(image_path, detections, figsize=(8, 8)):
                 clip_box=ax.clipbox,
                 clip_on=True,
             )
-        
+
     plt.show()
-    
+
 image_path = './2.jpg'
 visualize_detections(image_path, detections['predictions'][0])
 ```
