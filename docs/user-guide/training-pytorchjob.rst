@@ -5,7 +5,7 @@ PyTorch Distributed Training (PyTorchJob)
 Introduction
 ============
 
-``PyTorchJob`` is a training operator in Freestone Kubeflow. It allows you to run distributed PyTorch jobs on Kubernetes clusters. It provides a PyTorch-specific implementation of the Kubernetes Operator pattern, which automates the management of PyTorch training jobs.
+``PyTorchJob`` is a training operator in vSphere Machine Learning Extension. It allows you to run distributed PyTorch jobs on Kubernetes clusters. It provides a PyTorch-specific implementation of the Kubernetes Operator pattern, which automates the management of PyTorch training jobs.
 
 With ``PyTorchJob``, you define and manage PyTorch jobs as Kubernetes custom resources. The operator will then manage the creation, scaling, and deletion of the resources needed to run the job. This includes creating pods for PyTorch workers, launching PyTorch distributed training, and managing checkpoints.
 
@@ -17,7 +17,7 @@ Overall, ``PyTorchJob`` simplifies the process of running distributed PyTorch jo
 Get started
 ===========
 
-In this section, you create a training job by defining a ``PyTorchJob`` configuration file to train a model. Before that, you need a working Freestone Kubeflow deployment with PyTorch Operator up and running. Also, you need to create a volume to save logs and model file for the training.
+In this section, you create a training job by defining a ``PyTorchJob`` configuration file to train a model. Before that, you need a working vSphere Machine Learning Extension deployment with PyTorch Operator up and running. Also, you need to create a volume to save logs and model file for the training.
 
 
 Verify PyTorchJob running

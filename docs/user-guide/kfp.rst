@@ -93,7 +93,7 @@ In this case, ``mnist_pipeline`` is the name of the main pipeline function in th
 Add the compiled pipeline
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once you have the compiled YAML file, download it. In Freestone Kubeflow web UI, go to pipelines dashaborad by clicking the **Pipelines** on the left-side navigation. And then click the **+ Upload pipeline** button.
+Once you have the compiled YAML file, download it. In vSphere Machine Learning Extension web UI, go to pipelines dashaborad by clicking the **Pipelines** on the left-side navigation. And then click the **+ Upload pipeline** button.
 
 In the upload page, choose **Upload a file**, and upload the ``mnist.yaml`` file. Then, click the **Create** button.
 

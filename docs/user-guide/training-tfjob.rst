@@ -5,7 +5,7 @@ TensorFlow Distributed Training (TFJob)
 Introduction
 ============
 
-``TFJob`` is a training operator in Freestone Kubeflow. It is specifically designed to run distributed TensorFlow training jobs on Kubernetes clusters. It provides a simple and consistent way to define, manage, and scale TensorFlow training jobs in a distributed manner, allowing you to easily leverage the power of Kubernetes to accelerate your machine learning (ML) workloads.
+``TFJob`` is a training operator in vSphere Machine Learning Extension. It is specifically designed to run distributed TensorFlow training jobs on Kubernetes clusters. It provides a simple and consistent way to define, manage, and scale TensorFlow training jobs in a distributed manner, allowing you to easily leverage the power of Kubernetes to accelerate your machine learning (ML) workloads.
 
 With ``TFJob``, you define a TensorFlow training job with a YAML configuration file, specifying the details of the job such as the number of workers and parameter servers, the location of the training data, the type of cluster to use, and so on. ``TFJob`` then creates and manages the Kubernetes resources required to run the job, including pods, services, and volumes.
 
@@ -15,7 +15,7 @@ With ``TFJob``, you define a TensorFlow training job with a YAML configuration f
 Get started
 ===========
 
-In this section, you create a training job by defining a ``TFJob`` configuration file to train a model. Before that, you need a working Freestone Kubeflow deployment with ``TFJob`` Operator up and running. 
+In this section, you create a training job by defining a ``TFJob`` configuration file to train a model. Before that, you need a working vSphere Machine Learning Extension deployment with ``TFJob`` Operator up and running. 
 
 
 Verify ``TFJob`` is running

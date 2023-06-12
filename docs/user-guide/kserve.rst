@@ -285,7 +285,7 @@ Run the following command in terminal to get host, which is set to the headers i
 
     $ kubectl get inferenceservice spam-email-serving -o jsonpath='{.status.url}' | cut -d "/" -f 3
 
-Use your web browser to login to Freestone Kubeflow UI, and get Cookies: authservice_session. If you use Chrome browser, go to Developer Tools -> Applications -> Cookies to get session.
+Use your web browser to login to vSphere Machine Learning Extension UI, and get Cookies: authservice_session. If you use Chrome browser, go to Developer Tools -> Applications -> Cookies to get session.
 
 ---------------------
 Test model prediction
