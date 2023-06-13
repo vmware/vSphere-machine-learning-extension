@@ -16,18 +16,20 @@ The LLaMA model size this turorial uses is 7B. File size of the whole model is a
 - The LLaMA 7B model has been downloaded and ready for use.
 
 ### Step 1: Create a new Notebook Server
+
 Create a new Notebook Server on the vSphere Machine Learning Extension platform, 
+
 - Use a customized image that has Java and torchserve installed. You can create your own custom image or use an image published by us here:
     ```
     projects.registry.vmware.com/models/llm/pytorch/torchserve-notebook:latest-gpu-v0.15
     ```
-- set 8 CPUs, 12GB memory, 1 GPU, 40GB disk space for this Notebook Server. 
+- set 8 CPUs, 12GB memory, 1 GPU, 40GB disk space for this Notebook Server.
 Wait until the Notebook Server is created successfully.
 
 ### Step 2: Connect to the Notebook Server
 Connect to the Notebook Server. Open a Terminal window. Pull the code of this project by running
     ```
-    git clone https://github.com/elements-of-ai/kubeflow-docs.git
+    git clone https://github.com/vmware/vSphere-machine-learning-extension.git
     ```
 
 Then change directory to this llm_llama_deployment project in the kubeflow-docs\examples directory.

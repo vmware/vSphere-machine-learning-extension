@@ -2,13 +2,13 @@
 
 ## Instruction
 
-Kubeflow Pipelines is a platform for building and deploying portable, scalable machine learning (ML) workflows based on Docker containers. 
+Kubeflow Pipelines is a platform for building and deploying portable, scalable machine learning (ML) workflows based on Docker containers.
 Each pipeline represents an ML workflow, and includes the specifications of all inputs needed to run the pipeline, as well the outputs of all components.
 If you are not familar with the Kubeflow Pipeline, you can refer to [Kubeflow Pipelines](https://www.kubeflow.org/docs/components/pipelines/).
 
 ## Build Pipeline
 
-In this tutorial, we will guide you through the Helmet Detection Example (as mentioned [here](https://github.com/elements-of-ai/kubeflow-docs/tree/e2e-examples/examples/helmet_object_detection/notebook)) to build up and run Kubeflow pipelines
+In this tutorial, we will guide you through the Helmet Detection Example (as mentioned [here](https://github.com/vmware/vSphere-machine-learning-extension/tree/e2e-examples/examples/helmet_object_detection/notebook)) to build up and run Kubeflow pipelines
 
 We provide you a [helmet_detection_pipeline.yaml](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/helmet_detection_pipeline.yaml) for quick-test purpose. If you prefer build the pipeline by yourself, please follow the pipeline building steps in [helmet_detection_pipeline.ipynb](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/helmet_detection_pipeline.ipynb) in the Kubeflow Notebook.
 
@@ -16,7 +16,7 @@ We provide you a [helmet_detection_pipeline.yaml](https://github.com/vmware/vSph
 
 First, install the Pipeline SDK using the following command. If you run this command in a Jupyter notebook, restart the kernel after installing the SDK.
 
-```bash 
+```bash
 $ pip install kfp --upgrade --user --quiet
 $ pip show kfp
 ```
@@ -41,7 +41,7 @@ Our Kubeflow pipeline is broken down into four pipeline components:
 
 In this example, we provide you the following Dockerfile for Data component and Train component.
 
-```bash 
+```bash
 FROM ubuntu:20.04
 # Downloads to user config dir
 ADD https://ultralytics.com/assets/Arial.ttf https://ultralytics.com/assets/Arial.Unicode.ttf /root/.config/Ultralytics/
@@ -62,13 +62,13 @@ First, we need to create and specify the persistent volume (PVC) for data storag
 
 ```python
 vop = dsl.VolumeOp(name="create_helmet_data_storage_volume",
-                    resource_name="helmet_data_storage_volume", size='10Gi', 
+                    resource_name="helmet_data_storage_volume", size='10Gi',
                     modes=dsl.VOLUME_MODE_RWO)
 ```
 You then create a ContainerOp instance, which would be understood and used as "a step" in your pipeline, and return this "step".
 ```python
 return dsl.ContainerOp(
-        name = 'Download Data', 
+        name = 'Download Data',
         image = 'harbor-repo.vmware.com/juanl/helmet_detection_pipeline:v1',
         command = ['python3', 'ingest_pipeline.py'],
         arguments=[
@@ -90,7 +90,7 @@ You also need to specify command. In this provided case, as we containernize the
 ```python
 def data_process(comp1):
     return dsl.ContainerOp(
-        name = 'Process Data', 
+        name = 'Process Data',
         image = 'harbor-repo.vmware.com/juanl/helmet_detection_pipeline:v1',
         command = ['python3', 'prepare.py'],
         pvolumes={
@@ -132,7 +132,7 @@ def generate_pipeline(dataurl, datapath, epoch, device, workers_num):
     comp1 = data_download_from_url(dataurl, datapath)
     comp2 = data_process(comp1)
     comp3 = model_train(comp2, epoch, device, workers_num)
-    
+
 if __name__ == '__main__':
   import kfp.compiler as compiler
   compiler.Compiler().compile(generate_pipeline, './generated_yaml_files/helmet_detection_pipeline' + '.yaml')
@@ -140,9 +140,10 @@ if __name__ == '__main__':
 
 ## Execute the Pipeline
 
-Following the steps in your notebook, you should be able to see a file called `helmet_detection_pipeline.yaml` in folder `generated_yaml_files`.. So here we provide you a brief guide on how to execute a pipeline. 
+Following the steps in your notebook, you should be able to see a file called `helmet_detection_pipeline.yaml` in folder `generated_yaml_files`.. So here we provide you a brief guide on how to execute a pipeline.
 
 ### Upload the pipeline in vSphere Machine Learning Extension Dashboard 
+
 
 Once you have the compiled YAML file, download it. In vSphere Machine Learning Extension Dashboard, go to pipelines dashaborad by clicking the “Pipelines” on the left-side toolbar. And then click the “Upload Pipeline” button.
 
@@ -155,6 +156,7 @@ Create an experiment for this pipeline. This time, you need to provide two input
 
 ![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/helmet_detection/pipelines/imgs/helmet-pipeline-03.png)
 ![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/helmet_detection/pipelines/imgs/helmet-pipeline-04.png)
+
 
 ### Check logs and outputs 
 ![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/helmet_detection/pipelines/imgs/helmet-pipeline-05.png)
