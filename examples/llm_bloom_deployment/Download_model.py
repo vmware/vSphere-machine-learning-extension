@@ -7,11 +7,9 @@ from huggingface_hub import HfApi, snapshot_download
 def dir_path(path_str):
     if os.path.isdir(path_str):
         return path_str
-    elif input(f"{path_str} does not exist, create directory? [y/n]").lower() == "y":
+    else:
         os.makedirs(path_str)
         return path_str
-    else:
-        raise NotADirectoryError(path_str)
 
 
 class HFModelNotFoundError(Exception):
