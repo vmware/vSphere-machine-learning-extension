@@ -2,7 +2,7 @@
 
 The InferenceService custom resource is the primary interface that is used for deploying models on KServe. Inside an InferenceService, users can specify multiple components that are used for handling inference requests. These components are the predictor, transformer, and explainer. For more detailed documentation on Kubeflow KServe, refer to [KServe](https://kserve.github.io/website/0.7/modelserving/data_plane/).
 
-This tutorial show you how to run BLOOM model inference, and more detailed information can be see in the [bloom_kserve.ipynb](https://github.com/elements-of-ai/kubeflow-docs/blob/main/examples/llm_bloom_deployment/kserve/bloom_kserve.ipynb)
+This tutorial show you how to run BLOOM model inference, and more detailed information can be see in the [bloom_kserve.ipynb](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/llm_bloom_deployment/kserve/bloom_kserve.ipynb)
 
 The BLOOM model size this turorial for Kserve uses is 560m. File size of the whole model MAR package is about 3GB. 4G GPU is only required for this deployment.
 
@@ -56,7 +56,7 @@ EOF
 ```
 
 Copy the model MAR file and config.properties to PVC in the below structure.
-**Note**  MAR model file and config.properties follow the below structure: 
+**Note**  MAR model file and config.properties follow the below structure:
 ```
 |_model-store
   |_bloom-560m.mar
@@ -165,7 +165,7 @@ Expected Output
 > Cookie: authservice_session=MTY4MzUxMzI0MHxOd3dBTkVvMVdFOUZRVWxaU0ZSQ1MwVlZObE5hTXpkUU4xaEJUMGxPUVZOU1ZFdFBSVkUyUlRSTk5sSkpWRkpKUkRJeVZVUTJRMUU9fLH0CcadTC6658xbIccfZBXOeqIngfq7fPEbQf3e4fO1
 > Content-Length: 61
 > Content-Type: application/x-www-form-urlencoded
-> 
+>
 * upload completely sent off: 61 out of 61 bytes
 * Mark bundle as not supporting multiuse
 < HTTP/1.1 200 OK
@@ -174,7 +174,7 @@ Expected Output
 < date: Mon, 08 May 2023 05:58:04 GMT
 < server: envoy
 < x-envoy-upstream-service-time: 2557
-< 
+<
 * Connection #0 to host 10.105.150.44 left intact
 {"predictions": ["My dog is cute and cuddly.\nShe's cute, too. I love her! Oh, no, no, it isn't you, it's me.\nOkay, so I'm in a bit of a weird situation.\nYeah, just...\nI'm a little unsettled.\nNot quite.\nWe went on a date.\nWhy don't we just take a day?\nCome on.\nSo we can go out together.\nAnd then,"]}
 ```

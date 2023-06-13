@@ -15,4 +15,4 @@ To be specific, this example covers the following Freestone Kubeflow features:
 
 - Model deployment with KServe
 
-To get more details on this example, visit this `page <https://github.com/elements-of-ai/kubeflow-docs/tree/main/examples/helmet_object_detection/>`_.
+To get more details on this example, visit this `page <https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/>`_.

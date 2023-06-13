@@ -16,12 +16,12 @@ The BLOOM model size this turorial for torchserve uses is 560m. File size of the
 
 ### 1. Create a Notebook server
 
-Create a new Notebook Server on the Freestone Kubeflow platform, 
-- Use a customized image that has Java and torchserve installed. You can use [Dockerfile](https://github.com/elements-of-ai/kubeflow-docs/blob/main/examples/llm_bloom_deployment/Dockerfile) to generate your own custom image. You can also directly use an image published on VMware harbor repo:
+Create a new Notebook Server on the Freestone Kubeflow platform,
+- Use a customized image that has Java and torchserve installed. You can use [Dockerfile](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/llm_bloom_deployment/Dockerfile) to generate your own custom image. You can also directly use an image published on VMware harbor repo:
     ```
     projects.registry.vmware.com/models/llm/pytorch/torchserve-notebook:latest-gpu-v0.15
     ```
-- Set 8 CPUs, 16GB memory, 1 GPU, 50GB disk space for this Notebook Server. 
+- Set 8 CPUs, 16GB memory, 1 GPU, 50GB disk space for this Notebook Server.
 Wait until the Notebook Server is created successfully.
 
 ### 2. Prepare MAR model package and it's config
@@ -84,7 +84,7 @@ mv bloom.mar torchserve/model_store
 
 ### 3. Start torchserve
 
-Update ``torchserve/config/config.properties``, especially notice that chanage ``model_store`` field to your model directory. Then start torchserve. 
+Update ``torchserve/config/config.properties``, especially notice that chanage ``model_store`` field to your model directory. Then start torchserve.
 
 Suggestion: run ``torchserve --start`` command in the jupyter terminal, and you can see the detail logs directly about running model using torchserve. You can't see the whole logs if you run ``torchserve --start`` command in the jupyter notebook
 
