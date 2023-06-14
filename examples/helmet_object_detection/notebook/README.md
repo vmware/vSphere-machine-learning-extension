@@ -4,7 +4,7 @@ AI-based helmet detection models use computer vision techniques to identify and 
 
 ## Create Notebook server on Freestone Kubeflow UI
 
-You can refer to the [Notebook Document](https://elements-of-ai.github.io/kubeflow-docs/user-guide/notebooks.html) to create and use a Kubeflow notebook.
+You can refer to the [Notebook Document](https://vmware.github.io/vSphere-machine-learning-extension/user-guide/notebooks.html) to create and use a Kubeflow notebook.
 
 - Create a Notebook Server with 1 GPU, 4CPUs, 16GB Memory and 10G volume disk
 
@@ -16,7 +16,7 @@ You can refer to the [Notebook Document](https://elements-of-ai.github.io/kubefl
 - Clone this repo in the notebook and install the dependencies in the requirements.txt:
 
 ```bash
-$ !git clone https://github.com/elements-of-ai/kubeflow-docs.git
+$ !git clone https://github.com/vmware/vSphere-machine-learning-extension.git
 $ cd examples/helmet_object_detection/notebook
 $ pip install -r requirements.txt
 

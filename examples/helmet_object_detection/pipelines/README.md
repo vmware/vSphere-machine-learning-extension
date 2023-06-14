@@ -8,9 +8,9 @@ If you are not familar with the Kubeflow Pipeline, you can refer to [Kubeflow Pi
 
 ## Build Pipeline
 
-In this tutorial, we will guide you through the Helmet Detection Example (as mentioned [here](https://github.com/vmware/vSphere-machine-learning-extension/tree/e2e-examples/examples/helmet_object_detection/notebook)) to build up and run Kubeflow pipelines
+In this tutorial, we will guide you through the Helmet Detection Example (as mentioned [here](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/notebook)) to build up and run Kubeflow pipelines
 
-We provide you a [helmet_detection_pipeline.yaml](https://github.com/vmware/vSphere-machine-learning-extension/blob/e2e-examples/examples/helmet_object_detection/pipelines/helmet_detection_pipeline.yaml) for quick-test purpose. If you prefer build the pipeline by yourself, please follow the pipeline building steps in [helmet_detection_pipeline.ipynb](https://github.com/vmware/vSphere-machine-learning-extension/blob/e2e-examples/examples/helmet_object_detection/pipelines/helmet_detection_pipeline.ipynb) in the Kubeflow Notebook.
+We provide you a [helmet_detection_pipeline.yaml](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/helmet_detection_pipeline.yaml) for quick-test purpose. If you prefer build the pipeline by yourself, please follow the pipeline building steps in [helmet_detection_pipeline.ipynb](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/helmet_detection_pipeline.ipynb) in the Kubeflow Notebook.
 
 ### Step 1: Install Kubeflow Pipeline SDK and import the required kfp packages to run the pipeline
 
@@ -161,4 +161,4 @@ Create an experiment for this pipeline. This time, you need to provide two input
 
 ### Delete pipeline
 
-![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/e2e-examples/examples/helmet_object_detection/pipelines/imgs/helmet-pipeline-06.png)
+![Image text](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/pipelines/imgs/helmet-pipeline-06.png)
