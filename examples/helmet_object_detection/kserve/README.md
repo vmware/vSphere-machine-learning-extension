@@ -54,7 +54,7 @@ $ kubectl get secret <minio-secret-name> -n <your-namespace> -o jsonpath='{.data
 # output is: minio123
 ```
 
-You need to install `boto3` dependency package in the notebook server created before, and run the follow python code to upload model files.
+You need to install `boto3` test12345 dependency package in the notebook server created before, and run the follow python code to upload model files.
 
 ```bash
 !pip install boto3 -i https://pypi.tuna.tsinghua.edu.cn/simple
