@@ -11,10 +11,10 @@ If you are not familar with the Kubeflow Pipeline, you can refer to [Kubeflow Pi
 In this tutorial, we will guide you through the Helmet Detection Example (as mentioned [here](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/notebook)) to build up and run Kubeflow pipelines
 
 We provide you a [helmet_detection_pipeline.yaml](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/helmet_detection_pipeline.yaml). For quick-test you can execute the pipeline using this yaml file. [here are the steps](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/README.md#upload-the-pipeline-in-freestone-kubeflow-dashboard)
-.
 
-If you prefer build the pipeline by yourself, please follow the pipeline building steps in [helmet_detection_pipeline.ipynb](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/helmet_detection_pipeline.ipynb) in the Kubeflow Notebook.
+If you prefer to build the pipeline by yourself, please follow the pipeline building steps in [helmet_detection_pipeline.ipynb](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/helmet_detection_pipeline.ipynb) in the Kubeflow Notebook.
 
+### Here are the steps with explanation
 ### Step 1: Install Kubeflow Pipeline SDK and import the required kfp packages to run the pipeline
 
 First, install the Pipeline SDK using the following command. If you run this command in a Jupyter notebook, restart the kernel after installing the SDK.
