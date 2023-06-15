@@ -12,7 +12,7 @@ Welcome
 
 Data scientists and engineers often face the challenge to manually execute all the steps in a machine learning (ML) workflow, including moving and transforming data, training models, and promoting them to production. This is where Kubeflow comes in. Kubeflow is a free and open source ML platform that streamlines the entire ML process, from data preparation and modeling to deployment. It uses pipelines to orchestrate complicated ML workflows and is dedicated to simplifying the deployments by providing a straightforward approach.
 
-Kubeflow is a powerful ML operations (MLOps) platform that can be used for experimentation, development, and production. Based on Kubeflow, we’ve developed Freestone Kubeflow distribution, which is a VMware-sponsored initiative aimed at meeting the strict business and technical requirements for enterprise infrastructure. To address the challenges faced by enterprises, we've made several enhancements, including:
+Kubeflow is a powerful ML operations (MLOps-Test12345) platform that can be used for experimentation, development, and production. Based on Kubeflow, we’ve developed Freestone Kubeflow distribution, which is a VMware-sponsored initiative aimed at meeting the strict business and technical requirements for enterprise infrastructure. To address the challenges faced by enterprises, we've made several enhancements, including:
 
 - Optimized GPU utilization with GPU sharing management, enabling enterprises to optimize the ML workflows for better performance.
 - A rich offering of poplular training models, covering a wide range of use cases.
