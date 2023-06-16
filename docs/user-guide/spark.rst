@@ -13,7 +13,7 @@ data cleaning and data transformations are performed. During the training stage,
 are in turn made available to the target audience in the serving stage. The data generated during serving can be fed back to 
 the ML pipeline to help improve model accuracy, keep the model relevant and up to date as old training data might become 
 irrelevant. The increasing amount of data available as input for ML workflows increases the need for efficient processing of 
-data. Therefore it would be useful to learn how to integrate `Apache Spark <https://spark.apache.org/>`__ into Freestone Kubeflow ML workflow.
+data. Therefore it would be useful to learn how to integrate `Apache Spark <https://spark.apache.org/>`__ into Kubeflow on vSphere ML workflow.
 
 .. note::
     Details and screenshots on how to create pipelines from YAML file and how to create experiments and runs are included in 
@@ -25,7 +25,7 @@ It is used widely for data-intensive processing tasks. It is a multi-language en
 science, and ML on single-node machines or clusters. It supports multiple powerful features such as streaming 
 data, SQL analytics, data science at scale and ML. 
 
-In this section, we walk you through an example to show how to integrate Spark into Freestone Kubeflow ML workflow. The following diagram demonstrates 
+In this section, we walk you through an example to show how to integrate Spark into Kubeflow on vSphere ML workflow. The following diagram demonstrates 
 the overall workflow of the example, which can also be a general workflow of ML pipeline that uses Spark job.
 
 .. image:: ../_static/user-guide-spark-overview.jpg
@@ -121,14 +121,14 @@ Create the pipeline with a Spark job
 
 Now, it's time to start concreate coding work to create a pipeline with a Spark job.
 
-The main challage here is to orchestrate a Spark job from Freestone Kubeflow and submit it to the cluster. You overcome it by using 
+The main challage here is to orchestrate a Spark job from Kubeflow on vSphere and submit it to the cluster. You overcome it by using 
 pipeline components for kubernetes.
 
 As shown in the workflow diagram in :ref:`workflow overview`, you create a **k8s apply component** to load the Spark job manifest file and perform ``kubectl apply`` to submit it to the 
 cluster. In this way, a ``sparkapplication`` resource is created in the cluster. You also need to create a **k8s get component** to periodically poll the *control plane* to get the status of the Spark job. 
 And once the job is in "COMPLETED" state, the pipeline moves to the next step.
 
-On your Freestone Kubeflow dashboard UI, navigate to **Notebooks** page, and connect to a proper Notebook Server. Run the following *Python* codes in a notebook (``.ipynb`` file).
+On your Kubeflow on vSphere dashboard UI, navigate to **Notebooks** page, and connect to a proper Notebook Server. Run the following *Python* codes in a notebook (``.ipynb`` file).
 
 """"""""""""""""""""""""""""""""""""""""""""""
 1. Import packages and define global variables

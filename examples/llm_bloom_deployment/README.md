@@ -1,6 +1,6 @@
-# BLOOM Deployment on Freestone Kubeflow with Torchserve and Kserve
+# BLOOM Deployment on Kubeflow on vSphere with Torchserve and Kserve
 
-This tutorial guides you deploy the BLOOM model on the Freestone Kubeflow platform with torchserve.
+This tutorial guides you deploy the BLOOM model on the Kubeflow on vSphere platform with torchserve.
 
 [BLOOM](https://huggingface.co/docs/transformers/model_doc/bloom) is the bigScience large open-science multilingual language Model. The architecture of BLOOM is essentially similar to GPT3 (auto-regressive model for next token prediction), but has been trained on 46 different languages and 13 programming languages, based on the transformer architecture.
 
@@ -12,11 +12,11 @@ The BLOOM model size this turorial for torchserve uses is 560m. File size of the
 
 ### Prerequisite
 
-- The Freestone Kubeflow platform is ready for use.
+- The Kubeflow on vSphere platform is ready for use.
 
 ### 1. Create a Notebook server
 
-Create a new Notebook Server on the Freestone Kubeflow platform,
+Create a new Notebook Server on the Kubeflow on vSphere platform,
 - Use a customized image that has Java and torchserve installed. You can use [Dockerfile](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/llm_bloom_deployment/Dockerfile) to generate your own custom image. You can also directly use an image published on VMware harbor repo:
     ```
     projects.registry.vmware.com/models/llm/pytorch/torchserve-notebook:latest-gpu-v0.15

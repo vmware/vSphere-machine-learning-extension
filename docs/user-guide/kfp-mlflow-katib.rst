@@ -6,7 +6,7 @@ Kubeflow Pipelines with MLFlow and Katib
 Introduction
 ------------
 
-This section intends to introduce you complete machine learning (ML) workflow using Freestone Kubeflow. In particular, examples of Kubeflow Pipelines using Katib hyperparameter tuning and MLFlow model registry are presented along with some common pipeline steps and interfaces such as S3.
+This section intends to introduce you complete machine learning (ML) workflow using Kubeflow on vSphere. In particular, examples of Kubeflow Pipelines using Katib hyperparameter tuning and MLFlow model registry are presented along with some common pipeline steps and interfaces such as S3.
 
 For more detailed documentation on Kubeflow Pipelines, refer to `Kubeflow Pipelines | Kubeflow <https://www.kubeflow.org/docs/components/pipelines/>`__.
 
@@ -39,7 +39,7 @@ Get started
 Create Notebook Server and Jupyter Notebook
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Access Freestone Kubeflow Dashboard, and navigate to **Notebooks**. Fill in a name. Select TensorFlow image ``jupyter-tensorflow-full:v1.6.1``. 
+Access Kubeflow on vSphere Dashboard, and navigate to **Notebooks**. Fill in a name. Select TensorFlow image ``jupyter-tensorflow-full:v1.6.1``. 
 And select minimum configuration: 1 CPU and 4GB of RAM. Also, remember to enable ``mlflow-server-minio`` option in the configuration section.
 
 .. image:: ../_static/user-guide-kfp-mlflow-katib-newNotebook.png
@@ -554,7 +554,7 @@ side containing more information such as inputs/outputs and logs.
 Katib experiment
 """"""""""""""""
 
-To view more details about your Katib experiment, navigate to **Experiments (AutoML)** from left side navigation on Freestone Kubeflow Dashboard.
+To view more details about your Katib experiment, navigate to **Experiments (AutoML)** from left side navigation on Kubeflow on vSphere Dashboard.
 
 .. image:: ../_static/user-guide-kfp-mlflow-katib-experiment.png
 

@@ -28,7 +28,7 @@ Get Started
 Run Katib experiments from CLI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can run Katib experiments through Freestone Kubeflow UI.
+You can run Katib experiments through Kubeflow on vSphere UI.
 
 First download an example to create a Katib experiment:
 
@@ -59,10 +59,10 @@ Katib experiment then starts running. You can inspect experiment progress using 
     kubectl -n kubeflow get experiment grid-example -o yaml
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Run Katib experiments from Freestone Kubeflow UI
+Run Katib experiments from Kubeflow on vSphere UI
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can also use Freestone Kubeflow UI to run Katib experiments. 
+You can also use Kubeflow on vSphere UI to run Katib experiments. 
 
 Again, first save the following content as ``grid-example.yaml`` which is used to generate Katib experiment.
 
@@ -141,7 +141,7 @@ Again, first save the following content as ``grid-example.yaml`` which is used t
 Open the ``grid-example.yaml`` file and edit it, changing ``.metadata.namespace`` to your own. Note that here we also disable Istio 
 sidecar using ``sidecar.istio.io/inject: "false"``, under ``.spec.trialTemplate.trialSpec.spec.template.metadata.annotations``.
 
-Open Freestone Kubeflow UI in your browswer, go to **Experiments (AutoML)** on the left panel, and select **New Experiment**.
+Open Kubeflow on vSphere UI in your browswer, go to **Experiments (AutoML)** on the left panel, and select **New Experiment**.
 
 .. image:: ../_static/user-guide-katib-experiment.png
 

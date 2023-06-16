@@ -12,15 +12,15 @@ Welcome
 
 Data scientists and engineers often face the challenge to manually execute all the steps in a machine learning (ML) workflow, including moving and transforming data, training models, and promoting them to production. This is where Kubeflow comes in. Kubeflow is a free and open source ML platform that streamlines the entire ML process, from data preparation and modeling to deployment. It uses pipelines to orchestrate complicated ML workflows and is dedicated to simplifying the deployments by providing a straightforward approach.
 
-Kubeflow is a powerful ML operations (MLOps) platform that can be used for experimentation, development, and production. Based on Kubeflow, we’ve developed Freestone Kubeflow distribution, which is a VMware-sponsored initiative aimed at meeting the strict business and technical requirements for enterprise infrastructure. To address the challenges faced by enterprises, we've made several enhancements, including:
+Kubeflow is a powerful ML operations (MLOps) platform that can be used for experimentation, development, and production. Based on Kubeflow, we’ve developed Kubeflow on vSphere distribution, which is a VMware-sponsored initiative aimed at meeting the strict business and technical requirements for enterprise infrastructure. To address the challenges faced by enterprises, we've made several enhancements, including:
 
 - Optimized GPU utilization with GPU sharing management, enabling enterprises to optimize the ML workflows for better performance.
 - A rich offering of popular training models, covering a wide range of use cases.
-- Streamlined packaging and deployment user experience, making the deployment of Freestone Kubeflow easier and swifter.
+- Streamlined packaging and deployment user experience, making the deployment of Kubeflow on vSphere easier and swifter.
 
-Additionally, Freestone Kubeflow incorporates several Kubeflow add-ons and community software to create an enterprise-ready MLOps platform on vSphere. With Freestone Kubeflow, enterprises can enjoy the benefits of an efficient and streamlined ML workflow, allowing them to achieve faster and more accurate results.
+Additionally, Kubeflow on vSphere incorporates several Kubeflow add-ons and community software to create an enterprise-ready MLOps platform on vSphere. With Kubeflow on vSphere, enterprises can enjoy the benefits of an efficient and streamlined ML workflow, allowing them to achieve faster and more accurate results.
 
-This documentation presents a comprehensive end-to-end workflow of using Freestone Kubeflow to build, train, and deploy ML models. It guides you through the entire process, from data preparation to model serving, and explain how various components of Freestone Kubeflow work together to streamline and enhance your ML workflow. Furthermore, we provide our best practices for deploying Kubeflow components locally, on-prem, and in the cloud. By the end of this documentation, you have a better understanding of how to use Freestone Kubeflow to manage your ML projects and you are able to apply the additionally provided features to your projects.
+This documentation presents a comprehensive end-to-end workflow of using Kubeflow on vSphere to build, train, and deploy ML models. It guides you through the entire process, from data preparation to model serving, and explain how various components of Kubeflow on vSphere work together to streamline and enhance your ML workflow. Furthermore, we provide our best practices for deploying Kubeflow components locally, on-prem, and in the cloud. By the end of this documentation, you have a better understanding of how to use Kubeflow on vSphere to manage your ML projects and you are able to apply the additionally provided features to your projects.
 
 
 .. toctree::
@@ -79,7 +79,7 @@ License
 
 Kubeflow is released under the Apache License 2.0.
 
-Freestone Kubeflow and its documents are offered as free, open-source software. You don’t need a support agreement or license to deploy them.
+Kubeflow on vSphere and its documents are offered as free, open-source software. You don’t need a support agreement or license to deploy them.
 
 .. Indices and tables
    ==================
