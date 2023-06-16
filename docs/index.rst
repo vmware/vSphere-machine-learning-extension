@@ -15,7 +15,7 @@ Data scientists and engineers often face the challenge to manually execute all t
 Kubeflow is a powerful ML operations (MLOps) platform that can be used for experimentation, development, and production. Based on Kubeflow, we’ve developed Kubeflow on vSphere distribution, which is a VMware-sponsored initiative aimed at meeting the strict business and technical requirements for enterprise infrastructure. To address the challenges faced by enterprises, we've made several enhancements, including:
 
 - Optimized GPU utilization with GPU sharing management, enabling enterprises to optimize the ML workflows for better performance.
-- A rich offering of poplular training models, covering a wide range of use cases.
+- A rich offering of popular training models, covering a wide range of use cases.
 - Streamlined packaging and deployment user experience, making the deployment of Kubeflow on vSphere easier and swifter.
 
 Additionally, Kubeflow on vSphere incorporates several Kubeflow add-ons and community software to create an enterprise-ready MLOps platform on vSphere. With Kubeflow on vSphere, enterprises can enjoy the benefits of an efficient and streamlined ML workflow, allowing them to achieve faster and more accurate results.
