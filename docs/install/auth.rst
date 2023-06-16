@@ -6,7 +6,7 @@ Authentication Integration
 Introduction
 ------------
 
-The goal of Freestone Kubeflow's integration with LDAP Server is that you can login to Freestone Kubeflow using your LDAP account. As shown in the following screenshots, choose **Log in with OpenLDAP**, input your account name and password, then you can login to Freestone Kubeflow successfully. When you login, it will create your own user profile automatically.
+The goal of Kubeflow on vSphere's integration with LDAP Server is that you can login to Kubeflow on vSphere using your LDAP account. As shown in the following screenshots, choose **Log in with OpenLDAP**, input your account name and password, then you can login to Kubeflow on vSphere successfully. When you login, it will create your own user profile automatically.
 
 .. image:: ../_static/operation-guide-auth-ldap-goal01.png
 .. image:: ../_static/operation-guide-auth-ldap-goal02.jpeg
@@ -135,7 +135,7 @@ A brief message introduces profiles, and the user can name her profile and click
 Configure pod security policy for your user profile
 ---------------------------------------------------
 
-Before starting to use Freestone Kubeflow, remember to configure the pod security policy for your user profile in order to create pods. This is important as pod creation is needed for many Freestone Kubeflow functions, such as Notebook Server creation. 
+Before starting to use Kubeflow on vSphere, remember to configure the pod security policy for your user profile in order to create pods. This is important as pod creation is needed for many Kubeflow on vSphere functions, such as Notebook Server creation. 
 Refer to :ref:`configure pod security policy` for more details and instructions.
 
 ---------------
@@ -143,11 +143,11 @@ Troubleshooting
 ---------------
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Restrict specific LDAP accounts to login to Freestone Kubeflow
+Restrict specific LDAP accounts to login to Kubeflow on vSphere
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Most of the time, you hope to specify some LDAP accounts can login to Freestone Kubeflow, but not all LDAP accounts. Thus you need to add more filter restrictions when searching the directory. 
-As in the following example, you only allow ``user1`` and ``user2`` these 2 users to login to Freestone Kubeflow. 
+Most of the time, you hope to specify some LDAP accounts can login to Kubeflow on vSphere, but not all LDAP accounts. Thus you need to add more filter restrictions when searching the directory. 
+As in the following example, you only allow ``user1`` and ``user2`` these 2 users to login to Kubeflow on vSphere. 
 
 .. code-block:: shell
 
