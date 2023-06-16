@@ -18,11 +18,11 @@ Federated Learning is a machine learning technique where algorithms are trained 
 
 - FATE-Job is a task management tool specifically designed for FATE. It facilitates the submission and querying of FATE tasks through the use of the Kubernetes API.
 
-FATE-Operator_ simplifies the deployment of FATE, KubeFATE and FATE-Job into Kubernetes clusters. It has been integrated into Freestone Kubeflow, facilitating effortless utilization within the platform.
+FATE-Operator_ simplifies the deployment of FATE, KubeFATE and FATE-Job into Kubernetes clusters. It has been integrated into Kubeflow on vSphere, facilitating effortless utilization within the platform.
 
 .. _FATE-Operator: https://github.com/kubeflow/fate-operator
 
-This tutorial offers a comprehensive, step-by-step guide for demonstrating the usage of FATE-Operator on a Freestone Kubeflow cluster:
+This tutorial offers a comprehensive, step-by-step guide for demonstrating the usage of FATE-Operator on a Kubeflow on vSphere cluster:
 
 - **Cluster Deployment: Setting up the FATE cluster.**
 - **Federated Learning with FATE: Initial federated training on the deployed FATE cluster.**
@@ -31,7 +31,7 @@ This tutorial offers a comprehensive, step-by-step guide for demonstrating the u
 Prerequisites
 --------------
 
-- Freestone Kubeflow v1.6.1
+- Kubeflow on vSphere v1.6.1
 - Deployed an additional FATE cluster with the ID 10000 or set both collaborative parties to 9999 (refer to the comments in the code example).
 
 -------------------

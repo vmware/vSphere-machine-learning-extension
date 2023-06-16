@@ -2,11 +2,11 @@
 MLOps with Kubeflow
 ===================
 
-The Freestone Kubeflow distribution includes the core Kubeflow components and new components designed for the vSphere platform. Together with key Kubeflow add-on components and several other open source software, they form an enterprise ready machine learning operations (MLOps) platform. It is optimized for the VMware vSphere platform.
+The Kubeflow on vSphere distribution includes the core Kubeflow components and new components designed for the vSphere platform. Together with key Kubeflow add-on components and several other open source software, they form an enterprise ready machine learning operations (MLOps) platform. It is optimized for the VMware vSphere platform.
 
 Google published a `MLOps maturity model <https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning>`__, which describes the level of automation in the key steps of MLOps including Data Extraction, Data Analysis, Data Preparation, Model Training, Model Evaluation, Model Validation, Model Serving and Model Monitoring.
 
-The Freestone Kubeflow platform includes most of the key components for achieving the highest level of MLOps maturity, as illustrated in the figure below.
+The Kubeflow on vSphere platform includes most of the key components for achieving the highest level of MLOps maturity, as illustrated in the figure below.
 
 .. image:: ../_static/mlops-components.png
 
@@ -28,7 +28,7 @@ The following diagram shows the stages of the ML CI/CD automation pipeline:
 
 .. image:: ../_static/mlops-flow.png
 
-The following Kubeflow add-on components or open source software are included or recommended in the Freestone Kubeflow distribution to meet these requirements.
+The following Kubeflow add-on components or open source software are included or recommended in the Kubeflow on vSphere distribution to meet these requirements.
 
 `Feast <https://docs.feast.dev/>`__ is a Kubeflow add-on component that provides the feature store service. A feature store is a centralized repository where you standardize the definition, storage, and access of features for training and serving.
 
@@ -38,7 +38,7 @@ The following Kubeflow add-on components or open source software are included or
 
 Metadata about each run of the ML pipeline is recorded to help with data and artifacts lineage, reproducibility, and comparisons. It also helps you debug errors and anomalies. `ML Metadata <https://github.com/google/ml-metadata>`__ (MLMD) is a library for recording and retrieving metadata associated with your workflows. MLMD is an integral part of TensorFlow Extended (TFX) but is designed so that it can be used independently.
 
-The data analysis step is still a manual process before the pipeline starts a new iteration of the experiment. The following software is included in the Freestone Kubeflow platform for data storage and processing purposes.
+The data analysis step is still a manual process before the pipeline starts a new iteration of the experiment. The following software is included in the Kubeflow on vSphere platform for data storage and processing purposes.
 
 `Apache Spark <https://spark.apache.org/>`__ is a distributed computation framework. It is used widely for data-intensive processing tasks. It is a multi-language engine for executing data engineering, data science, and ML on single-node machines or clusters. It supports multiple powerful features such as streaming data, SQL analytics, data science at scale and ML.
 

@@ -15,7 +15,7 @@ Get started
 Set up your environment
 -----------------------
 
-Grab the `code samples <https://github.com/Barteus/kubeflow-examples/tree/0.2/e2e-wine-kfp-mlflow>`__ and execute them together in order to get the most out of the example. You need a working Freestone Kubeflow deployment with MLFLow up and running.
+Grab the `code samples <https://github.com/Barteus/kubeflow-examples/tree/0.2/e2e-wine-kfp-mlflow>`__ and execute them together in order to get the most out of the example. You need a working Kubeflow on vSphere deployment with MLFLow up and running.
 
 Going through the pipeline, each step shows you something new.
 
@@ -119,7 +119,7 @@ For the preprocessing step you need a different approach. Each data preprocessin
       df.columns = [c.lower().replace(' ', '_') for c in df.columns]
       df.to_parquet(output_file)
 
-You have a function write tests for it to make sure it works correctly. Now you wrap it into the container so the Kubernetes platform underneath Freestone Kubeflow knows how to invoke your code. You use the Docker image for Python 3.9 and install additional Python packages using Python’s ``pip`` package installer.
+You have a function write tests for it to make sure it works correctly. Now you wrap it into the container so the Kubernetes platform underneath Kubeflow on vSphere knows how to invoke your code. You use the Docker image for Python 3.9 and install additional Python packages using Python’s ``pip`` package installer.
 
 .. code-block:: python
 
@@ -228,7 +228,7 @@ Next, use Docker to build and push an image to the Docker image registry. The `D
 Create a component configuration file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Thirdly, create a Freestone Kubeflow pipeline step configuration file using the output from ``docker inspect``. This configuration file is crucial to share your Kubeflow pipeline step with others.
+Thirdly, create a Kubeflow on vSphere pipeline step configuration file using the output from ``docker inspect``. This configuration file is crucial to share your Kubeflow pipeline step with others.
 
 .. code-block:: shell
 
@@ -288,7 +288,7 @@ You don’t need to specify the order of the steps explicitly. When you set inpu
 
 When looking at the training step, it differs from the others. It requires additional configuration. You need to add some sensitive data using Kubernetes secrets and the rest using environment variables. Kubeflow Pipelines supports multiple ways to add secrets to the pipeline steps and for `more information <https://kubeflow-pipelines.readthedocs.io/en/stable/source/kfp.extensions.html#module-kfp.aws>`_.
 
-Now, the coding part is completed. All that’s left is to see the results of your pipeline. Run ``pipeline.py`` to generate ``wine-pipeline.yaml`` in the generated folder. You then open the Freestone Kubeflow Dashboard with your browser, create a new pipeline with your YAML file and – the moment of truth – run the pipeline.
+Now, the coding part is completed. All that’s left is to see the results of your pipeline. Run ``pipeline.py`` to generate ``wine-pipeline.yaml`` in the generated folder. You then open the Kubeflow on vSphere Dashboard with your browser, create a new pipeline with your YAML file and – the moment of truth – run the pipeline.
 
 .. image:: ../_static/user-guide-kfp-mlflow-seldon-result.png
     :align: center

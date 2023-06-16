@@ -4,7 +4,7 @@
 Monitoring with Prometheus and Grafana 
 ======================================
 
-This section explains how to use Prometheus and Grafana to monitor the Tanzu Kubernetes Grid (TKG) cluster in which Freestone Kubeflow runs. 
+This section explains how to use Prometheus and Grafana to monitor the Tanzu Kubernetes Grid (TKG) cluster in which Kubeflow on vSphere runs. 
 
 Prerequisites
 =============

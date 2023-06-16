@@ -36,7 +36,7 @@ Go through the example notebook to have a better idea about what this example is
 
 .. image:: ../_static/user-guide-tensorboard-logDir.png
 
-Run the notebook, and navigate to "Tensorboards" from left toolbar on Freestone Kubeflow Dashboard UI.
+Run the notebook, and navigate to "Tensorboards" from left toolbar on Kubeflow on vSphere Dashboard UI.
 
 .. note:: 
     You may need to run ``pip install tensorflow`` to install TensorFlow package if you have not done so.

@@ -9,7 +9,7 @@ Introduction
 
 `MLFlow <https://www.mlflow.org/>`_ is a platform to streamline machine learning (ML) development, including tracking experiments, packaging code into reproducible runs, and sharing and deploying models.
 
-MLFlow integration with Freestone Kubeflow requires a relation between MLFlow and `MinIO <https://min.io/docs/minio/kubernetes/upstream/index.html>`_ operator, which you learn more in this section. MinIO is used to store artifacts produced by MLFlow runs (files, models, images, in-memory objects, model summary, etc). In the last part of this section, you learn how to access the artifact store using MinIO client or ``boto3`` APIs.
+MLFlow integration with Kubeflow on vSphere requires a relation between MLFlow and `MinIO <https://min.io/docs/minio/kubernetes/upstream/index.html>`_ operator, which you learn more in this section. MinIO is used to store artifacts produced by MLFlow runs (files, models, images, in-memory objects, model summary, etc). In the last part of this section, you learn how to access the artifact store using MinIO client or ``boto3`` APIs.
 
 For the basic knowledge, please refer to `mlfow-quick-start <https://mlflow.org/docs/latest/quickstart.html#downloading-the-quickstart>`_ and to understand how it works, please refer to its `source code <https://github.com/mlflow/mlflow>`_. 
 
@@ -19,7 +19,7 @@ Get started
 Deploy mlflow-server and mlflow-db
 ----------------------------------
 
-This section guides you through the integration of MLFlow with Freestone Kubeflow using `Juju <https://juju.is/>`_. This integration enables true automated model lifecycle management using MLFlow metrics and the MLFlow model registry.
+This section guides you through the integration of MLFlow with Kubeflow on vSphere using `Juju <https://juju.is/>`_. This integration enables true automated model lifecycle management using MLFlow metrics and the MLFlow model registry.
 
 In an Ubuntu terminal window, run the following commands to deploy ``mlflow-server`` and ``mlflow-db``:
 
@@ -42,7 +42,7 @@ For ``mlflow-server`` to become active, you need to integrate applications that 
 Run ``watch juju status`` to watch the application status of ``mlflow-db`` to become active and ``mlflow-server`` to be waiting for ``mysql`` relation data. This takes about a minute.
 
 
-Run an example model with Freestone Kubeflow
+Run an example model with Kubeflow on vSphere
 -----------------------------------------------------
 
 .. note::

@@ -45,7 +45,7 @@ For more detailed information about how MLMD works, please refer to its `source 
 Get started
 -----------
 
-On your Freestone Kubeflow Dashboard UI, navigate to **Notebooks**, and connect to a Notebook Server. Create a notebook (``.ipynb`` file) to hold and execute 
+On your Kubeflow on vSphere Dashboard UI, navigate to **Notebooks**, and connect to a Notebook Server. Create a notebook (``.ipynb`` file) to hold and execute 
 the *Python* codes given in the rest of this section.
 
 ^^^^^^^^^^^^^^^^^^^^

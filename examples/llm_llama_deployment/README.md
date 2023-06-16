@@ -1,6 +1,6 @@
-# LLaMA Deployment on Freestone Kubeflow with Torchserve
+# LLaMA Deployment on Kubeflow on vSphere with Torchserve
 
-This tutorial guides you deploy the LLaMA model on the Freestone Kubeflow platform with torchserve.
+This tutorial guides you deploy the LLaMA model on the Kubeflow on vSphere platform with torchserve.
 
 [LLaMA](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/) is a large language model Meta AI released for research purpose. LLaMA is an auto-regressive language model, based on the transformer architecture.
 
@@ -12,11 +12,11 @@ The LLaMA model size this turorial uses is 7B. File size of the whole model is a
 
 ### Prerequisite
 
-- The Freestone Kubeflow platform is ready for use.
+- The Kubeflow on vSphere platform is ready for use.
 - The LLaMA 7B model has been downloaded and ready for use.
 
 ### Step 1: Create a new Notebook Server
-Create a new Notebook Server on the Freestone Kubeflow platform,
+Create a new Notebook Server on the Kubeflow on vSphere platform,
 - Use a customized image that has Java and torchserve installed. You can create your own custom image or use an image published by us here:
     ```
     projects.registry.vmware.com/models/llm/pytorch/torchserve-notebook:latest-gpu-v0.15
