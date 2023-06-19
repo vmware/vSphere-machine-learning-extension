@@ -15,26 +15,26 @@ You can refer to the [Notebook Document](https://vmware.github.io/vSphere-machin
 
 - Clone this repo in the notebook and install the dependencies in the requirements.txt:
 
-```bash
-$ !git clone https://github.com/vmware/vSphere-machine-learning-extension.git
-$ cd vSphere-machine-learning-extension/examples/helmet_object_detection/notebook
-$ pip install -r requirements.txt
+```
+!git clone https://github.com/vmware/vSphere-machine-learning-extension.git
+cd vSphere-machine-learning-extension/examples/helmet_object_detection/notebook
+pip install -r requirements.txt
 
 Note:= After running above command, you will see warning like(Note: you may need to restart the kernel to use updated packages.) You can restart your Jupyter Kernel by simply clicking Kernel > Restart from the Jupyter menu. Note: This will reset your notebook and remove all variables or methods you've defined! Sometimes you'll notice that your notebook is still hanging after you've restart the kernel. If this occurs try refreshing your browser
 ```
 
 - We use the VOC2007 dataset (train: *16551 images;*  val: *4952 image*) in the experiment, and you can get the data from [here](https://jhx.japaneast.cloudapp.azure.com/share/VOC2007.zip). For the data processing, the `prepare.py` converts the VOC label format (.xml) to yolo label format (.txt) and split the training and  validating data.
 
-```bash
-$ mkdir VOCdevkit
-$ cd VOCdevkit
+```
+mkdir VOCdevkit
+cd VOCdevkit
 
 # Download the data
-$ !wget https://jhx.japaneast.cloudapp.azure.com/share/VOC2007.zip
-$ !unzip VOC2007.zip
+!wget https://jhx.japaneast.cloudapp.azure.com/share/VOC2007.zip
+!unzip VOC2007.zip
 
-$ cd ..
-$ !python prepare.py
+cd ..
+!python prepare.py
 ```
 
 - Modify the configuration files <br>
@@ -57,8 +57,8 @@ width_multiple: 0.50  # layer channel multiple
 
 ## Model Training
 
-```bash
-$ !python train.py     # you can also add '--arguments' to change for your setting
+```
+!python train.py     # you can also add '--arguments' to change for your setting
 
 YOLOv5 🚀 2021-4-12 torch 1.8.1+cu111 CUDA:0 (NVIDIA GeForce RTX 2080 Ti, 11019.5625MB)
 Namespace(adam=False, artifact_alias='latest', batch_size=32, bbox_interval=-1, bucket='', cache_images=False, cfg='models/yolov5s_hat.yaml', data='data/hat.yaml', device='0', entity=None, epochs=50, evolve=False, exist_ok=False, global_rank=-1, hyp='data/hyp.scratch.yaml', image_weights=False, img_size=[640, 640], label_smoothing=0.0, linear_lr=False, local_rank=-1, multi_scale=False, name='exp', noautoanchor=False, nosave=False, notest=False, project='runs/train', quad=False, rect=False, resume=False, save_dir='runs/train/exp5', save_period=-1, single_cls=False, sync_bn=False, total_batch_size=32, upload_dataset=False, weights='yolov5s.pt', workers=8, world_size=1)
@@ -121,8 +121,8 @@ Optimizer stripped from runs/train/exp5/weights/best.pt, 14.4MB
 `detect.py` runs inference on a variety of sources, using the fine-tuned model and saving results to `runs/detect`.
 
 To run inference on example images in `VOCdevkit/images`:
-```bash
-$ !python detect.py --weight runs/train/exp5/weights/best.pt   --source  VOCdevkit/images/train/000004.jpg
+```
+!python detect.py --weight runs/train/exp5/weights/best.pt   --source  VOCdevkit/images/train/000004.jpg
 
 Namespace(agnostic_nms=False, augment=False, classes=None, conf_thres=0.25, device='', exist_ok=False, img_size=640, iou_thres=0.45, name='exp', nosave=False, project='runs/detect', save_conf=False, save_txt=False, source='VOCdevkit/images/train/000003.jpg', update=False, view_img=False, weights=['runs/train/exp5/weights/best.pt'])
 YOLOv5 🚀 2021-4-12 torch 1.8.1+cu111 CUDA:0 (NVIDIA GeForce RTX 2080 Ti, 11019.5625MB)
