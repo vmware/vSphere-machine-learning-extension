@@ -30,10 +30,10 @@ Connect to the Notebook Server. Open a Terminal window. Pull the code of this pr
     git clone https://github.com/vmware/vSphere-machine-learning-extension.git
     ```
 
-Then change directory to this llm_llama_deployment project in the kubeflow-docs\examples directory.
+Then change directory to this llm_llama_deployment project in the vSphere-machine-learning\examples directory.
 
 ### Step 3: Download the LLaMA model files
-Download the LLaMA model files following the instructions in ```download_models.sh```
+Download the LLaMA model files by following the instructions in ```download_models.sh```
 
 ### Step 4: Generate the model package
 Generate the model package required by torchserve. Run ```gen_pkgs.sh```
@@ -48,7 +48,7 @@ Install the necessary dependency packages. Run
 ## Start the inference service
 
 Run ```start_ts.sh``` to start the inference service with torchserve.
-It might take more than 10 minutes for the service to be ready. Open another terminal window, check the output of ```nvidia-smi```. If all the model files have been loaded into GPU memory (more than 14GB), the service should be ready.
+It might take more than 10 minutes for the service to be ready. Open another terminal window, check the output of ```nvidia-smi```. If all the model files have been loaded into GPU memory (more than 14GB), then the service should be ready.
 
 Run ```test.py``` to test the inference service. Modify test.py to try different prompts for your test.
 
