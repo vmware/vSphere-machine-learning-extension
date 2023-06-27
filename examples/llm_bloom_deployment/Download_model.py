@@ -1,5 +1,6 @@
 import argparse
 import os
+os.environ['CURL_CA_BUNDLE'] = ''
 
 from huggingface_hub import HfApi, snapshot_download
 
