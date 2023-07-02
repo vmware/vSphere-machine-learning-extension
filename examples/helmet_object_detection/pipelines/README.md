@@ -42,7 +42,7 @@ Our Kubeflow pipeline is broken down into four pipeline components:
 - Data Processing Component
 - Model Training Component
 
-In this example, we provide you the following Dockerfile for Data component and Train component.
+In this example, we provide you the following Dockerfile for Data component and Train component. Please use the dockerfile in the notebook folder and run `docker build . -t helmet_detection_pipeline:v1` to build a image.
 
 ```bash
 FROM ubuntu:20.04
@@ -61,7 +61,7 @@ COPY . /
 ```
 
 #### Compile Data Ingest Component
-First, we need to create and specify the persistent volume (PVC) for data storage, creating a VolumeOP instance.
+First, we need to create and specify the persistent volume (PVC) for data storage, creating a VolumeOP instance. You can change the VolumeOP name and resource_name to create your data storage.
 
 ```python
 vop = dsl.VolumeOp(name="create_helmet_data_storage_volume",
