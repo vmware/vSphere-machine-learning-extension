@@ -67,6 +67,7 @@ This documentation presents a comprehensive end-to-end workflow of using Kubeflo
     use-cases/helmet
     use-cases/modelserving
     use-cases/codegen
+    use-cases/mnist
 
 .. toctree::
     :caption: Internals
