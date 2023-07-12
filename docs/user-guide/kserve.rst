@@ -39,7 +39,7 @@ First, you create a notebook refer to :ref:`user-guide-notebooks`. Then, downloa
 Upload to MinIO
 ---------------
 
-If you already have the MinIO storage, you can directly skip the MinIO deployment step, and follow the next steps to upload data to MinIO. If not, we also provide instructions on how to deploy standalone MinIO on the kubernetes clusters, you may refer to the `upload data to MinIO bucket` part in the :ref:`feature_store`. And the YAML files are the same with `MinIO deployment files <https://github.com/vmware/ml-ops-platform-for-vsphere/tree/main/website/content/en/docs/kubeflow-tutorial/lab4_minio_deploy>`__.
+If you already have the MinIO storage, you can directly skip the MinIO deployment step, and follow the next steps to upload data to MinIO. If not, we also provide instructions on how to deploy standalone MinIO on the kubernetes clusters, you may refer to the `upload data to MinIO bucket` part in the :ref:`feature_store`. And the YAML files are the same with `MinIO deployment files <https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/kserve/minio>`__.
 
 .. code-block:: shell
     

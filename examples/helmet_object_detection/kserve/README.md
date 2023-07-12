@@ -19,7 +19,7 @@ You cloud also run  the `helmet_kserve.ipynb` in the notebook server to generate
 
 ### Upload to MinIO
 
-If you already have the MinIO storage, you can directly skip the MinIO deployment step, and follow the next steps to upload data to MinIO. If not, we also provide a standalone MinIO deployment guide on the kubernetes clusters, you can refer to the YAML files from [MinIO deployment files](https://github.com/vmware/ml-ops-platform-for-vsphere/tree/main/website/content/en/docs/kubeflow-tutorial/lab4_minio_deploy).
+If you already have the MinIO storage, you can directly skip the MinIO deployment step, and follow the next steps to upload data to MinIO. If not, we also provide a standalone MinIO deployment guide on the kubernetes clusters, you can refer to the YAML files from [MinIO deployment files](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/kserve/minio).
 
 ```bash
 # create pvc, replace storageClassName: pacific-storage-policy with storageClassName: k8s-storage-policy in minio-standalone-pvc.yml first
