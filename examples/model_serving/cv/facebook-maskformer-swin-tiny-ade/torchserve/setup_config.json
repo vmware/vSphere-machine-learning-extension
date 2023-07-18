@@ -1,0 +1,11 @@
+{
+    "revision": "main",
+    "max_memory": {
+        "0": "32GB"
+    },
+    "low_cpu_mem_usage": false,
+    "offload_folder": "offload",
+    "offload_state_dict": true,
+    "torch_dtype":"float16",
+    "max_length":"80"
+}
