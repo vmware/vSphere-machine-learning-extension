@@ -165,3 +165,17 @@ root@test-serve-big-02-0:~# curl -v "http://localhost:8080/predictions/maskforme
 
 ```
 
+## Troubleshooting
+
+### SSL Error
+
+While downingloading the model or executing the custom handler, some users may meet error messages similar to `SSLError: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /togethercomputer/RedPajama-INCITE-Instruct-3B-v1/resolve/main/tokenizer_config.json (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1129)')))`. This is because some of the codes require downloading or using resources from Hugging Face Hub. And therefore there may be HTTPS proxy issues depending on your own settings.
+
+To solve this, you need to add below chunks of codes at the beginning of [Download_model.py](./Download_model.py) and [custom_handler.py](./custom_handler.py) to manually export the proxy.
+
+```python
+import os
+os.environ['HTTP_PROXY'] = <your_http_proxy>
+os.environ['HTTPS_PROXY'] = <your_https_proxy>
+```
+

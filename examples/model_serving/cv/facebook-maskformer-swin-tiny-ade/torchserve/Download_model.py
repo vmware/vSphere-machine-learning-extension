@@ -4,9 +4,6 @@ import os
 import zipfile
 from abc import ABC
 
-os.environ['HTTP_PROXY'] = 'http://proxy.vmware.com:3128'
-os.environ['HTTPS_PROXY'] = 'http://proxy.vmware.com:3128'
-
 import torch
 import transformers
 
