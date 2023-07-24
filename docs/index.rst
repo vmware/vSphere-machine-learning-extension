@@ -57,6 +57,7 @@ This documentation presents a comprehensive end-to-end workflow of using Kubeflo
     user-guide/kserve
     user-guide/kfp
     user-guide/federated-model-training
+    user-guide/gang-scheduling
 
 
 .. toctree::
