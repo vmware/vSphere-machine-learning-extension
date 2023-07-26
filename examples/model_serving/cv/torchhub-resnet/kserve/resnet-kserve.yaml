@@ -1,0 +1,13 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: "resnet-18"
+spec:
+  predictor:
+    pytorch:
+      storageUri: pvc://resnet-model-volume
+      resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+
