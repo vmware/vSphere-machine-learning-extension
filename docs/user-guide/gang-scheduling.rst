@@ -9,7 +9,7 @@ Introduction
 Kubernetes is widely used for online service orchestration. In order to improve cluster utilization and operational efficiency, we aim to 
 use Kubernetes as a unified management platform for both online services and offline jobs. The default scheduler schedules Pods sequentially 
 without considering the relationship between them. However, many offline jobs involving data computation require co-scheduling. 
-Co-scheduling means that all tasks must be created before the entire job can run properly. If some tasks have been started while others 
+Co-scheduling means that all tasks must be created before running properly the entire job. If some tasks have been started while others 
 have not, the started tasks will wait for the scheduler to schedule the remaining tasks. This scenario is known as gang scheduling.
 
 As shown in the diagram below, JobA can only run properly if all four Pods are started simultaneously. The Kube-scheduler schedules and 
@@ -169,7 +169,7 @@ Volcano Scheduler with co-scheduling
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can also install volcano scheduler in your cluster first as a secondary scheduler of Kubernetes and 
-configure the training operator to select the scheduler name for gang-scheduling in the following:
+configure the training operator to select the scheduler name for gang-scheduling as below:
 
 .. code-block:: shell
 
