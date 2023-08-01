@@ -4,7 +4,7 @@ Table Transformer is actually a DETR model - by Microsoft Research (which is par
 
 "DETR is short for DEtection TRansformer, and consists of a convolutional backbone (ResNet-50 or ResNet-101) followed by an encoder-decoder Transformer. It can be trained end-to-end to perform object detection (and panoptic segmentation). The main contribution of DETR is its simplicity: compared to other models like Faster R-CNN and Mask R-CNN, which rely on several highly engineered things like region proposals, non-maximum suppression procedure and anchor generation, DETR is a model that can simply be trained end-to-end, and fine-tuned just like you would fine-tune BERT. This is possible due to the use of a clever loss function, the so-called bipartite matching loss." 
 
----- From [Jupyter notebook](https://github.com/NielsRogge/Transformers-Tutorials/blob/master/Table%20Transformer/Using_Table_Transformer_for_table_detection_and_table_structure_recognition.ipynb)
+This tutorial guides you to run the Table Transformer model with [this Jupyter notebook](https://github.com/NielsRogge/Transformers-Tutorials/blob/master/Table%20Transformer/Using_Table_Transformer_for_table_detection_and_table_structure_recognition.ipynb).
 
 Steps to run the example:
 
@@ -15,7 +15,7 @@ Steps to run the example:
 3. Download the [Jupyter notebook](https://github.com/NielsRogge/Transformers-Tutorials/blob/master/Table%20Transformer/Using_Table_Transformer_for_table_detection_and_table_structure_recognition.ipynb) (hash value is`c95e0a9` in case updated version doesn't work and you need to use this version) in the Terminal via command: 
 
    ```shell
-   wget https://github.com/NielsRogge/Transformers-Tutorials/blob/d1872b1b60a9785c389d5c2b0261ffee55cc1eda/Table%20Transformer/Using_Table_Transformer_for_table_detection_and_table_structure_recognition.ipynb
+   wget https://raw.githubusercontent.com/NielsRogge/Transformers-Tutorials/master/Table%20Transformer/Using_Table_Transformer_for_table_detection_and_table_structure_recognition.ipynb
    ```
 
 4. Open the downloaded notebook file.
@@ -62,6 +62,6 @@ Steps to run the example:
    os.environ['CURL_CA_BUNDLE'] = ''
    ```
 
-   Even though, you may need to try multiple times.
+   Even though, you might need to try multiple times.
 
 8. Follow the steps in the notebook to reproduce the results.
