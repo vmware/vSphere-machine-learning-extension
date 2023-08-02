@@ -8,7 +8,7 @@ This tutorial guides you to run the Table Transformer model with [this Jupyter n
 
 Steps to run the example:
 
-1. Create a new notebook server on **Kubeflow on vSphere** dashboard with 1 CPU and 4G RAM using custom Docker image `projects.registry.vmware.com/models/notebook/inference:cv-pytorch-cpu-v1`. GPU is not needed. 
+1. Create a new notebook server on **Kubeflow on vSphere** dashboard with 1 CPU and 4G RAM using custom Docker image `projects.registry.vmware.com/models/notebook/inference:cv-pytorch-cpu-v3`. GPU is not needed. 
 
 2. `CONNECT` to the notebook server and launch a Terminal in the created notebook server.
 
@@ -20,48 +20,11 @@ Steps to run the example:
 
 4. Open the downloaded notebook file.
 
-5. Remove option `-q` from the following two cells in order to see the installation process and make sure the expected modules are installed:
+5. Remove option `-q` from the following two cells in order to see the installation processes are completed and the modules are installed:
 
    - `!pip install -q git+https://github.com/huggingface/transformers.git`
    - `!pip install -q timm`
 
-   You may use the following command in the Terminal to check if the expected Python module and version is installed:
+6. Follow the remaining steps in the notebook to reproduce the results.
 
-   ```sh
-   pip list | grep <module name>
-   ```
-
-6. Make sure the installed torch version is above `1.9.1`(not included) as the example doesn't work with lower versions. The following versions are tested that are working:
-
-   - 1.10.0
-
-   - 1.10.1
-
-   - 1.10.2
-
-   - 1.11.0
-
-   - 1.12.0
-
-   - 1.12.1
-
-   - 1.13.0
-
-   - 1.13.1
-
-   - 2.0.0
-
-   - 2.0.1
-
-   Run `!pip install torch==<version number>`  in a new cell  after `!pip install timm` in the notebook.
-
-7. Run the following commands to avoid problem of downloading (model and data)  from [Hugging Face](https://huggingface.co):
-
-   ```python
-   import os
-   os.environ['CURL_CA_BUNDLE'] = ''
-   ```
-
-   Even though, you might need to try multiple times.
-
-8. Follow the steps in the notebook to reproduce the results.
+**Note：**When you run a cell to download model or data from Hugging Face, If you meet a problem like `SSLError: (MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443):`, just run it again. Sometimes, you might need to run multiple times to get it done.
