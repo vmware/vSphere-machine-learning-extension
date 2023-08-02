@@ -20,7 +20,7 @@ Steps to run the example:
 
 4. Open the downloaded notebook file.
 
-5. Remove option `-q` from the following two cells in order to see the installation processes are completed and the modules are installed:
+5. (Optional) Remove option `-q` from the following two cells in order to see the installation processes are completed and the modules are installed successfully:
 
    - `!pip install -q git+https://github.com/huggingface/transformers.git`
    - `!pip install -q timm`
