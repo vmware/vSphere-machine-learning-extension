@@ -50,7 +50,7 @@ Scheduler plugins scheduler is integrated by Kubeflow Training Operator v1.5.0, 
 Kubeflow version is 1.6.0. The minor version of the scheduler-plugins matches the minor version of the 
 k8s client packages that it is compiled with. For example we use the k8s v1.23.x dependencies, there are 
 built with scheduler-plugins v0.23.x releases. By default, we install the scheduler-plugins as a second 
-scheduler. You can use the `scheduler-plugins-v0.23 <https://github.com/vmware/vSphere-machine-learning-extension/blob/gang-scheduling/docs/user-guide/scheduler-plugins-v0.23.yaml>`_ deployment yaml file to deploy scheduler-plugins.
+scheduler. You can use the `scheduler-plugins-v0.23 <https://github.com/vmware/vSphere-machine-learning-extension/blob/gang-scheduling/docs/_static/scheduler-plugins-v0.23.yaml>`_ deployment yaml file to deploy scheduler-plugins.
 If you want to install other versions or install that as a single scheduler, you can refer to `this doc <https://github.com/kubernetes-sigs/scheduler-plugins/blob/release-1.23/doc/install.md>`_.
 
 .. code-block:: shell
