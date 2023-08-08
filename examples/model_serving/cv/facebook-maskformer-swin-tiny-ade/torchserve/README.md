@@ -7,7 +7,7 @@ MaskFormer model trained on ADE20k semantic segmentation (tiny-sized version, Sw
 ## Prerequisites
 
 - 0 GPU, 8 CPUs (recommended), 16Gi memory (recommended)
-- Use custom notebook image [projects.registry.vmware.com/models/notebook/serve:pytorch-cuda-v1](https://projects.registry.vmware.com/harbor/projects/46787/repositories/notebook%2Fserve/artifacts-tab)
+- Use custom notebook image ``projects.registry.vmware.com/models/notebook/serve:pytorch-cpu-v3``.
 
 ## Get Started
 
