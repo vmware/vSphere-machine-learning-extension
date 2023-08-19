@@ -3,6 +3,9 @@ import os
 
 from huggingface_hub import HfApi, snapshot_download
 
+# Fix: requests.exceptions.SSLError: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url....aused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1129)'
+os.environ['HTTP_PROXY'] = 'http://proxy.vmware.com:3128'
+os.environ['HTTPS_PROXY'] = 'http://proxy.vmware.com:3128'
 
 def dir_path(path_str):
     if os.path.isdir(path_str):
