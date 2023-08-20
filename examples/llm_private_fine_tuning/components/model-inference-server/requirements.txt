@@ -1,0 +1,12 @@
+bitsandbytes==0.39.1
+transformers==4.30.2
+accelerate==0.20.3
+
+sentencepiece==0.1.99
+einops==0.6.1
+loralib==0.1.1
+peft==0.4.0
+scipy==1.11.1
+
+requests==2.31.0
+flask==2.3.2

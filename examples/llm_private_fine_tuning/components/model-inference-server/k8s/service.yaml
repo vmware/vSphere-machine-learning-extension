@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: model-inference-service
+  labels:
+    app: model-inference-server
+spec:
+  selector:
+    app: model-inference-server
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000

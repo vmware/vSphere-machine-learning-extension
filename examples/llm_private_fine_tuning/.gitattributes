@@ -1,0 +1,2 @@
+components/model-reference-relocation-server/models/gpt2-large/pytorch_model.bin filter=lfs diff=lfs merge=lfs -text
+components/model-relocation-server/models/gpt2/pytorch_model.bin filter=lfs diff=lfs merge=lfs -text

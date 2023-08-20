@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dataset-relocation-server
+spec:
+  template:
+    spec:
+      containers:
+        - name: dataset-relocation-server
+          image: ghcr.io/albertoimpl/dataset-relocation-server
+          args: [ "--dataset_destination_path", "/datasets" ]
+          command: [ "python3", "app.py" ]
+          volumeMounts:
+            - name: datasets
+              mountPath: /datasets
+      volumes:
+        - name: datasets
+          persistentVolumeClaim:
+            claimName: datasets
+      restartPolicy: Never

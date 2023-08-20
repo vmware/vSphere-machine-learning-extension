@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: model-relocation-server
+spec:
+  template:
+    metadata:
+      name: model-relocation-server
+    spec:
+      containers:
+        - name: model-relocation-server
+          image: ghcr.io/albertoimpl/model-relocation-server
+          command: [ "python3", "app.py" ]
+          args: [ "--model_destination_path", "/base-model/model" ]
+          volumeMounts:
+            - name: base-model
+              mountPath: /base-model
+      volumes:
+        - name: base-model
+          persistentVolumeClaim:
+            claimName: base-model
+      restartPolicy: Never

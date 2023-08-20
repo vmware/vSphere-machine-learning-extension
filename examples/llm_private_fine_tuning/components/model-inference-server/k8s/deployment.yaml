@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: model-inference-server
+  name: model-inference-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: model-inference-server
+  template:
+    metadata:
+      labels:
+        app: model-inference-server
+    spec:
+      initContainers:
+        - name: data-check-init-container
+          image: alpine:latest
+          command: [ "/bin/sh", "-c" ]
+          args:
+            - |
+              while [ -z "$(ls -A /base-tokenizer/tokenizer)" ] || [ -z "$(ls -A /base-model/model)" ] || [ -z "$(ls -A /fine-tuned-model/model)" ]; do
+                echo "Paths are empty. Waiting..."
+                tree /fine-tuned-model
+                sleep 10
+              done
+              echo "Paths found. Proceeding..."
+          volumeMounts:
+            - name: fine-tuned-model
+              mountPath: /fine-tuned-model
+            - name: base-tokenizer
+              mountPath: /base-tokenizer
+            - name: base-model
+              mountPath: /base-model
+      containers:
+        - name: model-inference-server
+          image: ghcr.io/albertoimpl/model-inference-server
+          ports:
+            - containerPort: 5000
+          command: [ "python3", "app.py" ]
+          args:
+            - "--fine_tuned_model_full_path"
+            - "/fine-tuned-model/model/gpt2"
+            - "--base_tokenizer_full_path"
+            - "/base-tokenizer/tokenizer/gpt2"
+            - "--base_model_full_path"
+            - "/base-model/model/gpt2"
+          volumeMounts:
+            - name: fine-tuned-model
+              mountPath: /fine-tuned-model
+            - name: base-tokenizer
+              mountPath: /base-tokenizer
+            - name: base-model
+              mountPath: /base-model
+      volumes:
+        - name: fine-tuned-model
+          persistentVolumeClaim:
+            claimName: fine-tuned-model
+        - name: base-tokenizer
+          persistentVolumeClaim:
+            claimName: base-tokenizer
+        - name: base-model
+          persistentVolumeClaim:
+            claimName: base-model

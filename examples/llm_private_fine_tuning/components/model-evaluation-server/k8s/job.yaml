@@ -1,0 +1,76 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: model-evaluation-server
+spec:
+  template:
+    metadata:
+      name: model-evaluation-server
+    spec:
+      initContainers:
+        - name: data-check-init-container
+          image: alpine:latest
+          command: [ "/bin/sh", "-c" ]
+          args:
+            - |
+              while [ -z "$(ls -A /base-tokenizer/tokenizer)" ]  || [ -z "$(ls -A /base-model/model)" ] || [ -z "$(ls -A /reference-model/models)" ] || [ -z "$(ls -A /reference-model/tokenizers)" ] || [ -z "$(ls -A /fine-tuned-model/model)" || [-f "/fine-tuned-model/model/gpt2/config.json"] ]; do
+                echo "Data not found or paths are empty. Waiting..."
+                tree /base-model
+                tree /base-tokenizer
+                tree /reference-model
+                tree /fine-tuned-model
+                sleep 10
+              done
+              echo "Data and paths found. Proceeding..."
+                tree /base-model
+                tree /base-tokenizer
+                tree /reference-model
+                tree /fine-tuned-model
+          volumeMounts:
+            - name: base-model
+              mountPath: /base-model
+            - name: base-tokenizer
+              mountPath: /base-tokenizer
+            - name: reference-model
+              mountPath: /reference-model
+            - name: fine-tuned-model
+              mountPath: /fine-tuned-model
+      containers:
+        - name: model-evaluation-server
+          image: ghcr.io/albertoimpl/model-evaluation-server
+          command: [ "python3", "app.py" ]
+          args:
+            - "--base_model_full_path"
+            - "/base-model/model/gpt2"
+            - "--base_tokenizer_full_path"
+            - "/base-tokenizer/tokenizer/gpt2"
+            - "--reference_model_full_path"
+            - "/reference-model/models/gpt2-large"
+            - "--reference_tokenizer_full_path"
+            - "/reference-model/tokenizers/gpt2-large"
+            - "--fine_tuned_model_full_path"
+            - "/fine-tuned-model/model/gpt2"
+
+          volumeMounts:
+            - name: base-model
+              mountPath: /base-model
+            - name: base-tokenizer
+              mountPath: /base-tokenizer
+            - name: reference-model
+              mountPath: /reference-model
+            - name: fine-tuned-model
+              mountPath: /fine-tuned-model
+      volumes:
+        - name: base-model
+          persistentVolumeClaim:
+            claimName: base-model
+        - name: base-tokenizer
+          persistentVolumeClaim:
+            claimName: base-tokenizer
+        - name: reference-model
+          persistentVolumeClaim:
+            claimName: reference-model
+        - name: fine-tuned-model
+          persistentVolumeClaim:
+            claimName: fine-tuned-model
+      restartPolicy: Never

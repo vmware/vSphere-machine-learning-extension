@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: tokenizer-relocation-server
+spec:
+  template:
+    spec:
+      containers:
+        - name: tokenizer-relocation-server
+          image: ghcr.io/albertoimpl/tokenizer-relocation-server
+          args: [ "--tokenizer_destination_path", "/base-tokenizer/tokenizer" ]
+          command: [ "python3", "app.py" ]
+          volumeMounts:
+            - name: base-tokenizer
+              mountPath: /base-tokenizer
+      volumes:
+        - name: base-tokenizer
+          persistentVolumeClaim:
+            claimName: base-tokenizer
+      restartPolicy: Never

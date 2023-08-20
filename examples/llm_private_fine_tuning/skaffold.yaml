@@ -1,0 +1,47 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: private-fine-tuning
+build:
+  local:
+    push: false
+    concurrency: 7
+  artifacts:
+    - image: ghcr.io/albertoimpl/dataset-relocation-server
+      context: components/dataset-relocation-server
+      docker:
+        dockerfile: Dockerfile
+    - image: ghcr.io/albertoimpl/model-evaluation-server
+      context: components/model-evaluation-server
+      docker:
+        dockerfile: Dockerfile
+    - image: ghcr.io/albertoimpl/model-inference-server
+      context: components/model-inference-server
+      docker:
+        dockerfile: Dockerfile
+    - image: ghcr.io/albertoimpl/model-peft-server
+      context: components/model-peft-server
+      docker:
+        dockerfile: Dockerfile
+    - image: ghcr.io/albertoimpl/model-reference-relocation-server
+      context: components/model-reference-relocation-server
+      docker:
+        dockerfile: Dockerfile
+    - image: ghcr.io/albertoimpl/model-relocation-server
+      context: components/model-relocation-server
+      docker:
+        dockerfile: Dockerfile
+    - image: ghcr.io/albertoimpl/tokenizer-relocation-server
+      context: components/tokenizer-relocation-server
+      docker:
+        dockerfile: Dockerfile
+portForward:
+  - resourceType: service
+    resourceName: model-inference-service
+    namespace: default
+    port: 5000
+    localPort: 5001
+manifests:
+  rawYaml:
+    - components/*.yaml
+    - components/*/k8s/*.yaml
