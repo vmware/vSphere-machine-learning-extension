@@ -2,7 +2,9 @@
 
 The multilingual NLP library for researchers and companies, built on PyTorch and TensorFlow 2.x, for advancing state-of-the-art deep learning techniques in both academia and industry. HanLP was designed from day one to be efficient, user friendly and extendable. It comes with pretrained models for various human languages including English, Chinese, Japanese and many others.
 
-This tutorial guides you to run the T5-Base model with [this Jupyter notebook](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/model_serving/nlp/hanlp/HanLP.ipynb).
+HanLP offers out-of-the-box RESTful API and native Python API which share very similar interfaces while they are designed for different scenes.
+
+This tutorial shows you its APIs with a Jupyter notebook.
 
 Steps to run the example:
 
@@ -16,4 +18,4 @@ Steps to run the example:
    wget https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/master/examples/model_serving/nlp/hanlp/HanLP.ipynb
    ```
 
-4. Open the downloaded notebook file follow the steps in the notebook to reproduce the results.
+4. Open the downloaded notebook and run the cells in the notebook to reproduce the results.
