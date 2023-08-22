@@ -6,7 +6,7 @@ Bidirectional Encoder Representations from Transformers, or BERT, is a revolutio
 
 RoBERTa builds on BERT’s language masking strategy and modifies key hyperparameters in BERT, including removing BERT’s next-sentence pretraining objective, and training with much larger mini-batches and learning rates. RoBERTa was also trained on an order of magnitude more data than BERT, for a longer amount of time. This allows RoBERTa representations to generalize even better to downstream tasks compared to BERT.
 
-This tutorial guides you to run the RoBERTa model with [this Jupyter notebook](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/model_serving/nlp/roberta/RoBERTa.ipynb).
+This tutorial demonstrates the basic usage of RoBERTa, especially *classification tasks* with a Jupyter notebook.
 
 Steps to run the example:
 
@@ -20,4 +20,4 @@ Steps to run the example:
    wget https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/master/examples/model_serving/nlp/roberta/RoBERTa.ipynb
    ```
 
-4. Open the downloaded notebook file follow the steps in the notebook to reproduce the results.
+4. Open the downloaded notebook and run the cells in the notebook to reproduce the results.
