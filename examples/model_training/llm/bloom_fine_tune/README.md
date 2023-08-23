@@ -86,4 +86,4 @@ If you don't provide a path to your downloaded base model, this script by defaul
 
 ### Model inference using the fine-tuned model
 
-Please refer to [llm_bloom_deployment](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/model_deployment/llm/bloom_deployment) to do model inference with the fine-tuned model.
+Please refer to [llm_bloom_deployment](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/model_serving/llm/bloom_deployment) to do model inference with the fine-tuned model.

@@ -15,4 +15,4 @@ To be specific, this example covers the following Kubeflow on vSphere features:
 
 - Model deployment with KServe
 
-To get more details on this example, visit this `page <https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/>`_.
+To get more details on this example, visit this `page <https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/end_to_end/helmet_object_detection/>`_.

@@ -15,7 +15,7 @@ Steps to run the example:
 3. Download the Jupyter notebook in the Terminal via command: 
 
    ```shell
-   wget https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/master/examples/model_serving/nlp/distilbert-base-multilingual-cased/distilbert-base-multilingual-cased.ipynb
+   wget https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/master/examples/model_inference/nlp/distilbert-base-multilingual-cased/distilbert-base-multilingual-cased.ipynb
    ```
 
 4. Open the downloaded notebook and run the cells in the notebook step-by-step to reproduce the results.

@@ -6,7 +6,7 @@
 
 **T5-Base** is the checkpoint with 220 million parameters. 
 
-This tutorial guides you to run the T5-Base model with [this Jupyter notebook](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/model_serving/nlp/t5-base/t5-base.ipynb).
+This tutorial guides you to run the T5-Base model with a Jupyter notebook.
 
 Steps to run the example:
 
@@ -17,9 +17,9 @@ Steps to run the example:
 3. Download the Jupyter notebook in the Terminal via command: 
 
    ```shell
-   wget https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/master/examples/model_serving/nlp/t5-base/t5-base.ipynb
+   wget https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/master/examples/model_inference/nlp/t5-base/t5-base.ipynb
    ```
 
-4. Open the downloaded notebook file follow the steps in the notebook to reproduce the results.
+4. Open the downloaded notebook and run the cells in the notebook to reproduce the results.
 
 **Note:** You might need to try multiple times for downloading from Hugging Face in cell [2] and [5].
