@@ -13,7 +13,7 @@ Steps to run the examples:
 3. Download the Jupyter notebook in the Terminal via command: 
 
    ```shell
-   wget https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/master/examples/model_serving/nlp/fasttext/fastText.ipynb
+   wget https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/master/examples/model_inference/nlp/fasttext/fastText.ipynb
    ```
 
 4. Open the downloaded notebook and run the cells in the notebook step-by-step to reproduce the results.
