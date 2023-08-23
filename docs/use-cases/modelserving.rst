@@ -14,7 +14,7 @@ To be specific, this example covers the following use cases:
 
 - Large Language Model deployment with TorchServe
 
-To get more details on this example, visit `its page <https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/llm_llama_deployment/>`_.
+To get more details on this example, visit `its page <https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/model_serving/llm/llm_llama_deployment/>`_.
 
 BLOOM model deployment with KServe
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -25,4 +25,4 @@ To be specific, this example covers the following use cases:
 
 - Large Language Model deployment with KServe
 
-To get more details on this example, visit `this page <https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/llm_bloom_deployment/>`_.
+To get more details on this example, visit `this page <https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/model_serving/llm/llm_bloom_deployment/>`_.
