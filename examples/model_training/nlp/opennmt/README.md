@@ -23,8 +23,8 @@ Steps to run the example:
 3. Download the Jupyter notebooks in the Terminal via command: 
 
    ```shell
-   wget https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/master/examples/end_to_end/opennmt/OpenNMT.ipynb
-   wget https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/master/examples/end_to_end/opennmt/OpenNMT-zh.ipynb
+   wget https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/master/examples/model_training/nlp/opennmt/OpenNMT.ipynb
+   wget https://raw.githubusercontent.com/vmware/vSphere-machine-learning-extension/master/examples/model_training/nlp/opennmt/OpenNMT-zh.ipynb
    ```
 
    These 2 notebooks are independent with each other. 
