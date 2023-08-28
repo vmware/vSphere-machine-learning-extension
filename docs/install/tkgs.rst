@@ -29,8 +29,25 @@ For the deployment on TKG clusters, Kubeflow on vSphere is installed on a Tanzu 
 
 - Install ``kctrl``, a kapp-controller's native CLI on your client host. It is used to install  Kubeflow on vSphere Carvel Package. See `Installing kapp-controller CLI: kctrl <https://carvel.dev/kapp-controller/docs/v0.40.0/install/#installing-kapp-controller-cli-kctrl>`__.
 
+Minimus resources for TKG cluster to Install Kubeflow
+======================================================
+
+The TKG cluster must meet the following minimu reqyurments:
+
+- Kubernetes version 1.21 or later
+- At least one worker node with a minimum of:
+    - 4 CPU
+    - 16 GB memory
+    - 50 GB storage
+
+Also note: the minimus resources of TKG cluster can install Kubeflow successfully, but it's more like a toy. For workloads with large resources, Kubeflow may not deploy your workloads due to the limited resources.
+
+Thus, it depends on the workloads to create suitable resources TKG cluster to deploy Kubeflow.
+
 Deploy Kubeflow on vSphere package on TKG clusters
 ===========================================================
+
+The below deployment procedure is based on Linux. For the Windows user, the deployment procedure is the same as below, just need to pay attention to install Windows version of the `kubectl`, `kctrl` software.
 
 Add package repository
 ----------------------
@@ -302,3 +319,16 @@ When you try to create a Notebook Server, you may meet the following error:
     FailedCreate 1s (x2 over 1s) statefulset-controller create Pod test-01-0 in StatefulSet test-01 failed error: pods “test-01-0” is forbidden: PodSecurityPolicy: unable to admit pod: []
 
 This error occurs because Notebook Server creation needs pod creation, and you did not configure the pod security policy correctly. To solve this error, you need to configure pod security policy based on :ref:`configure pod security policy`.
+
+cert-manager webhook is not ready
+---------------------------------
+
+cert-manager is used by Kubeflow components to provide certificates for admission webhooks. When you try to install Kubeflow, you may meet the following error about cert-manager:
+
+.. code-block:: text
+
+    Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "webhook.cert-manager.io": failed to call webhook: Post "https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s": dial tcp 10.96.202.64:443: connect: connection refused
+
+This is because the webhook is not yet ready to receive request. Wait a couple seconds and retry deploying Kubeflow again.
+
+For more troubleshooting info also check out https://cert-manager.io/docs/troubleshooting/webhook/
