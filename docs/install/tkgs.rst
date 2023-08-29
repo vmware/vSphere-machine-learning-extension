@@ -41,7 +41,8 @@ To install Kubeflow, the TKG cluster must meet the following minimum requirement
     - 50GB storage
 
 .. note::
-Above resources requirements of TKG cluster only support a toy version of Kubeflow installation which may not be able to deploy heavy workloads due to limited resources. It is therefore suggested that users should create the TKG cluster with suitable resources depending on the workloads they would like to deploy using Kubeflow.
+    
+    Above resources requirements of TKG cluster only support a toy version of Kubeflow installation which may not be able to deploy heavy workloads due to limited resources. It is therefore suggested that users should create the TKG cluster with suitable resources depending on the workloads they would like to deploy using Kubeflow.
 
 Deploy Kubeflow on vSphere package on TKG clusters
 ===========================================================
