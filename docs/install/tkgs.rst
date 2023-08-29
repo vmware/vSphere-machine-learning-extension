@@ -29,25 +29,24 @@ For the deployment on TKG clusters, Kubeflow on vSphere is installed on a Tanzu 
 
 - Install ``kctrl``, a kapp-controller's native CLI on your client host. It is used to install  Kubeflow on vSphere Carvel Package. See `Installing kapp-controller CLI: kctrl <https://carvel.dev/kapp-controller/docs/v0.40.0/install/#installing-kapp-controller-cli-kctrl>`__.
 
-Minimus resources for TKG cluster to Install Kubeflow
-======================================================
+Minimally required resources for TKG cluster to install Kubeflow
+================================================================
 
-The TKG cluster must meet the following minimu reqyurments:
+To install Kubeflow, the TKG cluster must meet the following minimum requirements:
 
 - Kubernetes version 1.21 or later
-- At least one worker node with a minimum of:
+- At least one worker node satisfies below minimum resources requirements:
     - 4 CPU
-    - 16 GB memory
-    - 50 GB storage
+    - 16GB memory
+    - 50GB storage
 
-Also note: the minimus resources of TKG cluster can install Kubeflow successfully, but it's more like a toy. For workloads with large resources, Kubeflow may not deploy your workloads due to the limited resources.
-
-Thus, it depends on the workloads to create suitable resources TKG cluster to deploy Kubeflow.
+.. note::
+Above resources requirements of TKG cluster only support a toy version of Kubeflow installation which may not be able to deploy heavy workloads due to limited resources. It is therefore suggested that users should create the TKG cluster with suitable resources depending on the workloads they would like to deploy using Kubeflow.
 
 Deploy Kubeflow on vSphere package on TKG clusters
 ===========================================================
 
-The below deployment procedure is based on Linux. For the Windows user, the deployment procedure is the same as below, just need to pay attention to install Windows version of the `kubectl`, `kctrl` software.
+Note that the below deployment procedure is for Linux and Windows users, but Windows users would need to first install the Windows version of `kubectl` and `kctrl` command.
 
 Add package repository
 ----------------------
@@ -320,15 +319,15 @@ When you try to create a Notebook Server, you may meet the following error:
 
 This error occurs because Notebook Server creation needs pod creation, and you did not configure the pod security policy correctly. To solve this error, you need to configure pod security policy based on :ref:`configure pod security policy`.
 
-cert-manager webhook is not ready
+cert-manager-webhook is not ready
 ---------------------------------
 
-cert-manager is used by Kubeflow components to provide certificates for admission webhooks. When you try to install Kubeflow, you may meet the following error about cert-manager:
+Cert-manager is used by Kubeflow components to provide certificates for admission webhooks. When you try to install Kubeflow, you may meet the following error about cert-manager:
 
 .. code-block:: text
 
     Error from server (InternalError): error when creating "STDIN": Internal error occurred: failed calling webhook "webhook.cert-manager.io": failed to call webhook: Post "https://cert-manager-webhook.cert-manager.svc:443/mutate?timeout=10s": dial tcp 10.96.202.64:443: connect: connection refused
 
-This is because the webhook is not yet ready to receive request. Wait a couple seconds and retry deploying Kubeflow again.
+This error message indicates that the webhook is not yet ready to receive request. You simply need to wait a couple seconds and retry.
 
-For more troubleshooting info also check out https://cert-manager.io/docs/troubleshooting/webhook/
+For more troubleshooting info about cert-manager, check https://cert-manager.io/docs/troubleshooting/webhook/
