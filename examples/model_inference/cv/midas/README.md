@@ -1,6 +1,6 @@
 # MiDaS
 
-[MiDaS](https://arxiv.org/abs/1907.01341) computes relative inverse depth from a single image. The repository provides multiple models that cover different use cases ranging from a small, high-speed model to a very large model that provide the highest accuracy. The models have been trained on 10 distinct datasets using multi-objective optimization to ensure high quality on a wide range of inputs.
+[MiDaS](https://arxiv.org/abs/1907.01341) computes relative inverse depth from a single image. The latest release MiDaS v3.1 offers a large collection of new depth estimation models that cover different use cases ranging from a small, high-speed model to a very large model that provide the highest accuracy. The models have been trained on 10 distinct datasets using multi-objective optimization to ensure high quality on a wide range of inputs.
 
 This tutorial shows you the *image resize and normalize* capabilities of the model with a Jupyter notebook.
 
