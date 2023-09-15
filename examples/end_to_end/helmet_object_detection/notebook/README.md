@@ -17,7 +17,7 @@ You can refer to the [Notebook Document](https://vmware.github.io/vSphere-machin
 
 ```
 !git clone https://github.com/vmware/vSphere-machine-learning-extension.git
-cd vSphere-machine-learning-extension/examples/helmet_object_detection/notebook
+cd vSphere-machine-learning-extension/examples/end_to_end/helmet_object_detection/notebook
 pip install -r requirements.txt
 
 Note:= After running above command, you will see warning like(Note: you may need to restart the kernel to use updated packages.) You can restart your Jupyter Kernel by simply clicking Kernel > Restart from the Jupyter menu. Note: This will reset your notebook and remove all variables or methods you've defined! Sometimes you'll notice that your notebook is still hanging after you've restart the kernel. If this occurs try refreshing your browser
