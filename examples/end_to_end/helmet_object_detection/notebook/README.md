@@ -6,7 +6,7 @@ AI-based helmet detection models use computer vision techniques to identify and 
 
 You can refer to the [Notebook Document](https://vmware.github.io/vSphere-machine-learning-extension/user-guide/notebooks.html) to create and use a Kubeflow notebook.
 
-- Create a Notebook Server with 1 GPU, 4CPUs, 16GB Memory and 10G volume disk
+- Create a Notebook Server [official docker image: kubeflownotebookswg/jupyter-pytorch-cuda-full:v1.6.0] with 1 GPU, 4CPUs, 16GB Memory and 10G volume disk 
 
 
 - [Python](https://www.python.org/), [PyTorch](https://pytorch.org/), and [CUDA](https://developer.nvidia.com/cuda)/[CUDNN](https://developer.nvidia.com/cudnn)  are preinstalled
