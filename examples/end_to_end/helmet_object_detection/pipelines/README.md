@@ -8,11 +8,11 @@ If you are not familar with the Kubeflow Pipeline, you can refer to [Kubeflow Pi
 
 ## Build Pipeline
 
-In this tutorial, we will guide you through the Helmet Detection Example (as mentioned [here](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/notebook)) to build up and run Kubeflow pipelines
+In this tutorial, we will guide you through the Helmet Detection Example (as mentioned [here](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/end_to_end/helmet_object_detection/notebook)) to build up and run Kubeflow pipelines
 
-We provide you a [helmet_detection_pipeline.yaml](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/helmet_detection_pipeline.yaml). For quick-test you can execute the pipeline using this yaml file. [here are the steps](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/README.md#upload-the-pipeline-in-freestone-kubeflow-dashboard)
+We provide you a [helmet_detection_pipeline.yaml](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/end_to_end/helmet_object_detection/pipelines/helmet_detection_pipeline.yaml). For quick-test you can execute the pipeline using this yaml file. [here are the steps](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/end_to_end/helmet_object_detection/pipelines/README.md#upload-the-pipeline-in-freestone-kubeflow-dashboard)
 
-If you prefer to build the pipeline by yourself, please follow the pipeline building steps in [helmet_detection_pipeline.ipynb](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/helmet_detection_pipeline.ipynb) in the Kubeflow Notebook.
+If you prefer to build the pipeline by yourself, please follow the pipeline building steps in [helmet_detection_pipeline.ipynb](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/end_to_end/helmet_object_detection/pipelines/helmet_detection_pipeline.ipynb) in the Kubeflow Notebook.
 
 ### Here are the steps with explanation
 ### Step 1: Install Kubeflow Pipeline SDK and import the required kfp packages to run the pipeline
@@ -149,19 +149,19 @@ Following the steps in your notebook, you should be able to see a file called `h
 
 Once you have the compiled YAML file, download it. In Kubeflow on vSphere Dashboard, go to pipelines dashaborad by clicking the “Pipelines” on the left-side toolbar. And then click the “Upload Pipeline” button.
 
-![Image text](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/pipelines/imgs/helmet-pipeline-01.png)
-![Image text](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/pipelines/imgs/helmet-pipeline-02.png)
+![Image text](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/end_to_end/helmet_object_detection/pipelines/imgs/helmet-pipeline-01.png)
+![Image text](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/end_to_end/helmet_object_detection/pipelines/imgs/helmet-pipeline-02.png)
 
 ### Create experiment and run
 
 Create an experiment for this pipeline. This time, you need to provide two inputs, dataset and data_path, exactly the ones for our first step Data Download. If you do not intend to make any personalization on datasets and data path, enter following values
 
-![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/imgs/helmet-pipeline-03.png)
-![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/imgs/helmet-pipeline-04.png)
+![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/end_to_end/helmet_object_detection/pipelines/imgs/helmet-pipeline-03.png)
+![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/end_to_end/helmet_object_detection/pipelines/imgs/helmet-pipeline-04.png)
 
 ### Check logs and outputs
-![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/helmet_object_detection/pipelines/imgs/helmet-pipeline-05.png)
+![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/end_to_end/helmet_object_detection/pipelines/imgs/helmet-pipeline-05.png)
 
 ### Delete pipeline
 
-![Image text](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/pipelines/imgs/helmet-pipeline-06.png)
+![Image text](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/end_to_end/helmet_object_detection/pipelines/imgs/helmet-pipeline-06.png)

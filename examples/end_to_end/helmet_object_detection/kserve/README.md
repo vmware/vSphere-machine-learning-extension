@@ -11,7 +11,7 @@ For more detailed documentation on KServe, refer to [KServe](https://kserve.gith
 First, you can create a notebook refer to [Kubeflow Notebook](https://vmware.github.io/vSphere-machine-learning-extension/user-guide/notebooks.html#user-guide-notebooks). Then, unzip the kserve package we have prepared for this notebook server.
 
 ```bash
-$ cd kubeflow-docs/examples/helmet_object_detection/kserve
+$ cd kubeflow-docs/examples/end_to_end/helmet_object_detection/kserve
 $ unzip helmet_kserve.zip
 ```
 
@@ -19,7 +19,7 @@ You cloud also run  the `helmet_kserve.ipynb` in the notebook server to generate
 
 ### Upload to MinIO
 
-If you already have the MinIO storage, you can directly skip the MinIO deployment step, and follow the next steps to upload data to MinIO. If not, we also provide a standalone MinIO deployment guide on the kubernetes clusters, you can refer to the YAML files from [MinIO deployment files](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/kserve/minio).
+If you already have the MinIO storage, you can directly skip the MinIO deployment step, and follow the next steps to upload data to MinIO. If not, we also provide a standalone MinIO deployment guide on the kubernetes clusters, you can refer to the YAML files from [MinIO deployment files](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/end_to_end/helmet_object_detection/kserve/minio).
 
 ```bash
 # create pvc, replace storageClassName: pacific-storage-policy with storageClassName: k8s-storage-policy in minio-standalone-pvc.yml first

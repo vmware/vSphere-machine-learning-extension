@@ -6,7 +6,7 @@ AI-based helmet detection models use computer vision techniques to identify and 
 
 You can refer to the [Notebook Document](https://vmware.github.io/vSphere-machine-learning-extension/user-guide/notebooks.html) to create and use a Kubeflow notebook.
 
-- Create a Notebook Server with 1 GPU, 4CPUs, 16GB Memory and 10G volume disk
+- Create a Notebook Server [official docker image: kubeflownotebookswg/jupyter-pytorch-cuda-full:v1.6.0] with 1 GPU, 4CPUs, 16GB Memory and 10G volume disk 
 
 
 - [Python](https://www.python.org/), [PyTorch](https://pytorch.org/), and [CUDA](https://developer.nvidia.com/cuda)/[CUDNN](https://developer.nvidia.com/cudnn)  are preinstalled
@@ -17,7 +17,7 @@ You can refer to the [Notebook Document](https://vmware.github.io/vSphere-machin
 
 ```
 !git clone https://github.com/vmware/vSphere-machine-learning-extension.git
-cd vSphere-machine-learning-extension/examples/helmet_object_detection/notebook
+cd vSphere-machine-learning-extension/examples/end_to_end/helmet_object_detection/notebook
 pip install -r requirements.txt
 
 Note:= After running above command, you will see warning like(Note: you may need to restart the kernel to use updated packages.) You can restart your Jupyter Kernel by simply clicking Kernel > Restart from the Jupyter menu. Note: This will reset your notebook and remove all variables or methods you've defined! Sometimes you'll notice that your notebook is still hanging after you've restart the kernel. If this occurs try refreshing your browser
