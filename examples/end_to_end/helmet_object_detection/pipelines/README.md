@@ -20,7 +20,7 @@ If you prefer to build the pipeline by yourself, please follow the pipeline buil
 First, install the Pipeline SDK using the following command. If you run this command in a Jupyter notebook, restart the kernel after installing the SDK.
 
 ```bash
-$ pip install kfp --upgrade --user --quiet
+$ pip install kfp==1.6.3
 $ pip show kfp
 ```
 
