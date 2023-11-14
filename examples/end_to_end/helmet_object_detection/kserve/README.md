@@ -40,18 +40,6 @@ This step uploads `v1/torchserve/model-store`, `v1/torchserve/config` to MinIO b
 # get the endpoint url for MinIO
 $ kubectl get svc minio-service -n <your-namespace> -o jsonpath='{.status.loadBalancer.ingress}'
 # output is like: [{"ip":"10.105.150.41"}], this IP is used later in the Python script to set AWS_ENDPOINT_URL
-
-# get the secret name for Minio.
-$ kubectl get secret -n <your-namespace> | grep minio
-# output is: mlpipeline-minio-artifact
-
-# get the access key for MinIO
-$ kubectl get secret <minio-secret-name> -n <your-namespace> -o jsonpath='{.data.accesskey}' | base64 -d
-# output is: minio
-
-# get the secret key for MinIO
-$ kubectl get secret <minio-secret-name> -n <your-namespace> -o jsonpath='{.data.secretkey}' | base64 -d
-# output is: minio123
 ```
 
 You need to install `boto3` dependency package in the notebook server created before, and run the follow python code to upload model files.
