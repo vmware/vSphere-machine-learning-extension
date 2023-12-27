@@ -148,7 +148,6 @@ Following the steps in your notebook, you should be able to see a file called `h
 ### Upload the pipeline in Kubeflow on vSphere Dashboard
 
 Once you have the compiled YAML file, download it. In Kubeflow on vSphere Dashboard, go to pipelines dashaborad by clicking the “Pipelines” on the left-side toolbar. And then click the “Upload Pipeline” button.
-
 ![Image text](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/end_to_end/helmet_object_detection/pipelines/imgs/helmet-pipeline-01.png)
 ![Image text](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/end_to_end/helmet_object_detection/pipelines/imgs/helmet-pipeline-02.png)
 
@@ -163,5 +162,4 @@ Create an experiment for this pipeline. This time, you need to provide two input
 ![Image text](https://github.com/vmware/vSphere-machine-learning-extension/blob/main/examples/end_to_end/helmet_object_detection/pipelines/imgs/helmet-pipeline-05.png)
 
 ### Delete pipeline
-
 ![Image text](https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/end_to_end/helmet_object_detection/pipelines/imgs/helmet-pipeline-06.png)
