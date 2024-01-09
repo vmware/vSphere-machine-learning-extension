@@ -34,7 +34,7 @@ Minimally required resources for TKG cluster to install Kubeflow
 
 To install Kubeflow, the TKG cluster must meet the following minimum requirements:
 
-- Kubernetes version 1.21 or later
+- Kubernetes version 1.21, 1.22, 1.23, 1.24 or 1.25
 - At least one worker node satisfies below minimum resources requirements:
     - 4 CPU
     - 16GB memory
