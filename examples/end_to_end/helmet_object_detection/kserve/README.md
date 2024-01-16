@@ -1,4 +1,4 @@
-# Helmet Detection Model Serving on FreestoneKubeflow with KServe
+# Helmet Detection Model Serving on Freestone Kubeflow with KServe
 
 ## Introduction
 
