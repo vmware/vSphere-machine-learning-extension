@@ -1,0 +1,1748 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../_static/favicon.ico">
+    
+    
+      
+        <title>Metadata Store - vSphere Machine Learning Extension</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.af531f03affe68837.min.css?v=2410bb73" />
+        <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="vSphere Machine Learning Extension" class="md-header__button md-logo" aria-label="vSphere Machine Learning Extension" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            vSphere Machine Learning Extension
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Metadata Store
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="yellow"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vmware/vSphere-machine-learning-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vSphere Machine Learning Extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="vSphere Machine Learning Extension" class="md-nav__button md-logo" aria-label="vSphere Machine Learning Extension" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    vSphere Machine Learning Extension
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vmware/vSphere-machine-learning-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vSphere Machine Learning Extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          <span class="md-ellipsis">Introduction</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Introduction" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Introduction</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/index.html" class="md-nav__link">
+        <span title="/introduction/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/oss.html" class="md-nav__link">
+        <span title="/introduction/oss.rst (reference label)" class="md-ellipsis">Kubeflow Components</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/ekf.html" class="md-nav__link">
+        <span title="/introduction/ekf.rst (reference label)" class="md-ellipsis">Kubeflow on v<wbr>Sphere Components and Features</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/mlops.html" class="md-nav__link">
+        <span title="/introduction/mlops.rst (reference label)" class="md-ellipsis">MLOps with Kubeflow</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          <span class="md-ellipsis">Install and Configure</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Install and Configure" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Install and Configure</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/index.html" class="md-nav__link">
+        <span title="/install/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/tkgs.html" class="md-nav__link">
+        <span title="/install/tkgs.rst (reference label)" class="md-ellipsis">Install Kubeflow on v<wbr>Sphere</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/auth.html" class="md-nav__link">
+        <span title="/install/auth.rst (reference label)" class="md-ellipsis">Authentication Integration</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/monitor.html" class="md-nav__link">
+        <span title="/install/monitor.rst (reference label)" class="md-ellipsis">Monitoring with Prometheus and Grafana</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          <span class="md-ellipsis">User Guide</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">User Guide</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        <span title="/user-guide/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks.html" class="md-nav__link">
+        <span title="/user-guide/notebooks.rst (reference label)" class="md-ellipsis">Notebooks</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="feast.html" class="md-nav__link">
+        <span title="/user-guide/feast.rst (reference label)" class="md-ellipsis">Feature Store</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spark.html" class="md-nav__link">
+        <span title="/user-guide/spark.rst (reference label)" class="md-ellipsis">Data Processing</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/user-guide/mlmd.rst (reference label)" class="md-ellipsis">Metadata Store</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/user-guide/mlmd.rst (reference label)" class="md-ellipsis">Metadata Store</span>
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/user-guide/mlmd.rst (reference label)" class="md-ellipsis">Metadata Store</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#get-started (reference label)" class="md-ellipsis">Get started</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-mlmd-library" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#install-mlmd-library (reference label)" class="md-ellipsis">Install MLMD library</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install MLMD library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-from-pypi" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#install-from-pypi (reference label)" class="md-ellipsis">Install from Py<wbr>PI</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-with-docker" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#install-with-docker (reference label)" class="md-ellipsis">Install with Docker</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-from-source" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#install-from-source (reference label)" class="md-ellipsis">Install from source</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-metadata-store-connection" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#configure-metadata-store-connection (reference label)" class="md-ellipsis">Configure Metadata Store connection</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Metadata Store connection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fake-database-used-in-this-section" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#fake-database-used-in-this-section (reference label)" class="md-ellipsis">Fake Database <wbr>(used in this section)</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlite" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#sqlite (reference label)" class="md-ellipsis">SQLite</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#mysql (reference label)" class="md-ellipsis">My<wbr>SQL</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrate-mlmd-with-ml-workflow" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#integrate-mlmd-with-ml-workflow (reference label)" class="md-ellipsis">Integrate MLMD with ML Workflow</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integrate MLMD with ML Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register-artifact-types" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#register-artifact-types (reference label)" class="md-ellipsis">1.<wbr> Register Artifact types</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register-execution-types" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#register-execution-types (reference label)" class="md-ellipsis">2.<wbr> Register execution types</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-dataset-artifact" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#create-dataset-artifact (reference label)" class="md-ellipsis">3.<wbr> Create dataset artifact</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-execution-for-trainer" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#create-execution-for-trainer (reference label)" class="md-ellipsis">4.<wbr> Create execution for trainer</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-dataset-and-record-input-event" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#read-dataset-and-record-input-event (reference label)" class="md-ellipsis">5.<wbr> Read Dataset and record input event</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#train-model-and-create-saved-model-artifact" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#train-model-and-create-saved-model-artifact (reference label)" class="md-ellipsis">6.<wbr> Train model and create saved model artifact</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-saved-model-and-record-output-event" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#write-saved-model-and-record-output-event (reference label)" class="md-ellipsis">7.<wbr> Write saved model and record output event</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mark-execution-completed" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#mark-execution-completed (reference label)" class="md-ellipsis">8.<wbr> Mark execution completed</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#annote-the-experiment-with-a-context" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#annote-the-experiment-with-a-context (reference label)" class="md-ellipsis">9.<wbr> Annote the experiment with a context</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mlflow.html" class="md-nav__link">
+        <span title="/user-guide/mlflow.rst (reference label)" class="md-ellipsis">Model Registry</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="training.html" class="md-nav__link">
+        <span title="/user-guide/training.rst (reference label)" class="md-ellipsis">Model Training</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tensorboard.html" class="md-nav__link">
+        <span title="/user-guide/tensorboard.rst (reference label)" class="md-ellipsis">Visualization for Experiments</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="katib.html" class="md-nav__link">
+        <span title="/user-guide/katib.rst (reference label)" class="md-ellipsis">Hyperparameter Tuning</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kserve.html" class="md-nav__link">
+        <span title="/user-guide/kserve.rst (reference label)" class="md-ellipsis">Model Serving</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kfp.html" class="md-nav__link">
+        <span title="/user-guide/kfp.rst (reference label)" class="md-ellipsis">ML Pipelines</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="federated-model-training.html" class="md-nav__link">
+        <span title="/user-guide/federated-model-training.rst (reference label)" class="md-ellipsis">Federated model training</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          <span class="md-ellipsis">Use Cases</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Use Cases" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Use Cases</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/index.html" class="md-nav__link">
+        <span title="/use-cases/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/helmet.html" class="md-nav__link">
+        <span title="/use-cases/helmet.rst (reference label)" class="md-ellipsis">End to End Examples</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/modelserving.html" class="md-nav__link">
+        <span title="/use-cases/modelserving.rst (reference label)" class="md-ellipsis">Model Serving Examples</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/codegen.html" class="md-nav__link">
+        <span title="/use-cases/codegen.ipynb (reference label)" class="md-ellipsis">Salesforce Code<wbr>Gen</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          <span class="md-ellipsis">Internals</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Internals" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Internals</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internals/auth.html" class="md-nav__link">
+        <span title="/internals/auth.rst (reference label)" class="md-ellipsis">Authentication and Authorization</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/user-guide/mlmd.rst (reference label)" class="md-ellipsis">Metadata Store</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#get-started (reference label)" class="md-ellipsis">Get started</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-mlmd-library" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#install-mlmd-library (reference label)" class="md-ellipsis">Install MLMD library</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install MLMD library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-from-pypi" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#install-from-pypi (reference label)" class="md-ellipsis">Install from Py<wbr>PI</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-with-docker" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#install-with-docker (reference label)" class="md-ellipsis">Install with Docker</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-from-source" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#install-from-source (reference label)" class="md-ellipsis">Install from source</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-metadata-store-connection" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#configure-metadata-store-connection (reference label)" class="md-ellipsis">Configure Metadata Store connection</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Metadata Store connection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fake-database-used-in-this-section" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#fake-database-used-in-this-section (reference label)" class="md-ellipsis">Fake Database <wbr>(used in this section)</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlite" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#sqlite (reference label)" class="md-ellipsis">SQLite</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#mysql (reference label)" class="md-ellipsis">My<wbr>SQL</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrate-mlmd-with-ml-workflow" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#integrate-mlmd-with-ml-workflow (reference label)" class="md-ellipsis">Integrate MLMD with ML Workflow</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integrate MLMD with ML Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register-artifact-types" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#register-artifact-types (reference label)" class="md-ellipsis">1.<wbr> Register Artifact types</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register-execution-types" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#register-execution-types (reference label)" class="md-ellipsis">2.<wbr> Register execution types</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-dataset-artifact" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#create-dataset-artifact (reference label)" class="md-ellipsis">3.<wbr> Create dataset artifact</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-execution-for-trainer" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#create-execution-for-trainer (reference label)" class="md-ellipsis">4.<wbr> Create execution for trainer</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-dataset-and-record-input-event" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#read-dataset-and-record-input-event (reference label)" class="md-ellipsis">5.<wbr> Read Dataset and record input event</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#train-model-and-create-saved-model-artifact" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#train-model-and-create-saved-model-artifact (reference label)" class="md-ellipsis">6.<wbr> Train model and create saved model artifact</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-saved-model-and-record-output-event" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#write-saved-model-and-record-output-event (reference label)" class="md-ellipsis">7.<wbr> Write saved model and record output event</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mark-execution-completed" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#mark-execution-completed (reference label)" class="md-ellipsis">8.<wbr> Mark execution completed</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#annote-the-experiment-with-a-context" class="md-nav__link">
+    <span title="/user-guide/mlmd.rst#annote-the-experiment-with-a-context (reference label)" class="md-ellipsis">9.<wbr> Annote the experiment with a context</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+  <a href="https://github.com/vmware/vSphere-machine-learning-extension/blob/master/docs/user-guide/mlmd.rst" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+<h1 id="metadata-store">Metadata Store<a class="headerlink" href="#metadata-store" title="Link to this heading">¶</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>Metadata in machine learning (ML) is the data that includes information such as the creator of different model versions, the time they are
+created, the training data, parameters, and the place and performance metrics of each version of a model. It is created in each phase
+of the ML lifecycle, and also provides information about the environment in which an ML model is built. From the data extraction to
+the model monitoring phase, all ML-related processes create specific metadata. For example, the initial part of the ML lifecycle
+includes metadata regarding the location, name, and version of the dataset; the model training phase includes metadata regarding
+hyperparameters and evaluation metrics.</p>
+<p><a class="reference external" href="https://github.com/google/ml-metadata">ML Metadata (MLMD)</a> is a library for recording and retrieving metadata associated with
+ML engineers and data scientist workflows. MLMD is an integral part of <a class="reference external" href="https://www.tensorflow.org/tfx">TensorFlow Extended (TFX)</a>,
+but is designed so that it can be used independently.</p>
+<p>Every run of a production ML pipeline generates metadata containing information about the various pipeline components, their
+executions (e.g. training runs), and resulting artifacts (e.g. trained models). In the event of unexpected pipeline behavior or
+errors, this metadata can be leveraged to analyze the lineage of pipeline components and debug issues. Think of this metadata as
+the equivalent of logs in software systems.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Details and screenshots on how to create pipelines from YAML file and how to create experiments and runs are included in
+<a class="reference internal" href="kfp.html#kubeflow-pipelines"><span class="std std-ref">ML Pipelines</span></a>.</p>
+</div>
+<p>MLMD helps you understand and analyze all the interconnected parts of your ML pipelines instead of analyzing them in isolation and
+can help you answer questions about your ML pipelines such as:</p>
+<ul class="simple">
+<li><p>Which dataset was the model trained on?</p></li>
+<li><p>What were the hyperparameters used to train the model?</p></li>
+<li><p>Which pipeline run created the model?</p></li>
+<li><p>Which training run led to this model?</p></li>
+<li><p>When was the failed model pushed?</p></li>
+</ul>
+<p>Below diagram shows a high-level overview of the various components of MLMD.</p>
+<img alt="../_images/user-guide-mlmd-overview.png" src="../_images/user-guide-mlmd-overview.png" />
+<p>For more detailed information about how MLMD works, please refer to its <a class="reference external" href="https://github.com/google/ml-metadata">source code</a>.</p>
+<h2 id="get-started">Get started<a class="headerlink" href="#get-started" title="Link to this heading">¶</a></h2>
+<p>On your Kubeflow on vSphere Dashboard UI, navigate to <strong>Notebooks</strong>, and connect to a Notebook Server. Create a notebook (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file) to hold and execute
+the <em>Python</em> codes given in the rest of this section.</p>
+<h3 id="install-mlmd-library">Install MLMD library<a class="headerlink" href="#install-mlmd-library" title="Link to this heading">¶</a></h3>
+<p>Let’s start from installing MLMD library. There are three ways to do so.</p>
+<h4 id="install-from-pypi">Install from PyPI<a class="headerlink" href="#install-from-pypi" title="Link to this heading">¶</a></h4>
+<p>The <em>general recommended</em> way to install ML Metadata is to use the <a class="reference external" href="https://pypi.org/project/ml-metadata/">PyPI package</a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>ml-metadata
+</code></pre></div>
+</div>
+<h4 id="install-with-docker">Install with Docker<a class="headerlink" href="#install-with-docker" title="Link to this heading">¶</a></h4>
+<p>This is the recommended way to build ML Metadata <em>under Linux</em>.</p>
+<p>Please first install <code class="docutils literal notranslate"><span class="pre">docker</span></code> and <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> following the directions: <a class="reference external" href="https://docs.docker.com/get-docker/">docker</a>;
+<a class="reference external" href="https://docs.docker.com/compose/install/">docker-compose</a>.</p>
+<p>Then, run the following at the project root:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="nv">DOCKER_SERVICE</span><span class="o">=</span>manylinux-python<span class="si">${</span><span class="nv">PY_VERSION</span><span class="si">}</span>
+sudo<span class="w"> </span>docker-compose<span class="w"> </span>build<span class="w"> </span><span class="si">${</span><span class="nv">DOCKER_SERVICE</span><span class="si">}</span>
+sudo<span class="w"> </span>docker-compose<span class="w"> </span>run<span class="w"> </span><span class="si">${</span><span class="nv">DOCKER_SERVICE</span><span class="si">}</span>
+</code></pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">PY_VERSION</span></code> is one of <code class="docutils literal notranslate"><span class="pre">{37,</span> <span class="pre">38,</span> <span class="pre">39}</span></code>.</p>
+<p>A wheel is generated under <code class="docutils literal notranslate"><span class="pre">dist/</span></code>, and installed as follows:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>dist/*.whl
+</code></pre></div>
+</div>
+<h4 id="install-from-source">Install from source<a class="headerlink" href="#install-from-source" title="Link to this heading">¶</a></h4>
+<p>If you prefer to install MLMD from source, refer to <a class="reference external" href="https://github.com/google/ml-metadata#installing-from-source">its github</a>
+for detailed instruction.</p>
+<p>After installation, you can import the package in your notebook.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">ml_metadata</span> <span class="kn">import</span> <span class="n">metadata_store</span>
+<span class="kn">from</span> <span class="nn">ml_metadata.proto</span> <span class="kn">import</span> <span class="n">metadata_store_pb2</span>
+</code></pre></div>
+</div>
+<h3 id="configure-metadata-store-connection"><span id="storage-backends-and-store-connection-configuration"></span>Configure Metadata Store connection<a class="headerlink" href="#configure-metadata-store-connection" title="Link to this heading">¶</a></h3>
+<p>After installing and importing MLMD, you need to configure the Metadata Store connection.</p>
+<p>An ML Metadata Store is a centralized structure for storing the metadata of ML models. MLMD registers the following types of metadata in
+the Metadata Store database:</p>
+<ul class="simple">
+<li><p>Metadata about the artifacts created through the components/steps of your ML pipelines;</p></li>
+<li><p>Metadata about the executions of these components/steps;</p></li>
+<li><p>Metadata about pipelines and associated lineage information.</p></li>
+</ul>
+<p>The Metadata Store provides APIs to record and retrieve metadata to and from the storage backend. The storage backend is pluggable and
+can be extended. MLMD provides reference implementations for SQLite (which supports in memory and on disk storage) and MySQL out of the box.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">MetadataStore</span></code> object receives a connection configuration that corresponds to the storage backend used.
+There are three general options to configure storage connection.</p>
+<div class="important admonition">
+<p class="admonition-title">Important</p>
+<p>This section uses <em>Fake Database</em>.</p>
+</div>
+<h4 id="fake-database-used-in-this-section">Fake Database (used in this section)<a class="headerlink" href="#fake-database-used-in-this-section" title="Link to this heading">¶</a></h4>
+<p>Fake Database provides an in-memory DB (using SQLite) for fast experimentation and local runs. The database is deleted when
+the store object is destroyed.</p>
+<p>In your notebook, run below codes to connect your Metadata Store to a Fake Database:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">connection_config</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">ConnectionConfig</span><span class="p">()</span>
+<span class="n">connection_config</span><span class="o">.</span><span class="n">fake_database</span><span class="o">.</span><span class="n">SetInParent</span><span class="p">()</span> <span class="c1"># Sets an empty fake database proto.</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">metadata_store</span><span class="o">.</span><span class="n">MetadataStore</span><span class="p">(</span><span class="n">connection_config</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h4 id="sqlite">SQLite<a class="headerlink" href="#sqlite" title="Link to this heading">¶</a></h4>
+<p>SQLite reads and writes files on disk.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">connection_config</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">ConnectionConfig</span><span class="p">()</span>
+<span class="n">connection_config</span><span class="o">.</span><span class="n">sqlite</span><span class="o">.</span><span class="n">filename_uri</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>
+<span class="n">connection_config</span><span class="o">.</span><span class="n">sqlite</span><span class="o">.</span><span class="n">connection_mode</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># READWRITE_OPENCREATE</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">metadata_store</span><span class="o">.</span><span class="n">MetadataStore</span><span class="p">(</span><span class="n">connection_config</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h4 id="mysql">MySQL<a class="headerlink" href="#mysql" title="Link to this heading">¶</a></h4>
+<p>MySQL connects to a MySQL server.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">connection_config</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">ConnectionConfig</span><span class="p">()</span>
+<span class="n">connection_config</span><span class="o">.</span><span class="n">mysql</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>
+<span class="n">connection_config</span><span class="o">.</span><span class="n">mysql</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>
+<span class="n">connection_config</span><span class="o">.</span><span class="n">mysql</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>
+<span class="n">connection_config</span><span class="o">.</span><span class="n">mysql</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>
+<span class="n">connection_config</span><span class="o">.</span><span class="n">mysql</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">metadata_store</span><span class="o">.</span><span class="n">MetadataStore</span><span class="p">(</span><span class="n">connection_config</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h3 id="integrate-mlmd-with-ml-workflow">Integrate MLMD with ML Workflow<a class="headerlink" href="#integrate-mlmd-with-ml-workflow" title="Link to this heading">¶</a></h3>
+<p>In this section, we introduce you some basic concepts and understandings of MLMD usage by going through an example. We use a typical ML workflow to show you how to use the low-level MLMD APIs to track the execution of a training task.</p>
+<p>The following graph shows the <em>overall workflow</em>.</p>
+<img alt="../_images/user-guide-mlmd-workflow.png" src="../_images/user-guide-mlmd-workflow.png" />
+<p>To record and retrieve metadata of the workflow to and from the storage backend, the Metadata Store uses the following data model:</p>
+<table class="docutils data align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Data Model</p></th>
+<th class="head"><p>Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ArtifactType</p></td>
+<td><p>Describe an artifact’s type and its properties that are stored in the metadata store. You can register these types on-the-fly with the metadata store in code, or you can load them in the store from a serialized format. Once you register a type, its definition is available throughout the lifetime of the store.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Artifact</p></td>
+<td><p>Describe a specific instance of an <code class="docutils literal notranslate"><span class="pre">ArtifactType</span></code>, and its properties that are written to the metadata store.</p></td>
+</tr>
+<tr class="row-even"><td><p>ExecutionType</p></td>
+<td><p>Describe a type of component or step in a workflow, and its runtime parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Execution</p></td>
+<td><p>A record of a component run or a step in an ML workflow and the runtime parameters. An <code class="docutils literal notranslate"><span class="pre">Execution</span></code> can be thought of as an instance of an <code class="docutils literal notranslate"><span class="pre">ExecutionType</span></code>. Executions are recorded when you run an ML pipeline or step.</p></td>
+</tr>
+<tr class="row-even"><td><p>Event</p></td>
+<td><p>A record of the relationship between <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> and <code class="docutils literal notranslate"><span class="pre">Execution</span></code>. When an execution happens, events record every artifact that was used by the execution, and every artifact that was produced. These records allow for lineage tracking throughout a workflow. By looking at all <code class="docutils literal notranslate"><span class="pre">Event</span></code>, MLMD knows what <code class="docutils literal notranslate"><span class="pre">Execution</span></code> happened and what <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> was created as a result. MLMD can then recurse back from any <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> to all of its upstream inputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ContextType</p></td>
+<td><p>Describe a type of conceptual group of <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> and <code class="docutils literal notranslate"><span class="pre">Execution</span></code> in a workflow, and its structural properties. For example: projects, pipeline runs, experiments, owners, etc.</p></td>
+</tr>
+<tr class="row-even"><td><p>Context</p></td>
+<td><p>An instance of a <code class="docutils literal notranslate"><span class="pre">ContextType</span></code>. It captures the shared information within the group. For example: project name, change list commit id, experiment annotations, etc. It has a user-defined <strong>unique</strong> name within its <code class="docutils literal notranslate"><span class="pre">ContextType</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Attribution</p></td>
+<td><p>A record of the relationship between <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> and <code class="docutils literal notranslate"><span class="pre">Context</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Association</p></td>
+<td><p>A record of the relationship between <code class="docutils literal notranslate"><span class="pre">Execution</span></code> and <code class="docutils literal notranslate"><span class="pre">Context</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<p>You may understand an <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> as a concrete object that is produced by an <code class="docutils literal notranslate"><span class="pre">Execution</span></code>. For example, a model is an
+<code class="docutils literal notranslate"><span class="pre">Artifact</span></code> that is produced from an <code class="docutils literal notranslate"><span class="pre">Execution</span></code> of training step. The <code class="docutils literal notranslate"><span class="pre">Context</span></code> can be then considered as the whole run that
+encapsulates the experiment. And whenever a step (i.e. <code class="docutils literal notranslate"><span class="pre">Execution</span></code>) produces an <code class="docutils literal notranslate"><span class="pre">Artifact</span></code>, you can say that it emits an <code class="docutils literal notranslate"><span class="pre">Event</span></code>, which binds an
+<code class="docutils literal notranslate"><span class="pre">Artifact</span></code> and an <code class="docutils literal notranslate"><span class="pre">Execution</span></code> together. Finally, an <code class="docutils literal notranslate"><span class="pre">Attribution</span></code> connects an <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> with a <code class="docutils literal notranslate"><span class="pre">Context</span></code>, and an
+<code class="docutils literal notranslate"><span class="pre">Association</span></code> connects an <code class="docutils literal notranslate"><span class="pre">Execution</span></code> with a <code class="docutils literal notranslate"><span class="pre">Context</span></code>.</p>
+<p>To summarize,</p>
+<ul class="simple">
+<li><p>An <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> (a model) is produced by an <code class="docutils literal notranslate"><span class="pre">Execution</span></code> (a workflow step) and they are bounded together by an <code class="docutils literal notranslate"><span class="pre">Event</span></code>;</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">Execution</span></code> (a workflow step) is part of a <code class="docutils literal notranslate"><span class="pre">Context</span></code> (an experiment) and they are bounded together by an <code class="docutils literal notranslate"><span class="pre">Association</span></code>;</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Context</span></code> (an experiment) generates an <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> (a model) and they are bounded together by an <code class="docutils literal notranslate"><span class="pre">Attribution</span></code>.</p></li>
+</ul>
+<p>This exmaple simply represents a workflow that uses a <em>dataset</em> (<code class="docutils literal notranslate"><span class="pre">Artifact</span></code>) to <em>train</em> (<code class="docutils literal notranslate"><span class="pre">Execution</span></code>) a
+<em>model</em> (<code class="docutils literal notranslate"><span class="pre">Artifact</span></code>). We walk you through the code implementation step by step, based on the graph above.</p>
+<h4 id="register-artifact-types">1. Register Artifact types<a class="headerlink" href="#register-artifact-types" title="Link to this heading">¶</a></h4>
+<p>Let’s start with registering artifact types. You see two <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> in the graph above,
+therefore you need to register two <code class="docutils literal notranslate"><span class="pre">ArtifactType</span></code>.</p>
+<p>To register <code class="docutils literal notranslate"><span class="pre">ArtifactType</span></code> for dataset:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">data_type</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">ArtifactType</span><span class="p">()</span>
+<span class="n">data_type</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DataSet&quot;</span>
+<span class="n">data_type</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">INT</span>
+<span class="n">data_type</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;split&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">STRING</span>
+<span class="n">data_type_id</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">put_artifact_type</span><span class="p">(</span><span class="n">data_type</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>To register <code class="docutils literal notranslate"><span class="pre">ArtifactType</span></code> for saved model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">model_type</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">ArtifactType</span><span class="p">()</span>
+<span class="n">model_type</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;SavedModel&quot;</span>
+<span class="n">model_type</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">INT</span>
+<span class="n">model_type</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">STRING</span>
+<span class="n">model_type_id</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">put_artifact_type</span><span class="p">(</span><span class="n">model_type</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>To see the registered <code class="docutils literal notranslate"><span class="pre">ArtifactType</span></code>,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">artifact_types</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_artifact_types</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">artifact_types</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>and you see outputs like below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code>[id: 10
+ name: &quot;DataSet&quot;
+ properties {
+   key: &quot;day&quot;
+   value: INT
+ }
+ properties {
+   key: &quot;split&quot;
+   value: STRING
+ }
+, id: 11
+ name: &quot;SavedModel&quot;
+ properties {
+   key: &quot;name&quot;
+   value: STRING
+ }
+ properties {
+   key: &quot;version&quot;
+   value: INT
+ }
+]
+</code></pre></div>
+</div>
+<h4 id="register-execution-types">2. Register execution types<a class="headerlink" href="#register-execution-types" title="Link to this heading">¶</a></h4>
+<p>You then register execution types for all steps in the ML workflow. In this example, you register an <code class="docutils literal notranslate"><span class="pre">ExecutionType</span></code> for trainer:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">trainer_type</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">ExecutionType</span><span class="p">()</span>
+<span class="n">trainer_type</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Trainer&quot;</span>
+<span class="n">trainer_type</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">STRING</span>
+<span class="n">trainer_type_id</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">put_execution_type</span><span class="p">(</span><span class="n">trainer_type</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>You query a registered <code class="docutils literal notranslate"><span class="pre">ExecutionType</span></code> with the returned <code class="docutils literal notranslate"><span class="pre">id</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">registered_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_execution_types_by_id</span><span class="p">([</span><span class="n">trainer_type_id</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">registered_type</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>And you see output like below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code>id: 12
+name: &quot;Trainer&quot;
+properties {
+  key: &quot;state&quot;
+  value: STRING
+}
+</code></pre></div>
+</div>
+<h4 id="create-dataset-artifact">3. Create dataset artifact<a class="headerlink" href="#create-dataset-artifact" title="Link to this heading">¶</a></h4>
+<p>Next, you create the dataset artifact using the Dataset <code class="docutils literal notranslate"><span class="pre">ArtifactType</span></code> registered previously:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">data_artifact</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">Artifact</span><span class="p">()</span>
+<span class="n">data_artifact</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="s1">&#39;path/to/data&#39;</span>
+<span class="n">data_artifact</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">int_value</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">data_artifact</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;split&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">string_value</span> <span class="o">=</span> <span class="s1">&#39;train&#39;</span>
+</code></pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">id</span></code> to specify that this <code class="docutils literal notranslate"><span class="pre">data_artifact</span></code> is in <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> artifact type:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">data_artifact</span><span class="o">.</span><span class="n">type_id</span> <span class="o">=</span> <span class="n">data_type_id</span>
+<span class="p">[</span><span class="n">data_artifact_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">put_artifacts</span><span class="p">([</span><span class="n">data_artifact</span><span class="p">])</span>
+</code></pre></div>
+</div>
+<p>You see the registered dataset artifact by querying all registered <code class="docutils literal notranslate"><span class="pre">Artifact</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">artifacts</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_artifacts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">artifacts</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>You see outputs like below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code>[id: 1
+type_id: 10
+uri: &quot;path/to/data&quot;
+properties {
+  key: &quot;day&quot;
+  value {
+    int_value: 1
+  }
+}
+properties {
+  key: &quot;split&quot;
+  value {
+    string_value: &quot;train&quot;
+  }
+}
+create_time_since_epoch: 1675758739631
+last_update_time_since_epoch: 1675758739631
+]
+</code></pre></div>
+</div>
+<p>By the way, there are many ways to query the same <code class="docutils literal notranslate"><span class="pre">Artifact</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">stored_data_artifact</span><span class="p">]</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_artifacts_by_id</span><span class="p">([</span><span class="n">data_artifact_id</span><span class="p">])</span>
+<span class="n">artifacts_with_uri</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_artifacts_by_uri</span><span class="p">(</span><span class="n">data_artifact</span><span class="o">.</span><span class="n">uri</span><span class="p">)</span>
+<span class="n">artifacts_with_conditions</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_artifacts</span><span class="p">(</span>
+    <span class="n">list_options</span><span class="o">=</span><span class="n">metadata_store</span><span class="o">.</span><span class="n">ListOptions</span><span class="p">(</span>
+        <span class="n">filter_query</span><span class="o">=</span><span class="s1">&#39;uri LIKE &quot;%/data&quot; AND properties.day.int_value &gt; 0&#39;</span><span class="p">))</span>
+</code></pre></div>
+</div>
+<h4 id="create-execution-for-trainer">4. Create execution for trainer<a class="headerlink" href="#create-execution-for-trainer" title="Link to this heading">¶</a></h4>
+<p>You then create an <code class="docutils literal notranslate"><span class="pre">Execution</span></code> of the trainer run, using the Trainer <code class="docutils literal notranslate"><span class="pre">ExecutionType</span></code> registered previously:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">trainer_run</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">Execution</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<p>Similary, use <code class="docutils literal notranslate"><span class="pre">id</span></code> to specify that this <code class="docutils literal notranslate"><span class="pre">Execution</span></code> is in <code class="docutils literal notranslate"><span class="pre">Trainer</span></code> execution type:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">trainer_run</span><span class="o">.</span><span class="n">type_id</span> <span class="o">=</span> <span class="n">trainer_type_id</span>
+</code></pre></div>
+</div>
+<p>And mark its status as “Running”:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">trainer_run</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">string_value</span> <span class="o">=</span> <span class="o">**</span><span class="n">RUNNING</span><span class="o">**</span>
+<span class="p">[</span><span class="n">run_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">put_executions</span><span class="p">([</span><span class="n">trainer_run</span><span class="p">])</span>
+</code></pre></div>
+</div>
+<p>You see this execution by querying all registered <code class="docutils literal notranslate"><span class="pre">Execution</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">executions</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_executions_by_id</span><span class="p">([</span><span class="n">run_id</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">executions</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>And you see output like below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code>[id: 1
+ type_id: 12
+ properties {
+   key: &quot;state&quot;
+   value {
+     string_value: &quot;RUNNING&quot;
+   }
+ }
+ create_time_since_epoch: 1675758962852
+ last_update_time_since_epoch: 1675758962852
+]
+</code></pre></div>
+</div>
+<p>Similarly, the same execution is queried with conditions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">executions_with_conditions</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_executions</span><span class="p">(</span>
+    <span class="n">list_options</span> <span class="o">=</span> <span class="n">metadata_store</span><span class="o">.</span><span class="n">ListOptions</span><span class="p">(</span>
+        <span class="n">filter_query</span><span class="o">=</span><span class="s1">&#39;type = &quot;Trainer&quot; AND properties.state.string_value IS NOT NULL&#39;</span><span class="p">))</span>
+</code></pre></div>
+</div>
+<h4 id="read-dataset-and-record-input-event">5. Read Dataset and record input event<a class="headerlink" href="#read-dataset-and-record-input-event" title="Link to this heading">¶</a></h4>
+<p>Now, it’s time to define the input <code class="docutils literal notranslate"><span class="pre">Event</span></code> and read the data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">input_event</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+<span class="n">input_event</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">Event</span><span class="o">.</span><span class="n">DECLARED_INPUT</span>
+</code></pre></div>
+</div>
+<p>Read the input data by specifying the <code class="docutils literal notranslate"><span class="pre">input_event.artifact_id</span></code> as the id of the dataset artifact created previously:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">input_event</span><span class="o">.</span><span class="n">artifact_id</span> <span class="o">=</span> <span class="n">data_artifact_id</span>
+</code></pre></div>
+</div>
+<p>Specify that this dataset artifact is used as the input of the trainer execution using the id of the <code class="docutils literal notranslate"><span class="pre">Execution</span></code>
+created for trainer run previously:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">input_event</span><span class="o">.</span><span class="n">execution_id</span> <span class="o">=</span> <span class="n">run_id</span>
+</code></pre></div>
+</div>
+<p>Finally, record this input <code class="docutils literal notranslate"><span class="pre">Event</span></code> in the metadata store:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">store</span><span class="o">.</span><span class="n">put_events</span><span class="p">([</span><span class="n">input_event</span><span class="p">])</span>
+</code></pre></div>
+</div>
+<h4 id="train-model-and-create-saved-model-artifact">6. Train model and create saved model artifact<a class="headerlink" href="#train-model-and-create-saved-model-artifact" title="Link to this heading">¶</a></h4>
+<p>Next, you declare the output <code class="docutils literal notranslate"><span class="pre">Artifact</span></code>, which is the saved model, using the <code class="docutils literal notranslate"><span class="pre">SavedModel</span></code> artifact type created previously:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">model_artifact</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">Artifact</span><span class="p">()</span>
+<span class="n">model_artifact</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="s1">&#39;path/to/model/file&#39;</span>
+<span class="n">model_artifact</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">int_value</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">model_artifact</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">string_value</span> <span class="o">=</span> <span class="s1">&#39;MNIST-v1&#39;</span>
+<span class="n">model_artifact</span><span class="o">.</span><span class="n">type_id</span> <span class="o">=</span> <span class="n">model_type_id</span>
+<span class="p">[</span><span class="n">model_artifact_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">put_artifacts</span><span class="p">([</span><span class="n">model_artifact</span><span class="p">])</span>
+</code></pre></div>
+</div>
+<h4 id="write-saved-model-and-record-output-event">7. Write saved model and record output event<a class="headerlink" href="#write-saved-model-and-record-output-event" title="Link to this heading">¶</a></h4>
+<p>Now, it’s time to declare the output <code class="docutils literal notranslate"><span class="pre">Event</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">output_event</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+<span class="n">output_event</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">Event</span><span class="o">.</span><span class="n">DECLARED_OUTPUT</span>
+</code></pre></div>
+</div>
+<p>The output in this workflow is the saved model. So you use the id of saved model <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> created previously to specify:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">output_event</span><span class="o">.</span><span class="n">artifact_id</span> <span class="o">=</span> <span class="n">model_artifact_id</span>
+</code></pre></div>
+</div>
+<p>Similar to the input event, you need to specify that the saved model artifact is the output of the trainer execution:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">output_event</span><span class="o">.</span><span class="n">execution_id</span> <span class="o">=</span> <span class="n">run_id</span>
+</code></pre></div>
+</div>
+<p>Finally, submit this output <code class="docutils literal notranslate"><span class="pre">Event</span></code> to the Metadata Store:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">store</span><span class="o">.</span><span class="n">put_events</span><span class="p">([</span><span class="n">output_event</span><span class="p">])</span>
+</code></pre></div>
+</div>
+<h4 id="mark-execution-completed">8. Mark execution completed<a class="headerlink" href="#mark-execution-completed" title="Link to this heading">¶</a></h4>
+<p>You now mark the execution as <strong>COMPLETED</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">trainer_run</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">run_id</span>
+<span class="n">trainer_run</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;state&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">string_value</span> <span class="o">=</span> <span class="s2">&quot;COMPLETED&quot;</span>
+<span class="n">store</span><span class="o">.</span><span class="n">put_executions</span><span class="p">([</span><span class="n">trainer_run</span><span class="p">])</span>
+</code></pre></div>
+</div>
+<h4 id="annote-the-experiment-with-a-context">9. Annote the experiment with a context<a class="headerlink" href="#annote-the-experiment-with-a-context" title="Link to this heading">¶</a></h4>
+<p>Finally, you group artifacts and executions under a <code class="docutils literal notranslate"><span class="pre">Context</span></code> using <code class="docutils literal notranslate"><span class="pre">Attribution</span></code> and <code class="docutils literal notranslate"><span class="pre">Association</span></code>.</p>
+<p>Register a <code class="docutils literal notranslate"><span class="pre">ContextType</span></code> first.</p>
+<div class="important admonition">
+<p class="admonition-title">Important</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">name</span></code> of the <code class="docutils literal notranslate"><span class="pre">ContextType</span></code> must be unique.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">experiment_type</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">ContextType</span><span class="p">()</span>
+<span class="n">experiment_type</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Experiment&quot;</span>
+<span class="n">experiment_type</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;note&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">STRING</span>
+<span class="n">experiment_type_id</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">put_context_type</span><span class="p">(</span><span class="n">experiment_type</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">Context</span></code> using the <code class="docutils literal notranslate"><span class="pre">ContextType</span></code> just registered:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">my_experiment</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">Context</span><span class="p">()</span>
+<span class="n">my_experiment</span><span class="o">.</span><span class="n">type_id</span> <span class="o">=</span> <span class="n">experiment_type_id</span>
+<span class="n">my_experiment</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;exp1&quot;</span>
+<span class="n">my_experiment</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="s2">&quot;note&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">string_value</span> <span class="o">=</span> <span class="s2">&quot;My first experiment.&quot;</span>
+<span class="p">[</span><span class="n">experiment_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">put_contexts</span><span class="p">([</span><span class="n">my_experiment</span><span class="p">])</span>
+</code></pre></div>
+</div>
+<p>Group the model <code class="docutils literal notranslate"><span class="pre">Artifact</span></code> to this experiment <code class="docutils literal notranslate"><span class="pre">Context</span></code> using <code class="docutils literal notranslate"><span class="pre">Attribution</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">attribution</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">Attribution</span><span class="p">()</span>
+<span class="n">attribution</span><span class="o">.</span><span class="n">artifact_id</span> <span class="o">=</span> <span class="n">model_artifact_id</span>
+<span class="n">attribution</span><span class="o">.</span><span class="n">context_id</span> <span class="o">=</span> <span class="n">experiment_id</span>
+</code></pre></div>
+</div>
+<p>Group the trainer <code class="docutils literal notranslate"><span class="pre">Execution</span></code> to this experiment <code class="docutils literal notranslate"><span class="pre">Context</span></code> using <code class="docutils literal notranslate"><span class="pre">Association</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">association</span> <span class="o">=</span> <span class="n">metadata_store_pb2</span><span class="o">.</span><span class="n">Association</span><span class="p">()</span>
+<span class="n">association</span><span class="o">.</span><span class="n">execution_id</span> <span class="o">=</span> <span class="n">run_id</span>
+<span class="n">association</span><span class="o">.</span><span class="n">context_id</span> <span class="o">=</span> <span class="n">experiment_id</span>
+</code></pre></div>
+</div>
+<p>Submit this <code class="docutils literal notranslate"><span class="pre">Context</span></code> to Metadata Store:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">store</span><span class="o">.</span><span class="n">put_attributions_and_associations</span><span class="p">([</span><span class="n">attribution</span><span class="p">],</span> <span class="p">[</span><span class="n">association</span><span class="p">])</span>
+</code></pre></div>
+</div>
+<p>Confirm your previous works by querying the artifacts and executions that are linked to the experiment context:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">experiment_artifacts</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_artifacts_by_context</span><span class="p">(</span><span class="n">experiment_id</span><span class="p">)</span>
+<span class="n">experiment_executions</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_executions_by_context</span><span class="p">(</span><span class="n">experiment_id</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">experiment_artifacts</span></code> looks like below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code>[id: 2
+ type_id: 11
+ uri: &quot;path/to/model/file&quot;
+ properties {
+   key: &quot;name&quot;
+   value {
+     string_value: &quot;MNIST-v1&quot;
+   }
+ }
+ properties {
+   key: &quot;version&quot;
+   value {
+     int_value: 1
+   }
+ }
+ create_time_since_epoch: 1675759027103
+ last_update_time_since_epoch: 1675759027103
+]
+</code></pre></div>
+</div>
+<p>And the <code class="docutils literal notranslate"><span class="pre">experiment_executions</span></code> looks like below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code>[id: 1
+ type_id: 12
+ properties {
+   key: &quot;state&quot;
+   value {
+     string_value: &quot;COMPLETED&quot;
+   }
+ }
+ create_time_since_epoch: 1675758962852
+ last_update_time_since_epoch: 1675759074438
+]
+</code></pre></div>
+</div>
+<p>You may also use neighborhood queries to fetch these artifacts and executions with conditions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">experiment_artifacts_with_conditions</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_artifacts</span><span class="p">(</span>
+    <span class="n">list_options</span> <span class="o">=</span> <span class="n">metadata_store</span><span class="o">.</span><span class="n">ListOptions</span><span class="p">(</span>
+        <span class="n">filter_query</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;contexts_a.type = &quot;Experiment&quot; AND contexts_a.name = &quot;exp1&quot;&#39;</span><span class="p">)))</span>
+<span class="n">experiment_executions_with_conditions</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_executions</span><span class="p">(</span>
+    <span class="n">list_options</span> <span class="o">=</span> <span class="n">metadata_store</span><span class="o">.</span><span class="n">ListOptions</span><span class="p">(</span>
+        <span class="n">filter_query</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;contexts_a.id = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">experiment_id</span><span class="p">))))</span>
+</code></pre></div>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://github.com/google/ml-metadata">Github repo for google/ml-metadata</a></p>
+</div>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="spark.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Data Processing" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Data Processing
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="mlflow.html" class="md-footer__link md-footer__link--next" aria-label="Next: Model Registry" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Model Registry
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2023, VMware.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.2.6.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.sections", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+  </body>
+</html>

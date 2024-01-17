@@ -1,0 +1,1682 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../_static/favicon.ico">
+    
+    
+      
+        <title>Feature Store - vSphere Machine Learning Extension</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.af531f03affe68837.min.css?v=2410bb73" />
+        <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="vSphere Machine Learning Extension" class="md-header__button md-logo" aria-label="vSphere Machine Learning Extension" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            vSphere Machine Learning Extension
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Feature Store
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="yellow"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vmware/vSphere-machine-learning-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vSphere Machine Learning Extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="vSphere Machine Learning Extension" class="md-nav__button md-logo" aria-label="vSphere Machine Learning Extension" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    vSphere Machine Learning Extension
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vmware/vSphere-machine-learning-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vSphere Machine Learning Extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          <span class="md-ellipsis">Introduction</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Introduction" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Introduction</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/index.html" class="md-nav__link">
+        <span title="/introduction/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/oss.html" class="md-nav__link">
+        <span title="/introduction/oss.rst (reference label)" class="md-ellipsis">Kubeflow Components</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/ekf.html" class="md-nav__link">
+        <span title="/introduction/ekf.rst (reference label)" class="md-ellipsis">Kubeflow on v<wbr>Sphere Components and Features</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/mlops.html" class="md-nav__link">
+        <span title="/introduction/mlops.rst (reference label)" class="md-ellipsis">MLOps with Kubeflow</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          <span class="md-ellipsis">Install and Configure</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Install and Configure" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Install and Configure</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/index.html" class="md-nav__link">
+        <span title="/install/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/tkgs.html" class="md-nav__link">
+        <span title="/install/tkgs.rst (reference label)" class="md-ellipsis">Install Kubeflow on v<wbr>Sphere</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/auth.html" class="md-nav__link">
+        <span title="/install/auth.rst (reference label)" class="md-ellipsis">Authentication Integration</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/monitor.html" class="md-nav__link">
+        <span title="/install/monitor.rst (reference label)" class="md-ellipsis">Monitoring with Prometheus and Grafana</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          <span class="md-ellipsis">User Guide</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">User Guide</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        <span title="/user-guide/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks.html" class="md-nav__link">
+        <span title="/user-guide/notebooks.rst (reference label)" class="md-ellipsis">Notebooks</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/user-guide/feast.rst (reference label)" class="md-ellipsis">Feature Store</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/user-guide/feast.rst (reference label)" class="md-ellipsis">Feature Store</span>
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/user-guide/feast.rst (reference label)" class="md-ellipsis">Feature Store</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span title="/user-guide/feast.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started" class="md-nav__link">
+    <span title="/user-guide/feast.rst#get-started (reference label)" class="md-ellipsis">Get started</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upload-data-to-minio-bucket" class="md-nav__link">
+    <span title="/user-guide/feast.rst#upload-data-to-minio-bucket (reference label)" class="md-ellipsis">Upload data to Min<wbr>IO bucket</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-feast-and-dependency-packages" class="md-nav__link">
+    <span title="/user-guide/feast.rst#install-feast-and-dependency-packages (reference label)" class="md-ellipsis">Install Feast and dependency packages</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exploring-the-data" class="md-nav__link">
+    <span title="/user-guide/feast.rst#exploring-the-data (reference label)" class="md-ellipsis">Exploring the data</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-the-feature-repo-to-register-features" class="md-nav__link">
+    <span title="/user-guide/feast.rst#setup-the-feature-repo-to-register-features (reference label)" class="md-ellipsis">Setup the feature repo to register features</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup the feature repo to register features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-the-feature-repo" class="md-nav__link">
+    <span title="/user-guide/feast.rst#setup-the-feature-repo (reference label)" class="md-ellipsis">Setup the feature repo</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-feast-plan" class="md-nav__link">
+    <span title="/user-guide/feast.rst#run-feast-plan (reference label)" class="md-ellipsis">Run feast plan</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-feast-apply" class="md-nav__link">
+    <span title="/user-guide/feast.rst#run-feast-apply (reference label)" class="md-ellipsis">Run feast apply</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-features-are-registered" class="md-nav__link">
+    <span title="/user-guide/feast.rst#verify-features-are-registered (reference label)" class="md-ellipsis">Verify features are registered</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fetch-offline-features-to-train-model" class="md-nav__link">
+    <span title="/user-guide/feast.rst#fetch-offline-features-to-train-model (reference label)" class="md-ellipsis">Fetch offline features to train model</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fetch-online-features-from-sqlite-to-predict" class="md-nav__link">
+    <span title="/user-guide/feast.rst#fetch-online-features-from-sqlite-to-predict (reference label)" class="md-ellipsis">Fetch online features from SQLite to predict</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span title="/user-guide/feast.rst#troubleshooting (reference label)" class="md-ellipsis">Troubleshooting</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typeerror-when-execute-feast-plan-or-feast-apply" class="md-nav__link">
+    <span title="/user-guide/feast.rst#typeerror-when-execute-feast-plan-or-feast-apply (reference label)" class="md-ellipsis">Type<wbr>Error when execute feast plan or feast apply</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spark.html" class="md-nav__link">
+        <span title="/user-guide/spark.rst (reference label)" class="md-ellipsis">Data Processing</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mlmd.html" class="md-nav__link">
+        <span title="/user-guide/mlmd.rst (reference label)" class="md-ellipsis">Metadata Store</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mlflow.html" class="md-nav__link">
+        <span title="/user-guide/mlflow.rst (reference label)" class="md-ellipsis">Model Registry</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="training.html" class="md-nav__link">
+        <span title="/user-guide/training.rst (reference label)" class="md-ellipsis">Model Training</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tensorboard.html" class="md-nav__link">
+        <span title="/user-guide/tensorboard.rst (reference label)" class="md-ellipsis">Visualization for Experiments</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="katib.html" class="md-nav__link">
+        <span title="/user-guide/katib.rst (reference label)" class="md-ellipsis">Hyperparameter Tuning</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kserve.html" class="md-nav__link">
+        <span title="/user-guide/kserve.rst (reference label)" class="md-ellipsis">Model Serving</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kfp.html" class="md-nav__link">
+        <span title="/user-guide/kfp.rst (reference label)" class="md-ellipsis">ML Pipelines</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="federated-model-training.html" class="md-nav__link">
+        <span title="/user-guide/federated-model-training.rst (reference label)" class="md-ellipsis">Federated model training</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          <span class="md-ellipsis">Use Cases</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Use Cases" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Use Cases</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/index.html" class="md-nav__link">
+        <span title="/use-cases/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/helmet.html" class="md-nav__link">
+        <span title="/use-cases/helmet.rst (reference label)" class="md-ellipsis">End to End Examples</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/modelserving.html" class="md-nav__link">
+        <span title="/use-cases/modelserving.rst (reference label)" class="md-ellipsis">Model Serving Examples</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/codegen.html" class="md-nav__link">
+        <span title="/use-cases/codegen.ipynb (reference label)" class="md-ellipsis">Salesforce Code<wbr>Gen</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          <span class="md-ellipsis">Internals</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Internals" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Internals</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internals/auth.html" class="md-nav__link">
+        <span title="/internals/auth.rst (reference label)" class="md-ellipsis">Authentication and Authorization</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/user-guide/feast.rst (reference label)" class="md-ellipsis">Feature Store</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span title="/user-guide/feast.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started" class="md-nav__link">
+    <span title="/user-guide/feast.rst#get-started (reference label)" class="md-ellipsis">Get started</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upload-data-to-minio-bucket" class="md-nav__link">
+    <span title="/user-guide/feast.rst#upload-data-to-minio-bucket (reference label)" class="md-ellipsis">Upload data to Min<wbr>IO bucket</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-feast-and-dependency-packages" class="md-nav__link">
+    <span title="/user-guide/feast.rst#install-feast-and-dependency-packages (reference label)" class="md-ellipsis">Install Feast and dependency packages</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exploring-the-data" class="md-nav__link">
+    <span title="/user-guide/feast.rst#exploring-the-data (reference label)" class="md-ellipsis">Exploring the data</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-the-feature-repo-to-register-features" class="md-nav__link">
+    <span title="/user-guide/feast.rst#setup-the-feature-repo-to-register-features (reference label)" class="md-ellipsis">Setup the feature repo to register features</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup the feature repo to register features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-the-feature-repo" class="md-nav__link">
+    <span title="/user-guide/feast.rst#setup-the-feature-repo (reference label)" class="md-ellipsis">Setup the feature repo</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-feast-plan" class="md-nav__link">
+    <span title="/user-guide/feast.rst#run-feast-plan (reference label)" class="md-ellipsis">Run feast plan</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-feast-apply" class="md-nav__link">
+    <span title="/user-guide/feast.rst#run-feast-apply (reference label)" class="md-ellipsis">Run feast apply</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-features-are-registered" class="md-nav__link">
+    <span title="/user-guide/feast.rst#verify-features-are-registered (reference label)" class="md-ellipsis">Verify features are registered</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fetch-offline-features-to-train-model" class="md-nav__link">
+    <span title="/user-guide/feast.rst#fetch-offline-features-to-train-model (reference label)" class="md-ellipsis">Fetch offline features to train model</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fetch-online-features-from-sqlite-to-predict" class="md-nav__link">
+    <span title="/user-guide/feast.rst#fetch-online-features-from-sqlite-to-predict (reference label)" class="md-ellipsis">Fetch online features from SQLite to predict</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span title="/user-guide/feast.rst#troubleshooting (reference label)" class="md-ellipsis">Troubleshooting</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typeerror-when-execute-feast-plan-or-feast-apply" class="md-nav__link">
+    <span title="/user-guide/feast.rst#typeerror-when-execute-feast-plan-or-feast-apply (reference label)" class="md-ellipsis">Type<wbr>Error when execute feast plan or feast apply</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+  <a href="https://github.com/vmware/vSphere-machine-learning-extension/blob/master/docs/user-guide/feast.rst" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+<h1 id="feature-store"><span id="id1"></span>Feature Store<a class="headerlink" href="#feature-store" title="Link to this heading">¶</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p><em>Feast</em> (Feature Store) is a customizable operational data system that re-uses existing infrastructures to manage and serve machine learning (ML) features to models.</p>
+<ul class="simple">
+<li><p><em>Feature sharing and reuse</em>: Feature engineering is one of the most time consuming activities in building an end-to-end ML system, yet many teams continue to develop features in silos. This leads to a high amount of re-development and duplication of work across teams and projects.</p></li>
+<li><p><em>Serving features at scale</em>: Models need data from a variety of sources, including event streams, data lakes, warehouses, or notebooks. ML teams need to store and serve all these data for their models in a performant and reliable way. The challenge is to scalably produce massive datasets of features for model training, and provide access to real-time feature data at low latency and high throughput in serving.</p></li>
+<li><p><em>Consistency between training and serving</em>: The separation between data scientists and engineering teams often lead to the re-development of feature transformations when moving from training to online serving. Inconsistencies that arise due to discrepancies between training and serving implementations frequently leads to a drop in model performance in production.</p></li>
+</ul>
+<img alt="../_images/user-guide-feast-introduction.jpg" src="../_images/user-guide-feast-introduction.jpg" />
+<p>Feast helps ML teams with development and operations (DevOps) experience productionize real-time models. Feast can also help these teams build towards a feature platform that improves collaboration between engineers and data scientists.</p>
+<p>If you want to know the basic knowledges, such as simple feature repo, please refer to <a class="reference external" href="https://docs.feast.dev/getting-started/quickstart">feast-quick-start</a>.
+For more detailed information about Feast, please refer to <a class="reference external" href="https://docs.feast.dev/">Feast official website</a>, and to understand how it works, please refer to <a class="reference external" href="https://github.com/feast-dev/feast">its source code</a>.</p>
+<h2 id="get-started">Get started<a class="headerlink" href="#get-started" title="Link to this heading">¶</a></h2>
+<p>In this section, you use Feast to share features for training offline models, do online model inference for a ride-sharing driver satisfaction prediction model. You put data into S3 object (MinIO) for model training and store feature into S3 object to share for model inference later.</p>
+<p>Grab the <a class="reference external" href="https://github.com/feast-dev/feast-workshop/tree/main/module_0">code examples</a> to learn how to use feast to help development.</p>
+<p>Here is the roadmap:</p>
+<ul class="simple">
+<li><p>Set up a feature repo using MinIO S3 bucket for registry.</p></li>
+<li><p>Use the offline features to train model.</p></li>
+<li><p>Make predictions using online features by SQLite.</p></li>
+</ul>
+<p>The following graph shows the <em>overall workflow</em>.</p>
+<img alt="../_images/user-guide-feast-workflow.png" src="../_images/user-guide-feast-workflow.png" />
+<h3 id="upload-data-to-minio-bucket">Upload data to MinIO bucket<a class="headerlink" href="#upload-data-to-minio-bucket" title="Link to this heading">¶</a></h3>
+<p>If you already have the MinIO storage, you can directly skip the MinIO deployment step, and follow the next steps to upload data to MinIO. If not, we also provide a standalone MinIO deployment guide on the kubernetes clusters. You use the following YAML content and execute this command in your terminal.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># create pvc, MinIO service, MinIO deployment if you have not MinIO storage</span>
+cat<span class="w"> </span><span class="s">&lt;&lt; EOF | kubectl apply -f -</span>
+<span class="s">apiVersion: v1</span>
+<span class="s">kind: PersistentVolumeClaim</span>
+<span class="s">metadata:</span>
+<span class="s">  # This name uniquely identifies the PVC. Will be used in deployment below.</span>
+<span class="s">  name: minio-pv-claim</span>
+<span class="s">  labels:</span>
+<span class="s">    app: minio-storage-claim</span>
+<span class="s">  annotations:</span>
+<span class="s">    volume.beta.kubernetes.io/storage-class: pacific-storage-policy # replace it with yourself environment storage-class</span>
+<span class="s">spec:</span>
+<span class="s">  # Read more about access modes here: http://kubernetes.io/docs/user-guide/persistent-volumes/#access-modes</span>
+<span class="s">  accessModes:</span>
+<span class="s">    - ReadWriteOnce</span>
+<span class="s">  storageClassName: pacific-storage-policy</span>
+<span class="s">  resources:</span>
+<span class="s">    # This is the request for storage. Should be available in the cluster.</span>
+<span class="s">    requests:</span>
+<span class="s">      storage: 10Gi</span>
+<span class="s">---</span>
+<span class="s">apiVersion: v1</span>
+<span class="s">kind: Service</span>
+<span class="s">metadata:</span>
+<span class="s">  name: minio-service</span>
+<span class="s">spec:</span>
+<span class="s">  type: LoadBalancer</span>
+<span class="s">  ports:</span>
+<span class="s">    - port: 9000</span>
+<span class="s">      name: http</span>
+<span class="s">      targetPort: 9000</span>
+<span class="s">      protocol: TCP</span>
+<span class="s">    - port: 9001</span>
+<span class="s">      name: console</span>
+<span class="s">      targetPort: 9001</span>
+<span class="s">      protocol: TCP</span>
+<span class="s">  selector:</span>
+<span class="s">    app: minio</span>
+<span class="s">---</span>
+<span class="s">apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1</span>
+<span class="s">kind: Deployment</span>
+<span class="s">metadata:</span>
+<span class="s">  # This name uniquely identifies the Deployment</span>
+<span class="s">  name: minio-deployment</span>
+<span class="s">spec:</span>
+<span class="s">  selector:</span>
+<span class="s">    matchLabels:</span>
+<span class="s">      app: minio</span>
+<span class="s">  strategy:</span>
+<span class="s">    type: Recreate</span>
+<span class="s">  template:</span>
+<span class="s">    metadata:</span>
+<span class="s">      labels:</span>
+<span class="s">        # Label is used as selector in the service.</span>
+<span class="s">        app: minio</span>
+<span class="s">    spec:</span>
+<span class="s">      # Refer to the PVC created earlier</span>
+<span class="s">      volumes:</span>
+<span class="s">      - name: storage</span>
+<span class="s">        persistentVolumeClaim:</span>
+<span class="s">          # Name of the PVC created earlier</span>
+<span class="s">          claimName: minio-pv-claim</span>
+<span class="s">      containers:</span>
+<span class="s">      - name: minio</span>
+<span class="s">        # Pulls the default Minio image from Docker Hub</span>
+<span class="s">        image: minio/minio:latest</span>
+<span class="s">        args:</span>
+<span class="s">        - server</span>
+<span class="s">        - --console-address</span>
+<span class="s">        - :9001</span>
+<span class="s">        - /storage</span>
+<span class="s">        env:</span>
+<span class="s">        # Minio access key and secret key</span>
+<span class="s">        - name: MINIO_ACCESS_KEY</span>
+<span class="s">          value: &quot;minioadmin&quot;</span>
+<span class="s">        - name: MINIO_SECRET_KEY</span>
+<span class="s">          value: &quot;minioadmin&quot;</span>
+<span class="s">        ports:</span>
+<span class="s">        - containerPort: 9000</span>
+<span class="s">        - containerPort: 9001</span>
+<span class="s">        # Mount the volume into the pod</span>
+<span class="s">        volumeMounts:</span>
+<span class="s">        - name: storage # must match the volume name, above</span>
+<span class="s">          mountPath: &quot;/storage&quot;</span>
+<span class="s">EOF</span>
+</code></pre></div>
+</div>
+<p>This step uploads data to MinIO buckets. You need to find the MinIO <code class="docutils literal notranslate"><span class="pre">endpoint_url</span></code>, <code class="docutils literal notranslate"><span class="pre">accesskey</span></code>, <code class="docutils literal notranslate"><span class="pre">secretkey</span></code> before upload using the following commands in your terminal.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># get the endpoint url for MinIO</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>minio<span class="w"> </span>-n<span class="w"> </span>kubeflow<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.spec.clusterIP}&#39;</span>
+
+<span class="c1"># get the secret name for Minio. your-namespace is admin for this cluster.</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>-n<span class="w"> </span>&lt;your-namespace&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>minio
+<span class="c1"># get the access key for MinIO</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>&lt;minio-secret-name&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;your-namespace&gt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.data.accesskey}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d
+<span class="c1"># get the secret key for MinIO</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>&lt;minio-secret-name&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;your-namespace&gt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.data.secretkey}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d
+</code></pre></div>
+</div>
+<p>Now you create a notebook refer to <a class="reference internal" href="notebooks.html#user-guide-notebooks"><span class="std std-ref">Notebooks</span></a>, then upload data to MinIO bucket in the notebook server.</p>
+<p>You need to install <code class="docutils literal notranslate"><span class="pre">boto3</span></code> dependency package in the notebook server created previously:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>!pip<span class="w"> </span>install<span class="w"> </span>boto3<span class="w"> </span>-i<span class="w"> </span>https://pypi.tuna.tsinghua.edu.cn/simple
+</code></pre></div>
+</div>
+<p>We’ve made some dummy data. You need to create <code class="docutils literal notranslate"><span class="pre">infra</span></code> folder and download <a class="reference external" href="https://github.com/feast-dev/feast-workshop/blob/main/module_0/infra/driver_stats.parquet">driver_stats.parquet</a> file, put <code class="docutils literal notranslate"><span class="pre">driver_stats.parquet</span></code> file into <code class="docutils literal notranslate"><span class="pre">infra</span></code> folder. Now You run the follow Python code to upload model files.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>import<span class="w"> </span>os
+from<span class="w"> </span>urllib.parse<span class="w"> </span>import<span class="w"> </span>urlparse
+import<span class="w"> </span>boto3
+<span class="c1"># Update these parameters about your environment</span>
+os.environ<span class="o">[</span><span class="s2">&quot;FEAST_S3_ENDPOINT_URL&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;http://&lt;your_minio_endpoint_url&gt;:9000&quot;</span><span class="w">  </span><span class="c1"># repalce it to your MinIO endpoint url</span>
+os.environ<span class="o">[</span><span class="s2">&quot;AWS_ACCESS_KEY_ID&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;your_minio_access_key&gt;&quot;</span><span class="w"> </span><span class="c1"># repalce it to your MinIO access key</span>
+os.environ<span class="o">[</span><span class="s2">&quot;AWS_SECRET_ACCESS_KEY&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;your_minio_secret_key&gt;&quot;</span><span class="w">  </span><span class="c1"># repalce it to your MinIO secret key</span>
+
+<span class="nv">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>boto3.resource<span class="o">(</span><span class="s1">&#39;s3&#39;</span>,
+<span class="w">                    </span><span class="nv">endpoint_url</span><span class="o">=</span>os.getenv<span class="o">(</span><span class="s2">&quot;FEAST_S3_ENDPOINT_URL&quot;</span><span class="o">)</span>,
+<span class="w">                    </span><span class="nv">verify</span><span class="o">=</span>False<span class="o">)</span>
+<span class="c1"># Create a bucket</span>
+<span class="nv">bucket_name</span><span class="o">=</span><span class="s1">&#39;featurestore&#39;</span>
+s3.create_bucket<span class="o">(</span><span class="nv">Bucket</span><span class="o">=</span>bucket_name<span class="o">)</span>
+<span class="c1"># Check if the newly bucket exists</span>
+print<span class="o">(</span>list<span class="o">(</span>s3.buckets.all<span class="o">()))</span>
+<span class="c1"># Upload data file to the newly bucket</span>
+<span class="nv">bucket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>s3.Bucket<span class="o">(</span>bucket_name<span class="o">)</span>
+<span class="nv">bucket_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;infra&quot;</span>
+bucket.upload_file<span class="o">(</span><span class="s2">&quot;infra/driver_stats.parquet&quot;</span>,<span class="w"> </span>os.path.join<span class="o">(</span>bucket_path,<span class="w"> </span><span class="s2">&quot;driver_stats.parquet&quot;</span><span class="o">))</span>
+<span class="c1"># check files</span>
+<span class="k">for</span><span class="w"> </span>obj<span class="w"> </span><span class="k">in</span><span class="w"> </span>bucket.objects.filter<span class="o">(</span><span class="nv">Prefix</span><span class="o">=</span>bucket_path<span class="o">)</span>:
+<span class="w">    </span>print<span class="o">(</span>obj.key<span class="o">)</span>
+</code></pre></div>
+</div>
+<h3 id="install-feast-and-dependency-packages">Install Feast and dependency packages<a class="headerlink" href="#install-feast-and-dependency-packages" title="Link to this heading">¶</a></h3>
+<p>Now you need to install the dependencies for Feast in the notebook server in order to access Feast CLI.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>!pip<span class="w"> </span>install<span class="w"> </span>scikit-learn
+!pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;numpy&gt;=1.16.5,&lt;1.23.0&quot;</span>
+!pip<span class="w"> </span>install<span class="w"> </span>pyarrow
+!pip<span class="w"> </span>install<span class="w"> </span>s3fs
+!pip<span class="w"> </span>install<span class="w"> </span><span class="nv">feast</span><span class="o">==</span><span class="m">0</span>.29.0
+</code></pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># fix: TypeError: cannot create weak reference to &#39;property&#39; object</span>
+<span class="c1"># reference: https://github.com/feast-dev/feast/issues/3538</span>
+!pip<span class="w"> </span>install<span class="w"> </span><span class="nv">typeguard</span><span class="o">==</span><span class="m">2</span>.13.3
+</code></pre></div>
+</div>
+<h3 id="exploring-the-data">Exploring the data<a class="headerlink" href="#exploring-the-data" title="Link to this heading">¶</a></h3>
+<p>Let’s dive into what the data <code class="docutils literal notranslate"><span class="pre">./infra/driver_stats.parquet</span></code> downloaded before looks like.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>import<span class="w"> </span>pandas<span class="w"> </span>as<span class="w"> </span>pd
+pd.read_parquet<span class="o">(</span><span class="s2">&quot;infra/driver_stats.parquet&quot;</span><span class="o">)</span>
+</code></pre></div>
+</div>
+<img alt="../_images/user-guide-feast-data.png" src="../_images/user-guide-feast-data.png" />
+<p>This is a set of time-series data with driver_id as the primary key (representing the driver entity) and event_timestamp as showing when the event happens.</p>
+<h3 id="setup-the-feature-repo-to-register-features">Setup the feature repo to register features<a class="headerlink" href="#setup-the-feature-repo-to-register-features" title="Link to this heading">¶</a></h3>
+<p>Let’s setup a feature repo for the feast project following the next steps. Meanwhile, if you want to know more basic knowledges, such as a simple feature repo by yourself, please refer to <a class="reference external" href="https://docs.feast.dev/getting-started/quickstart">feast-quick-start</a>.</p>
+<h4 id="setup-the-feature-repo">Setup the feature repo<a class="headerlink" href="#setup-the-feature-repo" title="Link to this heading">¶</a></h4>
+<p>Create a Python file named <code class="docutils literal notranslate"><span class="pre">data_sources.py</span></code> as shown in below screenshot to load data from S3 storage.</p>
+<img alt="../_images/user-guide-feast-new-python-file.jpg" src="../_images/user-guide-feast-new-python-file.jpg" />
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>from<span class="w"> </span>feast<span class="w"> </span>import<span class="w"> </span>FileSource
+import<span class="w"> </span>s3fs
+<span class="nv">bucket_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;featurestore&quot;</span>
+<span class="nv">file_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;driver_stats.parquet&quot;</span>
+<span class="nv">s3_endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;http://&lt;your_minio_endpoint_url&gt;:9000&quot;</span><span class="w"> </span><span class="c1"># repalce it to your MinIO endpoint url</span>
+<span class="nv">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>s3fs.S3FileSystem<span class="o">(</span><span class="nv">key</span><span class="o">=</span><span class="s1">&#39;&lt;your_minio_access_key&gt;&#39;</span>,<span class="w"> </span><span class="c1"># repalce it to your MinIO access key</span>
+<span class="w">                    </span><span class="nv">secret</span><span class="o">=</span><span class="s1">&#39;&lt;your_minio_secret_key&gt;&#39;</span>,<span class="w"> </span><span class="c1"># repalce it to your MinIO secret key</span>
+<span class="w">                    </span><span class="nv">client_kwargs</span><span class="o">={</span><span class="s1">&#39;endpoint_url&#39;</span>:<span class="w"> </span>s3_endpoint<span class="o">}</span>,<span class="w"> </span><span class="nv">use_ssl</span><span class="o">=</span>False<span class="o">)</span>
+<span class="nv">driver_stats</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>FileSource<span class="o">(</span>
+<span class="w">    </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;driver_stats_source&quot;</span>,
+<span class="w">    </span><span class="nv">path</span><span class="o">=</span><span class="s2">&quot;s3://featurestore/infra/driver_stats.parquet&quot;</span>,<span class="w">  </span><span class="c1"># Replace it with your bucket</span>
+<span class="w">    </span><span class="nv">s3_endpoint_override</span><span class="o">=</span><span class="s2">&quot;http://&lt;your_minio_endpoint_url&gt;:9000&quot;</span>,<span class="w"> </span><span class="c1"># repalce it to your MinIO endpoint url</span>
+<span class="w">    </span><span class="nv">timestamp_field</span><span class="o">=</span><span class="s2">&quot;event_timestamp&quot;</span>,
+<span class="w">    </span><span class="nv">created_timestamp_column</span><span class="o">=</span><span class="s2">&quot;created&quot;</span>,
+<span class="w">    </span><span class="nv">description</span><span class="o">=</span><span class="s2">&quot;A table describing the stats of a driver based on hourly logs&quot;</span>,
+<span class="w">    </span><span class="nv">owner</span><span class="o">=</span><span class="s2">&quot;test2@gmail.com&quot;</span>,
+<span class="o">)</span>
+</code></pre></div>
+</div>
+<p>Create a Python file named <code class="docutils literal notranslate"><span class="pre">entities.py</span></code> to construct composite keys to join feature views together.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>from<span class="w"> </span>feast<span class="w"> </span>import<span class="w"> </span><span class="o">(</span>
+<span class="w">    </span>Entity,
+<span class="w">    </span>ValueType,
+<span class="o">)</span>
+
+<span class="nv">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Entity<span class="o">(</span>
+<span class="w">    </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;driver&quot;</span>,
+<span class="w">    </span><span class="nv">join_keys</span><span class="o">=[</span><span class="s2">&quot;driver_id&quot;</span><span class="o">]</span>,
+<span class="w">    </span><span class="nv">value_type</span><span class="o">=</span>ValueType.INT64,
+<span class="w">    </span><span class="nv">description</span><span class="o">=</span><span class="s2">&quot;driver id&quot;</span>,
+<span class="o">)</span>
+</code></pre></div>
+</div>
+<p>Create a Python file named <code class="docutils literal notranslate"><span class="pre">features.py</span></code> to define the various feature views corresponding to different logical groups of features and transformations from data sources keyed on entities.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>from<span class="w"> </span>datetime<span class="w"> </span>import<span class="w"> </span>timedelta
+
+from<span class="w"> </span>feast<span class="w"> </span>import<span class="w"> </span><span class="o">(</span>
+<span class="w">    </span>FeatureView,
+<span class="w">    </span>Field,
+<span class="o">)</span>
+from<span class="w"> </span>feast.types<span class="w"> </span>import<span class="w"> </span>Float32
+
+from<span class="w"> </span>data_sources<span class="w"> </span>import<span class="w"> </span>*
+from<span class="w"> </span>entities<span class="w"> </span>import<span class="w"> </span>*
+
+<span class="nv">driver_hourly_stats_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>FeatureView<span class="o">(</span>
+<span class="w">    </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;driver_hourly_stats&quot;</span>,
+<span class="w">    </span><span class="nv">description</span><span class="o">=</span><span class="s2">&quot;Hourly features&quot;</span>,
+<span class="w">    </span><span class="nv">entities</span><span class="o">=[</span>driver<span class="o">]</span>,
+<span class="w">    </span><span class="nv">ttl</span><span class="o">=</span>timedelta<span class="o">(</span><span class="nv">seconds</span><span class="o">=</span><span class="m">8640000000</span><span class="o">)</span>,
+<span class="w">    </span><span class="nv">schema</span><span class="o">=[</span>
+<span class="w">        </span>Field<span class="o">(</span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;conv_rate&quot;</span>,<span class="w"> </span><span class="nv">dtype</span><span class="o">=</span>Float32<span class="o">)</span>,
+<span class="w">        </span>Field<span class="o">(</span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;acc_rate&quot;</span>,<span class="w"> </span><span class="nv">dtype</span><span class="o">=</span>Float32<span class="o">)</span>,
+<span class="w">    </span><span class="o">]</span>,
+<span class="w">    </span><span class="nv">online</span><span class="o">=</span>True,
+<span class="w">    </span><span class="nv">source</span><span class="o">=</span>driver_stats,
+<span class="w">    </span><span class="nv">tags</span><span class="o">={</span><span class="s2">&quot;production&quot;</span>:<span class="w"> </span><span class="s2">&quot;True&quot;</span><span class="o">}</span>,
+<span class="w">    </span><span class="nv">owner</span><span class="o">=</span><span class="s2">&quot;test2@gmail.com&quot;</span>,
+<span class="o">)</span>
+</code></pre></div>
+</div>
+<p>Create a Python file named <code class="docutils literal notranslate"><span class="pre">feature_services.py</span></code> to build different model versions with different sets of features using feature services (<code class="docutils literal notranslate"><span class="pre">model_v1</span></code>, <code class="docutils literal notranslate"><span class="pre">model_v2</span></code>).</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>from<span class="w"> </span>feast<span class="w"> </span>import<span class="w"> </span>FeatureService
+
+from<span class="w"> </span>features<span class="w"> </span>import<span class="w"> </span>*
+
+<span class="nv">feature_service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>FeatureService<span class="o">(</span>
+<span class="w">    </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;model_v1&quot;</span>,
+<span class="w">    </span><span class="nv">features</span><span class="o">=[</span>driver_hourly_stats_view<span class="o">[[</span><span class="s2">&quot;conv_rate&quot;</span><span class="o">]]]</span>,
+<span class="w">    </span><span class="nv">owner</span><span class="o">=</span><span class="s2">&quot;test3@gmail.com&quot;</span>,
+<span class="o">)</span>
+
+<span class="nv">feature_service_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>FeatureService<span class="o">(</span>
+<span class="w">    </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;model_v2&quot;</span>,<span class="w"> </span><span class="nv">features</span><span class="o">=[</span>driver_hourly_stats_view<span class="o">]</span>,<span class="w"> </span><span class="nv">owner</span><span class="o">=</span><span class="s2">&quot;test3@gmail.com&quot;</span>,
+<span class="o">)</span>
+</code></pre></div>
+</div>
+<p>Create a YAML file named <code class="docutils literal notranslate"><span class="pre">feature_store.yaml</span></code> containing a demo setup configuring data sources.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>project:<span class="w"> </span>feast_demo_minio
+provider:<span class="w"> </span><span class="nb">local</span>
+registry:<span class="w"> </span>s3://featurestore/infra/registry.pb<span class="w"> </span><span class="c1"># replace it with your bucket</span>
+online_store:
+<span class="w">  </span>type:<span class="w"> </span>sqlite
+<span class="w">  </span>path:<span class="w"> </span>data/online_store.db
+offline_store:
+<span class="w">  </span>type:<span class="w"> </span>file
+entity_key_serialization_version:<span class="w"> </span><span class="m">2</span>
+</code></pre></div>
+</div>
+<p>A quick explanation of what’s happening in this <code class="docutils literal notranslate"><span class="pre">feature_store.yaml</span></code>:</p>
+<table class="docutils data align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>What it does</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>project</cite></p></td>
+<td><p>Gives infrastructure isolation via namespacing (e.g. online stores + Feast objects).</p></td>
+<td><p>any unique name within your organization (e.g. <cite>feast_demo_minio</cite>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>provider</cite></p></td>
+<td><p>Defines registry location &amp; sets defaults for offline / online stores</p></td>
+<td><p><cite>local</cite>, <cite>aws</cite>, <cite>gcp</cite> (MinIO has S3 object and installed on Kubeflow)</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>registry</cite></p></td>
+<td><p>Defines the specific path for the registry (local, gcs, s3, etc)</p></td>
+<td><p><cite>s3://[YOUR BUCKET]/registry.pb</cite></p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>online_store</cite></p></td>
+<td><p>Configures online store (if needed for supporting real-time models)</p></td>
+<td><p><cite>null</cite>, <cite>sqlite</cite>, <cite>redis</cite>, <cite>dynamodb</cite>, <cite>datastore</cite>, <cite>postgres</cite> (each have their own extra configs)</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>offline_store</cite></p></td>
+<td><p>Configures offline store, which executes point in time joins</p></td>
+<td><p><cite>bigquery</cite>, <cite>snowflake.offline</cite>,  <cite>redshift</cite>, <cite>spark</cite>, <cite>trino</cite>  (each have their own extra configs)</p></td>
+</tr>
+</tbody>
+</table>
+<h4 id="run-feast-plan">Run <code class="docutils literal notranslate"><span class="pre">feast</span> <span class="pre">plan</span></code><a class="headerlink" href="#run-feast-plan" title="Link to this heading">¶</a></h4>
+<p>With the <code class="docutils literal notranslate"><span class="pre">feature_store.yaml</span></code> setup, you now run <code class="docutils literal notranslate"><span class="pre">feast</span> <span class="pre">plan</span></code> to see what changes happen with <code class="docutils literal notranslate"><span class="pre">feast</span> <span class="pre">apply</span></code>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>!feast<span class="w"> </span>plan
+</code></pre></div>
+</div>
+<p>Sample output:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="m">02</span>/22/2023<span class="w"> </span><span class="m">02</span>:48:14<span class="w"> </span>AM<span class="w"> </span>botocore.credentials<span class="w"> </span>INFO:<span class="w"> </span>Found<span class="w"> </span>credentials<span class="w"> </span><span class="k">in</span><span class="w"> </span>environment<span class="w"> </span>variables.
+Created<span class="w"> </span>entity<span class="w"> </span>driver
+Created<span class="w"> </span>feature<span class="w"> </span>view<span class="w"> </span>driver_hourly_stats
+Created<span class="w"> </span>feature<span class="w"> </span>service<span class="w"> </span>model_v1
+Created<span class="w"> </span>feature<span class="w"> </span>service<span class="w"> </span>model_v2
+
+Created<span class="w"> </span>sqlite<span class="w"> </span>table<span class="w"> </span>feast_demo_minio_driver_hourly_stats
+</code></pre></div>
+</div>
+<h4 id="run-feast-apply">Run <code class="docutils literal notranslate"><span class="pre">feast</span> <span class="pre">apply</span></code><a class="headerlink" href="#run-feast-apply" title="Link to this heading">¶</a></h4>
+<p>This parses the feature, data source, and feature service definitions and publishes them to the registry. It also sets up some tables in the online store to materialize batch features.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>!feast<span class="w"> </span>apply
+
+<span class="c1"># output</span>
+<span class="m">02</span>/22/2023<span class="w"> </span><span class="m">02</span>:48:14<span class="w"> </span>AM<span class="w"> </span>botocore.credentials<span class="w"> </span>INFO:<span class="w"> </span>Found<span class="w"> </span>credentials<span class="w"> </span><span class="k">in</span><span class="w"> </span>environment<span class="w"> </span>variables.
+Created<span class="w"> </span>entity<span class="w"> </span>driver
+Created<span class="w"> </span>feature<span class="w"> </span>view<span class="w"> </span>driver_hourly_stats
+Created<span class="w"> </span>feature<span class="w"> </span>service<span class="w"> </span>model_v1
+Created<span class="w"> </span>feature<span class="w"> </span>service<span class="w"> </span>model_v2
+
+Deploying<span class="w"> </span>infrastructure<span class="w"> </span><span class="k">for</span><span class="w"> </span>feast_demo_minio_driver_hourly_stats
+</code></pre></div>
+</div>
+<h4 id="verify-features-are-registered">Verify features are registered<a class="headerlink" href="#verify-features-are-registered" title="Link to this heading">¶</a></h4>
+<p>You now run Feast CLI commands to verify that Feast knows about your features and data sources.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>!feast<span class="w"> </span>feature-views<span class="w"> </span>list
+
+<span class="c1"># output</span>
+<span class="m">02</span>/22/2023<span class="w"> </span><span class="m">02</span>:48:43<span class="w"> </span>AM<span class="w"> </span>botocore.credentials<span class="w"> </span>INFO:<span class="w"> </span>Found<span class="w"> </span>credentials<span class="w"> </span><span class="k">in</span><span class="w"> </span>environment<span class="w"> </span>variables.
+NAME<span class="w">                 </span>ENTITIES<span class="w">    </span>TYPE
+driver_hourly_stats<span class="w">  </span><span class="o">{</span><span class="s1">&#39;driver&#39;</span><span class="o">}</span><span class="w">  </span>FeatureView
+</code></pre></div>
+</div>
+<h3 id="fetch-offline-features-to-train-model">Fetch offline features to train model<a class="headerlink" href="#fetch-offline-features-to-train-model" title="Link to this heading">¶</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">get_historical_features</span></code> API to retrieve features (by referencing features directly or via feature services). Under the hood, it manages point-in-time joins and avoids data leakage to generate training datasets.</p>
+<p>You need to get the data <a class="reference external" href="https://github.com/feast-dev/feast-gcp-driver-ranking-tutorial/blob/master/driver_orders.csv">driver_orders.csv</a> using the following command.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>!wget<span class="w"> </span>https://github.com/feast-dev/feast-gcp-driver-ranking-tutorial/blob/master/driver_orders.csv
+</code></pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">get_historical_features</span></code> API to train model.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>from<span class="w"> </span>feast<span class="w"> </span>import<span class="w"> </span>FeatureStore
+from<span class="w"> </span>joblib<span class="w"> </span>import<span class="w"> </span>dump
+import<span class="w"> </span>pandas<span class="w"> </span>as<span class="w"> </span>pd
+from<span class="w"> </span>sklearn.linear_model<span class="w"> </span>import<span class="w"> </span>LinearRegression
+
+<span class="c1"># Load driver order data, when orders give to entity_df, it shows 0 entries</span>
+<span class="nv">orders</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pd.read_csv<span class="o">(</span><span class="s2">&quot;driver_orders.csv&quot;</span>,<span class="w"> </span><span class="nv">sep</span><span class="o">=</span><span class="s2">&quot;\t&quot;</span><span class="o">)</span>
+orders<span class="o">[</span><span class="s2">&quot;event_timestamp&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pd.to_datetime<span class="o">(</span>orders<span class="o">[</span><span class="s2">&quot;event_timestamp&quot;</span><span class="o">])</span>
+print<span class="o">(</span>orders<span class="o">)</span>
+
+<span class="c1"># Connect to your feature store provider</span>
+<span class="nv">store</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>FeatureStore<span class="o">(</span><span class="nv">repo_path</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="o">)</span>
+
+<span class="c1"># Because we&#39;re using the default FileOfflineStore, this executes on your machine</span>
+<span class="nv">training_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>store.get_historical_features<span class="o">(</span>
+<span class="w">    </span><span class="nv">entity_df</span><span class="o">=</span>orders,
+<span class="w">    </span><span class="nv">features</span><span class="o">=</span>store.get_feature_service<span class="o">(</span><span class="s2">&quot;model_v2&quot;</span><span class="o">)</span>,
+<span class="o">)</span>.to_df<span class="o">()</span>
+
+print<span class="o">(</span><span class="s2">&quot;----- Feature schema -----\n&quot;</span><span class="o">)</span>
+print<span class="o">(</span>training_df.info<span class="o">())</span>
+
+print<span class="o">()</span>
+print<span class="o">(</span><span class="s2">&quot;----- Example features -----\n&quot;</span><span class="o">)</span>
+print<span class="o">(</span>training_df.head<span class="o">())</span>
+
+<span class="c1"># Train model</span>
+<span class="nv">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;trip_completed&quot;</span>
+
+<span class="nv">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>LinearRegression<span class="o">()</span>
+<span class="nv">train_X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>training_df<span class="o">[</span>training_df.columns.drop<span class="o">(</span>target<span class="o">)</span>.drop<span class="o">(</span><span class="s2">&quot;event_timestamp&quot;</span><span class="o">)]</span>
+<span class="nv">train_Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>training_df.loc<span class="o">[</span>:,<span class="w"> </span>target<span class="o">]</span>
+reg.fit<span class="o">(</span>train_X<span class="o">[</span>sorted<span class="o">(</span>train_X<span class="o">)]</span>,<span class="w"> </span>train_Y<span class="o">)</span>
+
+<span class="c1"># Save model</span>
+dump<span class="o">(</span>reg,<span class="w"> </span><span class="s2">&quot;driver_model.bin&quot;</span><span class="o">)</span>
+</code></pre></div>
+</div>
+<p>The output looks like the following and the trained model file <code class="docutils literal notranslate"><span class="pre">driver_model.bin</span></code> is saved in the current directory.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="w">            </span>event_timestamp<span class="w">  </span>driver_id<span class="w">  </span>trip_completed
+<span class="m">0</span><span class="w"> </span><span class="m">2021</span>-04-16<span class="w"> </span><span class="m">20</span>:29:28+00:00<span class="w">       </span><span class="m">1001</span><span class="w">               </span><span class="m">1</span>
+<span class="m">1</span><span class="w"> </span><span class="m">2021</span>-04-17<span class="w"> </span><span class="m">04</span>:29:28+00:00<span class="w">       </span><span class="m">1002</span><span class="w">               </span><span class="m">0</span>
+<span class="m">2</span><span class="w"> </span><span class="m">2021</span>-04-17<span class="w"> </span><span class="m">12</span>:29:28+00:00<span class="w">       </span><span class="m">1003</span><span class="w">               </span><span class="m">0</span>
+<span class="m">3</span><span class="w"> </span><span class="m">2021</span>-04-17<span class="w"> </span><span class="m">20</span>:29:28+00:00<span class="w">       </span><span class="m">1001</span><span class="w">               </span><span class="m">1</span>
+<span class="m">4</span><span class="w"> </span><span class="m">2021</span>-04-18<span class="w"> </span><span class="m">04</span>:29:28+00:00<span class="w">       </span><span class="m">1002</span><span class="w">               </span><span class="m">0</span>
+<span class="m">5</span><span class="w"> </span><span class="m">2021</span>-04-18<span class="w"> </span><span class="m">12</span>:29:28+00:00<span class="w">       </span><span class="m">1003</span><span class="w">               </span><span class="m">0</span>
+<span class="m">6</span><span class="w"> </span><span class="m">2021</span>-04-18<span class="w"> </span><span class="m">20</span>:29:28+00:00<span class="w">       </span><span class="m">1001</span><span class="w">               </span><span class="m">1</span>
+<span class="m">7</span><span class="w"> </span><span class="m">2021</span>-04-19<span class="w"> </span><span class="m">04</span>:29:28+00:00<span class="w">       </span><span class="m">1002</span><span class="w">               </span><span class="m">0</span>
+<span class="m">8</span><span class="w"> </span><span class="m">2021</span>-04-19<span class="w"> </span><span class="m">12</span>:29:28+00:00<span class="w">       </span><span class="m">1003</span><span class="w">               </span><span class="m">0</span>
+<span class="m">9</span><span class="w"> </span><span class="m">2021</span>-04-19<span class="w"> </span><span class="m">20</span>:29:28+00:00<span class="w">       </span><span class="m">1004</span><span class="w">               </span><span class="m">1</span>
+-----<span class="w"> </span>Feature<span class="w"> </span>schema<span class="w"> </span>-----
+
+&lt;class<span class="w"> </span><span class="s1">&#39;pandas.core.frame.DataFrame&#39;</span>&gt;
+RangeIndex:<span class="w"> </span><span class="m">10</span><span class="w"> </span>entries,<span class="w"> </span><span class="m">0</span><span class="w"> </span>to<span class="w"> </span><span class="m">9</span>
+Data<span class="w"> </span>columns<span class="w"> </span><span class="o">(</span>total<span class="w"> </span><span class="m">5</span><span class="w"> </span>columns<span class="o">)</span>:
+<span class="c1">#   Column           Non-Null Count  Dtype</span>
+---<span class="w">  </span>------<span class="w">           </span>--------------<span class="w">  </span>-----
+<span class="m">0</span><span class="w">   </span>event_timestamp<span class="w">  </span><span class="m">10</span><span class="w"> </span>non-null<span class="w">     </span>datetime64<span class="o">[</span>ns,<span class="w"> </span>UTC<span class="o">]</span>
+<span class="m">1</span><span class="w">   </span>driver_id<span class="w">        </span><span class="m">10</span><span class="w"> </span>non-null<span class="w">     </span>int64
+<span class="m">2</span><span class="w">   </span>trip_completed<span class="w">   </span><span class="m">10</span><span class="w"> </span>non-null<span class="w">     </span>int64
+<span class="m">3</span><span class="w">   </span>conv_rate<span class="w">        </span><span class="m">10</span><span class="w"> </span>non-null<span class="w">     </span>float32
+<span class="m">4</span><span class="w">   </span>acc_rate<span class="w">         </span><span class="m">10</span><span class="w"> </span>non-null<span class="w">     </span>float32
+dtypes:<span class="w"> </span>datetime64<span class="o">[</span>ns,<span class="w"> </span>UTC<span class="o">](</span><span class="m">1</span><span class="o">)</span>,<span class="w"> </span>float32<span class="o">(</span><span class="m">2</span><span class="o">)</span>,<span class="w"> </span>int64<span class="o">(</span><span class="m">2</span><span class="o">)</span>
+memory<span class="w"> </span>usage:<span class="w"> </span><span class="m">448</span>.0<span class="w"> </span>bytes
+None
+
+-----<span class="w"> </span>Example<span class="w"> </span>features<span class="w"> </span>-----
+
+<span class="w">            </span>event_timestamp<span class="w">  </span>driver_id<span class="w">  </span>trip_completed<span class="w">  </span>conv_rate<span class="w">  </span>acc_rate
+<span class="m">0</span><span class="w"> </span><span class="m">2021</span>-04-16<span class="w"> </span><span class="m">20</span>:29:28+00:00<span class="w">       </span><span class="m">1001</span><span class="w">               </span><span class="m">1</span><span class="w">   </span><span class="m">0</span>.521149<span class="w">  </span><span class="m">0</span>.751659
+<span class="m">1</span><span class="w"> </span><span class="m">2021</span>-04-17<span class="w"> </span><span class="m">04</span>:29:28+00:00<span class="w">       </span><span class="m">1002</span><span class="w">               </span><span class="m">0</span><span class="w">   </span><span class="m">0</span>.089014<span class="w">  </span><span class="m">0</span>.212637
+<span class="m">2</span><span class="w"> </span><span class="m">2021</span>-04-17<span class="w"> </span><span class="m">12</span>:29:28+00:00<span class="w">       </span><span class="m">1003</span><span class="w">               </span><span class="m">0</span><span class="w">   </span><span class="m">0</span>.188855<span class="w">  </span><span class="m">0</span>.344736
+<span class="m">3</span><span class="w"> </span><span class="m">2021</span>-04-17<span class="w"> </span><span class="m">20</span>:29:28+00:00<span class="w">       </span><span class="m">1001</span><span class="w">               </span><span class="m">1</span><span class="w">   </span><span class="m">0</span>.521149<span class="w">  </span><span class="m">0</span>.751659
+<span class="m">4</span><span class="w"> </span><span class="m">2021</span>-04-18<span class="w"> </span><span class="m">04</span>:29:28+00:00<span class="w">       </span><span class="m">1002</span><span class="w">               </span><span class="m">0</span><span class="w">   </span><span class="m">0</span>.089014<span class="w">  </span><span class="m">0</span>.212637
+
+<span class="o">[</span><span class="s1">&#39;driver_model.bin&#39;</span><span class="o">]</span>
+</code></pre></div>
+</div>
+<img alt="../_images/user-guide-feast-model-download.png" src="../_images/user-guide-feast-model-download.png" />
+<h3 id="fetch-online-features-from-sqlite-to-predict">Fetch online features from SQLite to predict<a class="headerlink" href="#fetch-online-features-from-sqlite-to-predict" title="Link to this heading">¶</a></h3>
+<p>First you materialize features (which generate the latest values for each entity key from batch sources) into the online store (SQLite).</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>!feast<span class="w"> </span>materialize-incremental<span class="w"> </span><span class="k">$(</span>date<span class="w"> </span>+%Y-%m-%d<span class="k">)</span>
+</code></pre></div>
+</div>
+<p>Now you can retrieve these materialized features from SQLite directly using the SDK, loading the trained model file generated before, to make predictions.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>import<span class="w"> </span>pandas<span class="w"> </span>as<span class="w"> </span>pd
+import<span class="w"> </span>feast
+from<span class="w"> </span>joblib<span class="w"> </span>import<span class="w"> </span>load
+
+
+class<span class="w"> </span>DriverRankingModel:
+<span class="w">    </span>def<span class="w"> </span>__init__<span class="o">(</span>self<span class="o">)</span>:
+<span class="w">        </span><span class="c1"># Load model</span>
+<span class="w">        </span>self.model<span class="w"> </span><span class="o">=</span><span class="w"> </span>load<span class="o">(</span><span class="s2">&quot;driver_model.bin&quot;</span><span class="o">)</span>
+
+<span class="w">        </span><span class="c1"># Set up feature store</span>
+<span class="w">        </span>self.fs<span class="w"> </span><span class="o">=</span><span class="w"> </span>feast.FeatureStore<span class="o">(</span><span class="nv">repo_path</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="o">)</span>
+
+<span class="w">    </span>def<span class="w"> </span>predict<span class="o">(</span>self,<span class="w"> </span>driver_ids<span class="o">)</span>:
+<span class="w">        </span><span class="c1"># Read features from Feast</span>
+<span class="w">        </span><span class="nv">driver_features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.fs.get_online_features<span class="o">(</span>
+<span class="w">            </span><span class="nv">entity_rows</span><span class="o">=[{</span><span class="s2">&quot;driver_id&quot;</span>:<span class="w"> </span>driver_id<span class="o">}</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>driver_id<span class="w"> </span><span class="k">in</span><span class="w"> </span>driver_ids<span class="o">]</span>,
+<span class="w">            </span><span class="nv">features</span><span class="o">=[</span>
+<span class="w">                </span><span class="s2">&quot;driver_hourly_stats:conv_rate&quot;</span>,
+<span class="w">                </span><span class="s2">&quot;driver_hourly_stats:acc_rate&quot;</span>,
+<span class="w">            </span><span class="o">]</span>,
+<span class="w">        </span><span class="o">)</span>
+<span class="w">        </span><span class="nv">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pd.DataFrame.from_dict<span class="o">(</span>driver_features.to_dict<span class="o">())</span>
+
+<span class="w">        </span><span class="c1"># Make prediction</span>
+<span class="w">        </span>df<span class="o">[</span><span class="s2">&quot;prediction&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.model.predict<span class="o">(</span>df<span class="o">[</span>sorted<span class="o">(</span>df<span class="o">)])</span>
+
+<span class="w">        </span><span class="c1"># Choose best driver</span>
+<span class="w">        </span><span class="nv">best_driver_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>df<span class="o">[</span><span class="s2">&quot;driver_id&quot;</span><span class="o">]</span>.iloc<span class="o">[</span>df<span class="o">[</span><span class="s2">&quot;prediction&quot;</span><span class="o">]</span>.argmax<span class="o">()]</span>
+
+<span class="w">        </span><span class="c1"># return best driver</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>best_driver_id
+
+def<span class="w"> </span>make_drivers_prediction<span class="o">()</span>:
+<span class="w">    </span><span class="nv">drivers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="m">1001</span>,<span class="w"> </span><span class="m">1002</span>,<span class="w"> </span><span class="m">1003</span>,<span class="w"> </span><span class="m">1004</span><span class="o">]</span>
+<span class="w">    </span><span class="nv">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>DriverRankingModel<span class="o">()</span>
+<span class="w">    </span><span class="nv">best_driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>model.predict<span class="o">(</span>drivers<span class="o">)</span>
+<span class="w">    </span>print<span class="o">(</span>f<span class="s2">&quot;Prediction for best driver id: {best_driver}&quot;</span><span class="o">)</span>
+
+make_drivers_prediction<span class="o">()</span>
+</code></pre></div>
+</div>
+<p>The result output is <code class="docutils literal notranslate"><span class="pre">Prediction</span> <span class="pre">for</span> <span class="pre">best</span> <span class="pre">driver</span> <span class="pre">id:</span> <span class="pre">1003</span></code>.</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<h3 id="typeerror-when-execute-feast-plan-or-feast-apply"><code class="docutils literal notranslate"><span class="pre">TypeError</span></code> when execute <code class="docutils literal notranslate"><span class="pre">feast</span> <span class="pre">plan</span></code> or <code class="docutils literal notranslate"><span class="pre">feast</span> <span class="pre">apply</span></code><a class="headerlink" href="#typeerror-when-execute-feast-plan-or-feast-apply" title="Link to this heading">¶</a></h3>
+<p>If you execute <code class="docutils literal notranslate"><span class="pre">feast</span> <span class="pre">plan</span></code>  or <code class="docutils literal notranslate"><span class="pre">feast</span> <span class="pre">apply</span></code> and get the following error:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="s2">&quot;TypeError: the &#39;package&#39; argument is required to perform a relative import for &#39;.ipynb_checkpoints.data_sources-checkpoint&#39; or &#39;.jupyter.jupyter_lab_config&#39;&quot;</span>.
+</code></pre></div>
+</div>
+<p>You can remove the following 2 files and then run <code class="docutils literal notranslate"><span class="pre">feast</span> <span class="pre">plan</span></code>  or <code class="docutils literal notranslate"><span class="pre">east</span> <span class="pre">apply</span></code> again. It will be fine now.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>!rm<span class="w"> </span>-rf<span class="w"> </span>.ipynb_checkpoints
+!rm<span class="w"> </span>-rf<span class="w"> </span>.jupyter
+</code></pre></div>
+</div>
+<div class="seealso admonition">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://docs.feast.dev/getting-started/quickstart">Feast Quickstart</a></p>
+<p><a class="reference external" href="https://www.kubeflow.org/docs/external-add-ons/feature-store/">Kubeflow Feature Store</a></p>
+<p><a class="reference external" href="https://github.com/feast-dev/feast-workshop">Workshop: Learning Feast</a></p>
+<p><a class="reference external" href="https://github.com/juskuz/feast-driver-ranking-demo-aitech">Feast Driver Ranking Example</a></p>
+</div>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="notebooks.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Notebooks" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Notebooks
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="spark.html" class="md-footer__link md-footer__link--next" aria-label="Next: Data Processing" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Data Processing
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2023, VMware.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.2.6.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.sections", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+  </body>
+</html>

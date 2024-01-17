@@ -1,0 +1,1399 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../_static/favicon.ico">
+    
+    
+      
+        <title>Model Serving - vSphere Machine Learning Extension</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.af531f03affe68837.min.css?v=2410bb73" />
+        <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="vSphere Machine Learning Extension" class="md-header__button md-logo" aria-label="vSphere Machine Learning Extension" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            vSphere Machine Learning Extension
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Model Serving
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="yellow"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vmware/vSphere-machine-learning-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vSphere Machine Learning Extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="vSphere Machine Learning Extension" class="md-nav__button md-logo" aria-label="vSphere Machine Learning Extension" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    vSphere Machine Learning Extension
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vmware/vSphere-machine-learning-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vSphere Machine Learning Extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          <span class="md-ellipsis">Introduction</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Introduction" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Introduction</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/index.html" class="md-nav__link">
+        <span title="/introduction/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/oss.html" class="md-nav__link">
+        <span title="/introduction/oss.rst (reference label)" class="md-ellipsis">Kubeflow Components</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/ekf.html" class="md-nav__link">
+        <span title="/introduction/ekf.rst (reference label)" class="md-ellipsis">Kubeflow on v<wbr>Sphere Components and Features</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/mlops.html" class="md-nav__link">
+        <span title="/introduction/mlops.rst (reference label)" class="md-ellipsis">MLOps with Kubeflow</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          <span class="md-ellipsis">Install and Configure</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Install and Configure" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Install and Configure</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/index.html" class="md-nav__link">
+        <span title="/install/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/tkgs.html" class="md-nav__link">
+        <span title="/install/tkgs.rst (reference label)" class="md-ellipsis">Install Kubeflow on v<wbr>Sphere</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/auth.html" class="md-nav__link">
+        <span title="/install/auth.rst (reference label)" class="md-ellipsis">Authentication Integration</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/monitor.html" class="md-nav__link">
+        <span title="/install/monitor.rst (reference label)" class="md-ellipsis">Monitoring with Prometheus and Grafana</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          <span class="md-ellipsis">User Guide</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">User Guide</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        <span title="/user-guide/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks.html" class="md-nav__link">
+        <span title="/user-guide/notebooks.rst (reference label)" class="md-ellipsis">Notebooks</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="feast.html" class="md-nav__link">
+        <span title="/user-guide/feast.rst (reference label)" class="md-ellipsis">Feature Store</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spark.html" class="md-nav__link">
+        <span title="/user-guide/spark.rst (reference label)" class="md-ellipsis">Data Processing</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mlmd.html" class="md-nav__link">
+        <span title="/user-guide/mlmd.rst (reference label)" class="md-ellipsis">Metadata Store</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mlflow.html" class="md-nav__link">
+        <span title="/user-guide/mlflow.rst (reference label)" class="md-ellipsis">Model Registry</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="training.html" class="md-nav__link">
+        <span title="/user-guide/training.rst (reference label)" class="md-ellipsis">Model Training</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tensorboard.html" class="md-nav__link">
+        <span title="/user-guide/tensorboard.rst (reference label)" class="md-ellipsis">Visualization for Experiments</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="katib.html" class="md-nav__link">
+        <span title="/user-guide/katib.rst (reference label)" class="md-ellipsis">Hyperparameter Tuning</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/user-guide/kserve.rst (reference label)" class="md-ellipsis">Model Serving</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/user-guide/kserve.rst (reference label)" class="md-ellipsis">Model Serving</span>
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/user-guide/kserve.rst (reference label)" class="md-ellipsis">Model Serving</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#get-started (reference label)" class="md-ellipsis">Get started</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare-model-and-configuration-files" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#prepare-model-and-configuration-files (reference label)" class="md-ellipsis">Prepare model and configuration files</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-to-minio" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#upload-to-minio (reference label)" class="md-ellipsis">Upload to Min<wbr>IO</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-minio-service-account-and-secret" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#create-minio-service-account-and-secret (reference label)" class="md-ellipsis">Create Min<wbr>IO service account and secret</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-inferenceservice-using-kserve" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#run-inferenceservice-using-kserve (reference label)" class="md-ellipsis">Run Inference<wbr>Service using KServe</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-inferenceservice-status" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#check-inferenceservice-status (reference label)" class="md-ellipsis">Check Inference<wbr>Service status</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-perform-inference" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#test-perform-inference (reference label)" class="md-ellipsis">Test perform inference</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test perform inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#define-a-test-bot-for-convenience" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#define-a-test-bot-for-convenience (reference label)" class="md-ellipsis">Define a Test_<wbr>bot for convenience</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#determine-host-and-session" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#determine-host-and-session (reference label)" class="md-ellipsis">Determine host and session</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-model-prediction" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#test-model-prediction (reference label)" class="md-ellipsis">Test model prediction</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-inferenceservice" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#delete-inferenceservice (reference label)" class="md-ellipsis">Delete Inference<wbr>Service</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kfp.html" class="md-nav__link">
+        <span title="/user-guide/kfp.rst (reference label)" class="md-ellipsis">ML Pipelines</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="federated-model-training.html" class="md-nav__link">
+        <span title="/user-guide/federated-model-training.rst (reference label)" class="md-ellipsis">Federated model training</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          <span class="md-ellipsis">Use Cases</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Use Cases" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Use Cases</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/index.html" class="md-nav__link">
+        <span title="/use-cases/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/helmet.html" class="md-nav__link">
+        <span title="/use-cases/helmet.rst (reference label)" class="md-ellipsis">End to End Examples</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/modelserving.html" class="md-nav__link">
+        <span title="/use-cases/modelserving.rst (reference label)" class="md-ellipsis">Model Serving Examples</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/codegen.html" class="md-nav__link">
+        <span title="/use-cases/codegen.ipynb (reference label)" class="md-ellipsis">Salesforce Code<wbr>Gen</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          <span class="md-ellipsis">Internals</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Internals" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Internals</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internals/auth.html" class="md-nav__link">
+        <span title="/internals/auth.rst (reference label)" class="md-ellipsis">Authentication and Authorization</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/user-guide/kserve.rst (reference label)" class="md-ellipsis">Model Serving</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#get-started (reference label)" class="md-ellipsis">Get started</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare-model-and-configuration-files" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#prepare-model-and-configuration-files (reference label)" class="md-ellipsis">Prepare model and configuration files</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-to-minio" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#upload-to-minio (reference label)" class="md-ellipsis">Upload to Min<wbr>IO</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-minio-service-account-and-secret" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#create-minio-service-account-and-secret (reference label)" class="md-ellipsis">Create Min<wbr>IO service account and secret</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-inferenceservice-using-kserve" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#run-inferenceservice-using-kserve (reference label)" class="md-ellipsis">Run Inference<wbr>Service using KServe</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-inferenceservice-status" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#check-inferenceservice-status (reference label)" class="md-ellipsis">Check Inference<wbr>Service status</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-perform-inference" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#test-perform-inference (reference label)" class="md-ellipsis">Test perform inference</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test perform inference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#define-a-test-bot-for-convenience" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#define-a-test-bot-for-convenience (reference label)" class="md-ellipsis">Define a Test_<wbr>bot for convenience</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#determine-host-and-session" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#determine-host-and-session (reference label)" class="md-ellipsis">Determine host and session</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-model-prediction" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#test-model-prediction (reference label)" class="md-ellipsis">Test model prediction</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-inferenceservice" class="md-nav__link">
+    <span title="/user-guide/kserve.rst#delete-inferenceservice (reference label)" class="md-ellipsis">Delete Inference<wbr>Service</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+  <a href="https://github.com/vmware/vSphere-machine-learning-extension/blob/master/docs/user-guide/kserve.rst" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+<h1 id="model-serving">Model Serving<a class="headerlink" href="#model-serving" title="Link to this heading">¶</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>KServe is a standard Model Inference Platform on Kubernetes, built for highly scalable use cases. It provides performant, standardized inference protocol across machine learning (ML) frameworks and supports modern serverless inference workload with autoscaling including Scale to Zero on GPU.</p>
+<p>You can use KServe to do the following:</p>
+<ul class="simple">
+<li><p>Provide a Kubernetes Custom Resource Definition for serving ML models on arbitrary frameworks.</p></li>
+<li><p>Encapsulate the complexity of autoscaling, networking, health checking, and server configuration to bring cutting edge serving features like GPU autoscaling, Scale to Zero, and canary rollouts to your ML deployments.</p></li>
+<li><p>Enable a simple, pluggable, and complete story for your production ML inference server by providing prediction, pre-processing, post-processing and explainability out of the box.</p></li>
+</ul>
+<p>Please browse the <a class="reference external" href="https://github.com/KServe/KServe">KServe GitHub repo</a> for more details.</p>
+<h2 id="get-started">Get started<a class="headerlink" href="#get-started" title="Link to this heading">¶</a></h2>
+<p>In this section, you deploy an <code class="docutils literal notranslate"><span class="pre">InferenceService</span></code> with a predictor that loads a spam email detection model trained with custom dataset. We have prepared the files needed to deploy the model through KServe before experiment, including model file, configuration file. This preparation work is complicated and lengthy, so we do not elaborate here. If you want to know more details, for example, how to prepare the model files, please read the <a class="reference external" href="https://github.com/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab4.ipynb">KServe example tutorial</a>.</p>
+<h3 id="prepare-model-and-configuration-files">Prepare model and configuration files<a class="headerlink" href="#prepare-model-and-configuration-files" title="Link to this heading">¶</a></h3>
+<p>First, you create a notebook refer to <a class="reference internal" href="notebooks.html#user-guide-notebooks"><span class="std std-ref">Notebooks</span></a>. Then, download <a class="reference external" href="https://github.com/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab4_files/v1.zip">model package</a> and unzip it in this notebook server:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>!wget<span class="w"> </span>https://github.com/vmware/ml-ops-platform-for-vsphere/blob/main/website/content/en/docs/kubeflow-tutorial/lab4_files/v1.zip
+
+!unzip<span class="w"> </span>v1.zip
+</code></pre></div>
+</div>
+<h3 id="upload-to-minio">Upload to MinIO<a class="headerlink" href="#upload-to-minio" title="Link to this heading">¶</a></h3>
+<p>If you already have the MinIO storage, you can directly skip the MinIO deployment step, and follow the next steps to upload data to MinIO. If not, we also provide instructions on how to deploy standalone MinIO on the kubernetes clusters, you may refer to the <cite>upload data to MinIO bucket</cite> part in the <a class="reference internal" href="feast.html#feature-store"><span class="std std-ref">Feature Store</span></a>. And the YAML files are the same with <a class="reference external" href="https://github.com/vmware/vSphere-machine-learning-extension/tree/main/examples/helmet_object_detection/kserve/minio">MinIO deployment files</a>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># create pvc</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>minio-standalone-pvc.yml
+
+<span class="c1"># create service</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>minio-standalone-service.yml
+
+<span class="c1"># create deployment</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>minio-standalone-deployment.yml
+</code></pre></div>
+</div>
+<p>This step uploads <code class="docutils literal notranslate"><span class="pre">v1/torchserve/model-store</span></code>, <code class="docutils literal notranslate"><span class="pre">v1/torchserve/config</span></code> to MinIO buckets. You need to find the MinIO <code class="docutils literal notranslate"><span class="pre">endpoint_url</span></code>, <code class="docutils literal notranslate"><span class="pre">accesskey</span></code>, <code class="docutils literal notranslate"><span class="pre">secretkey</span></code> before upload using the following commands in terminal:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># get the endpoint url for MinIO</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>minio-service<span class="w"> </span>-n<span class="w"> </span>kubeflow<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.spec.clusterIP}&#39;</span>
+
+<span class="c1"># get the secret name for Minio. your-namespace is admin for this Kubernetes cluster.</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>-n<span class="w"> </span>&lt;your-namespace&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>minio
+
+<span class="c1"># get the access key for MinIO</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>&lt;minio-secret-name&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;your-namespace&gt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.data.accesskey}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d
+
+<span class="c1"># get the secret key for MinIO</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>&lt;minio-secret-name&gt;<span class="w"> </span>-n<span class="w"> </span>&lt;your-namespace&gt;<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.data.secretkey}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d
+</code></pre></div>
+</div>
+<p>You need to install <code class="docutils literal notranslate"><span class="pre">boto3</span></code> dependency package in the notebook server created earlier, and run the follow Python code to upload model files:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>!pip<span class="w"> </span>install<span class="w"> </span>boto3<span class="w"> </span>-i<span class="w"> </span>https://pypi.tuna.tsinghua.edu.cn/simple
+</code></pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>import<span class="w"> </span>os
+from<span class="w"> </span>urllib.parse<span class="w"> </span>import<span class="w"> </span>urlparse
+import<span class="w"> </span>boto3
+
+os.environ<span class="o">[</span><span class="s2">&quot;AWS_ENDPOINT_URL&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;http://10.117.233.16:9000&quot;</span><span class="w"> </span><span class="c1"># repalce it to your MinIO endpoint url</span>
+os.environ<span class="o">[</span><span class="s2">&quot;AWS_REGION&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;us-east-1&quot;</span>
+os.environ<span class="o">[</span><span class="s2">&quot;AWS_ACCESS_KEY_ID&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;minioadmin&quot;</span><span class="w">  </span><span class="c1"># repalce it to your MinIO access key</span>
+os.environ<span class="o">[</span><span class="s2">&quot;AWS_SECRET_ACCESS_KEY&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;minioadmin&quot;</span><span class="w">   </span><span class="c1"># repalce it to your MinIO secret key</span>
+
+<span class="nv">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>boto3.resource<span class="o">(</span><span class="s1">&#39;s3&#39;</span>,
+<span class="w">                    </span><span class="nv">endpoint_url</span><span class="o">=</span>os.getenv<span class="o">(</span><span class="s2">&quot;AWS_ENDPOINT_URL&quot;</span><span class="o">)</span>,
+<span class="w">                    </span><span class="nv">verify</span><span class="o">=</span>True<span class="o">)</span>
+
+print<span class="o">(</span><span class="s2">&quot;current buckets in s3:&quot;</span><span class="o">)</span>
+print<span class="o">(</span>list<span class="o">(</span>s3.buckets.all<span class="o">()))</span>
+
+<span class="nv">curr_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>os.getcwd<span class="o">()</span>
+<span class="nv">base_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>os.path.join<span class="o">(</span>curr_path,<span class="w"> </span><span class="s2">&quot;torchserve&quot;</span><span class="o">)</span>
+
+<span class="nv">bucket_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;spam_email&quot;</span>
+<span class="nv">bucket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>s3.Bucket<span class="o">(</span>bucket_name<span class="o">)</span>
+
+<span class="c1"># upload</span>
+bucket.upload_file<span class="o">(</span>os.path.join<span class="o">(</span>base_path,<span class="w"> </span><span class="s2">&quot;model-store&quot;</span>,<span class="w"> </span><span class="s2">&quot;spam_email.mar&quot;</span><span class="o">)</span>,
+<span class="w">                </span>os.path.join<span class="o">(</span>bucket_path,<span class="w"> </span><span class="s2">&quot;model-store/spam_email.mar&quot;</span><span class="o">))</span>
+bucket.upload_file<span class="o">(</span>os.path.join<span class="o">(</span>base_path,<span class="w"> </span><span class="s2">&quot;config&quot;</span>,<span class="w"> </span><span class="s2">&quot;config.properties&quot;</span><span class="o">)</span>,
+<span class="w">                </span>os.path.join<span class="o">(</span>bucket_path,<span class="w"> </span><span class="s2">&quot;config/config.properties&quot;</span><span class="o">))</span>
+
+<span class="c1"># check files</span>
+<span class="k">for</span><span class="w"> </span>obj<span class="w"> </span><span class="k">in</span><span class="w"> </span>bucket.objects.filter<span class="o">(</span><span class="nv">Prefix</span><span class="o">=</span>bucket_path<span class="o">)</span>:
+<span class="w">    </span>print<span class="o">(</span>obj.key<span class="o">)</span>
+</code></pre></div>
+</div>
+<h3 id="create-minio-service-account-and-secret">Create MinIO service account and secret<a class="headerlink" href="#create-minio-service-account-and-secret" title="Link to this heading">¶</a></h3>
+<p>When you create an <code class="docutils literal notranslate"><span class="pre">InferenceService</span></code> to start model, authorization is needed to access MinIO to get the model. Thus, you create MinIO service account and secret using the follow YAML file:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>cat<span class="w"> </span><span class="s">&lt;&lt; EOF | kubectl apply -f -</span>
+<span class="s">apiVersion: v1</span>
+<span class="s">kind: Secret</span>
+<span class="s">metadata:</span>
+<span class="s">  name: minio-s3-secret-user # you can set a different secret name</span>
+<span class="s">  annotations:</span>
+<span class="s">    serving.kserve.io/s3-endpoint: &quot;10.117.233.16:9000&quot; # replace with your s3 endpoint e.g minio-service.kubeflow:9000</span>
+<span class="s">    serving.kserve.io/s3-usehttps: &quot;0&quot; # by default 1, if testing with minio you can set to 0</span>
+<span class="s">    serving.kserve.io/s3-region: &quot;us-east-2&quot;</span>
+<span class="s">    serving.kserve.io/s3-useanoncredential: &quot;false&quot; # omitting this is the same as false, if true will ignore provided credential and use anonymous credentials</span>
+<span class="s">type: Opaque</span>
+<span class="s">stringData: # use &quot;stringData&quot; for raw credential string or &quot;data&quot; for base64 encoded string</span>
+<span class="s">  AWS_ACCESS_KEY_ID: minioadmin  # repalce it to your MinIO access key</span>
+<span class="s">  AWS_SECRET_ACCESS_KEY: minioadmin # repalce it to your MinIO secret key</span>
+<span class="s">---</span>
+<span class="s">apiVersion: v1</span>
+<span class="s">kind: ServiceAccount</span>
+<span class="s">metadata:</span>
+<span class="s">  name: minio-service-account-user # you can set a different sa name</span>
+<span class="s">secrets:</span>
+<span class="s">- name: minio-s3-secret-user</span>
+<span class="s">EOF</span>
+</code></pre></div>
+</div>
+<h3 id="run-inferenceservice-using-kserve">Run <code class="docutils literal notranslate"><span class="pre">InferenceService</span></code> using KServe<a class="headerlink" href="#run-inferenceservice-using-kserve" title="Link to this heading">¶</a></h3>
+<p>Let’s define a new <code class="docutils literal notranslate"><span class="pre">InferenceService</span></code> YAML for the model and apply it to the cluster. Meanwhile, please notice that set <code class="docutils literal notranslate"><span class="pre">storageUri</span></code> to your <code class="docutils literal notranslate"><span class="pre">bucket_name/bucket_path</span></code>. You may also need to change <code class="docutils literal notranslate"><span class="pre">metadata:</span> <span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">serviceAccountName</span></code>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>cat<span class="w"> </span><span class="s">&lt;&lt; EOF | kubectl apply -f -</span>
+<span class="s">apiVersion: &quot;serving.kserve.io/v1beta1&quot;</span>
+<span class="s">kind: &quot;InferenceService&quot;</span>
+<span class="s">metadata:</span>
+<span class="s">  name: &quot;spam-email-serving&quot; # you can set a different secret name</span>
+<span class="s">spec:</span>
+<span class="s">  predictor:</span>
+<span class="s">    serviceAccountName: minio-service-account-user # replace with your MinIO service account created before</span>
+<span class="s">    model:</span>
+<span class="s">      modelFormat:</span>
+<span class="s">        name: pytorch</span>
+<span class="s">      storageUri: &quot;s3://spam-bucket/spam_email&quot; # set yourself model s3 path</span>
+<span class="s">      resources:</span>
+<span class="s">          requests:</span>
+<span class="s">            cpu: 50m</span>
+<span class="s">            memory: 200Mi</span>
+<span class="s">          limits:</span>
+<span class="s">            cpu: 100m</span>
+<span class="s">            memory: 500Mi</span>
+<span class="s">          # limits:</span>
+<span class="s">          #   nvidia.com/gpu: &quot;1&quot;   # for inference service on GPU</span>
+<span class="s">EOF</span>
+</code></pre></div>
+</div>
+<h3 id="check-inferenceservice-status">Check <code class="docutils literal notranslate"><span class="pre">InferenceService</span></code> status<a class="headerlink" href="#check-inferenceservice-status" title="Link to this heading">¶</a></h3>
+<p>Run the following command in terminal to check the status of <code class="docutils literal notranslate"><span class="pre">InferenceService</span></code>. <code class="docutils literal notranslate"><span class="pre">True</span></code> means your model server is running well.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>inferenceservice<span class="w"> </span>spam-email-serving<span class="w"> </span>-n<span class="w"> </span>&lt;your-namespace&gt;
+NAME<span class="w">           </span>URL<span class="w">                                                 </span>READY<span class="w">   </span>PREV<span class="w">   </span>LATEST<span class="w">   </span>PREVROLLEDOUTREVISION<span class="w">   </span>LATESTREADYREVISION<span class="w">                    </span>AGE
+spam-email-serving<span class="w">   </span>http://spam-email-serving.kubeflow-user.example.com<span class="w">         </span>True<span class="w">           </span><span class="m">100</span><span class="w">                              </span>spam-email-serving-predictor-default-47q2g<span class="w">   </span>23h
+</code></pre></div>
+</div>
+<h3 id="test-perform-inference">Test perform inference<a class="headerlink" href="#test-perform-inference" title="Link to this heading">¶</a></h3>
+<h4 id="define-a-test-bot-for-convenience">Define a Test_bot for convenience<a class="headerlink" href="#define-a-test-bot-for-convenience" title="Link to this heading">¶</a></h4>
+<p>Run the following cells to define a test_bot to make prediction in the notebook server.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>!pip<span class="w"> </span>install<span class="w"> </span>multiprocess<span class="w"> </span>-i<span class="w"> </span>https://pypi.tuna.tsinghua.edu.cn/simple
+</code></pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>import<span class="w"> </span>requests
+import<span class="w"> </span>json
+import<span class="w"> </span>multiprocess<span class="w"> </span>as<span class="w"> </span>mp
+
+class<span class="w"> </span>Test_bot<span class="o">()</span>:
+<span class="w">    </span>def<span class="w"> </span>__init__<span class="o">(</span>self,<span class="w"> </span>uri,<span class="w"> </span>model,<span class="w"> </span>host,<span class="w"> </span>session<span class="o">)</span>:
+<span class="w">        </span>self.uri<span class="w"> </span><span class="o">=</span><span class="w"> </span>uri
+<span class="w">        </span>self.model<span class="w"> </span><span class="o">=</span><span class="w"> </span>model
+<span class="w">        </span>self.host<span class="w"> </span><span class="o">=</span><span class="w"> </span>host
+<span class="w">        </span>self.session<span class="w"> </span><span class="o">=</span><span class="w"> </span>session
+<span class="w">        </span>self.headers<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="s1">&#39;Host&#39;</span>:<span class="w"> </span>self.host,<span class="w"> </span><span class="s1">&#39;Content-Type&#39;</span>:<span class="w"> </span><span class="s2">&quot;application/json&quot;</span>,<span class="w"> </span><span class="s1">&#39;Cookie&#39;</span>:<span class="w"> </span><span class="s2">&quot;authservice_session=&quot;</span><span class="w"> </span>+<span class="w"> </span>self.session<span class="o">}</span>
+<span class="w">        </span>self.email<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<span class="w">        </span><span class="c1"># features: shorter_text, body, business, html, money</span>
+<span class="w">        </span><span class="s2">&quot;[0, 0, 0, 0, 0] email longer than 500 character&quot;</span><span class="w"> </span>+<span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="w"> </span>*<span class="w"> </span><span class="m">500</span>,<span class="w">                                     </span><span class="c1"># ham</span>
+<span class="w">        </span><span class="s2">&quot;[1, 0, 0, 0, 0] email shorter than 500 character&quot;</span>,<span class="w">                                                </span><span class="c1"># ham</span>
+<span class="w">        </span><span class="s2">&quot;[1, 0, 1, 1, 1] email shorter than 500 character + business + html + money&quot;</span>,<span class="w">                      </span><span class="c1"># spam</span>
+<span class="w">        </span><span class="s2">&quot;[0, 1, 0, 0, 1] email longer than 500 character + body&quot;</span><span class="w"> </span>+<span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="w"> </span>*<span class="w"> </span><span class="m">500</span>,<span class="w">                              </span><span class="c1"># spam</span>
+<span class="w">        </span><span class="s2">&quot;[0, 1, 1, 1, 1] email longer than 500 character + body + business + html + money&quot;</span><span class="w"> </span>+<span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="w"> </span>*<span class="w"> </span><span class="m">500</span>,<span class="w">    </span><span class="c1"># spam</span>
+<span class="w">        </span><span class="s2">&quot;[1, 1, 1, 1, 1] email shorter than 500 character body + business + html + money&quot;</span>,<span class="w">                 </span><span class="c1"># spam</span>
+<span class="w">        </span><span class="o">]</span>
+
+<span class="w">    </span>def<span class="w"> </span>update_uri<span class="o">(</span>self,<span class="w"> </span>uri<span class="o">)</span>:
+<span class="w">        </span>self.uri<span class="w"> </span><span class="o">=</span><span class="w"> </span>uri
+
+<span class="w">    </span>def<span class="w"> </span>update_model<span class="o">(</span>self,<span class="w"> </span>model<span class="o">)</span>:
+<span class="w">        </span>self.model<span class="w"> </span><span class="o">=</span><span class="w"> </span>model
+
+<span class="w">    </span>def<span class="w"> </span>update_host<span class="o">(</span>self,<span class="w"> </span>host<span class="o">)</span>:
+<span class="w">        </span>self.host<span class="w"> </span><span class="o">=</span><span class="w"> </span>host
+<span class="w">        </span>self.update_headers<span class="o">()</span>
+
+<span class="w">    </span>def<span class="w"> </span>update_session<span class="o">(</span>self,<span class="w"> </span>session<span class="o">)</span>:
+<span class="w">        </span>self.session<span class="w"> </span><span class="o">=</span><span class="w"> </span>session
+<span class="w">        </span>self.update_headers<span class="o">()</span>
+
+<span class="w">    </span>def<span class="w"> </span>update_headers<span class="o">(</span>self<span class="o">)</span>:
+<span class="w">        </span>self.headers<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="s1">&#39;Host&#39;</span>:<span class="w"> </span>self.host,<span class="w"> </span><span class="s1">&#39;Content-Type&#39;</span>:<span class="w"> </span><span class="s2">&quot;application/json&quot;</span>,<span class="w"> </span><span class="s1">&#39;Cookie&#39;</span>:<span class="w"> </span><span class="s2">&quot;authservice_session=&quot;</span><span class="w"> </span>+<span class="w"> </span>self.session<span class="o">}</span>
+
+<span class="w">    </span>def<span class="w"> </span>get_data<span class="o">(</span>self,<span class="w"> </span>x<span class="o">)</span>:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>isinstance<span class="o">(</span>x,<span class="w"> </span>str<span class="o">)</span>:
+<span class="w">            </span><span class="nv">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>x
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span>isinstance<span class="o">(</span>x,<span class="w"> </span>int<span class="o">)</span>:
+<span class="w">            </span><span class="nv">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.email<span class="o">[</span>x<span class="w"> </span>%<span class="w"> </span><span class="m">6</span><span class="o">]</span>
+<span class="w">        </span><span class="k">else</span>:
+<span class="w">            </span><span class="nv">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.email<span class="o">[</span><span class="m">0</span><span class="o">]</span>
+<span class="w">        </span><span class="nv">json_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>json.dumps<span class="o">({</span>
+<span class="w">            </span><span class="s2">&quot;instances&quot;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">                </span>email,
+<span class="w">            </span><span class="o">]</span>
+<span class="w">        </span><span class="o">})</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>json_data
+
+<span class="w">    </span>def<span class="w"> </span>readiness<span class="o">(</span>self<span class="o">)</span>:
+<span class="w">        </span><span class="nv">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.uri<span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;/v1/models/&#39;</span><span class="w"> </span>+<span class="w"> </span>self.model
+<span class="w">        </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>requests.get<span class="o">(</span>uri,<span class="w"> </span><span class="nv">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.headers,<span class="w"> </span><span class="nv">timeout</span><span class="o">=</span><span class="m">5</span><span class="o">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>response.text
+
+<span class="w">    </span>def<span class="w"> </span>predict<span class="o">(</span>self,<span class="w"> </span><span class="nv">x</span><span class="o">=</span>None<span class="o">)</span>:
+<span class="w">        </span><span class="nv">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.uri<span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;/v1/models/&#39;</span><span class="w"> </span>+<span class="w"> </span>self.model<span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;:predict&#39;</span>
+<span class="w">        </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>requests.post<span class="o">(</span>uri,<span class="w"> </span><span class="nv">data</span><span class="o">=</span>self.get_data<span class="o">(</span>x<span class="o">)</span>,<span class="w"> </span><span class="nv">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.headers,<span class="w"> </span><span class="nv">timeout</span><span class="o">=</span><span class="m">10</span><span class="o">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>response.text
+
+<span class="w">    </span>def<span class="w"> </span>explain<span class="o">(</span>self,<span class="w"> </span><span class="nv">x</span><span class="o">=</span>None<span class="o">)</span>:
+<span class="w">        </span><span class="nv">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.uri<span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;/v1/models/&#39;</span><span class="w"> </span>+<span class="w"> </span>self.model<span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;:explain&#39;</span>
+<span class="w">        </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>requests.post<span class="o">(</span>uri,<span class="w"> </span><span class="nv">data</span><span class="o">=</span>self.get_data<span class="o">(</span>x<span class="o">)</span>,<span class="w"> </span><span class="nv">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.headers,<span class="w"> </span><span class="nv">timeout</span><span class="o">=</span><span class="m">10</span><span class="o">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>response.text
+
+<span class="w">    </span>def<span class="w"> </span>concurrent_predict<span class="o">(</span>self,<span class="w"> </span><span class="nv">num</span><span class="o">=</span><span class="m">10</span><span class="o">)</span>:
+<span class="w">        </span>print<span class="o">(</span><span class="s2">&quot;fire &quot;</span><span class="w"> </span>+<span class="w"> </span>str<span class="o">(</span>num<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="s2">&quot; requests to &quot;</span><span class="w"> </span>+<span class="w"> </span>self.host<span class="o">)</span>
+<span class="w">        </span>with<span class="w"> </span>mp.Pool<span class="o">()</span><span class="w"> </span>as<span class="w"> </span>pool:
+<span class="w">            </span><span class="nv">responses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pool.map<span class="o">(</span>self.predict,<span class="w"> </span>range<span class="o">(</span>num<span class="o">))</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>responses
+</code></pre></div>
+</div>
+<h4 id="determine-host-and-session">Determine host and session<a class="headerlink" href="#determine-host-and-session" title="Link to this heading">¶</a></h4>
+<p>Run the following command in terminal to get host, which is set to the headers in your request.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>inferenceservice<span class="w"> </span>spam-email-serving<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.status.url}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">3</span>
+</code></pre></div>
+</div>
+<p>Use your web browser to login to Kubeflow on vSphere UI, and get Cookies: authservice_session. If you use Chrome browser, go to Developer Tools -&gt; Applications -&gt; Cookies to get session.</p>
+<h4 id="test-model-prediction">Test model prediction<a class="headerlink" href="#test-model-prediction" title="Link to this heading">¶</a></h4>
+<p>Run the following cell to do model prediction in the notebook server.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="w">            </span><span class="c1"># replace it with the url you used to access Kubeflow</span>
+<span class="nv">bot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Test_bot<span class="o">(</span><span class="nv">uri</span><span class="o">=</span><span class="s1">&#39;http://10.117.233.8&#39;</span>,
+<span class="w">            </span><span class="nv">model</span><span class="o">=</span><span class="s1">&#39;spam_email&#39;</span>,
+<span class="w">            </span><span class="c1"># replace it with what is printed above</span>
+<span class="w">            </span><span class="nv">host</span><span class="o">=</span><span class="s1">&#39;spam-email-serving.kubeflow-user-example-com.example.com&#39;</span>,
+<span class="w">            </span><span class="c1"># replace with your browser session</span>
+<span class="w">            </span><span class="nv">session</span><span class="o">=</span><span class="s1">&#39;MTY2NjE2MDYyMHxOd3dBTkZZelVqVkdOVkJIVUVGR1IweEVTbG95VVRZMU5WaEVXbE5GTlV0WlVrWk1WRk5FTkU5WVIxZFJRelpLVFZoWVVFOVdSa0U9fMj0VhQPme_rORhhdy0mtBJk-yGWdzibFfPMdU3TztbJ&#39;</span><span class="o">)</span>
+
+print<span class="o">(</span>bot.readiness<span class="o">())</span>
+print<span class="o">(</span>bot.predict<span class="o">(</span><span class="m">0</span><span class="o">))</span>
+</code></pre></div>
+</div>
+<p>The output looks like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;spam_email&quot;</span>,<span class="w"> </span><span class="s2">&quot;ready&quot;</span>:<span class="w"> </span>true<span class="o">}</span>
+<span class="o">{</span><span class="s2">&quot;predictions&quot;</span>:<span class="w"> </span><span class="o">[{</span><span class="s2">&quot;version&quot;</span>:<span class="w"> </span><span class="s2">&quot;2&quot;</span>,<span class="w"> </span><span class="s2">&quot;prediction&quot;</span>:<span class="w"> </span><span class="s2">&quot;ham&quot;</span><span class="o">}]}</span>
+</code></pre></div>
+</div>
+<h3 id="delete-inferenceservice">Delete <code class="docutils literal notranslate"><span class="pre">InferenceService</span></code><a class="headerlink" href="#delete-inferenceservice" title="Link to this heading">¶</a></h3>
+<p>When you are done with your <code class="docutils literal notranslate"><span class="pre">InferenceService</span></code>, run the following command in terminal to delete it:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>$<span class="w"> </span>kubectl<span class="w"> </span>delete<span class="w"> </span>inferenceservice<span class="w"> </span>&lt;your-inferenceservice&gt;<span class="w"> </span>-n<span class="w">  </span>&lt;your-namespace&gt;
+</code></pre></div>
+</div>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="katib.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Hyperparameter Tuning" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Hyperparameter Tuning
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="kfp.html" class="md-footer__link md-footer__link--next" aria-label="Next: ML Pipelines" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              ML Pipelines
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2023, VMware.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.2.6.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.sections", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+  </body>
+</html>

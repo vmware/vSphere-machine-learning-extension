@@ -1,0 +1,1680 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../_static/favicon.ico">
+    
+    
+      
+        <title>Federated model training - vSphere Machine Learning Extension</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.af531f03affe68837.min.css?v=2410bb73" />
+        <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="vSphere Machine Learning Extension" class="md-header__button md-logo" aria-label="vSphere Machine Learning Extension" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            vSphere Machine Learning Extension
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Federated model training
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="yellow"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vmware/vSphere-machine-learning-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vSphere Machine Learning Extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="vSphere Machine Learning Extension" class="md-nav__button md-logo" aria-label="vSphere Machine Learning Extension" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    vSphere Machine Learning Extension
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vmware/vSphere-machine-learning-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vSphere Machine Learning Extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          <span class="md-ellipsis">Introduction</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Introduction" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Introduction</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/index.html" class="md-nav__link">
+        <span title="/introduction/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/oss.html" class="md-nav__link">
+        <span title="/introduction/oss.rst (reference label)" class="md-ellipsis">Kubeflow Components</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/ekf.html" class="md-nav__link">
+        <span title="/introduction/ekf.rst (reference label)" class="md-ellipsis">Kubeflow on v<wbr>Sphere Components and Features</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/mlops.html" class="md-nav__link">
+        <span title="/introduction/mlops.rst (reference label)" class="md-ellipsis">MLOps with Kubeflow</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          <span class="md-ellipsis">Install and Configure</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Install and Configure" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Install and Configure</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/index.html" class="md-nav__link">
+        <span title="/install/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/tkgs.html" class="md-nav__link">
+        <span title="/install/tkgs.rst (reference label)" class="md-ellipsis">Install Kubeflow on v<wbr>Sphere</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/auth.html" class="md-nav__link">
+        <span title="/install/auth.rst (reference label)" class="md-ellipsis">Authentication Integration</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/monitor.html" class="md-nav__link">
+        <span title="/install/monitor.rst (reference label)" class="md-ellipsis">Monitoring with Prometheus and Grafana</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          <span class="md-ellipsis">User Guide</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">User Guide</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        <span title="/user-guide/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks.html" class="md-nav__link">
+        <span title="/user-guide/notebooks.rst (reference label)" class="md-ellipsis">Notebooks</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="feast.html" class="md-nav__link">
+        <span title="/user-guide/feast.rst (reference label)" class="md-ellipsis">Feature Store</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spark.html" class="md-nav__link">
+        <span title="/user-guide/spark.rst (reference label)" class="md-ellipsis">Data Processing</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mlmd.html" class="md-nav__link">
+        <span title="/user-guide/mlmd.rst (reference label)" class="md-ellipsis">Metadata Store</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mlflow.html" class="md-nav__link">
+        <span title="/user-guide/mlflow.rst (reference label)" class="md-ellipsis">Model Registry</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="training.html" class="md-nav__link">
+        <span title="/user-guide/training.rst (reference label)" class="md-ellipsis">Model Training</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tensorboard.html" class="md-nav__link">
+        <span title="/user-guide/tensorboard.rst (reference label)" class="md-ellipsis">Visualization for Experiments</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="katib.html" class="md-nav__link">
+        <span title="/user-guide/katib.rst (reference label)" class="md-ellipsis">Hyperparameter Tuning</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kserve.html" class="md-nav__link">
+        <span title="/user-guide/kserve.rst (reference label)" class="md-ellipsis">Model Serving</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kfp.html" class="md-nav__link">
+        <span title="/user-guide/kfp.rst (reference label)" class="md-ellipsis">ML Pipelines</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/user-guide/federated-model-training.rst (reference label)" class="md-ellipsis">Federated model training</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/user-guide/federated-model-training.rst (reference label)" class="md-ellipsis">Federated model training</span>
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/user-guide/federated-model-training.rst (reference label)" class="md-ellipsis">Federated model training</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#prerequisites (reference label)" class="md-ellipsis">Prerequisites</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cluster-deployment" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#cluster-deployment (reference label)" class="md-ellipsis">Cluster Deployment</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cluster Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-the-fate-operator" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#deploy-the-fate-operator (reference label)" class="md-ellipsis">Deploy the FATE-<wbr>Operator</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-the-fate-cluster" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#deploy-the-fate-cluster (reference label)" class="md-ellipsis">Deploy the FATE cluster</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy the FATE cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-kubefate" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#install-kubefate (reference label)" class="md-ellipsis">1.<wbr> Install Kube<wbr>FATE</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-fate" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#install-fate (reference label)" class="md-ellipsis">2.<wbr> Install FATE</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#federated-learning-with-fate" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#federated-learning-with-fate (reference label)" class="md-ellipsis">Federated Learning with FATE</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Federated Learning with FATE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fate-job" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#fate-job (reference label)" class="md-ellipsis">fate-<wbr>job</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fateclient" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#fateclient (reference label)" class="md-ellipsis">fateclient</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          <span class="md-ellipsis">Use Cases</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Use Cases" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Use Cases</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/index.html" class="md-nav__link">
+        <span title="/use-cases/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/helmet.html" class="md-nav__link">
+        <span title="/use-cases/helmet.rst (reference label)" class="md-ellipsis">End to End Examples</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/modelserving.html" class="md-nav__link">
+        <span title="/use-cases/modelserving.rst (reference label)" class="md-ellipsis">Model Serving Examples</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/codegen.html" class="md-nav__link">
+        <span title="/use-cases/codegen.ipynb (reference label)" class="md-ellipsis">Salesforce Code<wbr>Gen</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          <span class="md-ellipsis">Internals</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Internals" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Internals</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internals/auth.html" class="md-nav__link">
+        <span title="/internals/auth.rst (reference label)" class="md-ellipsis">Authentication and Authorization</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/user-guide/federated-model-training.rst (reference label)" class="md-ellipsis">Federated model training</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#prerequisites (reference label)" class="md-ellipsis">Prerequisites</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cluster-deployment" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#cluster-deployment (reference label)" class="md-ellipsis">Cluster Deployment</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cluster Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-the-fate-operator" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#deploy-the-fate-operator (reference label)" class="md-ellipsis">Deploy the FATE-<wbr>Operator</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-the-fate-cluster" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#deploy-the-fate-cluster (reference label)" class="md-ellipsis">Deploy the FATE cluster</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy the FATE cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-kubefate" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#install-kubefate (reference label)" class="md-ellipsis">1.<wbr> Install Kube<wbr>FATE</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-fate" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#install-fate (reference label)" class="md-ellipsis">2.<wbr> Install FATE</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#federated-learning-with-fate" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#federated-learning-with-fate (reference label)" class="md-ellipsis">Federated Learning with FATE</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Federated Learning with FATE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fate-job" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#fate-job (reference label)" class="md-ellipsis">fate-<wbr>job</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fateclient" class="md-nav__link">
+    <span title="/user-guide/federated-model-training.rst#fateclient (reference label)" class="md-ellipsis">fateclient</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+  <a href="https://github.com/vmware/vSphere-machine-learning-extension/blob/master/docs/user-guide/federated-model-training.rst" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+<h1 id="federated-model-training">Federated model training<a class="headerlink" href="#federated-model-training" title="Link to this heading">¶</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>Federated Learning is a machine learning technique where algorithms are trained across multiple distributed edge devices or servers, each having its own local data samples.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/FederatedAI/FATE">FATE</a> (Federated AI Technology Enabler) is the world’s pioneering open-source framework for industrial-grade federated learning. It empowers businesses and institutions to collaborate on data while prioritizing the safety and privacy of the data involved. The FATE project leverages cutting-edge technologies such as Multi-Party Computation (MPC) and Homomorphic Encryption (HE) to build a robust and secure computing protocol, enabling a wide range of secure machine learning tasks, including logistic regression, tree-based algorithms, deep learning, and transfer learning, among others.</p></li>
+</ul>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/FederatedAI/KubeFATE">KubeFATE</a> is a solution that allows running FATE in containerized environments. It offers the capability to deploy FATE clusters with just one click, while also providing features to monitor the status of running FATE clusters, view logs, and perform version upgrades.</p></li>
+</ul>
+<ul class="simple">
+<li><p>FATE-Job is a task management tool specifically designed for FATE. It facilitates the submission and querying of FATE tasks through the use of the Kubernetes API.</p></li>
+</ul>
+<p><a class="reference external" href="https://github.com/kubeflow/fate-operator">FATE-Operator</a> simplifies the deployment of FATE, KubeFATE and FATE-Job into Kubernetes clusters. It has been integrated into Kubeflow on vSphere, facilitating effortless utilization within the platform.</p>
+<p>This tutorial offers a comprehensive, step-by-step guide for demonstrating the usage of FATE-Operator on a Kubeflow on vSphere cluster:</p>
+<ul class="simple">
+<li><p><strong>Cluster Deployment: Setting up the FATE cluster.</strong></p></li>
+<li><p><strong>Federated Learning with FATE: Initial federated training on the deployed FATE cluster.</strong></p></li>
+</ul>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Kubeflow on vSphere v1.6.1</p></li>
+<li><p>Deployed an additional FATE cluster with the ID 10000 or set both collaborative parties to 9999 (refer to the comments in the code example).</p></li>
+</ul>
+<h2 id="cluster-deployment">Cluster Deployment<a class="headerlink" href="#cluster-deployment" title="Link to this heading">¶</a></h2>
+<h3 id="deploy-the-fate-operator">Deploy the FATE-Operator<a class="headerlink" href="#deploy-the-fate-operator" title="Link to this heading">¶</a></h3>
+<p>Get source code</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/kubeflow/fate-operator.git
+<span class="nb">cd</span><span class="w"> </span>fate-operator
+</code></pre></div>
+</div>
+<p>Deploy the FATE-Operator CRDs</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>kustomize<span class="w"> </span>build<span class="w"> </span>config/crd<span class="w"> </span><span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
+</code></pre></div>
+</div>
+<p>Deploy the FATE-Operator controller-manager</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>kustomize<span class="w"> </span>build<span class="w"> </span>config/default<span class="w"> </span><span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>-
+</code></pre></div>
+</div>
+<h3 id="deploy-the-fate-cluster">Deploy the FATE cluster<a class="headerlink" href="#deploy-the-fate-cluster" title="Link to this heading">¶</a></h3>
+<h4 id="install-kubefate">1. Install KubeFATE<a class="headerlink" href="#install-kubefate" title="Link to this heading">¶</a></h4>
+<p>Configuring RBAC (Role-Based Access Control) Permissions for KubeFATE.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>cat<span class="w"> </span><span class="s">&lt;&lt; EOF | kubectl apply -f -</span>
+<span class="s">apiVersion: v1</span>
+<span class="s">kind: Namespace</span>
+<span class="s">metadata:</span>
+<span class="s">  name: kube-fate</span>
+<span class="s">  labels:</span>
+<span class="s">    name: kube-fate</span>
+<span class="s">---</span>
+<span class="s">apiVersion: v1</span>
+<span class="s">kind: ServiceAccount</span>
+<span class="s">metadata:</span>
+<span class="s">  name: kubefate-admin</span>
+<span class="s">  namespace: kube-fate</span>
+<span class="s">---</span>
+<span class="s">apiVersion: rbac.authorization.k8s.io/v1</span>
+<span class="s">kind: RoleBinding</span>
+<span class="s">metadata:</span>
+<span class="s">  name: kubefate</span>
+<span class="s">  namespace: fate-9999</span>
+<span class="s">roleRef:</span>
+<span class="s">  apiGroup: rbac.authorization.k8s.io</span>
+<span class="s">  kind: ClusterRole</span>
+<span class="s">  name: cluster-admin</span>
+<span class="s">subjects:</span>
+<span class="s">  - kind: ServiceAccount</span>
+<span class="s">    name: kubefate-admin</span>
+<span class="s">    namespace: kube-fate</span>
+
+<span class="s">---</span>
+<span class="s">apiVersion: rbac.authorization.k8s.io/v1</span>
+<span class="s">kind: RoleBinding</span>
+<span class="s">metadata:</span>
+<span class="s">  name: kubefate</span>
+<span class="s">  namespace: fate-10000</span>
+<span class="s">roleRef:</span>
+<span class="s">  apiGroup: rbac.authorization.k8s.io</span>
+<span class="s">  kind: ClusterRole</span>
+<span class="s">  name: cluster-admin</span>
+<span class="s">subjects:</span>
+<span class="s">  - kind: ServiceAccount</span>
+<span class="s">    name: kubefate-admin</span>
+<span class="s">    namespace: kube-fate</span>
+
+<span class="s">EOF</span>
+</code></pre></div>
+</div>
+<p>Set the key of KubeFATE</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>cat<span class="w"> </span><span class="s">&lt;&lt; EOF | kubectl apply -f -</span>
+<span class="s">apiVersion: v1</span>
+<span class="s">kind: Secret</span>
+<span class="s">metadata:</span>
+<span class="s">  name: kubefate-secret</span>
+<span class="s">  namespace: kube-fate</span>
+<span class="s">type: Opaque</span>
+<span class="s">stringData:</span>
+<span class="s">  kubefateUsername: admin</span>
+<span class="s">  kubefatePassword: admin</span>
+<span class="s">  mariadbUsername: kubefate</span>
+<span class="s">  mariadbPassword: kubefate</span>
+
+<span class="s">EOF</span>
+</code></pre></div>
+</div>
+<p>Deploy kubefate, here is the v1.3.0 version of kubefate</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>cat<span class="w"> </span><span class="s">&lt;&lt; EOF | kubectl apply -f -</span>
+<span class="s">apiVersion: app.kubefate.net/v1beta1</span>
+<span class="s">kind: Kubefate</span>
+<span class="s">metadata:</span>
+<span class="s">  name: kubefate-sample</span>
+<span class="s">  namespace: kube-fate</span>
+<span class="s">spec:</span>
+<span class="s">  # kubefate image tag</span>
+<span class="s">  image: federatedai/kubefate:v1.4.0</span>
+<span class="s">  # ingress host</span>
+<span class="s">  ingressDomain: kubefate.net</span>
+<span class="s">  # serviceAccountName</span>
+<span class="s">  serviceAccountName: kubefate-admin</span>
+<span class="s">  # kubefate config</span>
+<span class="s">  volumeSource:</span>
+<span class="s">    hostPath:</span>
+<span class="s">      path: /home/kubefate/mysql/db</span>
+<span class="s">      type: DirectoryOrCreate</span>
+<span class="s">  config:</span>
+<span class="s">    - name: MYSQL_USER</span>
+<span class="s">      valueFrom:</span>
+<span class="s">        secretKeyRef:</span>
+<span class="s">          name: kubefate-secret</span>
+<span class="s">          key: mariadbUsername</span>
+<span class="s">    - name: MYSQL_PASSWORD</span>
+<span class="s">      valueFrom:</span>
+<span class="s">        secretKeyRef:</span>
+<span class="s">          name: kubefate-secret</span>
+<span class="s">          key: mariadbPassword</span>
+<span class="s">    - name: FATECLOUD_DB_USERNAME</span>
+<span class="s">      valueFrom:</span>
+<span class="s">        secretKeyRef:</span>
+<span class="s">          name: kubefate-secret</span>
+<span class="s">          key: mariadbUsername</span>
+<span class="s">    - name: FATECLOUD_DB_PASSWORD</span>
+<span class="s">      valueFrom:</span>
+<span class="s">        secretKeyRef:</span>
+<span class="s">          name: kubefate-secret</span>
+<span class="s">          key: mariadbPassword</span>
+<span class="s">    - name: FATECLOUD_REPO_NAME</span>
+<span class="s">      value: &quot;kubefate&quot;</span>
+<span class="s">    - name: FATECLOUD_REPO_URL</span>
+<span class="s">      value: &quot;https://federatedai.github.io/KubeFATE&quot;</span>
+<span class="s">    - name: FATECLOUD_USER_USERNAME</span>
+<span class="s">      valueFrom:</span>
+<span class="s">        secretKeyRef:</span>
+<span class="s">          name: kubefate-secret</span>
+<span class="s">          key: kubefateUsername</span>
+<span class="s">    - name: FATECLOUD_USER_PASSWORD</span>
+<span class="s">      valueFrom:</span>
+<span class="s">        secretKeyRef:</span>
+<span class="s">          name: kubefate-secret</span>
+<span class="s">          key: kubefatePassword</span>
+<span class="s">    - name: FATECLOUD_LOG_LEVEL</span>
+<span class="s">      value: &quot;debug&quot;</span>
+<span class="s">    - name: FATECLOUD_LOG_NOCOLOR</span>
+<span class="s">      value: &quot;true&quot;</span>
+
+<span class="s">EOF</span>
+</code></pre></div>
+</div>
+<p>Check kubefate status</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>Kubefate<span class="w"> </span>-n<span class="w"> </span>kube-fate
+NAME<span class="w">              </span>INGRESSDOMAIN<span class="w">   </span>STATUS
+kubefate-sample<span class="w">   </span>kubefate.net<span class="w">    </span>Running
+</code></pre></div>
+</div>
+<h4 id="install-fate">2. Install FATE<a class="headerlink" href="#install-fate" title="Link to this heading">¶</a></h4>
+<p>To establish a FATE Cluster, we use FATE version 1.5.1. By removing comments in the YAML file, you can easily configure the parameters of the FATE Cluster, enabling seamless connections with other FATE Clusters. This interconnected network forms the foundation of federated learning, empowering collaborative learning across distributed nodes.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>cat<span class="w"> </span><span class="s">&lt;&lt; EOF | kubectl apply -f -</span>
+<span class="s">apiVersion: app.kubefate.net/v1beta1</span>
+<span class="s">kind: FateCluster</span>
+<span class="s">metadata:</span>
+<span class="s">  name: fatecluster-sample</span>
+<span class="s">  namespace: fate-9999</span>
+<span class="s">spec:</span>
+<span class="s">  kubefate:</span>
+<span class="s">    name: kubefate-sample</span>
+<span class="s">    namespace:  kube-fate</span>
+<span class="s">  clusterSpec:</span>
+<span class="s">    name: fate-9999</span>
+<span class="s">    namespace: fate-9999</span>
+<span class="s">    chartName: fate</span>
+<span class="s">    chartVersion: v1.5.1</span>
+<span class="s">    partyId: 9999</span>
+<span class="s">    registry: &quot;&quot;</span>
+<span class="s">    imageTag: &quot;&quot;</span>
+<span class="s">    pullPolicy: &quot;&quot;</span>
+<span class="s">    imagePullSecrets:</span>
+<span class="s">      - name: myregistrykey</span>
+<span class="s">    persistence: false</span>
+<span class="s">    istio:</span>
+<span class="s">      enabled: false</span>
+<span class="s">    modules:</span>
+<span class="s">      - rollsite</span>
+<span class="s">      - clustermanager</span>
+<span class="s">      - nodemanager</span>
+<span class="s">      - mysql</span>
+<span class="s">      - python</span>
+<span class="s">      - fateboard</span>
+<span class="s">      - client</span>
+
+<span class="s">    backend: eggroll</span>
+
+<span class="s">    host:</span>
+<span class="s">      fateboard: 9999.fateboard.kubefate.net</span>
+<span class="s">      client: 9999.notebook.kubefate.net</span>
+<span class="s">      # sparkUI: 9999.spark.kubefate.net</span>
+<span class="s">      # rabbitmqUI: 9999.rabbitmq.kubefate.net</span>
+<span class="s">    rollsite:</span>
+<span class="s">      type: NodePort</span>
+<span class="s">      nodePort: 30091</span>
+<span class="s">      exchange:</span>
+<span class="s">        ip: 192.168.0.1</span>
+<span class="s">        port: 30000</span>
+<span class="s">      partyList:</span>
+<span class="s">      - partyId: 10000</span>
+<span class="s">        partyIp: 192.168.0.1</span>
+<span class="s">        partyPort: 30101</span>
+<span class="s">      nodeSelector: {}</span>
+<span class="s">    # lbrollsite:</span>
+<span class="s">      # type: NodePort</span>
+<span class="s">      # nodePort: 30091</span>
+<span class="s">      # size: &quot;2M&quot;</span>
+<span class="s">      # exchangeList:</span>
+<span class="s">      # - id: 9991</span>
+<span class="s">        # ip: 192.168.0.1</span>
+<span class="s">        # port: 30910</span>
+<span class="s">      # nodeSelector:</span>
+
+<span class="s">    nodemanager:</span>
+<span class="s">      count: 3</span>
+<span class="s">      sessionProcessorsPerNode: 4</span>
+<span class="s">      # storageClass: &quot;nodemanagers&quot;</span>
+<span class="s">      # accessMode: ReadWriteOnce</span>
+<span class="s">      # size: 2Gi</span>
+<span class="s">      list:</span>
+<span class="s">        - name: nodemanager</span>
+<span class="s">          nodeSelector: {}</span>
+<span class="s">          sessionProcessorsPerNode: 2</span>
+<span class="s">          subPath: &quot;nodemanager&quot;</span>
+<span class="s">          existingClaim: &quot;&quot;</span>
+<span class="s">          storageClass: &quot;nodemanager&quot;</span>
+<span class="s">          accessMode: ReadWriteOnce</span>
+<span class="s">          size: 1Gi</span>
+
+<span class="s">    python:</span>
+<span class="s">      type: NodePort</span>
+<span class="s">      httpNodePort: 30097</span>
+<span class="s">      grpcNodePort: 30092</span>
+<span class="s">      nodeSelector: {}</span>
+<span class="s">      enabledNN: false</span>
+<span class="s">      # spark:</span>
+<span class="s">      #   master: spark://spark-master:7077</span>
+<span class="s">      #   home:</span>
+<span class="s">      #   cores_per_node: 20</span>
+<span class="s">      #   nodes: 2</span>
+<span class="s">      # hdfs:</span>
+<span class="s">      #   name_node: hdfs://namenode:9000</span>
+<span class="s">      #   path_prefix:</span>
+<span class="s">      # rabbitmq:</span>
+<span class="s">      #   host: rabbitmq</span>
+<span class="s">      #   mng_port: 15672</span>
+<span class="s">      #   port: 5672</span>
+<span class="s">      #   user: fate</span>
+<span class="s">      #   password: fate</span>
+<span class="s">      #   # default conf/rabbitmq_route_table.yaml</span>
+<span class="s">      #   route_table:</span>
+<span class="s">      # nginx:</span>
+<span class="s">      #   host: nginx</span>
+<span class="s">      #   http_port: 9300</span>
+<span class="s">      #   grpc_port: 9310</span>
+
+<span class="s">    mysql:</span>
+<span class="s">      nodeSelector: {}</span>
+<span class="s">      ip: mysql</span>
+<span class="s">      port: 3306</span>
+<span class="s">      database: eggroll_meta</span>
+<span class="s">      user: fate</span>
+<span class="s">      password: fate_dev</span>
+<span class="s">      subPath: &quot;&quot;</span>
+<span class="s">      existingClaim: &quot;&quot;</span>
+<span class="s">      storageClass: &quot;mysql&quot;</span>
+<span class="s">      accessMode: ReadWriteOnce</span>
+<span class="s">      size: 1Gi</span>
+
+<span class="s">    # externalMysqlIp: mysql</span>
+<span class="s">    # externalMysqlPort: 3306</span>
+<span class="s">    # externalMysqlDatabase: eggroll_meta</span>
+<span class="s">    # externalMysqlUser: fate</span>
+<span class="s">    # externalMysqlPassword: fate_dev</span>
+
+<span class="s">    servingIp: 192.168.9.1</span>
+<span class="s">    servingPort: 30209</span>
+
+<span class="s">    # spark:</span>
+<span class="s">      # master:</span>
+<span class="s">        # Image: &quot;federatedai/spark-master&quot;</span>
+<span class="s">        # ImageTag: &quot;1.5.0-release&quot;</span>
+<span class="s">        # replicas: 1</span>
+<span class="s">        # cpu: &quot;100m&quot;</span>
+<span class="s">        # memory: &quot;512Mi&quot;</span>
+<span class="s">        # nodeSelector:</span>
+<span class="s">        # type: ClusterIP</span>
+<span class="s">      # worker:</span>
+<span class="s">        # Image: &quot;federatedai/spark-worker&quot;</span>
+<span class="s">        # ImageTag: &quot;1.5.0-release&quot;</span>
+<span class="s">        # replicas: 2</span>
+<span class="s">        # cpu: &quot;1000m&quot;</span>
+<span class="s">        # memory: &quot;512Mi&quot;</span>
+<span class="s">        # nodeSelector:</span>
+<span class="s">        # type: ClusterIP</span>
+<span class="s">    # hdfs:</span>
+<span class="s">      # namenode:</span>
+<span class="s">        # nodeSelector:</span>
+<span class="s">        # type: ClusterIP</span>
+<span class="s">      # datanode:</span>
+<span class="s">        # nodeSelector:</span>
+<span class="s">        # type: ClusterIP</span>
+<span class="s">    # nginx:</span>
+<span class="s">      # nodeSelector:</span>
+<span class="s">      # type: ClusterIP</span>
+<span class="s">      # httpNodePort: 30093</span>
+<span class="s">      # grpcNodePort: 30098</span>
+<span class="s">      # route_table:</span>
+<span class="s">        # 10000:</span>
+<span class="s">          # proxy:</span>
+<span class="s">            # - host: 192.168.0.1</span>
+<span class="s">              # http_port: 30103</span>
+<span class="s">              # grpc_port: 30108</span>
+<span class="s">          # fateflow:</span>
+<span class="s">            # - host: 192.168.0.1</span>
+<span class="s">              # http_port: 30107</span>
+<span class="s">              # grpc_port: 30102</span>
+<span class="s">    # rabbitmq:</span>
+<span class="s">      # nodeSelector:</span>
+<span class="s">      # type: ClusterIP</span>
+<span class="s">      # nodePort: 30094</span>
+<span class="s">      # default_user: fate</span>
+<span class="s">      # default_pass: fate</span>
+<span class="s">      # user: fate</span>
+<span class="s">      # password: fate</span>
+<span class="s">      # route_table:</span>
+<span class="s">        # 10000:</span>
+<span class="s">          # host: 192.168.0.1</span>
+<span class="s">          # port: 30104</span>
+<span class="s">EOF</span>
+</code></pre></div>
+</div>
+<p>Check FATE cluster status</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>fatecluster<span class="w"> </span>-n<span class="w"> </span>fate-9999
+NAME<span class="w">                 </span>PARTYID<span class="w">   </span>STATUS
+fatecluster-sample<span class="w">   </span><span class="m">9999</span><span class="w">      </span>Running
+</code></pre></div>
+</div>
+<h3 id="federated-learning-with-fate">Federated Learning with FATE<a class="headerlink" href="#federated-learning-with-fate" title="Link to this heading">¶</a></h3>
+<p>There are two options for running FATE training tasks: either by submitting them using the “fate-job” command or by using the “fateclient” with FATE pipeline. Both approaches provide convenient ways to execute and manage your FATE training tasks.</p>
+<h4 id="fate-job">fate-job<a class="headerlink" href="#fate-job" title="Link to this heading">¶</a></h4>
+<p>To start a FATE training task, you can execute the following commands. The specifics of the task, such as the pipeline and modules configuration, can be customized within the “pipeline” and “modulesConf” sections of the “fate_v1alpha1_fatejob.yaml” file.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>https://raw.githubusercontent.com/kubeflow/fate-operator/master/config/samples/app_v1beta1_fatejob.yaml
+</code></pre></div>
+</div>
+<h4 id="fateclient">fateclient<a class="headerlink" href="#fateclient" title="Link to this heading">¶</a></h4>
+<p>During the model experimentation phase, leveraging the fateclient offers a user-friendly approach to define and submit FATE tasks. This streamlined process provides convenience and ease-of-use when configuring and starting FATE jobs.</p>
+<p>To obtain the Jupyter Notebook URL, you can use the following command which is already installed fateclient.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>ingress<span class="w"> </span>-n<span class="w"> </span>fate-9999
+NAMESPACE<span class="w">   </span>NAME<span class="w">        </span>CLASS<span class="w">    </span>HOSTS<span class="w">                         </span>ADDRESS<span class="w">   </span>PORTS<span class="w">   </span>AGE
+fate-9999<span class="w">   </span>fateboard<span class="w">   </span>&lt;none&gt;<span class="w">   </span><span class="m">9999</span>.fateboard.kubefate.net<span class="w">             </span><span class="m">80</span><span class="w">      </span>13m
+fate-9999<span class="w">   </span>notebook<span class="w">    </span>&lt;none&gt;<span class="w">   </span><span class="m">9999</span>.notebook.kubefate.net<span class="w">              </span><span class="m">80</span><span class="w">      </span>13m
+</code></pre></div>
+</div>
+<p>Initiate the pipeline to establish connectivity with fateflow.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><code>!pipeline<span class="w"> </span>init<span class="w"> </span>--ip<span class="w"> </span>fateflow<span class="w"> </span>--port<span class="w"> </span><span class="m">9380</span>
+</code></pre></div>
+</div>
+<p>Before proceeding, ensure that all participants have uploaded their respective data to FATE. Once this is done, follow the steps outlined in the notebook page:</p>
+<p>The guest party should upload their data. You can use the provided sample file, “breast_homo_guest.csv,” and replace it with your own dataset.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">pipeline.backend.pipeline</span> <span class="kn">import</span> <span class="n">PipeLine</span>
+<span class="kn">from</span> <span class="nn">pipeline.utils.tools</span> <span class="kn">import</span> <span class="n">load_job_config</span>
+
+<span class="n">guest</span> <span class="o">=</span> <span class="mi">9999</span>
+<span class="n">data_base</span> <span class="o">=</span> <span class="s2">&quot;/data/projects/fate/&quot;</span>
+
+<span class="c1"># partition for data storage</span>
+<span class="n">partition</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># table name and namespace, used in FATE job configuration</span>
+<span class="n">dense_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;breast_homo_guest&quot;</span><span class="p">,</span> <span class="s2">&quot;namespace&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;experiment&quot;</span><span class="p">}</span>
+
+<span class="n">pipeline_upload</span> <span class="o">=</span> <span class="n">PipeLine</span><span class="p">()</span><span class="o">.</span><span class="n">set_initiator</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s2">&quot;guest&quot;</span><span class="p">,</span> <span class="n">party_id</span><span class="o">=</span><span class="n">guest</span><span class="p">)</span><span class="o">.</span><span class="n">set_roles</span><span class="p">(</span><span class="n">guest</span><span class="o">=</span><span class="n">guest</span><span class="p">)</span>
+
+<span class="c1"># add upload data info</span>
+<span class="c1"># path to csv file(s) to be uploaded</span>
+<span class="n">pipeline_upload</span><span class="o">.</span><span class="n">add_upload_data</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_base</span><span class="p">,</span> <span class="s2">&quot;examples/data/breast_homo_guest.csv&quot;</span><span class="p">),</span>
+                                <span class="n">table_name</span><span class="o">=</span><span class="n">dense_data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>             <span class="c1"># table name</span>
+                                <span class="n">namespace</span><span class="o">=</span><span class="n">dense_data</span><span class="p">[</span><span class="s2">&quot;namespace&quot;</span><span class="p">],</span>         <span class="c1"># namespace</span>
+                                <span class="n">head</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="n">partition</span><span class="p">,</span>               <span class="c1"># data info</span>
+                                <span class="n">id_delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
+<span class="c1"># upload both data</span>
+<span class="n">pipeline_upload</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>The host party should upload their data. Use the provided example file, “breast_homo_host.csv,” and replace it with your own dataset.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">pipeline.backend.pipeline</span> <span class="kn">import</span> <span class="n">PipeLine</span>
+<span class="kn">from</span> <span class="nn">pipeline.utils.tools</span> <span class="kn">import</span> <span class="n">load_job_config</span>
+
+<span class="n">host</span> <span class="o">=</span> <span class="mi">10000</span> <span class="c1"># Please change to 9999 if only one party is deployed</span>
+<span class="n">data_base</span> <span class="o">=</span> <span class="s2">&quot;/data/projects/fate/&quot;</span>
+
+<span class="c1"># partition for data storage</span>
+<span class="n">partition</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># table name and namespace, used in FATE job configuration</span>
+<span class="n">dense_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;breast_homo_host&quot;</span><span class="p">,</span> <span class="s2">&quot;namespace&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;experiment&quot;</span><span class="p">}</span>
+
+<span class="n">pipeline_upload</span> <span class="o">=</span> <span class="n">PipeLine</span><span class="p">()</span><span class="o">.</span><span class="n">set_initiator</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s2">&quot;host&quot;</span><span class="p">,</span> <span class="n">party_id</span><span class="o">=</span><span class="n">host</span><span class="p">)</span><span class="o">.</span><span class="n">set_roles</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+
+<span class="c1"># add upload data info</span>
+<span class="c1"># path to csv file(s) to be uploaded</span>
+<span class="n">pipeline_upload</span><span class="o">.</span><span class="n">add_upload_data</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_base</span><span class="p">,</span> <span class="s2">&quot;examples/data/breast_homo_host.csv&quot;</span><span class="p">),</span>
+                                <span class="n">table_name</span><span class="o">=</span><span class="n">dense_data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>             <span class="c1"># table name</span>
+                                <span class="n">namespace</span><span class="o">=</span><span class="n">dense_data</span><span class="p">[</span><span class="s2">&quot;namespace&quot;</span><span class="p">],</span>         <span class="c1"># namespace</span>
+                                <span class="n">head</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="n">partition</span><span class="p">,</span>               <span class="c1"># data info</span>
+                                <span class="n">id_delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
+<span class="c1"># upload both data</span>
+<span class="n">pipeline_upload</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Use the FATE pipeline to create a federated training task specifically for homo-lr. This will enable you to perform federated learning using the homomorphic logistic regression (homo-lr) algorithm.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">from</span> <span class="nn">pipeline.backend.pipeline</span> <span class="kn">import</span> <span class="n">PipeLine</span>
+<span class="kn">from</span> <span class="nn">pipeline.component</span> <span class="kn">import</span> <span class="n">DataTransform</span>
+<span class="kn">from</span> <span class="nn">pipeline.component</span> <span class="kn">import</span> <span class="n">Evaluation</span>
+<span class="kn">from</span> <span class="nn">pipeline.component</span> <span class="kn">import</span> <span class="n">HomoLR</span>
+<span class="kn">from</span> <span class="nn">pipeline.component</span> <span class="kn">import</span> <span class="n">Reader</span>
+<span class="kn">from</span> <span class="nn">pipeline.component</span> <span class="kn">import</span> <span class="n">FeatureScale</span>
+<span class="kn">from</span> <span class="nn">pipeline.interface</span> <span class="kn">import</span> <span class="n">Data</span>
+<span class="kn">from</span> <span class="nn">pipeline.utils.tools</span> <span class="kn">import</span> <span class="n">load_job_config</span>
+
+<span class="c1"># obtain config</span>
+<span class="n">guest</span> <span class="o">=</span> <span class="mi">9999</span>
+<span class="n">host</span> <span class="o">=</span> <span class="mi">10000</span> <span class="c1"># Please change to 9999 if only one party is deployed</span>
+<span class="n">arbiter</span> <span class="o">=</span> <span class="mi">9999</span>
+
+<span class="n">guest_train_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;breast_homo_guest&quot;</span><span class="p">,</span> <span class="s2">&quot;namespace&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;experiment&quot;</span><span class="p">}</span>
+<span class="n">host_train_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;breast_homo_host&quot;</span><span class="p">,</span> <span class="s2">&quot;namespace&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;experiment&quot;</span><span class="p">}</span>
+
+<span class="c1"># initialize pipeline</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">PipeLine</span><span class="p">()</span>
+<span class="c1"># set job initiator</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">set_initiator</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s1">&#39;guest&#39;</span><span class="p">,</span> <span class="n">party_id</span><span class="o">=</span><span class="n">guest</span><span class="p">)</span>
+<span class="c1"># set participants information</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">set_roles</span><span class="p">(</span><span class="n">guest</span><span class="o">=</span><span class="n">guest</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span> <span class="n">arbiter</span><span class="o">=</span><span class="n">arbiter</span><span class="p">)</span>
+
+<span class="c1"># define Reader components to read in data</span>
+<span class="n">reader_0</span> <span class="o">=</span> <span class="n">Reader</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;reader_0&quot;</span><span class="p">)</span>
+<span class="c1"># configure Reader for guest</span>
+<span class="n">reader_0</span><span class="o">.</span><span class="n">get_party_instance</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s1">&#39;guest&#39;</span><span class="p">,</span> <span class="n">party_id</span><span class="o">=</span><span class="n">guest</span><span class="p">)</span><span class="o">.</span><span class="n">component_param</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">guest_train_data</span><span class="p">)</span>
+<span class="c1"># configure Reader for host</span>
+<span class="n">reader_0</span><span class="o">.</span><span class="n">get_party_instance</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="n">party_id</span><span class="o">=</span><span class="n">host</span><span class="p">)</span><span class="o">.</span><span class="n">component_param</span><span class="p">(</span><span class="n">table</span><span class="o">=</span><span class="n">host_train_data</span><span class="p">)</span>
+
+<span class="c1"># define DataTransform components</span>
+<span class="n">data_transform_0</span> <span class="o">=</span> <span class="n">DataTransform</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;data_transform_0&quot;</span><span class="p">,</span>
+    <span class="n">with_label</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">output_format</span><span class="o">=</span><span class="s2">&quot;dense&quot;</span><span class="p">)</span>  <span class="c1"># start component numbering at 0</span>
+
+<span class="n">scale_0</span> <span class="o">=</span> <span class="n">FeatureScale</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;scale_0&#39;</span><span class="p">)</span>
+<span class="n">param</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;penalty&quot;</span><span class="p">:</span> <span class="s2">&quot;L2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;optimizer&quot;</span><span class="p">:</span> <span class="s2">&quot;sgd&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tol&quot;</span><span class="p">:</span> <span class="mf">1e-05</span><span class="p">,</span>
+    <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
+    <span class="s2">&quot;max_iter&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="s2">&quot;early_stop&quot;</span><span class="p">:</span> <span class="s2">&quot;diff&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;batch_size&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span>
+    <span class="s2">&quot;decay&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;decay_sqrt&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;init_param&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;init_method&quot;</span><span class="p">:</span> <span class="s2">&quot;zeros&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;cv_param&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;n_splits&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;shuffle&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;random_seed&quot;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+        <span class="s2">&quot;need_cv&quot;</span><span class="p">:</span> <span class="kc">False</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">homo_lr_0</span> <span class="o">=</span> <span class="n">HomoLR</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;homo_lr_0&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">param</span><span class="p">)</span>
+
+<span class="c1"># add components to pipeline, in order of task execution</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">reader_0</span><span class="p">)</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">data_transform_0</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">Data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">reader_0</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+<span class="c1"># set data input sources of intersection components</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">scale_0</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">Data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data_transform_0</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">homo_lr_0</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">Data</span><span class="p">(</span><span class="n">train_data</span><span class="o">=</span><span class="n">scale_0</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+<span class="n">evaluation_0</span> <span class="o">=</span> <span class="n">Evaluation</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;evaluation_0&quot;</span><span class="p">,</span> <span class="n">eval_type</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">)</span>
+<span class="n">evaluation_0</span><span class="o">.</span><span class="n">get_party_instance</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="n">party_id</span><span class="o">=</span><span class="n">host</span><span class="p">)</span><span class="o">.</span><span class="n">component_param</span><span class="p">(</span><span class="n">need_run</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">evaluation_0</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">Data</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">homo_lr_0</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+
+<span class="c1"># compile pipeline once finished adding modules, this step will form conf and dsl files for running job</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+
+<span class="c1"># fit model</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">deploy_components</span> <span class="o">=</span> <span class="p">[</span><span class="n">data_transform_0</span><span class="p">,</span> <span class="n">scale_0</span><span class="p">,</span> <span class="n">homo_lr_0</span><span class="p">]</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">deploy_component</span><span class="p">(</span><span class="n">components</span><span class="o">=</span><span class="n">deploy_components</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="n">predict_pipeline</span> <span class="o">=</span> <span class="n">PipeLine</span><span class="p">()</span>
+<span class="c1"># # add data reader onto predict pipeline</span>
+<span class="n">predict_pipeline</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">reader_0</span><span class="p">)</span>
+<span class="c1"># # add selected components from train pipeline onto predict pipeline</span>
+<span class="c1"># # specify data source</span>
+<span class="n">predict_pipeline</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span>
+    <span class="n">pipeline</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">Data</span><span class="p">(</span>
+        <span class="n">predict_input</span><span class="o">=</span><span class="p">{</span>
+            <span class="n">pipeline</span><span class="o">.</span><span class="n">data_transform_0</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">data</span><span class="p">:</span> <span class="n">reader_0</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">data</span><span class="p">}))</span>
+<span class="n">predict_pipeline</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="n">predict_pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">()</span>
+
+<span class="n">dsl_json</span> <span class="o">=</span> <span class="n">predict_pipeline</span><span class="o">.</span><span class="n">get_predict_dsl</span><span class="p">()</span>
+<span class="n">conf_json</span> <span class="o">=</span> <span class="n">predict_pipeline</span><span class="o">.</span><span class="n">get_predict_conf</span><span class="p">()</span>
+<span class="c1"># import json</span>
+<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">dsl_json</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./homo-lr-normal-predict-dsl.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">conf_json</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./homo-lr-normal-predict-conf.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># query component summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">get_component</span><span class="p">(</span><span class="s2">&quot;homo_lr_0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_summary</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">get_component</span><span class="p">(</span><span class="s2">&quot;evaluation_0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_summary</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</code></pre></div>
+</div>
+<p>Upon successful completion of the task, you will be able to examine the outcomes of the federated training process.</p>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="kfp-mlflow-katib.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Kubeflow Pipelines with MLFlow and Katib" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Kubeflow Pipelines with MLFlow and Katib
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../use-cases/index.html" class="md-footer__link md-footer__link--next" aria-label="Next: Overview" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Overview
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2023, VMware.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.2.6.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.sections", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+  </body>
+</html>

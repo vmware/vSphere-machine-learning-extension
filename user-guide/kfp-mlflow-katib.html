@@ -1,0 +1,1762 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../_static/favicon.ico">
+    
+    
+      
+        <title>Kubeflow Pipelines with MLFlow and Katib - vSphere Machine Learning Extension</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.af531f03affe68837.min.css?v=2410bb73" />
+        <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="vSphere Machine Learning Extension" class="md-header__button md-logo" aria-label="vSphere Machine Learning Extension" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            vSphere Machine Learning Extension
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kubeflow Pipelines with MLFlow and Katib
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="yellow"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vmware/vSphere-machine-learning-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vSphere Machine Learning Extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="vSphere Machine Learning Extension" class="md-nav__button md-logo" aria-label="vSphere Machine Learning Extension" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    vSphere Machine Learning Extension
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vmware/vSphere-machine-learning-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vSphere Machine Learning Extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          <span class="md-ellipsis">Introduction</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Introduction" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Introduction</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/index.html" class="md-nav__link">
+        <span title="/introduction/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/oss.html" class="md-nav__link">
+        <span title="/introduction/oss.rst (reference label)" class="md-ellipsis">Kubeflow Components</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/ekf.html" class="md-nav__link">
+        <span title="/introduction/ekf.rst (reference label)" class="md-ellipsis">Kubeflow on v<wbr>Sphere Components and Features</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/mlops.html" class="md-nav__link">
+        <span title="/introduction/mlops.rst (reference label)" class="md-ellipsis">MLOps with Kubeflow</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          <span class="md-ellipsis">Install and Configure</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Install and Configure" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Install and Configure</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/index.html" class="md-nav__link">
+        <span title="/install/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/tkgs.html" class="md-nav__link">
+        <span title="/install/tkgs.rst (reference label)" class="md-ellipsis">Install Kubeflow on v<wbr>Sphere</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/auth.html" class="md-nav__link">
+        <span title="/install/auth.rst (reference label)" class="md-ellipsis">Authentication Integration</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/monitor.html" class="md-nav__link">
+        <span title="/install/monitor.rst (reference label)" class="md-ellipsis">Monitoring with Prometheus and Grafana</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          <span class="md-ellipsis">User Guide</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">User Guide</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        <span title="/user-guide/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks.html" class="md-nav__link">
+        <span title="/user-guide/notebooks.rst (reference label)" class="md-ellipsis">Notebooks</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="feast.html" class="md-nav__link">
+        <span title="/user-guide/feast.rst (reference label)" class="md-ellipsis">Feature Store</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spark.html" class="md-nav__link">
+        <span title="/user-guide/spark.rst (reference label)" class="md-ellipsis">Data Processing</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mlmd.html" class="md-nav__link">
+        <span title="/user-guide/mlmd.rst (reference label)" class="md-ellipsis">Metadata Store</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mlflow.html" class="md-nav__link">
+        <span title="/user-guide/mlflow.rst (reference label)" class="md-ellipsis">Model Registry</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="training.html" class="md-nav__link">
+        <span title="/user-guide/training.rst (reference label)" class="md-ellipsis">Model Training</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tensorboard.html" class="md-nav__link">
+        <span title="/user-guide/tensorboard.rst (reference label)" class="md-ellipsis">Visualization for Experiments</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="katib.html" class="md-nav__link">
+        <span title="/user-guide/katib.rst (reference label)" class="md-ellipsis">Hyperparameter Tuning</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kserve.html" class="md-nav__link">
+        <span title="/user-guide/kserve.rst (reference label)" class="md-ellipsis">Model Serving</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_11" type="checkbox" id="__nav_3_11" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="kfp.html"><span title="/user-guide/kfp.rst (reference label)" class="md-ellipsis">ML Pipelines</span></a>
+          
+            <label for="__nav_3_11">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="ML Pipelines" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_11">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/user-guide/kfp.rst (reference label)" class="md-ellipsis">ML Pipelines</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kfp-mlflow-seldon.html" class="md-nav__link">
+        <span title="/user-guide/kfp-mlflow-seldon.rst (reference label)" class="md-ellipsis">Kubeflow Pipelines with MLFlow and Seldon Core</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/user-guide/kfp-mlflow-katib.rst (reference label)" class="md-ellipsis">Kubeflow Pipelines with MLFlow and Katib</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/user-guide/kfp-mlflow-katib.rst (reference label)" class="md-ellipsis">Kubeflow Pipelines with MLFlow and Katib</span>
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/user-guide/kfp-mlflow-katib.rst (reference label)" class="md-ellipsis">Kubeflow Pipelines with MLFlow and Katib</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#prerequisites (reference label)" class="md-ellipsis">Prerequisites</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#get-started (reference label)" class="md-ellipsis">Get started</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-notebook-server-and-jupyter-notebook" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#create-notebook-server-and-jupyter-notebook (reference label)" class="md-ellipsis">Create Notebook Server and Jupyter Notebook</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-pipeline-steps" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#define-pipeline-steps (reference label)" class="md-ellipsis">Define pipeline steps</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Define pipeline steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-environment" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#setup-environment (reference label)" class="md-ellipsis">Setup environment</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-data-ingestion-and-cleanup-steps" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#create-data-ingestion-and-cleanup-steps (reference label)" class="md-ellipsis">Create data ingestion and cleanup steps</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-hyperparameter-tuning-step" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#create-hyperparameter-tuning-step (reference label)" class="md-ellipsis">Create hyperparameter-<wbr>tuning step</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-model-training-step" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#create-model-training-step (reference label)" class="md-ellipsis">Create model training step</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-timestamp-helper-step" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#create-timestamp-helper-step (reference label)" class="md-ellipsis">Create timestamp helper step</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-pipeline" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#create-pipeline (reference label)" class="md-ellipsis">Create pipeline</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execute-pipeline" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#execute-pipeline (reference label)" class="md-ellipsis">Execute pipeline</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-process-and-access-results" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#monitor-process-and-access-results (reference label)" class="md-ellipsis">Monitor process and access results</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitor process and access results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pipeline" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#pipeline (reference label)" class="md-ellipsis">Pipeline</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#katib-experiment" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#katib-experiment (reference label)" class="md-ellipsis">Katib experiment</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mlflow" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#mlflow (reference label)" class="md-ellipsis">MLFlow</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="federated-model-training.html" class="md-nav__link">
+        <span title="/user-guide/federated-model-training.rst (reference label)" class="md-ellipsis">Federated model training</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          <span class="md-ellipsis">Use Cases</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Use Cases" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Use Cases</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/index.html" class="md-nav__link">
+        <span title="/use-cases/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/helmet.html" class="md-nav__link">
+        <span title="/use-cases/helmet.rst (reference label)" class="md-ellipsis">End to End Examples</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/modelserving.html" class="md-nav__link">
+        <span title="/use-cases/modelserving.rst (reference label)" class="md-ellipsis">Model Serving Examples</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/codegen.html" class="md-nav__link">
+        <span title="/use-cases/codegen.ipynb (reference label)" class="md-ellipsis">Salesforce Code<wbr>Gen</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          <span class="md-ellipsis">Internals</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Internals" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Internals</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internals/auth.html" class="md-nav__link">
+        <span title="/internals/auth.rst (reference label)" class="md-ellipsis">Authentication and Authorization</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/user-guide/kfp-mlflow-katib.rst (reference label)" class="md-ellipsis">Kubeflow Pipelines with MLFlow and Katib</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#prerequisites (reference label)" class="md-ellipsis">Prerequisites</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#get-started (reference label)" class="md-ellipsis">Get started</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-notebook-server-and-jupyter-notebook" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#create-notebook-server-and-jupyter-notebook (reference label)" class="md-ellipsis">Create Notebook Server and Jupyter Notebook</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-pipeline-steps" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#define-pipeline-steps (reference label)" class="md-ellipsis">Define pipeline steps</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Define pipeline steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-environment" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#setup-environment (reference label)" class="md-ellipsis">Setup environment</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-data-ingestion-and-cleanup-steps" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#create-data-ingestion-and-cleanup-steps (reference label)" class="md-ellipsis">Create data ingestion and cleanup steps</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-hyperparameter-tuning-step" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#create-hyperparameter-tuning-step (reference label)" class="md-ellipsis">Create hyperparameter-<wbr>tuning step</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-model-training-step" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#create-model-training-step (reference label)" class="md-ellipsis">Create model training step</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-timestamp-helper-step" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#create-timestamp-helper-step (reference label)" class="md-ellipsis">Create timestamp helper step</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-pipeline" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#create-pipeline (reference label)" class="md-ellipsis">Create pipeline</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execute-pipeline" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#execute-pipeline (reference label)" class="md-ellipsis">Execute pipeline</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-process-and-access-results" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#monitor-process-and-access-results (reference label)" class="md-ellipsis">Monitor process and access results</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitor process and access results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pipeline" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#pipeline (reference label)" class="md-ellipsis">Pipeline</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#katib-experiment" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#katib-experiment (reference label)" class="md-ellipsis">Katib experiment</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mlflow" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-katib.rst#mlflow (reference label)" class="md-ellipsis">MLFlow</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+  <a href="https://github.com/vmware/vSphere-machine-learning-extension/blob/master/docs/user-guide/kfp-mlflow-katib.rst" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+<h1 id="kubeflow-pipelines-with-mlflow-and-katib">Kubeflow Pipelines with MLFlow and Katib<a class="headerlink" href="#kubeflow-pipelines-with-mlflow-and-katib" title="Link to this heading">¶</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>This section intends to introduce you complete machine learning (ML) workflow using Kubeflow on vSphere. In particular, examples of Kubeflow Pipelines using Katib hyperparameter tuning and MLFlow model registry are presented along with some common pipeline steps and interfaces such as S3.</p>
+<p>For more detailed documentation on Kubeflow Pipelines, refer to <a class="reference external" href="https://www.kubeflow.org/docs/components/pipelines/">Kubeflow Pipelines | Kubeflow</a>.</p>
+<p>For more detailed documentation on Kubeflow Katib, refer to <a class="reference external" href="https://www.kubeflow.org/docs/components/katib/">Katib | Kubeflow</a>.</p>
+<p>The following diagram outlines ML workflow presented in this section. Major pipeline steps include:</p>
+<ul class="simple">
+<li><p>Ingest dataset.</p></li>
+<li><p>Clean up the dataset.</p></li>
+<li><p>Store cleaned data to S3 bucket.</p></li>
+<li><p>Hyperparameter-tune using Katib and TensorFlow training container image (with MLFlow store functionality).</p></li>
+<li><p>Convert Katib tuning results to streamlined format.</p></li>
+<li><p>Train model using best parameters from tuning stage.</p></li>
+<li><p>Store the production model to MLFlow model registry.</p></li>
+</ul>
+<img alt="../_images/user-guide-kfp-mlflow-katib-overview.png" src="../_images/user-guide-kfp-mlflow-katib-overview.png" />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Deployed MLFlow. For deployment of MLFlow, refer to <a class="reference internal" href="mlflow.html#user-guide-mlflow"><span class="std std-ref">Model Registry</span></a>.</p></li>
+<li><p>Familiarity with <a class="reference external" href="https://docs.python.org/3/tutorial/">Python</a>, <a class="reference external" href="https://docs.docker.com/">Docker</a>, <a class="reference external" href="https://jupyter-notebook.readthedocs.io/en/stable/">Jupyter Notebook</a>.</p></li>
+</ul>
+<h2 id="get-started">Get started<a class="headerlink" href="#get-started" title="Link to this heading">¶</a></h2>
+<h3 id="create-notebook-server-and-jupyter-notebook">Create Notebook Server and Jupyter Notebook<a class="headerlink" href="#create-notebook-server-and-jupyter-notebook" title="Link to this heading">¶</a></h3>
+<p>Access Kubeflow on vSphere Dashboard, and navigate to <strong>Notebooks</strong>. Fill in a name. Select TensorFlow image <code class="docutils literal notranslate"><span class="pre">jupyter-tensorflow-full:v1.6.1</span></code>.
+And select minimum configuration: 1 CPU and 4GB of RAM. Also, remember to enable <code class="docutils literal notranslate"><span class="pre">mlflow-server-minio</span></code> option in the configuration section.</p>
+<img alt="../_images/user-guide-kfp-mlflow-katib-newNotebook.png" src="../_images/user-guide-kfp-mlflow-katib-newNotebook.png" />
+<img alt="../_images/user-guide-kfp-mlflow-katib-createNotebook1.png" src="../_images/user-guide-kfp-mlflow-katib-createNotebook1.png" />
+<img alt="../_images/user-guide-kfp-mlflow-katib-createNotebook2.png" src="../_images/user-guide-kfp-mlflow-katib-createNotebook2.png" />
+<p>Connect to the newly created notebook. And create a Jupyter notebook to hold codes that specify the Kubeflow pipeline.</p>
+<img alt="../_images/user-guide-kfp-mlflow-katib-connect.png" src="../_images/user-guide-kfp-mlflow-katib-connect.png" />
+<h3 id="define-pipeline-steps">Define pipeline steps<a class="headerlink" href="#define-pipeline-steps" title="Link to this heading">¶</a></h3>
+<h4 id="setup-environment">Setup environment<a class="headerlink" href="#setup-environment" title="Link to this heading">¶</a></h4>
+<p>To setup environment, add the following cells to the newly created Jupyter notebook:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><code>!pip install kfp==1.8.12
+!pip install kubeflow-katib==0.13.0
+
+import json
+import kfp
+from kfp import dsl
+from kfp import Client
+from kfp import components
+from kfp.onprem import use_k8s_secret
+import numpy as np
+import pandas as pd
+from scipy.io.arff import loadarff
+from kubeflow.katib import ApiClient
+from kubeflow.katib import V1beta1ExperimentSpec
+from kubeflow.katib import V1beta1AlgorithmSpec
+from kubeflow.katib import V1beta1ObjectiveSpec
+from kubeflow.katib import V1beta1ParameterSpec
+from kubeflow.katib import V1beta1FeasibleSpace
+from kubeflow.katib import V1beta1TrialTemplate
+from kubeflow.katib import V1beta1TrialParameterSpec
+</code></pre></div>
+</div>
+<h4 id="create-data-ingestion-and-cleanup-steps">Create data ingestion and cleanup steps<a class="headerlink" href="#create-data-ingestion-and-cleanup-steps" title="Link to this heading">¶</a></h4>
+<p>Create pipeline steps that do data ingestion and cleanup. Setup transfer of clean data to the next step using S3 bucket.</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Ingesting and cleaning of input data in this section is an example of how data can be processed in the pipeline. Different data
+ingestion, data cleaning, data formats can be integrated.</p>
+</div>
+<p>To load raw data into the pipeline, use Kubeflow Pipelines component <a class="reference external" href="https://github.com/kubeflow/pipelines/blob/master/components/contrib/web/Download/component.yaml">reusable web downloader component</a> to create data ingest operation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Data ingest operation.</span>
+<span class="c1"># Output is in outputs[&#39;data&#39;]</span>
+<span class="n">ingest_data_op</span> <span class="o">=</span> <span class="n">components</span><span class="o">.</span><span class="n">load_component_from_url</span><span class="p">(</span>
+<span class="s1">&#39;https://raw.githubusercontent.com/kubeflow/pipelines/master/components/contrib/web/Download/component.yaml&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+</div>
+<p>The data in this example is in ARFF format. Create function that do cleanup of ingested data. In this example, this function
+relies on specific components to aid in data processing. They are specified as packages and imported in the function code and
+cleanup data operation. Note that S3 bucket is used to save output for cleaned data.</p>
+<div class="important admonition">
+<p class="admonition-title">Important</p>
+<p>In following codes, environment variables <code class="docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code> and <code class="docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> are used. Make sure you set them up.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>To get your <code class="docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code> and <code class="docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code>, or to get more detailed instructions on S3 and MinIO, refer to
+<a class="reference internal" href="mlflow.html#user-guide-mlflow"><span class="std std-ref">Model Registry</span></a>.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Data clean up operation.</span>
+<span class="c1"># Output is in S3 (specified by `bucket`)</span>
+<span class="k">def</span> <span class="nf">clean_arff_data</span><span class="p">(</span>
+    <span class="n">bucket</span><span class="p">,</span>
+    <span class="n">key</span><span class="p">,</span>
+    <span class="n">input_file</span><span class="p">:</span> <span class="n">components</span><span class="o">.</span><span class="n">InputPath</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="kn">import</span> <span class="nn">boto3</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+    <span class="kn">from</span> <span class="nn">scipy.io.arff</span> <span class="kn">import</span> <span class="n">loadarff</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loading input file </span><span class="si">{</span><span class="n">input_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Convert to dataframe arff format.</span>
+    <span class="n">raw_data</span> <span class="o">=</span> <span class="n">loadarff</span><span class="p">(</span><span class="n">input_file</span><span class="p">)</span>
+    <span class="n">df_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">raw_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded data file of shape </span><span class="si">{</span><span class="n">df_data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cleaning the data&quot;</span><span class="p">)</span>
+    <span class="c1"># Convert target column to numeric.</span>
+    <span class="n">df_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;CHURN&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Remove missing values.</span>
+    <span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_data</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">df_clean</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;CHURN&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;CHURN&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Get rid of non-numeric columns.</span>
+    <span class="n">df_clean</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saving results to S3&quot;</span><span class="p">)</span>
+    <span class="n">csv_buffer</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+    <span class="n">df_clean</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">csv_buffer</span><span class="p">)</span>
+    <span class="n">s3_resource</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span>
+        <span class="s1">&#39;s3&#39;</span><span class="p">,</span>
+        <span class="n">endpoint_url</span><span class="o">=</span><span class="s1">&#39;http://minio.kubeflow.svc.cluster.local:9000&#39;</span><span class="p">,</span>
+        <span class="n">aws_access_key_id</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;AWS_ACCESS_KEY_ID&#39;</span><span class="p">),</span>
+        <span class="n">aws_secret_access_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;AWS_SECRET_ACCESS_KEY&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">check_bucket</span> <span class="o">=</span> <span class="n">s3_resource</span><span class="o">.</span><span class="n">Bucket</span><span class="p">(</span><span class="n">bucket</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">check_bucket</span><span class="o">.</span><span class="n">creation_date</span><span class="p">:</span>
+        <span class="c1"># bucket does not exist, create it</span>
+        <span class="n">s3_resource</span><span class="o">.</span><span class="n">create_bucket</span><span class="p">(</span><span class="n">Bucket</span><span class="o">=</span><span class="n">bucket</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving CSV of shape </span><span class="si">{</span><span class="n">df_clean</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> to s3&quot;</span><span class="p">)</span>
+    <span class="n">s3_resource</span><span class="o">.</span><span class="n">Object</span><span class="p">(</span><span class="n">bucket</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">Body</span><span class="o">=</span><span class="n">csv_buffer</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="s2">&quot;Done&quot;</span>
+</code></pre></div>
+</div>
+<p>Define data cleanup operation based on data clean up function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Data cleanup operation.</span>
+<span class="c1"># Output data is in S3.</span>
+<span class="n">clean_data_op</span> <span class="o">=</span> <span class="n">components</span><span class="o">.</span><span class="n">create_component_from_func</span><span class="p">(</span>
+        <span class="n">clean_arff_data</span><span class="p">,</span>
+        <span class="s2">&quot;clean_data.yaml&quot;</span><span class="p">,</span>
+        <span class="n">packages_to_install</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;pandas==1.2.4&quot;</span><span class="p">,</span> <span class="s2">&quot;scipy==1.7.0&quot;</span><span class="p">,</span> <span class="s2">&quot;boto3&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+</div>
+<h4 id="create-hyperparameter-tuning-step">Create hyperparameter-tuning step<a class="headerlink" href="#create-hyperparameter-tuning-step" title="Link to this heading">¶</a></h4>
+<p>Create the next pipeline step that does hyperparameter tuning using Katib and a training container image
+<code class="docutils literal notranslate"><span class="pre">docker.io/misohu/kubeflow-training:latest</span></code>.</p>
+<p>Note that output of Katib hyperparameter tuning is converted into <code class="docutils literal notranslate"><span class="pre">string</span></code> format by helper function <code class="docutils literal notranslate"><span class="pre">convert_katib_results()</span></code>.</p>
+<p>Define Katib hyperparameter tuninig operation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Katib hyperparameter tuning operation.</span>
+<span class="k">def</span> <span class="nf">create_katib_experiment_op</span><span class="p">(</span><span class="n">experiment_name</span><span class="p">,</span> <span class="n">experiment_namespace</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;AWS_ACCESS_KEY_ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;your_minio_access_key&gt;&#39;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;AWS_SECRET_ACCESS_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;your_minio_secret_key&gt;&#39;</span>
+
+    <span class="c1"># Trial count specification.</span>
+    <span class="n">max_trial_count</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">max_failed_trial_count</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">parallel_trial_count</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="c1"># Objective specification.</span>
+    <span class="n">objective</span> <span class="o">=</span> <span class="n">V1beta1ObjectiveSpec</span><span class="p">(</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;maximize&quot;</span><span class="p">,</span>
+        <span class="n">goal</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span>
+        <span class="n">objective_metric_name</span><span class="o">=</span><span class="s2">&quot;accuracy&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Algorithm specification.</span>
+    <span class="n">algorithm</span> <span class="o">=</span> <span class="n">V1beta1AlgorithmSpec</span><span class="p">(</span>
+        <span class="n">algorithm_name</span><span class="o">=</span><span class="s2">&quot;random&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Experiment search space.</span>
+    <span class="c1"># In this example we tune the number of epochs.</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">V1beta1ParameterSpec</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;epochs&quot;</span><span class="p">,</span>
+            <span class="n">parameter_type</span><span class="o">=</span><span class="s2">&quot;int&quot;</span><span class="p">,</span>
+            <span class="n">feasible_space</span><span class="o">=</span><span class="n">V1beta1FeasibleSpace</span><span class="p">(</span>
+                <span class="nb">min</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">,</span>
+                <span class="nb">max</span><span class="o">=</span><span class="s2">&quot;10&quot;</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Experiment trial template.</span>
+    <span class="n">trial_spec</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;apiVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;batch/v1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;Job&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;spec&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;template&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;annotations&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;sidecar.istio.io/inject&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;spec&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;containers&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;tensorflow&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="s2">&quot;docker.io/misohu/kubeflow-training:latest&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                <span class="s2">&quot;python&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;/opt/model.py&quot;</span><span class="p">,</span>
+                                <span class="sa">f</span><span class="s2">&quot;--s3-storage=true&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;--epochs=$</span><span class="si">{trialParameters.epochs}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                <span class="sa">f</span><span class="s2">&quot;--bucket=</span><span class="si">{</span><span class="n">bucket</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                                <span class="sa">f</span><span class="s2">&quot;--bucket-key=</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="p">],</span>
+                            <span class="s2">&quot;envFrom&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                <span class="p">{</span>
+                                    <span class="s2">&quot;secretRef&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mlpipeline-minio-artifact&quot;</span>
+                                    <span class="p">}</span>
+                                <span class="p">}</span>
+                            <span class="p">]</span>
+                        <span class="p">}</span>
+                    <span class="p">],</span>
+                    <span class="s2">&quot;restartPolicy&quot;</span><span class="p">:</span> <span class="s2">&quot;Never&quot;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Configure parameters for the Trial template.</span>
+    <span class="n">trial_template</span> <span class="o">=</span> <span class="n">V1beta1TrialTemplate</span><span class="p">(</span>
+        <span class="n">primary_container_name</span><span class="o">=</span><span class="s2">&quot;tensorflow&quot;</span><span class="p">,</span>
+        <span class="n">trial_parameters</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">V1beta1TrialParameterSpec</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;epochs&quot;</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Learning rate for the training model&quot;</span><span class="p">,</span>
+                <span class="n">reference</span><span class="o">=</span><span class="s2">&quot;epochs&quot;</span>
+            <span class="p">)</span>
+        <span class="p">],</span>
+        <span class="n">trial_spec</span><span class="o">=</span><span class="n">trial_spec</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create an Experiment from the above parameters.</span>
+    <span class="n">experiment_spec</span> <span class="o">=</span> <span class="n">V1beta1ExperimentSpec</span><span class="p">(</span>
+        <span class="n">max_trial_count</span><span class="o">=</span><span class="n">max_trial_count</span><span class="p">,</span>
+        <span class="n">max_failed_trial_count</span><span class="o">=</span><span class="n">max_failed_trial_count</span><span class="p">,</span>
+        <span class="n">parallel_trial_count</span><span class="o">=</span><span class="n">parallel_trial_count</span><span class="p">,</span>
+        <span class="n">objective</span><span class="o">=</span><span class="n">objective</span><span class="p">,</span>
+        <span class="n">algorithm</span><span class="o">=</span><span class="n">algorithm</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+        <span class="n">trial_template</span><span class="o">=</span><span class="n">trial_template</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create the KFP operation for the Katib experiment.</span>
+    <span class="c1"># Experiment spec should be serialized to a valid Kubernetes object.</span>
+    <span class="n">katib_experiment_launcher_op</span> <span class="o">=</span> <span class="n">components</span><span class="o">.</span><span class="n">load_component_from_url</span><span class="p">(</span>
+        <span class="s2">&quot;https://raw.githubusercontent.com/kubeflow/pipelines/master/components/kubeflow/katib-launcher/component.yaml&quot;</span><span class="p">)</span>
+    <span class="n">op</span> <span class="o">=</span> <span class="n">katib_experiment_launcher_op</span><span class="p">(</span>
+        <span class="n">experiment_name</span><span class="o">=</span><span class="n">experiment_name</span><span class="p">,</span>
+        <span class="n">experiment_namespace</span><span class="o">=</span><span class="n">experiment_namespace</span><span class="p">,</span>
+        <span class="n">experiment_spec</span><span class="o">=</span><span class="n">ApiClient</span><span class="p">()</span><span class="o">.</span><span class="n">sanitize_for_serialization</span><span class="p">(</span><span class="n">experiment_spec</span><span class="p">),</span>
+        <span class="n">experiment_timeout_minutes</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+        <span class="n">delete_finished_experiment</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">op</span>
+</code></pre></div>
+</div>
+<p>Define Katib convert results operation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Convert Katib experiment hyperparameter results to arguments in string format.</span>
+<span class="k">def</span> <span class="nf">convert_katib_results</span><span class="p">(</span><span class="n">katib_results</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">json</span>
+    <span class="kn">import</span> <span class="nn">pprint</span>
+    <span class="n">katib_results_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">katib_results</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Katib hyperparameter tuning results:&quot;</span><span class="p">)</span>
+    <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">katib_results_json</span><span class="p">)</span>
+    <span class="n">best_hps</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">pa</span> <span class="ow">in</span> <span class="n">katib_results_json</span><span class="p">[</span><span class="s2">&quot;currentOptimalTrial&quot;</span><span class="p">][</span><span class="s2">&quot;parameterAssignments&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">pa</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;epochs&quot;</span><span class="p">:</span>
+            <span class="n">best_hps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;--epochs=&quot;</span> <span class="o">+</span> <span class="n">pa</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best hyperparameters: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_hps</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">best_hps</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Katib convert results operation.</span>
+<span class="n">convert_katib_results_op</span> <span class="o">=</span> <span class="n">components</span><span class="o">.</span><span class="n">func_to_container_op</span><span class="p">(</span><span class="n">convert_katib_results</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h4 id="create-model-training-step">Create model training step<a class="headerlink" href="#create-model-training-step" title="Link to this heading">¶</a></h4>
+<p>Create the last step of the pipeline that does model training using TensorFlow based on Katib tuning results.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># Tensorflow job operation.</span>
+<span class="k">def</span> <span class="nf">create_tfjob_op</span><span class="p">(</span><span class="n">tfjob_name</span><span class="p">,</span> <span class="n">tfjob_namespace</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">bucket</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="n">tf_model</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="n">tfjob_chief_spec</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;replicas&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;restartPolicy&quot;</span><span class="p">:</span> <span class="s2">&quot;OnFailure&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;template&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;annotations&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;sidecar.istio.io/inject&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;spec&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;containers&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;tensorflow&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="s2">&quot;docker.io/misohu/kubeflow-training:latest&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="s2">&quot;python&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;/opt/model.py&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;--s3-storage=true&quot;</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tf_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;--mlflow-model-name=ml-workflow-demo-model&quot;</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s2">&quot;--bucket=</span><span class="si">{</span><span class="n">bucket</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s2">&quot;--bucket-key=</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="p">],</span>
+                        <span class="s2">&quot;envFrom&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;secretRef&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mlpipeline-minio-artifact&quot;</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">tfjob_worker_spec</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;replicas&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;restartPolicy&quot;</span><span class="p">:</span> <span class="s2">&quot;OnFailure&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;template&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;annotations&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;sidecar.istio.io/inject&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;spec&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;containers&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;tensorflow&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="s2">&quot;docker.io/misohu/kubeflow-training:latest&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="s2">&quot;python&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;/opt/model.py&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;--s3-storage=true&quot;</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tf_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s2">&quot;--bucket=</span><span class="si">{</span><span class="n">bucket</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                            <span class="sa">f</span><span class="s2">&quot;--bucket-key=</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="p">],</span>
+                        <span class="s2">&quot;envFrom&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;secretRef&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mlpipeline-minio-artifact&quot;</span>
+                            <span class="p">}</span>
+                        <span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Create the KFP task for the TFJob.</span>
+    <span class="n">tfjob_launcher_op</span> <span class="o">=</span> <span class="n">components</span><span class="o">.</span><span class="n">load_component_from_url</span><span class="p">(</span>
+<span class="s2">&quot;https://raw.githubusercontent.com/kubeflow/pipelines/master/components/kubeflow/launcher/component.yaml&quot;</span><span class="p">)</span>
+    <span class="n">op</span> <span class="o">=</span> <span class="n">tfjob_launcher_op</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">tfjob_name</span><span class="p">,</span>
+        <span class="n">namespace</span><span class="o">=</span><span class="n">tfjob_namespace</span><span class="p">,</span>
+        <span class="n">chief_spec</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">tfjob_chief_spec</span><span class="p">),</span>
+        <span class="n">worker_spec</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">tfjob_worker_spec</span><span class="p">),</span>
+        <span class="n">tfjob_timeout_minutes</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+        <span class="n">delete_finished_tfjob</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">op</span>
+</code></pre></div>
+</div>
+<h4 id="create-timestamp-helper-step">Create timestamp helper step<a class="headerlink" href="#create-timestamp-helper-step" title="Link to this heading">¶</a></h4>
+<p>Define a helper that generates timestamps in a Kubeflow Pipeline step. It is needed to generate unique names for some of pipeline steps.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_timestamp</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">datetime</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">-%H-%M-%S&quot;</span><span class="p">)</span>
+
+<span class="n">compute_timestamp_op</span> <span class="o">=</span> <span class="n">components</span><span class="o">.</span><span class="n">func_to_container_op</span><span class="p">(</span><span class="n">compute_timestamp</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h3 id="create-pipeline">Create pipeline<a class="headerlink" href="#create-pipeline" title="Link to this heading">¶</a></h3>
+<p>Define and create the complete pipeline that consists of all steps created earlier. Note that the name of the pipeline must be unique. If there
+is previously defined pipeline with the same name and in the same namespace, either change the name of current pipeline or
+delete the older pipeline from the namespace.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">demo_pipeline_name</span> <span class="o">=</span> <span class="s2">&quot;demo-pipeline&quot;</span>
+<span class="n">namespace</span> <span class="o">=</span> <span class="s2">&quot;admin&quot;</span>
+<span class="n">s3_bucket</span> <span class="o">=</span> <span class="s2">&quot;demo-dataset&quot;</span>
+<span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;data.csv&quot;</span>
+<span class="n">dataset_url</span> <span class="o">=</span> <span class="s2">&quot;https://api.openml.org./data/download/53995/KDDCup09_churn.arff&quot;</span>
+
+<span class="nd">@dsl</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ML Workflow in Kubeflow&quot;</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Demo pipeline&quot;</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">demo_pipeline</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">demo_pipeline_name</span><span class="p">,</span> <span class="n">namepace</span><span class="o">=</span><span class="n">namespace</span><span class="p">):</span>
+
+    <span class="c1"># Generate timestamp for unique pipeline name.</span>
+    <span class="n">timestamp_task</span> <span class="o">=</span> <span class="n">compute_timestamp_op</span><span class="p">()</span>
+
+    <span class="c1"># Step 1: Download dataset.</span>
+    <span class="n">ingest_data_task</span> <span class="o">=</span> <span class="n">ingest_data_op</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">dataset_url</span><span class="p">)</span>
+
+    <span class="c1"># Ensure timestamp generation for pipeline name is completed and set pipeline name.</span>
+    <span class="n">ingest_data_task</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="n">timestamp_task</span><span class="p">)</span>
+    <span class="n">pipeline_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">timestamp_task</span><span class="o">.</span><span class="n">output</span><span class="si">}</span><span class="s2">&quot;</span>
+
+
+    <span class="c1"># Step 2: Clean up the dataset and store it in S3 bucket.</span>
+    <span class="c1"># Note that we pass the `ingest_data_task.outputs[&#39;data&#39;]` as an argument here.  Because that output is</span>
+    <span class="c1"># defined as a file path, Kubeflow Pipeline will copy the data from ingest_data_task to clean_data_task.</span>
+    <span class="n">clean_data_task</span> <span class="o">=</span> <span class="n">clean_data_op</span><span class="p">(</span>
+        <span class="n">s3_bucket</span><span class="p">,</span>
+        <span class="n">key</span><span class="p">,</span>
+        <span class="n">ingest_data_task</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Because S3 access needs credentials, an extra directive is needed to pull those from an existing secret.</span>
+    <span class="n">clean_data_task</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">use_k8s_secret</span><span class="p">(</span>
+        <span class="n">secret_name</span><span class="o">=</span><span class="s1">&#39;mlpipeline-minio-artifact&#39;</span><span class="p">,</span>
+        <span class="n">k8s_secret_key_to_env</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;accesskey&#39;</span><span class="p">:</span> <span class="s1">&#39;AWS_ACCESS_KEY_ID&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;secretkey&#39;</span><span class="p">:</span> <span class="s1">&#39;AWS_SECRET_ACCESS_KEY&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">))</span>
+
+    <span class="c1"># Wait for clean up data task to finish.</span>
+    <span class="k">with</span> <span class="n">dsl</span><span class="o">.</span><span class="n">Condition</span><span class="p">(</span><span class="n">clean_data_task</span><span class="o">.</span><span class="n">output</span> <span class="o">==</span> <span class="s2">&quot;Done&quot;</span><span class="p">):</span>
+        <span class="c1"># Step 3: Run hyperparameter tuning with Katib.</span>
+        <span class="n">katib_task</span> <span class="o">=</span> <span class="n">create_katib_experiment_op</span><span class="p">(</span>
+            <span class="n">experiment_name</span><span class="o">=</span><span class="n">pipeline_name</span><span class="p">,</span>
+            <span class="n">experiment_namespace</span><span class="o">=</span><span class="n">namespace</span><span class="p">,</span>
+            <span class="n">bucket</span><span class="o">=</span><span class="n">s3_bucket</span><span class="p">,</span>
+            <span class="n">key</span><span class="o">=</span><span class="n">key</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Step 4: Convert Katib results produced by hyperparameter tuning to model.</span>
+        <span class="n">best_katib_model_task</span> <span class="o">=</span> <span class="n">convert_katib_results_op</span><span class="p">(</span><span class="n">katib_task</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+
+        <span class="c1"># Step 5: Run training with TFJob. Model will be stored into ML Flow model registry</span>
+        <span class="c1"># (done inside container image).</span>
+        <span class="n">tfjob_op</span> <span class="o">=</span> <span class="n">create_tfjob_op</span><span class="p">(</span><span class="n">tfjob_name</span><span class="o">=</span><span class="n">pipeline_name</span><span class="p">,</span>
+                                <span class="n">tfjob_namespace</span><span class="o">=</span><span class="n">namespace</span><span class="p">,</span>
+                                <span class="n">model</span><span class="o">=</span><span class="n">best_katib_model_task</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
+                                <span class="n">bucket</span><span class="o">=</span><span class="n">s3_bucket</span><span class="p">,</span>
+                                <span class="n">key</span><span class="o">=</span><span class="n">key</span>
+        <span class="p">)</span>
+</code></pre></div>
+</div>
+<h3 id="execute-pipeline">Execute pipeline<a class="headerlink" href="#execute-pipeline" title="Link to this heading">¶</a></h3>
+<p>Execute the pipeline using the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">kfp_client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+<span class="n">run_id</span> <span class="o">=</span> <span class="n">kfp_client</span><span class="o">.</span><span class="n">create_run_from_pipeline_func</span><span class="p">(</span>
+        <span class="n">demo_pipeline</span><span class="p">,</span>
+        <span class="n">namespace</span><span class="o">=</span><span class="n">namespace</span><span class="p">,</span>
+        <span class="n">arguments</span><span class="o">=</span><span class="p">{},</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">run_id</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Run ID: </span><span class="si">{</span><span class="n">run_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h3 id="monitor-process-and-access-results">Monitor process and access results<a class="headerlink" href="#monitor-process-and-access-results" title="Link to this heading">¶</a></h3>
+<h4 id="pipeline">Pipeline<a class="headerlink" href="#pipeline" title="Link to this heading">¶</a></h4>
+<p>After executing the <code class="docutils literal notranslate"><span class="pre">execute</span> <span class="pre">pipeline</span></code> cell block, you see running output like the following:</p>
+<img alt="../_images/user-guide-kfp-mlflow-katib-executeOutput.png" src="../_images/user-guide-kfp-mlflow-katib-executeOutput.png" />
+<p>Observe run details by clicking on <strong>Run details</strong> link. And you are guided to a page showing your pipeline running process. You
+can see each component (step) of the pipeline, with blue color representing running and green color representing successfully finished. The pipeline
+may take some time to finish, so please be patient.</p>
+<p>And when the pipeline finishes running, you see all steps in green.</p>
+<img alt="../_images/user-guide-kfp-mlflow-katib-pipeline.png" src="../_images/user-guide-kfp-mlflow-katib-pipeline.png" />
+<p>To view more details of any specific pipeline step, just click on that step, and you see a window popped on the left
+side containing more information such as inputs/outputs and logs.</p>
+<img alt="../_images/user-guide-kfp-mlflow-katib-pipelineStep.png" src="../_images/user-guide-kfp-mlflow-katib-pipelineStep.png" />
+<h4 id="katib-experiment">Katib experiment<a class="headerlink" href="#katib-experiment" title="Link to this heading">¶</a></h4>
+<p>To view more details about your Katib experiment, navigate to <strong>Experiments (AutoML)</strong> from left side navigation on Kubeflow on vSphere Dashboard.</p>
+<img alt="../_images/user-guide-kfp-mlflow-katib-experiment.png" src="../_images/user-guide-kfp-mlflow-katib-experiment.png" />
+<p>You then see your experiment created for this pipeline. Click on the experiment name to see more details, such as metrics graph and trials details.</p>
+<img alt="../_images/user-guide-kfp-mlflow-katib-experimentGraph.png" src="../_images/user-guide-kfp-mlflow-katib-experimentGraph.png" />
+<img alt="../_images/user-guide-kfp-mlflow-katib-experimentTrials.png" src="../_images/user-guide-kfp-mlflow-katib-experimentTrials.png" />
+<p>When the experiment finishes, you see the optimal value of your objective metrics (in this case, <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>).</p>
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>Note that in this example, you set the number of trials as <code class="docutils literal notranslate"><span class="pre">5</span></code> to save time, which leads to a relatively low accuracy value. Feel
+free to customize your Katib experiment configurations, such as <code class="docutils literal notranslate"><span class="pre">goal</span></code>, <code class="docutils literal notranslate"><span class="pre">max_trial_count</span></code>, etc.</p>
+</div>
+<h4 id="mlflow">MLFlow<a class="headerlink" href="#mlflow" title="Link to this heading">¶</a></h4>
+<p>Verify that the model is stored in MLFlow model registry by navigating to MLFlow Dashboard.</p>
+<p>Click on <strong>Models</strong> on the top toolbar, and you then see the model created and stored.</p>
+<img alt="../_images/user-guide-kfp-mlflow-katib-mlflow.png" src="../_images/user-guide-kfp-mlflow-katib-mlflow.png" />
+<div class="note admonition">
+<p class="admonition-title">Note</p>
+<p>If you have any trouble with accessing MLFlow, refer to <a class="reference internal" href="mlflow.html#user-guide-mlflow"><span class="std std-ref">Model Registry</span></a>.</p>
+</div>
+<p>Now your model is ready to be deployed!</p>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="kfp-mlflow-seldon.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Kubeflow Pipelines with MLFlow and Seldon Core" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Kubeflow Pipelines with MLFlow and Seldon Core
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="federated-model-training.html" class="md-footer__link md-footer__link--next" aria-label="Next: Federated model training" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Federated model training
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2023, VMware.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.2.6.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.sections", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+  </body>
+</html>

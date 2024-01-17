@@ -1,0 +1,1563 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../_static/favicon.ico">
+    
+    
+      
+        <title>Kubeflow Pipelines with MLFlow and Seldon Core - vSphere Machine Learning Extension</title>
+      
+    
+    
+      
+        
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="../_static/sphinx_immaterial_theme.af531f03affe68837.min.css?v=2410bb73" />
+        <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="vSphere Machine Learning Extension" class="md-header__button md-logo" aria-label="vSphere Machine Learning Extension" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            vSphere Machine Learning Extension
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kubeflow Pipelines with MLFlow and Seldon Core
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="yellow"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vmware/vSphere-machine-learning-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vSphere Machine Learning Extension
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="vSphere Machine Learning Extension" class="md-nav__button md-logo" aria-label="vSphere Machine Learning Extension" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+    </a>
+    vSphere Machine Learning Extension
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vmware/vSphere-machine-learning-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vSphere Machine Learning Extension
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          <span class="md-ellipsis">Introduction</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Introduction" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Introduction</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/index.html" class="md-nav__link">
+        <span title="/introduction/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/oss.html" class="md-nav__link">
+        <span title="/introduction/oss.rst (reference label)" class="md-ellipsis">Kubeflow Components</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/ekf.html" class="md-nav__link">
+        <span title="/introduction/ekf.rst (reference label)" class="md-ellipsis">Kubeflow on v<wbr>Sphere Components and Features</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/mlops.html" class="md-nav__link">
+        <span title="/introduction/mlops.rst (reference label)" class="md-ellipsis">MLOps with Kubeflow</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          <span class="md-ellipsis">Install and Configure</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Install and Configure" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Install and Configure</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/index.html" class="md-nav__link">
+        <span title="/install/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/tkgs.html" class="md-nav__link">
+        <span title="/install/tkgs.rst (reference label)" class="md-ellipsis">Install Kubeflow on v<wbr>Sphere</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/auth.html" class="md-nav__link">
+        <span title="/install/auth.rst (reference label)" class="md-ellipsis">Authentication Integration</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/monitor.html" class="md-nav__link">
+        <span title="/install/monitor.rst (reference label)" class="md-ellipsis">Monitoring with Prometheus and Grafana</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          <span class="md-ellipsis">User Guide</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">User Guide</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        <span title="/user-guide/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="notebooks.html" class="md-nav__link">
+        <span title="/user-guide/notebooks.rst (reference label)" class="md-ellipsis">Notebooks</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="feast.html" class="md-nav__link">
+        <span title="/user-guide/feast.rst (reference label)" class="md-ellipsis">Feature Store</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="spark.html" class="md-nav__link">
+        <span title="/user-guide/spark.rst (reference label)" class="md-ellipsis">Data Processing</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mlmd.html" class="md-nav__link">
+        <span title="/user-guide/mlmd.rst (reference label)" class="md-ellipsis">Metadata Store</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mlflow.html" class="md-nav__link">
+        <span title="/user-guide/mlflow.rst (reference label)" class="md-ellipsis">Model Registry</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="training.html" class="md-nav__link">
+        <span title="/user-guide/training.rst (reference label)" class="md-ellipsis">Model Training</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tensorboard.html" class="md-nav__link">
+        <span title="/user-guide/tensorboard.rst (reference label)" class="md-ellipsis">Visualization for Experiments</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="katib.html" class="md-nav__link">
+        <span title="/user-guide/katib.rst (reference label)" class="md-ellipsis">Hyperparameter Tuning</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kserve.html" class="md-nav__link">
+        <span title="/user-guide/kserve.rst (reference label)" class="md-ellipsis">Model Serving</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_11" type="checkbox" id="__nav_3_11" checked>
+      
+      
+      
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="kfp.html"><span title="/user-guide/kfp.rst (reference label)" class="md-ellipsis">ML Pipelines</span></a>
+          
+            <label for="__nav_3_11">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="ML Pipelines" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_11">
+          <span class="md-nav__icon md-icon"></span>
+          <span title="/user-guide/kfp.rst (reference label)" class="md-ellipsis">ML Pipelines</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span title="/user-guide/kfp-mlflow-seldon.rst (reference label)" class="md-ellipsis">Kubeflow Pipelines with MLFlow and Seldon Core</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="#" class="md-nav__link md-nav__link--active">
+        <span title="/user-guide/kfp-mlflow-seldon.rst (reference label)" class="md-ellipsis">Kubeflow Pipelines with MLFlow and Seldon Core</span>
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/user-guide/kfp-mlflow-seldon.rst (reference label)" class="md-ellipsis">Kubeflow Pipelines with MLFlow and Seldon Core</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#get-started (reference label)" class="md-ellipsis">Get started</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-up-your-environment" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#set-up-your-environment (reference label)" class="md-ellipsis">Set up your environment</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-privilege-to-access-minio-for-mlflow" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#add-privilege-to-access-minio-for-mlflow (reference label)" class="md-ellipsis">Add privilege to access Min<wbr>IO for MLFlow</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#download-data" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#download-data (reference label)" class="md-ellipsis">Download data</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preprocess-our-ml-source-data" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#preprocess-our-ml-source-data (reference label)" class="md-ellipsis">Preprocess our ML source data</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#train-your-ml-prediction-model" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#train-your-ml-prediction-model (reference label)" class="md-ellipsis">Train your ML prediction model</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Train your ML prediction model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-your-ml-model" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#deploy-your-ml-model (reference label)" class="md-ellipsis">Deploy your ML model</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-the-command-line-application" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#create-the-command-line-application (reference label)" class="md-ellipsis">Create the command-<wbr>line application</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-and-push-the-docker-image" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#build-and-push-the-docker-image (reference label)" class="md-ellipsis">Build and push the Docker image</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-component-configuration-file" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#create-a-component-configuration-file (reference label)" class="md-ellipsis">Create a component configuration file</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-your-component" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#load-your-component (reference label)" class="md-ellipsis">Load your component</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#put-the-mlops-pipeline-together" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#put-the-mlops-pipeline-together (reference label)" class="md-ellipsis">Put the MLOps pipeline together</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-the-inference-endpoint" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#check-the-inference-endpoint (reference label)" class="md-ellipsis">Check the Inference endpoint</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#troubleshooting (reference label)" class="md-ellipsis">Troubleshooting</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#can-not-resolve-hostname-for-download-data-url" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#can-not-resolve-hostname-for-download-data-url (reference label)" class="md-ellipsis">Can not resolve hostname for download data URL</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ml-model-file-is-not-compatible-with-seldonio-mlflowserver-1-14-0-dev" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#ml-model-file-is-not-compatible-with-seldonio-mlflowserver-1-14-0-dev (reference label)" class="md-ellipsis">ML Model file is not compatible with seldonio/mlflowserver:<wbr>1.<wbr>14.<wbr>0-<wbr>dev</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kfp-mlflow-katib.html" class="md-nav__link">
+        <span title="/user-guide/kfp-mlflow-katib.rst (reference label)" class="md-ellipsis">Kubeflow Pipelines with MLFlow and Katib</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="federated-model-training.html" class="md-nav__link">
+        <span title="/user-guide/federated-model-training.rst (reference label)" class="md-ellipsis">Federated model training</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          <span class="md-ellipsis">Use Cases</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Use Cases" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Use Cases</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/index.html" class="md-nav__link">
+        <span title="/use-cases/index.rst (reference label)" class="md-ellipsis">Overview</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/helmet.html" class="md-nav__link">
+        <span title="/use-cases/helmet.rst (reference label)" class="md-ellipsis">End to End Examples</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/modelserving.html" class="md-nav__link">
+        <span title="/use-cases/modelserving.rst (reference label)" class="md-ellipsis">Model Serving Examples</span>
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-cases/codegen.html" class="md-nav__link">
+        <span title="/use-cases/codegen.ipynb (reference label)" class="md-ellipsis">Salesforce Code<wbr>Gen</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          <span class="md-ellipsis">Internals</span>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Internals" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          <span class="md-ellipsis">Internals</span>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../internals/auth.html" class="md-nav__link">
+        <span title="/internals/auth.rst (reference label)" class="md-ellipsis">Authentication and Authorization</span>
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      <span title="/user-guide/kfp-mlflow-seldon.rst (reference label)" class="md-ellipsis">Kubeflow Pipelines with MLFlow and Seldon Core</span>
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#introduction (reference label)" class="md-ellipsis">Introduction</span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-started" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#get-started (reference label)" class="md-ellipsis">Get started</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Get started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-up-your-environment" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#set-up-your-environment (reference label)" class="md-ellipsis">Set up your environment</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-privilege-to-access-minio-for-mlflow" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#add-privilege-to-access-minio-for-mlflow (reference label)" class="md-ellipsis">Add privilege to access Min<wbr>IO for MLFlow</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#download-data" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#download-data (reference label)" class="md-ellipsis">Download data</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preprocess-our-ml-source-data" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#preprocess-our-ml-source-data (reference label)" class="md-ellipsis">Preprocess our ML source data</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#train-your-ml-prediction-model" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#train-your-ml-prediction-model (reference label)" class="md-ellipsis">Train your ML prediction model</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Train your ML prediction model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-your-ml-model" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#deploy-your-ml-model (reference label)" class="md-ellipsis">Deploy your ML model</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-the-command-line-application" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#create-the-command-line-application (reference label)" class="md-ellipsis">Create the command-<wbr>line application</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-and-push-the-docker-image" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#build-and-push-the-docker-image (reference label)" class="md-ellipsis">Build and push the Docker image</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-component-configuration-file" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#create-a-component-configuration-file (reference label)" class="md-ellipsis">Create a component configuration file</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-your-component" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#load-your-component (reference label)" class="md-ellipsis">Load your component</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#put-the-mlops-pipeline-together" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#put-the-mlops-pipeline-together (reference label)" class="md-ellipsis">Put the MLOps pipeline together</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-the-inference-endpoint" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#check-the-inference-endpoint (reference label)" class="md-ellipsis">Check the Inference endpoint</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#troubleshooting (reference label)" class="md-ellipsis">Troubleshooting</span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#can-not-resolve-hostname-for-download-data-url" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#can-not-resolve-hostname-for-download-data-url (reference label)" class="md-ellipsis">Can not resolve hostname for download data URL</span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ml-model-file-is-not-compatible-with-seldonio-mlflowserver-1-14-0-dev" class="md-nav__link">
+    <span title="/user-guide/kfp-mlflow-seldon.rst#ml-model-file-is-not-compatible-with-seldonio-mlflowserver-1-14-0-dev (reference label)" class="md-ellipsis">ML Model file is not compatible with seldonio/mlflowserver:<wbr>1.<wbr>14.<wbr>0-<wbr>dev</span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+  <a href="https://github.com/vmware/vSphere-machine-learning-extension/blob/master/docs/user-guide/kfp-mlflow-seldon.rst" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+<h1 id="kubeflow-pipelines-with-mlflow-and-seldon-core">Kubeflow Pipelines with MLFlow and Seldon Core<a class="headerlink" href="#kubeflow-pipelines-with-mlflow-and-seldon-core" title="Link to this heading">¶</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>In this section we show you how to build your advanced machine learning operations (MLOps) pipelines using Kubeflow Pipelines (KFP), MLFlow and Seldon Core and get them to work seamlessly together to deliver your machine learning (ML) model to production in a scalable, efficient manner.</p>
+<p>You use a wine dataset in the example. You predict the wine’s quality based on a chemical analysis. The higher the quality score is, the better the wine tastes.</p>
+<h2 id="get-started">Get started<a class="headerlink" href="#get-started" title="Link to this heading">¶</a></h2>
+<h3 id="set-up-your-environment">Set up your environment<a class="headerlink" href="#set-up-your-environment" title="Link to this heading">¶</a></h3>
+<p>Grab the <a class="reference external" href="https://github.com/Barteus/kubeflow-examples/tree/0.2/e2e-wine-kfp-mlflow">code samples</a> and execute them together in order to get the most out of the example. You need a working Kubeflow on vSphere deployment with MLFLow up and running.</p>
+<p>Going through the pipeline, each step shows you something new.</p>
+<h3 id="add-privilege-to-access-minio-for-mlflow">Add privilege to access MinIO for MLFlow<a class="headerlink" href="#add-privilege-to-access-minio-for-mlflow" title="Link to this heading">¶</a></h3>
+<p>Check if pod-defaults is in the user’s namespace.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>kubectl<span class="w"> </span>get<span class="w"> </span>poddefault<span class="w"> </span>-n<span class="w"> </span>admin
+</code></pre></div>
+</div>
+<p>If there is no pod-defaults in the user’s namespace, run the following command to create pod-defaults in the user’s namespace to access MinIO.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="nv">USER_NAMESPACE</span><span class="o">=</span>admin
+
+<span class="c1">#MLflow</span>
+cat<span class="w"> </span><span class="s">&lt;&lt;EOF | kubectl create -n $USER_NAMESPACE -f -</span>
+<span class="s">apiVersion: kubeflow.org/v1alpha1</span>
+<span class="s">kind: PodDefault</span>
+<span class="s">metadata:</span>
+<span class="s">name: mlflow-server-minio</span>
+<span class="s">spec:</span>
+<span class="s">desc: Allow access to MLFlow</span>
+<span class="s">env:</span>
+<span class="s">- name: MLFLOW_S3_ENDPOINT_URL</span>
+<span class="s">   value: http://minio.kubeflow:9000</span>
+<span class="s">- name: MLFLOW_TRACKING_URI</span>
+<span class="s">   value: http://mlflow-server.kubeflow.svc.cluster.local:5000</span>
+<span class="s">selector:</span>
+<span class="s">   matchLabels:</span>
+<span class="s">      mlflow-server-minio: &quot;true&quot;</span>
+<span class="s">EOF</span>
+
+cat<span class="w"> </span><span class="s">&lt;&lt;EOF | kubectl create -n $USER_NAMESPACE -f -</span>
+<span class="s">apiVersion: kubeflow.org/v1alpha1</span>
+<span class="s">kind: PodDefault</span>
+<span class="s">metadata:</span>
+<span class="s">name: access-minio</span>
+<span class="s">spec:</span>
+<span class="s">desc: Allow access to Minio</span>
+<span class="s">selector:</span>
+<span class="s">   matchLabels:</span>
+<span class="s">   access-minio: &quot;true&quot;</span>
+<span class="s">env:</span>
+<span class="s">   - name: AWS_ACCESS_KEY_ID</span>
+<span class="s">   valueFrom:</span>
+<span class="s">      secretKeyRef:</span>
+<span class="s">         name: mlpipeline-minio-artifact</span>
+<span class="s">         key: accesskey  # fill minio access key about yourself env.</span>
+<span class="s">         optional: false</span>
+<span class="s">   - name: AWS_SECRET_ACCESS_KEY</span>
+<span class="s">   valueFrom:</span>
+<span class="s">      secretKeyRef:</span>
+<span class="s">         name: mlpipeline-minio-artifact</span>
+<span class="s">         key: secretkey  # fill minio access secret key about yourself env.</span>
+<span class="s">         optional: false</span>
+<span class="s">   - name: MINIO_ENDPOINT_URL</span>
+<span class="s">   value: http://minio.kubeflow:9000 # update yourself env&#39;s minio url.</span>
+<span class="s">EOF</span>
+
+kubectl<span class="w"> </span>get<span class="w"> </span>secret<span class="w"> </span>mlflow-server-seldon-init-container-s3-credentials<span class="w"> </span>--namespace<span class="o">=</span>kubeflow<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="se">\</span>
+<span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/namespace: kubeflow/namespace: </span><span class="nv">$USER_NAMESPACE</span><span class="s2">/&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/name: mlflow-server-seldon-init-container-s3-credentials/name: seldon-init-container-secret/g&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="p">|</span><span class="w"> </span>kubectl<span class="w"> </span>apply<span class="w"> </span>-n<span class="w"> </span><span class="nv">$USER_NAMESPACE</span>-f<span class="w"> </span>-
+</code></pre></div>
+</div>
+<h3 id="download-data">Download data<a class="headerlink" href="#download-data" title="Link to this heading">¶</a></h3>
+<p>The first step is to download the source data and put it in object storage.</p>
+<p>Whenever you need to add a step to the pipeline, first check if it already exists in the <a class="reference external" href="https://github.com/kubeflow/pipelines/tree/master/components">Kubeflow Pipeline components registry</a>.</p>
+<img alt="../_images/user-guide-kfp-mlflow-seldon-dataset.png" src="../_images/user-guide-kfp-mlflow-seldon-dataset.png" />
+<p>This way adding a new step to the pipeline is simple – you can either load it from the URL or download and upload it from a local file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">web_downloader_op</span> <span class="o">=</span> <span class="n">kfp</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">load_component_from_url</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/kubeflow/pipelines/master/components/contrib/web/Download/component.yaml&#39;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Just like that, you developed your first step!</p>
+<h3 id="preprocess-our-ml-source-data">Preprocess our ML source data<a class="headerlink" href="#preprocess-our-ml-source-data" title="Link to this heading">¶</a></h3>
+<p>For the preprocessing step you need a different approach. Each data preprocessing step is different, so it’s unlikely to find what you need in the KFP components registry. During the experiment phase, preprocessing is usually done in a Jupyter notebook. So wrap the code into a Python function so that you convert it into a component. It’s important to notice that <code class="docutils literal notranslate"><span class="pre">pandas</span> <span class="pre">import</span></code> is inside the Python function because the package needs to be imported inside the Docker container that eventually runns the step.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">kfp.components</span> <span class="kn">import</span> <span class="n">InputPath</span><span class="p">,</span> <span class="n">OutputPath</span>
+
+<span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="n">InputPath</span><span class="p">(</span><span class="s1">&#39;CSV&#39;</span><span class="p">),</span> <span class="n">output_file</span><span class="p">:</span> <span class="n">OutputPath</span><span class="p">(</span><span class="s1">&#39;parquet&#39;</span><span class="p">)):</span>
+   <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+   <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+   <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+   <span class="n">df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>You have a function write tests for it to make sure it works correctly. Now you wrap it into the container so the Kubernetes platform underneath Kubeflow on vSphere knows how to invoke your code. You use the Docker image for Python 3.9 and install additional Python packages using Python’s <code class="docutils literal notranslate"><span class="pre">pip</span></code> package installer.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">preprocess_op</span> <span class="o">=</span> <span class="n">kfp</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">create_component_from_func</span><span class="p">(</span>
+   <span class="n">func</span><span class="o">=</span><span class="n">preprocess</span><span class="p">,</span>
+   <span class="n">base_image</span><span class="o">=</span><span class="s1">&#39;python:3.9&#39;</span><span class="p">,</span>
+   <span class="n">packages_to_install</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pandas&#39;</span><span class="p">,</span> <span class="s1">&#39;pyarrow&#39;</span><span class="p">])</span>
+</code></pre></div>
+</div>
+<p>This method allows you to quickly build a pipeline in a way that does not require additional resources like template files. It also works nicely to build the pipeline using a notebook. However installing Python packages each time the step is executed is not ideal, especially if the pipeline is invoked frequently.</p>
+<h3 id="train-your-ml-prediction-model">Train your ML prediction model<a class="headerlink" href="#train-your-ml-prediction-model" title="Link to this heading">¶</a></h3>
+<p>This preprocessing step is created using a function-based component too. The difference in this step is that you need to make calls to MLFlow and MinIO – and these calls require setting environment variables. How to securely handle setting up the environment variables is discussed later. Additionally, you change the training code, so that all of the information about the experiment is saved in MLFLow and the ML model artifacts this step generates is stored in MinIO.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">kfp.components</span> <span class="kn">import</span> <span class="n">InputPath</span>
+
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="n">InputPath</span><span class="p">(</span><span class="s1">&#39;parquet&#39;</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+   <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+   <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+   <span class="kn">import</span> <span class="nn">mlflow</span>
+   <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">ElasticNet</span>
+
+   <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+   <span class="n">target_column</span> <span class="o">=</span> <span class="s1">&#39;quality&#39;</span>
+   <span class="n">train_x</span><span class="p">,</span> <span class="n">test_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+      <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target_column</span><span class="p">]),</span>
+      <span class="n">df</span><span class="p">[</span><span class="n">target_column</span><span class="p">])</span>
+
+   <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">(</span><span class="n">run_name</span><span class="o">=</span><span class="s1">&#39;wine_models&#39;</span><span class="p">):</span>
+      <span class="n">lr</span> <span class="o">=</span> <span class="n">ElasticNet</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+      <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+      <span class="n">result</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">)</span>
+      <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">mlflow</span><span class="o">.</span><span class="n">get_artifact_uri</span><span class="p">()</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">artifact_path</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+</div>
+<p>The value returned from the step is the model URI – the path to the model file in MinIO. But if you need to return more than a single value, you can use a NamedTuple. For more details, take a look at <a class="reference external" href="https://www.kubeflow.org/docs/components/pipelines/sdk/python-function-components/#building-python-function-based-components">Building Python function-based components</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">training_op</span> <span class="o">=</span> <span class="n">kfp</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">create_component_from_func</span><span class="p">(</span>
+   <span class="n">func</span><span class="o">=</span><span class="n">train</span><span class="p">,</span>
+   <span class="n">base_image</span><span class="o">=</span><span class="s1">&#39;python:3.9&#39;</span><span class="p">,</span>
+   <span class="n">packages_to_install</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pandas&#39;</span><span class="p">,</span> <span class="s1">&#39;pyarrow&#39;</span><span class="p">,</span> <span class="s1">&#39;sklearn&#39;</span><span class="p">,</span> <span class="s1">&#39;mlflow&#39;</span><span class="p">,</span> <span class="s1">&#39;boto3&#39;</span><span class="p">])</span>
+</code></pre></div>
+</div>
+<p>The training container is created based on the same Python 3.9 Docker image as used in the previous step. When creating steps from functions, it’s best to try and use the same image whenever possible, in order to take full advantage of the Kubernetes caching mechanism for Docker images.</p>
+<h4 id="deploy-your-ml-model">Deploy your ML model<a class="headerlink" href="#deploy-your-ml-model" title="Link to this heading">¶</a></h4>
+<p>You deploy the inference server that hosts your ML model using a Docker container-based, microservices approach. The code for this step is not in the experiment notebook. You use Seldon Core for deployment together with MLFLow Server so that you take full advantage of features like monitoring your deployment without building a dedicated Docker image. The model artifacts are downloaded by the Seldon Core deployment from your MinIO object storage. In this step, you use kubectl to apply your <code class="docutils literal notranslate"><span class="pre">SeldonDeployment</span></code> configuration. The URI containing the path to the ML model is provided to the training step externally.</p>
+<p>The deployment step is split into a few parts:</p>
+<ul class="simple">
+<li><p>create the command-line application</p></li>
+<li><p>wrap it in the Docker image and publish it</p></li>
+<li><p>create the component configuration</p></li>
+<li><p>create the step from the component configuration file</p></li>
+</ul>
+<h4 id="create-the-command-line-application">Create the command-line application<a class="headerlink" href="#create-the-command-line-application" title="Link to this heading">¶</a></h4>
+<p>Firstly, create a command-line application, which calls <code class="docutils literal notranslate"><span class="pre">kubectl</span></code> with a file generated from a Jinja template as a parameter:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">jinja2</span> <span class="kn">import</span> <span class="n">Environment</span><span class="p">,</span> <span class="n">FileSystemLoader</span>
+
+<span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span><span class="n">model_uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+   <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/manifest.yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+      <span class="n">env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s1">&#39;./templates&#39;</span><span class="p">),</span>
+      <span class="n">trim_blocks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lstrip_blocks</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="s1">&#39;deploy-manifest.j2&#39;</span><span class="p">)</span>
+      <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">model_uri</span><span class="o">=</span><span class="n">model_uri</span><span class="p">))</span>
+   <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s1">&#39;kubectl&#39;</span><span class="p">,</span> <span class="s1">&#39;apply&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="s1">&#39;/tmp/manifest.yaml&#39;</span><span class="p">,</span> <span class="s1">&#39;-n&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">])</span>
+   <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+   <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Data processor&#39;</span><span class="p">)</span>
+   <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--model_uri&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Model URI&#39;</span><span class="p">)</span>
+   <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+   <span class="n">deploy</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">model_uri</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h4 id="build-and-push-the-docker-image">Build and push the Docker image<a class="headerlink" href="#build-and-push-the-docker-image" title="Link to this heading">¶</a></h4>
+<p>Next, use Docker to build and push an image to the Docker image registry. The <a class="reference external" href="https://github.com/Barteus/kubeflow-examples/tree/0.2/e2e-wine-kfp-mlflow/components/deploy">Dockerfile</a>, and the build script are as below:</p>
+<div class="highlight-dockerfile notranslate"><div class="highlight"><pre><span></span><code><span class="c"># building script</span>
+<span class="nv">VERSION</span><span class="o">=</span>&lt;version&gt;
+<span class="nv">REPO</span><span class="o">=</span>&lt;repository&gt;
+docker<span class="w"> </span>build<span class="w"> </span>.<span class="w"> </span>-t<span class="w"> </span><span class="nv">$REPO</span>:<span class="nv">$VERSION</span>
+docker<span class="w"> </span>push<span class="w"> </span><span class="nv">$REPO</span>:<span class="nv">$VERSION</span>
+docker<span class="w"> </span>inspect<span class="w"> </span>--format<span class="o">=</span><span class="s2">&quot;{{index .RepoDigests 0}}&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$REPO</span><span class="s2">:</span><span class="nv">$VERSION</span><span class="s2">&quot;</span>
+</code></pre></div>
+</div>
+<h4 id="create-a-component-configuration-file">Create a component configuration file<a class="headerlink" href="#create-a-component-configuration-file" title="Link to this heading">¶</a></h4>
+<p>Thirdly, create a Kubeflow on vSphere pipeline step configuration file using the output from <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">inspect</span></code>. This configuration file is crucial to share your Kubeflow pipeline step with others.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>name:<span class="w"> </span>Deploy<span class="w"> </span>model
+description:<span class="w"> </span>deploy<span class="w"> </span>model<span class="w"> </span>using<span class="w"> </span>seldon<span class="w"> </span>core
+inputs:
+<span class="w">  </span>-<span class="w"> </span><span class="o">{</span><span class="w"> </span>name:<span class="w"> </span>model_uri,<span class="w"> </span>type:<span class="w"> </span>String,<span class="w"> </span>description:<span class="w"> </span><span class="s1">&#39;model URI&#39;</span><span class="w"> </span><span class="o">}</span>
+<span class="w">  </span>implementation:
+<span class="w">     </span>container:
+<span class="w">        </span>image:<span class="w"> </span>&lt;image-name&gt;
+<span class="w">        </span>command:<span class="w"> </span><span class="o">[</span>
+<span class="w">            </span>python3,
+<span class="w">            </span>src/deploy.py,
+<span class="w">            </span>--model_uri,
+<span class="w">            </span><span class="o">{</span><span class="w"> </span>inputValue:<span class="w"> </span>model_uri<span class="w"> </span><span class="o">}</span>
+<span class="w">        </span><span class="o">]</span>
+</code></pre></div>
+</div>
+<h4 id="load-your-component">Load your component<a class="headerlink" href="#load-your-component" title="Link to this heading">¶</a></h4>
+<p>Finally, load the components in a similar way to the <em>Download data</em> step. You use the configuration file created in the third step to specify which Docker image to use, how it is invoked and what the input and output parameters are.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="n">deploy_op</span> <span class="o">=</span> <span class="n">kfp</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">load_component_from_file</span><span class="p">(</span>
+   <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;components&#39;</span><span class="p">,</span> <span class="s1">&#39;deploy&#39;</span><span class="p">,</span> <span class="s1">&#39;component.yaml&#39;</span><span class="p">))</span>
+</code></pre></div>
+</div>
+<p>The biggest advantage of this component creation method is extensibility. You may use any language to create the command-line application implementation as you want. You use Python and Jinja (a free templating engine) in order to keep the code clean. You have your manifest code in the template file, which is not possible with a function-based approach. Additionally, you do not need to install Python packages every time you execute the step. That means faster executions.</p>
+<p>Feel free to use the Docker image set up and pushed into Docker image repository.</p>
+<h3 id="put-the-mlops-pipeline-together">Put the MLOps pipeline together<a class="headerlink" href="#put-the-mlops-pipeline-together" title="Link to this heading">¶</a></h3>
+<p>You’ve defined all the components – now let’s create a pipeline from them. You need to put them in proper order, define inputs and outputs and add appropriate configuration values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><code><span class="nd">@dsl</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
+<span class="n">name</span><span class="o">=</span><span class="s2">&quot;e2e_wine_pipeline&quot;</span><span class="p">,</span>
+<span class="n">description</span><span class="o">=</span><span class="s2">&quot;WINE pipeline&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">wine_pipeline</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+   <span class="n">web_downloader_task</span> <span class="o">=</span> <span class="n">web_downloader_op</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+   <span class="n">preprocess_task</span> <span class="o">=</span> <span class="n">preprocess_op</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">web_downloader_task</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+   <span class="n">train_task</span> <span class="o">=</span> <span class="p">(</span><span class="n">training_op</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">preprocess_task</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">])</span>
+         <span class="o">.</span><span class="n">add_env_variable</span><span class="p">(</span><span class="n">V1EnvVar</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;MLFLOW_TRACKING_URI&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;http://mlflow-server.kubeflow.svc.cluster.local:5000&#39;</span><span class="p">))</span>
+         <span class="o">.</span><span class="n">add_env_variable</span><span class="p">(</span><span class="n">V1EnvVar</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;MLFLOW_S3_ENDPOINT_URL&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;http://minio.kubeflow.svc.cluster.local:9000&#39;</span><span class="p">))</span>
+         <span class="o">.</span><span class="n">add_env_variable</span><span class="p">(</span><span class="n">V1EnvVar</span> <span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;accesskey&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;AWS_ACCESS_KEY_ID&#39;</span><span class="p">))</span>
+         <span class="o">.</span><span class="n">add_env_variable</span><span class="p">(</span><span class="n">V1EnvVar</span> <span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;secretkey&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;AWS_SECRET_ACCESS_KEY&#39;</span><span class="p">))</span>
+   <span class="p">)</span>
+   <span class="n">deploy_task</span> <span class="o">=</span> <span class="n">deploy_op</span><span class="p">(</span><span class="n">model_uri</span><span class="o">=</span><span class="n">train_task</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>You don’t need to specify the order of the steps explicitly. When you set input-output dependencies, the steps will order themselves. Convenient, right?!</p>
+<p>When looking at the training step, it differs from the others. It requires additional configuration. You need to add some sensitive data using Kubernetes secrets and the rest using environment variables. Kubeflow Pipelines supports multiple ways to add secrets to the pipeline steps and for <a class="reference external" href="https://kubeflow-pipelines.readthedocs.io/en/stable/source/kfp.extensions.html#module-kfp.aws">more information</a>.</p>
+<p>Now, the coding part is completed. All that’s left is to see the results of your pipeline. Run <code class="docutils literal notranslate"><span class="pre">pipeline.py</span></code> to generate <code class="docutils literal notranslate"><span class="pre">wine-pipeline.yaml</span></code> in the generated folder. You then open the Kubeflow on vSphere Dashboard with your browser, create a new pipeline with your YAML file and – the moment of truth – run the pipeline.</p>
+<a class="reference internal image-reference" href="../_images/user-guide-kfp-mlflow-seldon-result.png"><img alt="../_images/user-guide-kfp-mlflow-seldon-result.png" class="align-center" src="../_images/user-guide-kfp-mlflow-seldon-result.png" style="width: 489.59999999999997px; height: 684.0px;" /></a>
+<h3 id="check-the-inference-endpoint">Check the Inference endpoint<a class="headerlink" href="#check-the-inference-endpoint" title="Link to this heading">¶</a></h3>
+<p>To be 100% sure it works – check if the inference endpoint is responding correctly. First, go to the Kubernetes cluster and port-forward or expose the newly created service.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># check pod&#39;s status</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>po<span class="w"> </span>-n<span class="w"> </span>admin
+NAME<span class="w">                                                           </span>READY<span class="w">   </span>STATUS<span class="w">      </span>RESTARTS<span class="w">      </span>AGE
+ml-pipeline-ui-artifact-5cfb68f5b7-97kjc<span class="w">                       </span><span class="m">2</span>/2<span class="w">     </span>Running<span class="w">     </span><span class="m">4</span><span class="w"> </span><span class="o">(</span>47h<span class="w"> </span>ago<span class="o">)</span><span class="w">   </span>2d
+ml-pipeline-visualizationserver-665bb6b8fc-f5nkm<span class="w">               </span><span class="m">2</span>/2<span class="w">     </span>Running<span class="w">     </span><span class="m">4</span><span class="w"> </span><span class="o">(</span>47h<span class="w"> </span>ago<span class="o">)</span><span class="w">   </span>2d
+e2e-wine-pipeline-nk6qh-1447540704<span class="w">                             </span><span class="m">0</span>/2<span class="w">     </span>Completed<span class="w">   </span><span class="m">0</span><span class="w">             </span>22h
+e2e-wine-pipeline-nk6qh-2458232327<span class="w">                             </span><span class="m">0</span>/2<span class="w">     </span>Completed<span class="w">   </span><span class="m">0</span><span class="w">             </span>22h
+e2e-wine-pipeline-nk6qh-2359496741<span class="w">                             </span><span class="m">0</span>/2<span class="w">     </span>Completed<span class="w">   </span><span class="m">0</span><span class="w">             </span>22h
+e2e-wine-pipeline-nk6qh-105037618<span class="w">                              </span><span class="m">0</span>/2<span class="w">     </span>Completed<span class="w">   </span><span class="m">0</span><span class="w">             </span>22h
+mlflow-wine-super-model-0-classifier-5c79775bb6-bv9dn<span class="w">          </span><span class="m">3</span>/3<span class="w">     </span>Running<span class="w">     </span><span class="m">0</span><span class="w">             </span>22h
+
+<span class="c1"># check service&#39;s status</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span>admin
+NAME<span class="w">                                                       </span>TYPE<span class="w">        </span>CLUSTER-IP<span class="w">       </span>EXTERNAL-IP<span class="w">   </span>PORT<span class="o">(</span>S<span class="o">)</span><span class="w">             </span>AGE
+ml-pipeline-visualizationserver<span class="w">                            </span>ClusterIP<span class="w">   </span><span class="m">10</span>.152.183.97<span class="w">    </span>&lt;none&gt;<span class="w">        </span><span class="m">8888</span>/TCP<span class="w">            </span>2d
+ml-pipeline-ui-artifact<span class="w">                                    </span>ClusterIP<span class="w">   </span><span class="m">10</span>.152.183.103<span class="w">   </span>&lt;none&gt;<span class="w">        </span><span class="m">80</span>/TCP<span class="w">              </span>2d
+mlflow-wine-super-model-classifier<span class="w">                         </span>ClusterIP<span class="w">   </span><span class="m">10</span>.152.183.245<span class="w">   </span>&lt;none&gt;<span class="w">        </span><span class="m">9000</span>/TCP,9500/TCP<span class="w">   </span>22h
+mlflow-wine-super-model<span class="w">                                    </span>ClusterIP<span class="w">   </span><span class="m">10</span>.152.183.236<span class="w">   </span>&lt;none&gt;<span class="w">        </span><span class="m">8000</span>/TCP,5001/TCP<span class="w">   </span>22h
+
+<span class="c1"># port-forward or expose the newly created service to localhost</span>
+$<span class="w"> </span>kubectl<span class="w"> </span>port-forward<span class="w"> </span>service/mlflow-wine-super-model<span class="w"> </span>-n<span class="w"> </span>admin<span class="w"> </span><span class="m">8000</span>:8000
+Forwarding<span class="w"> </span>from<span class="w"> </span><span class="m">127</span>.0.0.1:8000<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">8000</span>
+Forwarding<span class="w"> </span>from<span class="w"> </span><span class="o">[</span>::1<span class="o">]</span>:8000<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">8000</span>
+</code></pre></div>
+</div>
+<p>Then, use <code class="docutils literal notranslate"><span class="pre">curl</span></code> in another terminal to see if the endpoint is responding correctly.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:8000/api/v1.0/predictions<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;data&quot;:{&quot;ndarray&quot;:[[5.6, 0.31, 0.37, 1.4, 0.074, 12.0, 96.0, 0.9954, 3.32, 0.58, 9.2]]}}&#39;</span>
+</code></pre></div>
+</div>
+<p>Seldon Core supports batch inference out-of-the-box and its performance is much better than calling the endpoint in a loop.</p>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<h3 id="can-not-resolve-hostname-for-download-data-url">Can not resolve hostname for download data URL<a class="headerlink" href="#can-not-resolve-hostname-for-download-data-url" title="Link to this heading">¶</a></h3>
+<p>Sometimes hostname is combined with a domain name, which cannot be resolved. The domain name information on this machine can be viewed in this file <code class="docutils literal notranslate"><span class="pre">/etc/resolv.conf</span></code>.</p>
+<p>To solved this, just add <em>.</em> after domain name to prevent CoreDNS from using fully qualified domain names (FQDN) as hostnames, such as <code class="docutils literal notranslate"><span class="pre">raw.githubusercontent.com.</span></code></p>
+<h3 id="ml-model-file-is-not-compatible-with-seldonio-mlflowserver-1-14-0-dev">ML Model file is not compatible with <code class="docutils literal notranslate"><span class="pre">seldonio/mlflowserver:1.14.0-dev</span></code><a class="headerlink" href="#ml-model-file-is-not-compatible-with-seldonio-mlflowserver-1-14-0-dev" title="Link to this heading">¶</a></h3>
+<p>ML Model file saved with <code class="docutils literal notranslate"><span class="pre">mlflow=2</span></code> in <code class="docutils literal notranslate"><span class="pre">mlflowserver</span></code> is not compatible with <code class="docutils literal notranslate"><span class="pre">seldonio/mlflowserver:1.14.0-dev</span></code>. The error shows
+<code class="docutils literal notranslate"><span class="pre">conda_env_create.py</span> <span class="pre">TypeError:</span> <span class="pre">join()</span></code> argument must be <code class="docutils literal notranslate"><span class="pre">str</span></code> or <code class="docutils literal notranslate"><span class="pre">bytes</span></code>, not <code class="docutils literal notranslate"><span class="pre">dict</span></code>. And this issue has been <a class="reference external" href="https://github.com/SeldonIO/seldon-core/pull/4505">fixed</a>. But there is no update to <code class="docutils literal notranslate"><span class="pre">conda_env_create.py</span></code> code for <code class="docutils literal notranslate"><span class="pre">seldonio/mlflowserver:1.14.0-dev</span></code> Docker image.</p>
+<p>Choose one of the following solutions to solve this error.</p>
+<ul>
+<li><p>Solution 1: Update the latest <a class="reference external" href="https://github.com/SeldonIO/seldon-core/blob/master/servers/mlflowserver/mlflowserver/conda_env_create.py">conda_env_create.py</a> into <code class="docutils literal notranslate"><span class="pre">seldonio/mlflowserver:1.14.0-dev</span></code> Docker image and commit the new Docker image to use.</p></li>
+<li><p>Solution 2: Modify <code class="docutils literal notranslate"><span class="pre">MLModel</span></code> file</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><code><span class="c1"># MLModel saved with mlflow=1</span>
+artifact_path:<span class="w"> </span>model
+flavors:
+python_function:
+<span class="w">   </span>env:<span class="w"> </span>conda.yaml
+<span class="w">   </span>loader_module:<span class="w"> </span>mlflow.sklearn
+<span class="w">   </span>model_path:<span class="w"> </span>model.pkl
+<span class="w">   </span>predict_fn:<span class="w"> </span>predict
+<span class="w">   </span>python_version:<span class="w"> </span><span class="m">3</span>.9.16
+sklearn:
+<span class="w">   </span>code:<span class="w"> </span>null
+<span class="w">   </span>pickled_model:<span class="w"> </span>model.pkl
+<span class="w">   </span>serialization_format:<span class="w"> </span>cloudpickle
+<span class="w">   </span>sklearn_version:<span class="w"> </span><span class="m">1</span>.2.1
+mlflow_version:<span class="w"> </span><span class="m">2</span>.1.1
+model_uuid:<span class="w"> </span>9971f5db741348cda16bfb3fc4cfff18
+run_id:<span class="w"> </span>4a02ebc811b84e1194b452b38c2d96d8
+utc_time_created:<span class="w"> </span><span class="s1">&#39;2023-02-01 08:13:32.310337&#39;</span>
+</code></pre></div>
+</div>
+</li>
+</ul>
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="kfp.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: ML Pipelines" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              ML Pipelines
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="kfp-mlflow-katib.html" class="md-footer__link md-footer__link--next" aria-label="Next: Kubeflow Pipelines with MLFlow and Katib" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Kubeflow Pipelines with MLFlow and Katib
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2023, VMware.
+        
+    </div>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.2.6.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.sections", "navigation.top", "search.share"], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+  </body>
+</html>
