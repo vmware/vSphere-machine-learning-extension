@@ -1,0 +1,67 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: model-peft-server
+spec:
+  template:
+    metadata:
+      name: model-peft-server
+    spec:
+      initContainers:
+        - name: data-check-init-container
+          image: alpine:latest
+          command: [ "/bin/sh", "-c" ]
+          args:
+            - |
+              while [ ! -f /datasets/dataset.csv ] || [ -z "$(ls -A /base-tokenizer/tokenizer)" ] || [ -z "$(ls -A /base-model/model)" ]; do
+                echo "Data not found or paths are empty. Waiting..."
+                ls -A /base-tokenizer/tokenizer
+                ls -A /base-model/model
+                sleep 10
+              done
+              echo "Data and paths found. Proceeding..."
+          volumeMounts:
+            - name: datasets
+              mountPath: /datasets
+            - name: base-tokenizer
+              mountPath: /base-tokenizer
+            - name: base-model
+              mountPath: /base-model
+      containers:
+        - name: model-peft-server
+          image: ghcr.io/albertoimpl/model-peft-server
+          command: [ "python3", "app.py" ]
+          args:
+            - "--epochs"
+            - "0.001"
+            - "--base_model_full_path"
+            - "/base-model/model/gpt2"
+            - "--dataset_full_path"
+            - "/datasets/dataset.csv"
+            - "--base_tokenizer_full_path"
+            - "/base-tokenizer/tokenizer/gpt2"
+            - "--fine_tuned_model_full_path"
+            - "/fine-tuned-model/model/gpt2"
+          volumeMounts:
+            - name: base-model
+              mountPath: /base-model
+            - name: base-tokenizer
+              mountPath: /base-tokenizer
+            - name: datasets
+              mountPath: /datasets
+            - name: fine-tuned-model
+              mountPath: /fine-tuned-model
+      volumes:
+        - name: base-model
+          persistentVolumeClaim:
+            claimName: base-model
+        - name: base-tokenizer
+          persistentVolumeClaim:
+            claimName: base-tokenizer
+        - name: datasets
+          persistentVolumeClaim:
+            claimName: datasets
+        - name: fine-tuned-model
+          persistentVolumeClaim:
+            claimName: fine-tuned-model
+      restartPolicy: Never

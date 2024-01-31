@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: model-reference-relocation-server
+spec:
+  template:
+    metadata:
+      name: model-reference-relocation-server
+    spec:
+      containers:
+        - name: model-reference-relocation-server
+          image: ghcr.io/albertoimpl/model-reference-relocation-server
+          args: [ "--model_destination_path", "/reference-model/models", "--tokenizer_destination_path", "/reference-model/tokenizers" ]
+          command: [ "python3", "app.py" ]
+          volumeMounts:
+            - name: reference-model
+              mountPath: /reference-model
+      volumes:
+        - name: reference-model
+          persistentVolumeClaim:
+            claimName: reference-model
+      restartPolicy: Never
